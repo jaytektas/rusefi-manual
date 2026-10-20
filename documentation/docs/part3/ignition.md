@@ -193,6 +193,11 @@ trigger offset (**Setup**).
 
 <!-- shot: img/ts/ignition-menu.png | Ignition (menu open) | menu dropped down showing Ignition advance … Multispark | The Ignition menu -->
 
+<figure markdown>
+  ![Ignition (menu open): menu dropped down showing Ignition advance … Multispark](../img/ts/ignition-menu.png)
+  <figcaption>Figure 5 — The Ignition menu</figcaption>
+</figure>
+
 ### 1 · Check the engine
 
 Open **Setup ▸ Vehicle Information** and check **Number of cylinders** (`cylindersCount`) and
@@ -202,6 +207,11 @@ outputs.
 <!-- src: firmware/controllers/algo/defaults/default_base_engine.cpp (setInline4: FO_1_3_4_2); firmware/tunerstudio/tunerstudio.template.ini (engineChars) -->
 
 <!-- shot: img/ts/ignition-vehicle-info.png | Setup ▸ Vehicle Information | 4 cylinders, firing order 1-3-4-2 | Cylinder count and firing order -->
+
+<figure markdown>
+  ![Setup ▸ Vehicle Information: 4 cylinders, firing order 1-3-4-2](../img/ts/ignition-vehicle-info.png)
+  <figcaption>Figure 6 — Cylinder count and firing order</figcaption>
+</figure>
 
 ### 2 · Choose the mode
 
@@ -235,6 +245,11 @@ If a cylinder the mode needs has no output, rusEFI warns *Pin Not Assigned check
 
 <!-- shot: img/ts/ignition-hardware-cop.png | Ignition ▸ Ignition hardware | Tuning View Full; Mode Individual Coils; cylinders 1–4 on Ign 1–4; Timing Mode dynamic | Ignition hardware for four individual coils -->
 
+<figure markdown>
+  ![Ignition ▸ Ignition hardware: Tuning View Full; Mode Individual Coils; cylinders 1–4 on Ign 1–4; Timing Mode dynamic](../img/ts/ignition-hardware-cop.png)
+  <figcaption>Figure 7 — Ignition hardware for four individual coils</figcaption>
+</figure>
+
 ### 4 · Set the dwell
 
 Open **Ignition ▸ Dwell** (`dwellSettings`). Enter your coil's dwell in **Dwell time base** at each
@@ -243,6 +258,11 @@ less at high). Leave **Dwell Duty Mode** off unless your ignition module needs a
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (dwellSettings, dwellCorrection, dwellVoltageCorrection curves) -->
 
 <!-- shot: img/ts/ignition-dwell.png | Ignition ▸ Dwell | factory: 4 ms at 0–7000 RPM, multiplier 1.0 at 8–15 V | The Dwell dialog -->
+
+<figure markdown>
+  ![Ignition ▸ Dwell: factory: 4 ms at 0–7000 RPM, multiplier 1.0 at 8–15 V](../img/ts/ignition-dwell.png)
+  <figcaption>Figure 8 — The Dwell dialog</figcaption>
+</figure>
 
 ### 5 · Set cranking timing
 
@@ -258,6 +278,11 @@ Open **Cranking ▸ Cranking settings**, *Ignition* panel:
 <!-- src: firmware/controllers/algo/ignition/ignition_state.cpp (getCrankingAdvance, getSparkDwell isCranking); firmware/controllers/algo/defaults/default_cranking.cpp (setDefaultCranking: crankingAdvance 0, bins 0/200/400/1000) -->
 
 <!-- shot: img/ts/ignition-cranking.png | Cranking ▸ Cranking settings | factory: Fixed (auto taper), 6°, 6 ms | Cranking ignition settings -->
+
+<figure markdown>
+  ![Cranking ▸ Cranking settings: factory: Fixed (auto taper), 6°, 6 ms](../img/ts/ignition-cranking.png)
+  <figcaption>Figure 9 — Cranking ignition settings</figcaption>
+</figure>
 
 ### 6 · Check base timing with a timing light
 
@@ -279,17 +304,37 @@ the note on cylinder trims under *How it works*).
 
 <!-- shot: img/ts/ignition-hardware-fixed.png | Ignition ▸ Ignition hardware | Timing Mode fixed, Fixed Timing 10 | Fixed timing for a timing-light check -->
 
+<figure markdown>
+  ![Ignition ▸ Ignition hardware: Timing Mode fixed, Fixed Timing 10](../img/ts/ignition-hardware-fixed.png)
+  <figcaption>Figure 10 — Fixed timing for a timing-light check</figcaption>
+</figure>
+
 ### 7 · Review the timing table and corrections
 
-Open **Ignition ▸ Ignition advance** to see the table (Figure 3), **Ignition ▸ CLT timing
+Open **Ignition ▸ Ignition advance** to see the table (Figure 11; Figure 3 plots its factory values), **Ignition ▸ CLT timing
 correction** and **Ignition ▸ IAT timing correction**. Correction values are degrees added to the
 advance (negative = retard). The factory CLT correction is zero. The factory IAT correction on
 Proteus is zero up to 30 °C and pulls up to 3° at 60 °C (2° at the highest load row).
 <!-- src: firmware/controllers/algo/defaults/default_ignition.cpp (setDefaultCltTimingCorrection, setDefaultIatTimingCorrection); firmware/config/boards/proteus/prepend.txt (IAT_IGN_CORR_TEMP_COUNT 4); firmware/libfirmware/util/include/rusefi/arrays.h (copyArrayInterpolated) -->
 
 <!-- shot: img/ts/ignition-advance-table.png | Ignition ▸ Ignition advance | factory table | The Ignition advance table -->
+
+<figure markdown>
+  ![Ignition ▸ Ignition advance: factory table](../img/ts/ignition-advance-table.png)
+  <figcaption>Figure 11 — The Ignition advance table</figcaption>
+</figure>
 <!-- shot: img/ts/ignition-clt-corr.png | Ignition ▸ CLT timing correction | factory (all 0) | CLT timing correction -->
+
+<figure markdown>
+  ![Ignition ▸ CLT timing correction: factory (all 0)](../img/ts/ignition-clt-corr.png)
+  <figcaption>Figure 12 — CLT timing correction</figcaption>
+</figure>
 <!-- shot: img/ts/ignition-iat-corr.png | Ignition ▸ IAT timing correction | factory | IAT timing correction -->
+
+<figure markdown>
+  ![Ignition ▸ IAT timing correction: factory](../img/ts/ignition-iat-corr.png)
+  <figcaption>Figure 13 — IAT timing correction</figcaption>
+</figure>
 
 ## Worked examples
 
@@ -330,6 +375,11 @@ Only **Ignition Cylinder 1** and **3** appear in the dialog: they are the first 
 
 <!-- shot: img/ts/ignition-hardware-wasted.png | Ignition ▸ Ignition hardware | Mode Wasted Spark; Cylinder 1 = Ign 1, Cylinder 3 = Ign 2 | Ignition hardware for a wasted-spark coil pack -->
 
+<figure markdown>
+  ![Ignition ▸ Ignition hardware: Mode Wasted Spark; Cylinder 1 = Ign 1, Cylinder 3 = Ign 2](../img/ts/ignition-hardware-wasted.png)
+  <figcaption>Figure 14 — Ignition hardware for a wasted-spark coil pack</figcaption>
+</figure>
+
 ## Tuning it
 
 :material-circle:{ .level-intermediate } Intermediate → :material-circle:{ .level-advanced } Advanced
@@ -357,6 +407,11 @@ overheat ignition parts and is not recommended for distributor or wasted-spark s
 
 <!-- shot: img/ts/ignition-multispark.png | Ignition ▸ Multispark | enabled, factory values | The Multispark dialog -->
 
+<figure markdown>
+  ![Ignition ▸ Multispark: enabled, factory values](../img/ts/ignition-multispark.png)
+  <figcaption>Figure 15 — The Multispark dialog</figcaption>
+</figure>
+
 ### Trailing spark
 
 For rotaries and twin-plug engines, **Controller ▸ Rotary** enables **Trailing Sparks** on separate
@@ -365,6 +420,11 @@ For rotaries and twin-plug engines, **Controller ▸ Rotary** enables **Trailing
 <!-- src: firmware/controllers/engine_cycle/spark_logic.cpp (chargeTrailingSpark, fireTrailingSpark, trailingSparkAngle); firmware/controllers/algo/defaults/default_ignition.cpp (setDefaultTrailingSparkTable) -->
 
 <!-- shot: img/ts/ignition-rotary.png | Controller ▸ Rotary | Enable Trailing Sparks yes, factory table | Trailing spark settings -->
+
+<figure markdown>
+  ![Controller ▸ Rotary: Enable Trailing Sparks yes, factory table](../img/ts/ignition-rotary.png)
+  <figcaption>Figure 16 — Trailing spark settings</figcaption>
+</figure>
 
 ### Odd-fire engines
 

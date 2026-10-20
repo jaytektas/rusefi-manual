@@ -149,6 +149,11 @@ Open **Setup ▸ Trigger**. The left half, *Primary Trigger*:
 
 <!-- shot: img/ts/trigger-dialog.png | Setup ▸ Trigger | Example 1: Four Stroke, 60-2, On crankshaft, Trigger Angle Advance 114, Crank Sensor VR 1, Primary Edge Rising; Cam mode (intake) Single Tooth, Cam sensor bank 1 intake VR 2 | The Trigger dialog set up for a 60-2 crank on VR 1 and a single-tooth cam on VR 2 -->
 
+<figure markdown>
+  ![Setup ▸ Trigger: Example 1: Four Stroke, 60-2, On crankshaft, Trigger Angle Advance 114, Crank Sensor VR 1, Primary Edge Rising; Cam mode (intake) Single Tooth, Cam sensor bank 1 intake VR 2](../img/ts/trigger-dialog.png)
+  <figcaption>Figure 3 — The Trigger dialog set up for a 60-2 crank on VR 1 and a single-tooth cam on VR 2</figcaption>
+</figure>
+
 1. **Strokes** `twoStroke` — Four Stroke for car engines.
 2. **Trigger type** `trigger_type` — your wheel (*60-2*, *36-1*, a named engine pattern, or *custom
    toothed wheel* with **Total tooth count** and **Missing/skipped tooth count**).
@@ -176,6 +181,11 @@ engine sync resolution** on *Intake First Bank* unless your sync cam is another 
 Open **Setup ▸ Advanced Trigger**. The defaults suit most engines:
 
 <!-- shot: img/ts/trigger-advanced.png | Setup ▸ Advanced Trigger | factory defaults | The Advanced Trigger dialog -->
+
+<figure markdown>
+  ![Setup ▸ Advanced Trigger: factory defaults](../img/ts/trigger-advanced.png)
+  <figcaption>Figure 4 — The Advanced Trigger dialog</figcaption>
+</figure>
 
 - **Require cam/VVT sync for ignition** `isPhaseSyncRequiredForIgnition` — *no*: run (wasted spark,
   guessed-phase fuel) until the cam syncs. *yes*: no fuel and no spark until it does. Never set *yes*
@@ -213,6 +223,11 @@ tooth now at the sensor. Multiply by 6° (60-2) or 10° (36-1). Enter that.
 
 <!-- shot: img/ts/trigger-ignition-fixed-timing.png | Ignition ▸ Ignition hardware | Mode Individual Coils, Timing Mode fixed, Fixed Timing 10 | Fixed timing for checking the trigger angle with a timing light -->
 
+<figure markdown>
+  ![Ignition ▸ Ignition hardware: Mode Individual Coils, Timing Mode fixed, Fixed Timing 10](../img/ts/trigger-ignition-fixed-timing.png)
+  <figcaption>Figure 5 — Fixed timing for checking the trigger angle with a timing light</figcaption>
+</figure>
+
 !!! danger "Never drive on fixed timing"
     Fixed timing ignores the timing table and all corrections. Use it only for the check, and return to
     *dynamic* before any load.
@@ -242,19 +257,29 @@ close to trigger sync* — the order of the two could flip with belt stretch.
 
 <!-- shot: img/ts/trigger-dialog-36-1-hall.png | Setup ▸ Trigger | Example 2: 60-2 replaced by 36-1, On crankshaft, Crank Sensor Digital 1, Cam mode Inactive | Crank-only 36-1 on a Hall input -->
 
+<figure markdown>
+  ![Setup ▸ Trigger: Example 2: 60-2 replaced by 36-1, On crankshaft, Crank Sensor Digital 1, Cam mode Inactive](../img/ts/trigger-dialog-36-1-hall.png)
+  <figcaption>Figure 6 — Crank-only 36-1 on a Hall input</figcaption>
+</figure>
+
 ### Example 2 — 36-1 crank only, Hall sensor on Digital 1, wasted spark
 
 | Setting | Value | Why |
 |---|---|---|
 | Trigger type / location | 36-1 / On crankshaft | 35 teeth, 10° pitch |
-| Crank Sensor (Primary channel) | Digital 1 | Hall on Black 10; power 5 V or 12 V as the sensor needs |
+| Crank Sensor (Primary channel) | Digital 1 | Hall on Black23 pin 10; power 5 V or 12 V as the sensor needs |
 | Trigger Angle Advance | 90 (start) | sensor at tooth 10 after the gap at TDC: 9 × 10°; then timing light |
 | Cam mode (intake) | Inactive | no cam sensor |
 | Ignition Mode | Wasted Spark | phase is never known |
-| Injection Mode (**Fuel ▸ Injector Setup ▸ Injection hardware**) | Batch | sequential would fire in a guessed phase |
+| Mode (**Fuel ▸ Injector Setup ▸ Injection configuration**) | Batch | sequential would fire in a guessed phase |
 | Require cam/VVT sync for ignition | no | *yes* would never fire |
 
-<!-- shot: img/ts/trigger-injection-batch.png | Fuel ▸ Injector Setup ▸ Injection hardware | Injection Mode Batch | Batch injection for a crank-only trigger -->
+<!-- shot: img/ts/trigger-injection-batch.png | Fuel ▸ Injector Setup ▸ Injection configuration | Mode Batch | Batch injection for a crank-only trigger -->
+
+<figure markdown>
+  ![Fuel ▸ Injector Setup ▸ Injection configuration: Mode Batch](../img/ts/trigger-injection-batch.png)
+  <figcaption>Figure 7 — Batch injection for a crank-only trigger</figcaption>
+</figure>
 
 ## Tuning it
 
@@ -271,6 +296,11 @@ Ignition chapter.
     <!-- src: firmware/controllers/trigger/trigger_central.cpp (applyTriggerGapOverride, applyCamGapOverride) -->
 
 <!-- shot: img/ts/trigger-gap-override.png | Setup ▸ Trigger Gap Override | defaults (override off) | The Trigger Gap Override dialog -->
+
+<figure markdown>
+  ![Setup ▸ Trigger Gap Override: defaults (override off)](../img/ts/trigger-gap-override.png)
+  <figcaption>Figure 8 — The Trigger Gap Override dialog</figcaption>
+</figure>
 
 ## Diagnostics
 
