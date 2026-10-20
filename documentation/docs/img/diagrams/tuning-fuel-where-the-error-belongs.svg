@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="t d">
+<title id="t">Where a lambda error belongs</title>
+<desc id="d">A logged difference between measured and target lambda is read five ways: a steady-state cell
+error goes to the VE table, a cold-engine error goes to the warm-up enrichment curve, a tip-in error goes to
+the acceleration enrichment table, a whole-region error is held by the fuel trims and then written into the
+VE table, and an error everywhere at once means the base settings — injector flow, reference pressure,
+dead time, MAP calibration.</desc>
+<style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+
+<!-- the measurement -->
+<rect class="loop" x="20" y="150" width="180" height="110" rx="6"/>
+<text x="110" y="178" text-anchor="middle">Log the mixture</text>
+<text x="110" y="198" text-anchor="middle" class="small">measured lambda</text>
+<text x="110" y="214" text-anchor="middle" class="small">against target lambda</text>
+<text x="110" y="234" text-anchor="middle" class="small">steady state first</text>
+
+<!-- five symptom boxes -->
+<rect class="box" x="240" y="16" width="280" height="52" rx="6"/>
+<text x="380" y="38" text-anchor="middle">one RPM and load cell only</text>
+<text x="380" y="56" text-anchor="middle" class="small">steady idle or steady cruise</text>
+
+<rect class="box" x="240" y="86" width="280" height="52" rx="6"/>
+<text x="380" y="108" text-anchor="middle">only while the engine warms up</text>
+<text x="380" y="126" text-anchor="middle" class="small">coolant below Minimum CLT</text>
+
+<rect class="box" x="240" y="156" width="280" height="52" rx="6"/>
+<text x="380" y="178" text-anchor="middle">only as the throttle opens</text>
+<text x="380" y="196" text-anchor="middle" class="small">hesitation, flat spot on tip-in</text>
+
+<rect class="box" x="240" y="226" width="280" height="52" rx="6"/>
+<text x="380" y="248" text-anchor="middle">a whole region, everywhere in it</text>
+<text x="380" y="266" text-anchor="middle" class="small">the trim sits at its limit</text>
+
+<rect class="box" x="240" y="296" width="280" height="52" rx="6"/>
+<text x="380" y="318" text-anchor="middle">everywhere, by the same amount</text>
+<text x="380" y="336" text-anchor="middle" class="small">and it moves with battery voltage</text>
+
+<!-- five fixes -->
+<rect class="ask" x="560" y="16" width="380" height="52" rx="6"/>
+<text x="750" y="38" text-anchor="middle">change the VE table cell</text>
+<text x="750" y="56" text-anchor="middle" class="small">Fuel ▸ VE — and smooth the neighbours</text>
+
+<rect class="drive" x="560" y="86" width="380" height="52" rx="6"/>
+<text x="750" y="108" text-anchor="middle">change the warm-up enrichment curve</text>
+<text x="750" y="126" text-anchor="middle" class="small">Fuel ▸ Warmup enrichment — multiplier on base fuel</text>
+
+<rect class="drive" x="560" y="156" width="380" height="52" rx="6"/>
+<text x="750" y="178" text-anchor="middle">change acceleration enrichment</text>
+<text x="750" y="196" text-anchor="middle" class="small">Fuel ▸ AE / Transient fueling — not the VE table</text>
+
+<rect class="loop" x="560" y="226" width="380" height="52" rx="6"/>
+<text x="750" y="248" text-anchor="middle">let the trims hold it, then write it into VE</text>
+<text x="750" y="266" text-anchor="middle" class="small">Fuel ▸ Long term fuel trims ▸ Apply LTFT to VE and reset</text>
+
+<rect class="safe" x="560" y="296" width="380" height="52" rx="6"/>
+<text x="750" y="318" text-anchor="middle">check the base settings before any table</text>
+<text x="750" y="336" text-anchor="middle" class="small">injector flow, reference pressure, dead time, MAP calibration</text>
+
+<!-- fan out from the measurement -->
+<path class="wire-loop" d="M200,175 C218,175 222,42 238,42" marker-end="url(#a)"/>
+<path class="wire-loop" d="M200,188 C218,188 222,112 238,112" marker-end="url(#a)"/>
+<path class="wire-loop" d="M200,205 H238" marker-end="url(#a)"/>
+<path class="wire-loop" d="M200,222 C218,222 222,252 238,252" marker-end="url(#a)"/>
+<path class="wire-loop" d="M200,235 C218,235 222,322 238,322" marker-end="url(#a)"/>
+
+<!-- symptom to fix -->
+<path class="wire" d="M520,42 H558" marker-end="url(#a)"/>
+<path class="wire" d="M520,112 H558" marker-end="url(#a)"/>
+<path class="wire" d="M520,182 H558" marker-end="url(#a)"/>
+<path class="wire" d="M520,252 H558" marker-end="url(#a)"/>
+<path class="wire" d="M520,322 H558" marker-end="url(#a)"/>
+
+<rect class="ask" x="240" y="368" width="700" height="40" rx="6"/>
+<text x="590" y="386" text-anchor="middle">Want a different mixture, not a corrected one? Change the Target lambda table.</text>
+<text x="590" y="402" text-anchor="middle" class="small">Changing target lambda adds or removes fuel by itself; the VE table stays a description of the engine's airflow.</text>
+</svg>

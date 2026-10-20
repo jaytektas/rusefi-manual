@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 780 400" role="img" aria-labelledby="t d">
+  <title id="t">MBT and the knock limit at one operating point</title>
+  <desc id="d">Torque rises with ignition advance to a peak, MBT, and then falls away. Past the peak
+  there is no torque to gain, only more heat and cylinder pressure. At this operating point the engine
+  begins to knock before the peak is reached, so the usable advance is set by knock, and the tuner runs
+  below that with a margin.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    .curve { fill: none; stroke: #2563eb; stroke-width: 2.5; }
+    .band-safe { fill: #fff7ed; }
+    .band-risk { fill: #fef2f2; }
+    .axis { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .tick { stroke: #6b7280; stroke-width: 1.5; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+      .band-safe { fill: #431407; } .band-risk { fill: #450a0a; } .axis, .tick { stroke: #9ca3af; }
+      .curve { stroke: #60a5fa; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- the two zones -->
+  <rect class="band-safe" x="300" y="46" width="160" height="284"/>
+  <rect class="band-risk" x="460" y="46" width="252" height="284"/>
+
+  <!-- axes -->
+  <path class="axis" d="M70,46 V330 H716" marker-end="url(#a)"/>
+  <text x="62" y="56" text-anchor="end" class="small">torque</text>
+  <text x="712" y="374" text-anchor="end" class="small">ignition advance (° BTDC)</text>
+  <path class="tick" d="M215,330 V336"/><text x="215" y="352" text-anchor="middle" class="small">10°</text>
+  <path class="tick" d="M360,330 V336"/><text x="360" y="352" text-anchor="middle" class="small">20°</text>
+  <path class="tick" d="M505,330 V336"/><text x="505" y="352" text-anchor="middle" class="small">30°</text>
+  <path class="tick" d="M650,330 V336"/><text x="650" y="352" text-anchor="middle" class="small">40°</text>
+
+  <!-- torque against advance, one operating point, one fuel -->
+  <polyline class="curve" points="90,300 140,268 190,240 240,212 290,186 340,158 390,131 440,108 480,96 520,92 560,96 600,104 650,118 700,134"/>
+
+  <!-- MBT -->
+  <path class="wire-ask" d="M520,92 V66" marker-end="url(#a)"/>
+  <text x="528" y="62" class="small">MBT: best torque here</text>
+
+  <!-- knock limit, before the peak at this load -->
+  <path class="wire-safe" d="M460,46 V330"/>
+  <text x="452" y="60" text-anchor="end" class="small">knock limit —</text>
+  <text x="452" y="76" text-anchor="end" class="small">knocks short of MBT</text>
+
+  <!-- where the tuner runs -->
+  <circle cx="400" cy="124" r="5" fill="#e8710a"/>
+  <path class="wire-drive" d="M398,214 V134" marker-end="url(#a)"/>
+  <text x="380" y="234" text-anchor="middle" class="small">run here: below the</text>
+  <text x="380" y="250" text-anchor="middle" class="small">knock limit, with margin</text>
+
+  <!-- past the peak -->
+  <path class="wire-safe" d="M600,110 V196" marker-end="url(#a)"/>
+  <text x="588" y="216" text-anchor="middle" class="small">past MBT: no torque to gain,</text>
+  <text x="588" y="232" text-anchor="middle" class="small">only more heat and pressure</text>
+
+  <!-- what the shape depends on -->
+  <rect class="box" x="76" y="44" width="182" height="110" rx="6"/>
+  <text x="167" y="66" text-anchor="middle">this shape moves with:</text>
+  <text x="167" y="84" text-anchor="middle" class="small">load — light load wants</text>
+  <text x="167" y="99" text-anchor="middle" class="small">more advance</text>
+  <text x="167" y="114" text-anchor="middle" class="small">engine speed</text>
+  <text x="167" y="129" text-anchor="middle" class="small">charge and coolant heat</text>
+  <text x="167" y="144" text-anchor="middle" class="small">fuel octane</text>
+</svg>

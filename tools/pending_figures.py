@@ -12,8 +12,8 @@ import pathlib
 import re
 
 DOCS = pathlib.Path(__file__).resolve().parent.parent / "documentation/docs"
-FIG = re.compile(r"(?<!<!-- pending-figure\n)<figure markdown>\n.*?</figure>", re.S)   # skip ones already held
-HELD = re.compile(r"<!-- pending-figure\n(.*?)\npending-figure -->", re.S)
+FIG = re.compile(r"^([ \t]*)<figure markdown>\n.*?</figure>", re.S | re.M)   # keeps the figure's indent (figures inside tabs)
+HELD = re.compile(r"^([ \t]*)<!-- pending-figure\n(.*?)\n[ \t]*pending-figure -->", re.S | re.M)
 held = shown = 0
 
 
@@ -26,12 +26,16 @@ def missing(block, page):
 
 for page in sorted(DOCS.rglob("*.md")):
     text = page.read_text()
-    new = HELD.sub(lambda m: (m.group(0) if missing(m.group(1).replace("&#45;&#45;", "--"), page)
-                              else m.group(1).replace("&#45;&#45;", "--")), text)
+    new = HELD.sub(lambda m: (m.group(0) if missing(m.group(2).replace("&#45;&#45;", "--"), page)
+                              else m.group(2).replace("&#45;&#45;", "--")), text)
     before = len(HELD.findall(new))
     shown += len(HELD.findall(text)) - before
-    new = FIG.sub(lambda m: ("<!-- pending-figure\n" + m.group(0).replace("--", "&#45;&#45;") + "\npending-figure -->"
-                             if missing(m.group(0), page) else m.group(0)), new)
+    def hold(m):
+        ind = m.group(1)
+        if not missing(m.group(0), page) or new[max(0, m.start() - 40):m.start()].rstrip().endswith("<!-- pending-figure"):
+            return m.group(0)
+        return f"{ind}<!-- pending-figure\n" + m.group(0).replace("--", "&#45;&#45;") + f"\n{ind}pending-figure -->"
+    new = FIG.sub(hold, new)
     held += len(HELD.findall(new)) - before
     if new != text:
         page.write_text(new)

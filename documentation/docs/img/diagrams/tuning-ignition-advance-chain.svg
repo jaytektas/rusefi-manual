@@ -1,0 +1,132 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1030 456" role="img" aria-labelledby="t d">
+  <title id="t">How rusEFI builds the ignition advance for one cylinder</title>
+  <desc id="d">The ignition advance table is read at engine speed and ignition load, then the second
+  ignition table and blend tables, the idle table, and the IAT, CLT and idle timing corrections are added.
+  Knock retard and the soft RPM-limit retard are subtracted, and only in dynamic timing mode. The cylinder
+  trim and the hardware latency correction are added last, per cylinder. The knock sensor window, the
+  idle timing PID and the soft RPM limiter are the paths that measure the engine and change the answer.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: what is asked for (blue) -->
+  <rect class="ask" x="16" y="28" width="172" height="62" rx="6"/>
+  <text x="102" y="50" text-anchor="middle">Ignition advance table</text>
+  <text x="102" y="66" text-anchor="middle" class="small">RPM × ignition load</text>
+  <text x="102" y="81" text-anchor="middle" class="mono">ignitionTable</text>
+
+  <rect class="ask" x="208" y="28" width="172" height="62" rx="6"/>
+  <text x="294" y="50" text-anchor="middle">second table, blends</text>
+  <text x="294" y="66" text-anchor="middle" class="small">replaces, or mixes in</text>
+  <text x="294" y="81" text-anchor="middle" class="mono">secondIgnitionTable</text>
+
+  <rect class="ask" x="400" y="28" width="160" height="62" rx="6"/>
+  <text x="480" y="50" text-anchor="middle">idle table</text>
+  <text x="480" y="66" text-anchor="middle" class="small">blended out by throttle</text>
+  <text x="480" y="81" text-anchor="middle" class="mono">idleAdvance</text>
+
+  <rect class="ask" x="580" y="28" width="184" height="62" rx="6"/>
+  <text x="672" y="50" text-anchor="middle">+ corrections</text>
+  <text x="672" y="66" text-anchor="middle" class="small">IAT + CLT + idle timing PID</text>
+  <text x="672" y="81" text-anchor="middle" class="mono">ignitionIatCorrTable</text>
+
+  <rect class="ask" x="784" y="28" width="180" height="62" rx="6"/>
+  <text x="874" y="50" text-anchor="middle">+ add-on retard</text>
+  <text x="874" y="66" text-anchor="middle" class="small">burst knock, DFCO,</text>
+  <text x="874" y="81" text-anchor="middle" class="small">rolling launch</text>
+
+  <path class="wire-ask" d="M188,59 H206" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M380,59 H398" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M560,59 H578" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M764,59 H782" marker-end="url(#a)"/>
+
+  <path class="wire-ask" d="M940,90 V126" marker-end="url(#a)"/>
+  <text x="948" y="112" class="small">base advance</text>
+
+  <!-- row 2: the safety subtractions (red), then what is driven (orange) -->
+  <rect class="safe" x="784" y="128" width="180" height="68" rx="6"/>
+  <text x="874" y="150" text-anchor="middle">− knock retard</text>
+  <text x="874" y="166" text-anchor="middle" class="small">capped by Max knock retard</text>
+  <text x="874" y="182" text-anchor="middle" class="small">dynamic timing mode only</text>
+
+  <rect class="safe" x="516" y="136" width="180" height="54" rx="6"/>
+  <text x="606" y="158" text-anchor="middle">− soft RPM-limit retard</text>
+  <text x="606" y="175" text-anchor="middle" class="small">rpmSoftLimitTimingRetard 4°</text>
+
+  <rect class="drive" x="320" y="136" width="176" height="54" rx="6"/>
+  <text x="408" y="158" text-anchor="middle">Timing: ignition</text>
+  <text x="408" y="175" text-anchor="middle" class="small">what the ECU asks for</text>
+
+  <rect class="drive" x="136" y="136" width="164" height="54" rx="6"/>
+  <text x="218" y="158" text-anchor="middle">per cylinder</text>
+  <text x="218" y="175" text-anchor="middle" class="small">+ trim, + latency</text>
+
+  <rect class="box" x="16" y="136" width="100" height="54" rx="6"/>
+  <text x="66" y="158" text-anchor="middle">coil fires</text>
+  <text x="66" y="175" text-anchor="middle" class="small">that angle</text>
+
+  <path class="wire-safe" d="M784,162 H700" marker-end="url(#a)"/>
+  <path class="wire-safe" d="M516,163 H500" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M320,163 H304" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M136,163 H120" marker-end="url(#a)"/>
+
+  <!-- row 3: what measures the engine and changes the answer (green) -->
+  <rect class="loop" x="16" y="262" width="222" height="60" rx="6"/>
+  <text x="127" y="284" text-anchor="middle">knock sensor window</text>
+  <text x="127" y="300" text-anchor="middle" class="small">opens 20° after each spark</text>
+  <text x="127" y="315" text-anchor="middle" class="mono">knockDetectionWindowStart</text>
+
+  <rect class="loop" x="258" y="262" width="222" height="60" rx="6"/>
+  <text x="369" y="284" text-anchor="middle">level against threshold</text>
+  <text x="369" y="300" text-anchor="middle" class="small">Engine Knock Threshold curve</text>
+  <text x="369" y="315" text-anchor="middle" class="mono">knockBaseNoise</text>
+
+  <rect class="loop" x="500" y="262" width="200" height="60" rx="6"/>
+  <text x="600" y="284" text-anchor="middle">RPM against the limit</text>
+  <text x="600" y="300" text-anchor="middle" class="small">soft limiter window</text>
+  <text x="600" y="315" text-anchor="middle" class="mono">rpmHardLimit, rpmHardLimitHyst</text>
+
+  <rect class="loop" x="716" y="262" width="170" height="60" rx="6"/>
+  <text x="801" y="284" text-anchor="middle">idle timing PID</text>
+  <text x="801" y="300" text-anchor="middle" class="small">RPM error at idle</text>
+  <text x="801" y="315" text-anchor="middle" class="mono">idleTimingPid</text>
+
+  <path class="wire-loop" d="M238,292 H256" marker-end="url(#a)"/>
+  <!-- knock level to the retard box: under the row, up the right side, into the box bottom -->
+  <path class="wire-loop" d="M369,322 V344 H900 V198" marker-end="url(#a)"/>
+  <text x="500" y="338" class="small">every event pulls, then Retard Reapply Rate gives it back</text>
+  <!-- soft limiter straight up -->
+  <path class="wire-loop" d="M600,262 V194" marker-end="url(#a)"/>
+  <!-- idle timing PID up through the gap and into the corrections box -->
+  <path class="wire-loop" d="M740,262 V114 H672 V92" marker-end="url(#a)"/>
+
+  <!-- nothing clamps the result -->
+  <rect class="safe" x="16" y="366" width="1004" height="76" rx="6"/>
+  <text x="518" y="392" text-anchor="middle">Nothing in this chain limits what the table can ask for</text>
+  <text x="518" y="410" text-anchor="middle" class="small">the firmware's own clamps (minimumIgnitionTiming, maximumIgnitionTiming) are commented out</text>
+  <text x="518" y="427" text-anchor="middle" class="small">so one wrong cell, or one sign typed the wrong way, reaches the coil</text>
+  <path class="wire-safe" d="M218,190 V366"/>
+</svg>

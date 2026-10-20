@@ -5,5 +5,6 @@
 Finding the right numbers on a running engine: the principles, then fuel, ignition and logging. Read Tuning principles first.
 
 - **[Tuning principles](tuning-principles.md)** — Tuning is filling in the ECU's tables so the engine gets the fuel and spark it needs everywhere it runs — in a safe order, in small steps, checked against logs.
-
-**Still being written:** Tuning fuel, Tuning ignition, Datalogging and log analysis.
+- **[Tuning fuel](tuning-fuel.md)** — Fill in the VE table from logged wideband readings, keep the cold and transient corrections out of it, and let the fuel trims tell you what you missed when you were not looking.
+- **[Tuning ignition](tuning-ignition.md)** — Fill the ignition table from what the engine tells you — torque, lambda, exhaust temperature and knock — working from light load to full load, in one or two degree steps, stopping where knock starts rather than where the table says you should.
+- **[Datalogging and log analysis](datalogging.md)** — A datalog is a recording of everything the ECU was measuring and doing, row after row, and it is the only honest way to find out how the engine really ran when you were not looking at it.

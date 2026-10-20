@@ -108,6 +108,9 @@ nav:
   - Part IV — Tuning:
       - part4/index.md
       - Tuning principles: part4/tuning-principles.md
+      - Tuning fuel: part4/tuning-fuel.md
+      - Tuning ignition: part4/tuning-ignition.md
+      - Datalogging and log analysis: part4/datalogging.md
   - Part V — Testing and troubleshooting:
       - part5/index.md
       - Bench testing: part5/bench-testing.md

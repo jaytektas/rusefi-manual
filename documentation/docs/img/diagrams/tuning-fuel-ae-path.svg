@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 320" role="img" aria-labelledby="t d">
+<title id="t">Throttle-position acceleration enrichment path</title>
+<desc id="d">TPS is sampled every 50 ms; the largest single step inside the TPS history window is compared
+with the TPS opening threshold; if it passes, the value from the TPS-to-TPS table is used, then scaled by the
+fractional accelerator pump settings, the RPM multiplier curve, the flex multiplier and the injection mode,
+and added to each injection. The path is suspended while TunerStudio is writing the VE table and below
+cranking RPM, and MAP Prediction and Lua AE do not use it.</desc>
+<style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+
+<rect class="box" x="20" y="24" width="150" height="58" rx="6"/>
+<text x="95" y="48" text-anchor="middle">TPS, every 50 ms</text>
+<text x="95" y="66" text-anchor="middle" class="small">history buffer</text>
+
+<rect class="ask" x="190" y="24" width="180" height="58" rx="6"/>
+<text x="280" y="48" text-anchor="middle">largest step in window</text>
+<text x="280" y="66" text-anchor="middle" class="small">TPS history window</text>
+
+<rect class="box" x="390" y="24" width="180" height="58" rx="6"/>
+<text x="480" y="48" text-anchor="middle">above threshold?</text>
+<text x="480" y="66" text-anchor="middle" class="small">TPS opening threshold</text>
+
+<rect class="ask" x="590" y="24" width="170" height="58" rx="6"/>
+<text x="675" y="48" text-anchor="middle">TPS-to-TPS table</text>
+<text x="675" y="66" text-anchor="middle" class="small">ms, or a fraction</text>
+
+<rect class="drive" x="780" y="24" width="160" height="58" rx="6"/>
+<text x="860" y="48" text-anchor="middle">extra fuel</text>
+<text x="860" y="66" text-anchor="middle" class="small">added to each injection</text>
+
+<path class="wire" d="M170,53 H188" marker-end="url(#a)"/>
+<path class="wire" d="M370,53 H388" marker-end="url(#a)"/>
+<path class="wire" d="M570,53 H588" marker-end="url(#a)"/>
+<path class="wire" d="M760,53 H778" marker-end="url(#a)"/>
+<path class="wire" d="M675,82 V126" marker-end="url(#a)"/>
+
+<rect class="loop" x="20" y="130" width="920" height="104" rx="6"/>
+<text x="480" y="154" text-anchor="middle">the table value is then scaled in this order</text>
+<text x="480" y="176" text-anchor="middle">fractional accelerator pump → RPM multiplier curve → flex multiplier → injection-mode scaling</text>
+<text x="480" y="198" text-anchor="middle" class="small">Cycles per fuel portion and Fuel portion divisor spread one portion over several engine cycles</text>
+<text x="480" y="216" text-anchor="middle" class="small">MS Adder milliseconds are turned back into mass by the injector model; Percent Adder fractions multiply the injection</text>
+
+<rect class="safe" x="20" y="248" width="920" height="56" rx="6"/>
+<text x="480" y="270" text-anchor="middle">No enrichment while TunerStudio is writing the VE table, and none below cranking RPM</text>
+<text x="480" y="290" text-anchor="middle" class="small">the suspension lasts 20 s after the write while Suspend corrections after VE edits is on; MAP Prediction and Lua AE skip this path entirely</text>
+</svg>
