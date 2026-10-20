@@ -1,0 +1,12 @@
+# build output and local environments
+.venv/
+documentation/site/
+/publish/
+__pycache__/
+# private: never published (unredacted shots, third-party material, bench/VM details, term list, raw logs)
+/.private/
+/screenshots-raw/
+/reference/
+/reports/
+/skills/
+/.claude/

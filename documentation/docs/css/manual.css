@@ -1,0 +1,39 @@
+/* rusEFI console look: near-black chrome, the console's accent blue for links and highlights
+   (java_console/ui/src/main/resources/com/rusefi/ui/theme/FlatLightLaf.properties). */
+:root {
+  --md-primary-fg-color:        #151a21;
+  --md-primary-fg-color--light: #232a33;
+  --md-primary-fg-color--dark:  #0d1015;
+  --md-primary-bg-color:        #f2f3f5;
+  --md-primary-bg-color--light: #c9ccd2;
+  --md-accent-fg-color:         #2563eb;
+  --md-accent-fg-color--transparent: rgba(37, 99, 235, 0.12);
+}
+[data-md-color-scheme="default"] { --md-typeset-a-color: #1d4ed8; }
+[data-md-color-scheme="slate"]   { --md-typeset-a-color: #60a5fa; --md-default-bg-color: #14181e; }
+
+/* Use the width: tables and figures want it. */
+.md-grid { max-width: none; }
+.md-main__inner { margin-left: 1.2rem; margin-right: 1.2rem; }
+
+/* Level badges (STANDARD.md §2): one under every section heading. */
+.level-basic        { color: #2e9d4f; }
+.level-intermediate { color: #d19a00; }
+.level-advanced     { color: #c8412d; }
+
+/* Figures: centred, captioned, never wider than the text column. */
+figure { margin: 1.6em auto; text-align: center; }
+figure img { max-width: 100%; border-radius: 4px; }
+figcaption { font-size: 0.85em; color: var(--md-default-fg-color--light); max-width: 46em; margin: 0.5em auto 0; }
+
+/* Tool screenshots get a hairline so a dark page reads as a picture. */
+img[src*="img/ts/"], img[src*="img/console/"], img[src*="img/windows/"] { border: 1px solid var(--md-default-fg-color--lightest); }
+
+/* SVG diagrams have a viewBox and no size: give them the text column, and their figure too. */
+figure img[src$=".svg"] { width: 100%; height: auto; }
+.md-typeset figure:has(> img[src$=".svg"]),
+.md-typeset figure:has(> p > img[src$=".svg"]) { width: 100%; }
+
+/* Settings reference tables. */
+.md-typeset table code { word-break: keep-all; white-space: nowrap; }
+.md-typeset table:not([class]) td:first-child { min-width: 14em; }

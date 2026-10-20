@@ -1,0 +1,2 @@
+# Tools for generating figures (not needed to build the manual)
+matplotlib==3.10.9

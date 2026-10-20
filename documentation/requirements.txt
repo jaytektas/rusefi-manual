@@ -1,0 +1,3 @@
+# Pinned: MkDocs 2.0 drops plugins and themes, and a fresh install must not pick it up.
+mkdocs==1.6.1
+mkdocs-material==9.7.7

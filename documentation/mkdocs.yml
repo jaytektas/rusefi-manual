@@ -1,0 +1,74 @@
+site_name: The rusEFI Manual – from first spark to full tune
+site_description: rusEFI on official hardware with the rusEFI console and TunerStudio — how EFI works, installing, flashing, wiring, configuring, tuning and troubleshooting.
+site_url: https://jaytektas.github.io/rusefi-manual/
+repo_url: https://github.com/jaytektas/rusefi-manual
+repo_name: jaytektas/rusefi-manual
+edit_uri: ""
+docs_dir: docs
+site_dir: site
+strict: true
+# Snippet files are pulled INTO chapters (--8<--) and are not pages of their own.
+exclude_docs: |
+  reference/settings/_*.table.md
+
+theme:
+  name: material
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.top
+    - navigation.footer
+    - search.highlight
+    - search.suggest
+    - content.tabs.link
+    - toc.integrate
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: custom
+      accent: custom
+      toggle: { icon: material/weather-night, name: Dark }
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: custom
+      accent: custom
+      toggle: { icon: material/weather-sunny, name: Light }
+
+plugins:
+  - search
+  - offline          # works from file:// as well as from a web server
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc: { permalink: true }
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed: { alternate_style: true }
+  - pymdownx.snippets: { base_path: [docs] }
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+
+extra_css:
+  - css/manual.css
+
+# ---------------------------------------------------------------------------------------------------
+# THE INDEX. Parts run from first contact to reference; within a part, chapters run basic to advanced.
+# Each part's index page lists its planned chapters; a chapter joins the nav when it is written.
+# ---------------------------------------------------------------------------------------------------
+nav:
+  - Home: index.md
+  - Read this first — safety and disclaimer: safety.md
+  - Part 0 — About rusEFI: part0/index.md
+  - Part I — Getting started: part1/index.md
+  - Part II — Hardware and wiring: part2/index.md
+  - Part III — Configuring the engine:
+      - part3/index.md
+      - Electronic throttle: part3/electronic-throttle.md
+  - Part IV — Tuning: part4/index.md
+  - Part V — Testing and troubleshooting: part5/index.md
+  - Part VI — Firmware and maintenance: part6/index.md
+  - Part VII — Reference: part7/index.md

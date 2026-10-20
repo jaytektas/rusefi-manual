@@ -1,0 +1,117 @@
+#!/usr/bin/env python3
+"""Generate the settings-reference tables (STANDARD.md section 7) from the official TunerStudio .ini.
+
+    python3 -I tools/gen_settings.py <dialog> [<dialog> ...]
+    python3 -I tools/gen_settings.py --ini <path to .ini> <dialog> ...
+    python3 -I tools/gen_settings.py --out <dir> <dialog> ...      (write elsewhere, e.g. to compare)
+    python3 -I tools/gen_settings.py --all                          (every dialog a chapter includes)
+
+For each dialog (its internal name, e.g. etbDialog, tpsSensor, pedalSensor) this walks the dialog and
+every panel it contains, in display order, and writes documentation/docs/reference/settings/_<dialog>.table.md:
+one row per setting with its TunerStudio label, internal name, units, range and the help text
+TunerStudio shows (the ini's [SettingContextHelp], which rusEFI generates from rusefi_config.txt).
+Chapters include the file with  --8<-- "reference/settings/_<dialog>.table.md".
+Never edit the output by hand; fix help text upstream in firmware/integration/rusefi_config.txt.
+"""
+import os
+import pathlib
+import re
+import sys
+
+ROOT = pathlib.Path(__file__).resolve().parent.parent
+DEFAULT_INI = pathlib.Path(os.environ.get("RUSEFI_INI", ROOT.parent / "tools/bundle/official/rusefi.snapshot.proteus_f7/rusefi_proteus_f7.ini"))  # the official Proteus F7 ini from a rusEFI bundle
+OUT = ROOT / "documentation/docs/reference/settings"
+
+
+def section(text, name):
+    m = re.search(r"^\[%s\]\s*$(.*?)(?=^\[[A-Za-z]+\]\s*$)" % re.escape(name), text, re.M | re.S)
+    return m.group(1) if m else ""
+
+
+def parse(ini_text):
+    consts = {}
+    for m in re.finditer(r'^\s*(\w+)\s*=\s*(scalar|bits|array|string)\s*,\s*(\w+)\s*,\s*\d+\s*,(.*)$',
+                         section(ini_text, "Constants"), re.M):
+        name, kind, _typ, rest = m.groups()
+        parts = [p.strip() for p in re.split(r',(?=(?:[^"]*"[^"]*")*[^"]*$)', rest)]
+        info = {"kind": kind}
+        if kind == "scalar":
+            # "units", scale, translate, lo, hi, digits
+            info["units"] = parts[0].strip('"') if parts else ""
+            if len(parts) >= 5:
+                info["range"] = f"{parts[3]} … {parts[4]}"
+        elif kind == "bits":
+            info["units"] = "choice"
+        elif kind == "array":
+            info["units"] = parts[1].strip('"') if len(parts) > 1 else ""
+            info["range"] = f"{parts[4]} … {parts[5]}" if len(parts) > 5 else ""
+        consts[name] = info
+    helps = {}
+    for m in re.finditer(r'^\s*(\w+)\s*=\s*"(.*)"\s*$', section(ini_text, "SettingContextHelp"), re.M):
+        helps[m.group(1)] = m.group(2).replace("\\n", " ").strip()
+    ui = section(ini_text, "UserDefined")
+    dialogs, current = {}, None
+    for line in ui.splitlines():
+        line = line.split(";")[0].rstrip() if not line.strip().startswith('field = "') else line.rstrip()
+        m = re.match(r'\s*dialog\s*=\s*(\w+)\s*(?:,\s*"([^"]*)")?', line)
+        if m:
+            current = m.group(1)
+            dialogs[current] = {"title": m.group(2) or "", "items": []}
+            continue
+        if current is None:
+            continue
+        m = re.match(r'\s*field\s*=\s*"([^"]*)"\s*(?:,\s*(\w+))?', line)
+        if m:
+            dialogs[current]["items"].append(("field", m.group(1), m.group(2)))
+            continue
+        m = re.match(r'\s*panel\s*=\s*(\w+)', line)
+        if m:
+            dialogs[current]["items"].append(("panel", m.group(1), None))
+    return consts, helps, dialogs
+
+
+def rows_for(dialog, dialogs, consts, helps, seen):
+    rows = []
+    for kind, a, b in dialogs.get(dialog, {}).get("items", []):
+        if kind == "panel":
+            if a in dialogs and a not in seen:
+                seen.add(a)
+                rows += rows_for(a, dialogs, consts, helps, seen)
+        elif b and b in consts and b not in seen:
+            seen.add(b)
+            c = consts[b]
+            rows.append((a.strip(), b, c.get("units", ""), c.get("range", ""), helps.get(b, "")))
+    return rows
+
+
+def main(argv):
+    args = argv[1:]
+    ini, out = DEFAULT_INI, OUT
+    while args[:1] in (["--ini"], ["--out"]):
+        if args[0] == "--ini":
+            ini = pathlib.Path(args[1])
+        else:
+            out = pathlib.Path(args[1])
+        args = args[2:]
+    if args == ["--all"]:
+        args = sorted(set(re.findall(r'--8<-- "reference/settings/_(\w+)\.table\.md"',
+                                     "".join(p.read_text() for p in (ROOT / "documentation/docs").rglob("*.md")))))
+    consts, helps, dialogs = parse(ini.read_text(errors="replace"))
+    out.mkdir(parents=True, exist_ok=True)
+    sig = re.search(r'^\s*signature\s*=\s*"([^"]+)"', ini.read_text(errors="replace"), re.M)
+    for d in args:
+        if d not in dialogs:
+            sys.exit(f"no dialog {d!r} in {ini}")
+        rows = rows_for(d, dialogs, consts, helps, set())
+        cell = lambda s: s.replace("|", "\\|")
+        config_hash = sig.group(1).rsplit(".", 1)[-1] if sig else "?"
+        lines = [f"<!-- generated by tools/gen_settings.py from the official {ini.stem.replace('rusefi_', '')} ini (config hash {config_hash}); do not edit -->",
+                 "", "| TunerStudio label | Setting | Units | Range | Help (as TunerStudio shows it) |",
+                 "|---|---|---|---|---|"]
+        lines += [f"| {cell(l) or '—'} | `{n}` | {cell(u)} | {r} | {cell(h)} |" for l, n, u, r, h in rows]
+        (out / f"_{d}.table.md").write_text("\n".join(lines) + "\n")
+        print(f"{d}: {len(rows)} settings")
+
+
+if __name__ == "__main__":
+    main(sys.argv)
