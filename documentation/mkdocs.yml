@@ -139,4 +139,4 @@ nav:
       - Error codes: part7/error-codes.md
       - Console commands: part7/console-commands.md
       - Glossary: part7/glossary.md
-      - Appendix: tuning in the rusEFI console: part7/console-appendix.md
+      - "Appendix: tuning in the rusEFI console": part7/console-appendix.md
