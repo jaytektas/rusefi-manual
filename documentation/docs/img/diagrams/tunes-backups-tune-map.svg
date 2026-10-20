@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 420" role="img" aria-labelledby="t d">
+  <title id="t">What a rusEFI tune is made of, and where each part lives</title>
+  <desc id="d">TunerStudio keeps the tune in a .msq file and in its own automatic restore points. The ECU
+  serves five pages: page 0 settings, page 1 high-speed offsets, page 2 long term fuel trims, page 3 second
+  tables and page 4 the Lua script. Page 0 is what the ECU stores in flash as two checked copies; pages 2, 3
+  and 4 are stored as files on the SD card. The long term fuel trim page is deliberately left out of the
+  .msq file.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- left: the copies TunerStudio keeps -->
+  <rect class="ask" x="24" y="36" width="210" height="86" rx="6"/>
+  <text x="129" y="60" text-anchor="middle">TunerStudio</text>
+  <text x="129" y="80" text-anchor="middle" class="mono">2026-10-21.msq</text>
+  <text x="129" y="98" text-anchor="middle" class="small">every setting, as XML text</text>
+
+  <rect class="box" x="24" y="150" width="210" height="70" rx="6"/>
+  <text x="129" y="174" text-anchor="middle">TunerStudio restore points</text>
+  <text x="129" y="194" text-anchor="middle" class="small">kept inside the project</text>
+  <path class="wire" d="M129,148 V124" marker-end="url(#a)"/>
+
+  <rect class="safe" x="24" y="264" width="210" height="110" rx="6"/>
+  <text x="129" y="288" text-anchor="middle">Not in the tune file</text>
+  <text x="129" y="308" text-anchor="middle" class="small">long term fuel trims</text>
+  <text x="129" y="326" text-anchor="middle" class="small">dashboards, gauges and</text>
+  <text x="129" y="344" text-anchor="middle" class="small">log presets (project files)</text>
+  <path class="wire-safe" d="M236,319 H272 V193 H281" marker-end="url(#a)"/>
+  <text x="248" y="311" text-anchor="middle" class="mono">LTFT</text>
+
+  <!-- middle: the five TunerStudio pages the ECU serves -->
+  <rect class="ask" x="284" y="24" width="332" height="58" rx="6"/>
+  <text x="450" y="46" text-anchor="middle">page 0 · settings · 17,816 bytes</text>
+  <text x="450" y="66" text-anchor="middle" class="small">pinout, sensor calibrations, VE / timing / lambda tables</text>
+
+  <rect class="box" x="284" y="94" width="332" height="58" rx="6"/>
+  <text x="450" y="116" text-anchor="middle">page 1 · high-speed offsets · 256 bytes</text>
+  <text x="450" y="136" text-anchor="middle" class="small">not part of the tune, not saved</text>
+
+  <rect class="drive" x="284" y="164" width="332" height="58" rx="6"/>
+  <text x="450" y="186" text-anchor="middle">page 2 · long term fuel trims · 2,048 bytes</text>
+  <text x="450" y="206" text-anchor="middle" class="small">learned by the ECU while you drive</text>
+
+  <rect class="drive" x="284" y="234" width="332" height="58" rx="6"/>
+  <text x="450" y="256" text-anchor="middle">page 3 · second tables · 1,268 bytes</text>
+  <text x="450" y="276" text-anchor="middle" class="small">second VE, second timing, blends, torque</text>
+
+  <rect class="drive" x="284" y="304" width="332" height="58" rx="6"/>
+  <text x="450" y="326" text-anchor="middle">page 4 · Lua script · 48,000 bytes</text>
+  <text x="450" y="346" text-anchor="middle" class="small">the whole script, as text</text>
+
+  <path class="wire-ask" d="M236,72 H281" marker-end="url(#a)"/>
+  <text x="258" y="62" text-anchor="middle" class="small">Open</text>
+  <text x="258" y="90" text-anchor="middle" class="small">Burn</text>
+
+  <!-- right: where the ECU keeps each page -->
+  <rect class="loop" x="676" y="36" width="262" height="86" rx="6"/>
+  <text x="807" y="60" text-anchor="middle">ECU flash: two copies</text>
+  <text x="807" y="80" text-anchor="middle" class="small">page 0 only</text>
+  <text x="807" y="98" text-anchor="middle" class="small">CRC, version and size checked at boot</text>
+  <path class="wire-loop" d="M618,46 H674" marker-end="url(#a)"/>
+  <text x="646" y="38" text-anchor="middle" class="small">Burn</text>
+  <path class="wire-loop" d="M674,104 H621" marker-end="url(#a)"/>
+  <text x="646" y="122" text-anchor="middle" class="small">on boot</text>
+
+  <rect class="loop" x="676" y="228" width="262" height="110" rx="6"/>
+  <text x="807" y="252" text-anchor="middle">SD card, in ECU mode</text>
+  <text x="807" y="274" text-anchor="middle" class="mono">ltft.bin</text>
+  <text x="807" y="292" text-anchor="middle" class="mono">second_tables.bin · lua_script.bin</text>
+  <text x="807" y="314" text-anchor="middle" class="small">written when the card is with the ECU</text>
+
+  <!-- bus from pages 2, 3 and 4 to the SD card -->
+  <path class="wire-loop" d="M618,193 H652"/>
+  <path class="wire-loop" d="M618,263 H652"/>
+  <path class="wire-loop" d="M618,333 H652"/>
+  <path class="wire-loop" d="M652,193 V333"/>
+  <path class="wire-loop" d="M652,283 H674" marker-end="url(#a)"/>
+</svg>

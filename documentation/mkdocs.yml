@@ -118,6 +118,9 @@ nav:
       - Troubleshooting guide: part5/troubleshooting.md
   - Part VI — Firmware and maintenance:
       - part6/index.md
+      - Recovering an ECU: part6/recovering.md
+      - Tunes and backups: part6/tunes-backups.md
+      - Building rusEFI yourself: part6/building-rusefi.md
   - Part VII — Reference:
       - part7/index.md
       - Every setting, by menu:

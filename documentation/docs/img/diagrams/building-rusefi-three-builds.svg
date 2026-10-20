@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+  <title id="t">One source tree, three build units</title>
+  <desc id="d">The firmware sources are built three ways: as the real firmware for the MCU with
+  EFI_PROD_CODE, as Google Test host binaries with EFI_UNIT_TEST, and as a desktop simulator with
+  EFI_SIMULATOR. Each has its own CI job: the firmware matrix, unit tests on Linux and Windows, and the
+  simulator with a functional test over TCP port 29001.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- one source tree -->
+  <rect class="ask" x="20" y="150" width="230" height="150" rx="6"/>
+  <text x="135" y="176" text-anchor="middle">one source tree</text>
+  <text x="135" y="196" text-anchor="middle" class="mono">firmware/controllers/</text>
+  <text x="135" y="212" text-anchor="middle" class="mono">firmware/hw_layer/</text>
+  <text x="135" y="228" text-anchor="middle" class="mono">firmware/integration/</text>
+  <text x="135" y="250" text-anchor="middle" class="small">the same control logic runs in</text>
+  <text x="135" y="266" text-anchor="middle" class="small">all three builds below</text>
+  <text x="135" y="286" text-anchor="middle" class="small">the three flags are exclusive</text>
+
+  <!-- three build units -->
+  <rect class="box" x="300" y="30" width="300" height="112" rx="6"/>
+  <text x="450" y="54" text-anchor="middle">firmware/ — the ECU image</text>
+  <text x="450" y="73" text-anchor="middle" class="mono">-DEFI_PROD_CODE=1</text>
+  <text x="450" y="90" text-anchor="middle" class="small">arm-none-eabi-gcc, real STM32 HAL,</text>
+  <text x="450" y="106" text-anchor="middle" class="small">ChibiOS threads, real pins</text>
+  <text x="450" y="128" text-anchor="middle" class="mono">build/rusefi.elf → deliver/rusefi.bin</text>
+
+  <rect class="box" x="300" y="168" width="300" height="112" rx="6"/>
+  <text x="450" y="192" text-anchor="middle">unit_tests/ — on your PC</text>
+  <text x="450" y="211" text-anchor="middle" class="mono">-DEFI_UNIT_TEST=1</text>
+  <text x="450" y="228" text-anchor="middle" class="small">host g++ or clang + Google Test,</text>
+  <text x="450" y="244" text-anchor="middle" class="small">no ChibiOS, mocked sensors and pins</text>
+  <text x="450" y="266" text-anchor="middle" class="mono">build/rusefi_test --gtest_filter=…</text>
+
+  <rect class="box" x="300" y="306" width="300" height="112" rx="6"/>
+  <text x="450" y="330" text-anchor="middle">simulator/ — on your PC</text>
+  <text x="450" y="349" text-anchor="middle" class="mono">-DEFI_SIMULATOR=1</text>
+  <text x="450" y="366" text-anchor="middle" class="small">ChibiOS SIMIA32 port: threads run for real,</text>
+  <text x="450" y="382" text-anchor="middle" class="small">trigger self-stimulation, mocked ADCs</text>
+  <text x="450" y="404" text-anchor="middle" class="mono">build/rusefi_simulator · TCP :29001</text>
+
+  <path class="wire-ask" d="M250,190 H275 V86 H298" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M250,224 H298" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M250,260 H275 V362 H298" marker-end="url(#a)"/>
+
+  <!-- CI gates -->
+  <rect class="loop" x="650" y="30" width="290" height="112" rx="6"/>
+  <text x="795" y="54" text-anchor="middle">CI: build-firmware.yaml</text>
+  <text x="795" y="72" text-anchor="middle" class="small">one job per meta-info-*.env in the tree,</text>
+  <text x="795" y="88" text-anchor="middle" class="small">plus Windows and macOS jobs</text>
+  <text x="795" y="110" text-anchor="middle" class="mono">bootloader · firmware · bundle</text>
+
+  <rect class="loop" x="650" y="168" width="290" height="112" rx="6"/>
+  <text x="795" y="192" text-anchor="middle">CI: build-unit-tests.yaml</text>
+  <text x="795" y="210" text-anchor="middle" class="small">Linux GCC and clang, and a</text>
+  <text x="795" y="226" text-anchor="middle" class="small">separate Windows job</text>
+  <text x="795" y="248" text-anchor="middle" class="mono">+ a published coverage report</text>
+
+  <rect class="loop" x="650" y="306" width="290" height="112" rx="6"/>
+  <text x="795" y="330" text-anchor="middle">CI: build-simulator.yaml</text>
+  <text x="795" y="348" text-anchor="middle" class="small">gcc and clang builds, then a run</text>
+  <text x="795" y="364" text-anchor="middle" class="small">then a run driven over TCP port 29001</text>
+  <text x="795" y="386" text-anchor="middle" class="mono">gradlew simulatorFunctionalTest…</text>
+
+  <path class="wire-loop" d="M600,86 H648" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M600,224 H648" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M600,362 H648" marker-end="url(#a)"/>
+
+  <rect class="safe" x="20" y="432" width="920" height="30" rx="6"/>
+  <text x="480" y="452" text-anchor="middle" class="small">a source file is compiled in exactly one of the three modes — write #if EFI_UNIT_TEST / #if EFI_PROD_CODE / #if EFI_SIMULATOR, never guess</text>
+</svg>

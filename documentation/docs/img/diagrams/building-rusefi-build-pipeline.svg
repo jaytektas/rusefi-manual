@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 560" role="img" aria-labelledby="t d">
+  <title id="t">rusEFI firmware build pipeline</title>
+  <desc id="d">A clone with submodules plus the settings definition files feed a Java code-generation step,
+  which writes generated headers, the TunerStudio ini, the Lua lookup table and the RAM-disk image. The
+  cross compiler and linker then turn the C and C++ sources into an elf, hex and bin, and the bundle rules
+  merge the bootloader with the firmware into deliver/rusefi.bin and a bundle zip. Version checks, the ini
+  validator and the memory report gate the result.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: inputs (blue = what you control) -->
+  <rect class="ask" x="20" y="30" width="210" height="64" rx="6"/>
+  <text x="125" y="52" text-anchor="middle">your branch</text>
+  <text x="125" y="69" text-anchor="middle" class="mono">git clone --recursive</text>
+  <text x="125" y="84" text-anchor="middle" class="small">rusefi.git + 17 submodules</text>
+
+  <rect class="ask" x="255" y="30" width="160" height="64" rx="6"/>
+  <text x="335" y="52" text-anchor="middle">settings</text>
+  <text x="335" y="69" text-anchor="middle" class="mono">rusefi_config.txt</text>
+  <text x="335" y="84" text-anchor="middle" class="small">every setting + defaults</text>
+
+  <rect class="ask" x="440" y="30" width="200" height="64" rx="6"/>
+  <text x="540" y="52" text-anchor="middle">TunerStudio layout</text>
+  <text x="540" y="69" text-anchor="middle" class="mono">tunerstudio.template.ini</text>
+  <text x="540" y="84" text-anchor="middle" class="small">+ board prepend / board_*.ini</text>
+
+  <rect class="ask" x="665" y="30" width="275" height="64" rx="6"/>
+  <text x="802" y="52" text-anchor="middle">board files</text>
+  <text x="802" y="69" text-anchor="middle" class="mono">meta-info-proteus_f7.env · board.mk</text>
+  <text x="802" y="84" text-anchor="middle" class="small">chip, OpenBLT, defines, connectors</text>
+
+  <!-- row 2: code generation -->
+  <rect class="ask" x="20" y="160" width="210" height="56" rx="6"/>
+  <text x="125" y="182" text-anchor="middle">a JDK</text>
+  <text x="125" y="200" text-anchor="middle" class="small">gradlew wrapper: gradle-8.14.5</text>
+
+  <rect class="box" x="255" y="140" width="300" height="86" rx="6"/>
+  <text x="405" y="164" text-anchor="middle">code generation</text>
+  <text x="405" y="181" text-anchor="middle" class="small">Java tool, run by the Makefile</text>
+  <text x="405" y="198" text-anchor="middle" class="mono">make config · gen_config_board.sh</text>
+  <text x="405" y="215" text-anchor="middle" class="mono">configuration_definition-all.jar</text>
+
+  <rect class="drive" x="590" y="140" width="350" height="86" rx="6"/>
+  <text x="765" y="162" text-anchor="middle">generated — never hand-edit these</text>
+  <text x="765" y="179" text-anchor="middle" class="mono">controllers/generated/*.h · signature_proteus_f7.h</text>
+  <text x="765" y="195" text-anchor="middle" class="mono">tunerstudio/generated/rusefi_proteus_f7.ini</text>
+  <text x="765" y="211" text-anchor="middle" class="mono">Lua value lookup · RAM-disk image</text>
+
+  <path class="wire-ask" d="M335,94 V138" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M540,94 V120 H405 V138" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M125,94 V158" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M230,188 H253" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M555,183 H588" marker-end="url(#a)"/>
+
+  <!-- row 3: compile and link -->
+  <rect class="box" x="255" y="270" width="220" height="76" rx="6"/>
+  <text x="365" y="292" text-anchor="middle">cross compile</text>
+  <text x="365" y="309" text-anchor="middle" class="mono">arm-none-eabi-gcc 14.2</text>
+  <text x="365" y="325" text-anchor="middle" class="small">C++20 · -Os · LTO · no exceptions</text>
+  <text x="365" y="340" text-anchor="middle" class="small">ChibiOS + HAL + board.mk defines</text>
+
+  <rect class="box" x="510" y="270" width="180" height="76" rx="6"/>
+  <text x="600" y="292" text-anchor="middle">link + convert</text>
+  <text x="600" y="309" text-anchor="middle" class="mono">STM32F7.ld</text>
+  <text x="600" y="325" text-anchor="middle" class="small">elf · map · hex · bin</text>
+  <text x="600" y="340" text-anchor="middle" class="small">--print-memory-usage</text>
+
+  <rect class="drive" x="725" y="270" width="215" height="76" rx="6"/>
+  <text x="832" y="292" text-anchor="middle">deliverables</text>
+  <text x="832" y="309" text-anchor="middle" class="mono">deliver/rusefi.bin</text>
+  <text x="832" y="325" text-anchor="middle" class="mono">build/rusefi.srec (bundle)</text>
+  <text x="832" y="340" text-anchor="middle" class="mono">artifacts/rusefi_bundle_….zip</text>
+
+  <path class="wire-ask" d="M802,94 V112 H470 V138" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M765,226 V250 H365 V268"/>
+  <path class="wire-drive" d="M475,308 H508" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M690,308 H723" marker-end="url(#a)"/>
+
+  <!-- row 4: gates (green) -->
+  <rect class="loop" x="20" y="390" width="700" height="96" rx="6"/>
+  <text x="370" y="414" text-anchor="middle">gates that run on every build</text>
+  <text x="370" y="432" text-anchor="middle" class="mono">gcc_version_check.c · GeneratedIniValidator · memory report</text>
+  <text x="370" y="449" text-anchor="middle" class="small">the compiler version is checked before anything compiles</text>
+  <text x="370" y="466" text-anchor="middle" class="small">the generated .ini is validated before a bundle is zipped</text>
+  <path class="wire-loop" d="M365,346 V388"/>
+  <path class="wire-loop" d="M720,438 H760 V350" marker-end="url(#a)"/>
+  <text x="620" y="378" class="small">pass → image, fail → build stops</text>
+
+  <rect class="loop" x="740" y="390" width="200" height="96" rx="6"/>
+  <text x="840" y="414" text-anchor="middle">unit tests</text>
+  <text x="840" y="431" text-anchor="middle" class="small">same sources, built for</text>
+  <text x="840" y="448" text-anchor="middle" class="small">your PC, not the MCU</text>
+  <text x="840" y="466" text-anchor="middle" class="mono">see Figure 2</text>
+
+  <!-- bottom: hard stops (red) -->
+  <rect class="safe" x="20" y="500" width="920" height="46" rx="6"/>
+  <text x="480" y="520" text-anchor="middle">hard stops</text>
+  <text x="480" y="536" text-anchor="middle" class="small">GCC below 11.3.1 or above 15.0 → #error · out of flash or CCM → link fails · a downloaded zip has no .git → the Makefile refuses</text>
+</svg>

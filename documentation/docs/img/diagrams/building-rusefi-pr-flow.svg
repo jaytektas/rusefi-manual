@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 530" role="img" aria-labelledby="t d">
+  <title id="t">A rusEFI change from branch to released bundle</title>
+  <desc id="d">The contributor writes a failing unit test first, then the fix, runs the build gates
+  locally, adds a changelog line and opens a pull request. CI builds every board, both unit-test hosts and
+  the simulator, and hardware CI runs on two real boards. A pull request that touches more than 35 files
+  is commented on and closed. After merge the nightly build publishes bundles and the matching TunerStudio
+  ini.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: your work (blue) -->
+  <rect class="ask" x="20" y="30" width="150" height="66" rx="6"/>
+  <text x="95" y="54" text-anchor="middle">fork + branch</text>
+  <text x="95" y="72" text-anchor="middle" class="small">one subject per branch</text>
+  <text x="95" y="88" text-anchor="middle" class="mono">git checkout -b</text>
+
+  <rect class="ask" x="190" y="30" width="180" height="66" rx="6"/>
+  <text x="280" y="54" text-anchor="middle">test first</text>
+  <text x="280" y="72" text-anchor="middle" class="small">a green test that records</text>
+  <text x="280" y="88" text-anchor="middle" class="small">today's wrong behaviour</text>
+
+  <rect class="ask" x="390" y="30" width="160" height="66" rx="6"/>
+  <text x="470" y="54" text-anchor="middle">then the fix</text>
+  <text x="470" y="72" text-anchor="middle" class="small">and change the test's</text>
+  <text x="470" y="88" text-anchor="middle" class="small">expectation in step</text>
+
+  <rect class="ask" x="570" y="30" width="200" height="66" rx="6"/>
+  <text x="670" y="52" text-anchor="middle">your own gates</text>
+  <text x="670" y="69" text-anchor="middle" class="mono">compile_proteus_f7.sh</text>
+  <text x="670" y="84" text-anchor="middle" class="mono">./test.sh · ./format.sh</text>
+
+  <rect class="ask" x="790" y="30" width="150" height="66" rx="6"/>
+  <text x="865" y="54" text-anchor="middle">changelog</text>
+  <text x="865" y="72" text-anchor="middle" class="mono">firmware/CHANGELOG.md</text>
+  <text x="865" y="88" text-anchor="middle" class="small">under Unreleased</text>
+
+  <path class="wire-ask" d="M170,63 H188" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M370,63 H388" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M550,63 H568" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M770,63 H788" marker-end="url(#a)"/>
+
+  <!-- row 2: the pull request and its limits -->
+  <rect class="box" x="20" y="140" width="240" height="80" rx="6"/>
+  <text x="140" y="166" text-anchor="middle">open the pull request</text>
+  <text x="140" y="184" text-anchor="middle" class="small">complete, or marked [WIP] in the title</text>
+  <text x="140" y="201" text-anchor="middle" class="small">discuss the idea before you build it</text>
+
+  <rect class="safe" x="290" y="140" width="300" height="80" rx="6"/>
+  <text x="440" y="166" text-anchor="middle">size limit, enforced by CI</text>
+  <text x="440" y="184" text-anchor="middle" class="small">more than <tspan font-weight="bold">35 changed files</tspan> → the pull request</text>
+  <text x="440" y="201" text-anchor="middle" class="small">is commented on and closed automatically</text>
+
+  <rect class="loop" x="620" y="140" width="320" height="80" rx="6"/>
+  <text x="780" y="166" text-anchor="middle">the gates that must go green</text>
+  <text x="780" y="184" text-anchor="middle" class="mono">firmware matrix · unit tests · simulator</text>
+  <text x="780" y="201" text-anchor="middle" class="mono">generated configs · pinout check · HW CI</text>
+
+  <path class="wire" d="M865,96 V118 H140 V138" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M618,180 H592" marker-end="url(#a)"/>
+  <path class="wire-safe" d="M262,180 H288"/>
+
+  <!-- row 3: what CI builds -->
+  <rect class="loop" x="20" y="250" width="920" height="170" rx="6"/>
+  <text x="480" y="276" text-anchor="middle">what the gates actually build</text>
+  <text x="40" y="300" class="small">Firmware — one job for every meta-info-*.env found in the tree, so your change has to build for every official board.</text>
+  <text x="40" y="318" class="small">On a pull request that whole matrix runs; on a plain push some boards are sampled out (SKIP_RATE in their meta-info file), and a</text>
+  <text x="40" y="336" class="small">line only:proteus_f7 in the commit message narrows a push build to that one board.</text>
+  <text x="40" y="360" class="small">Unit tests — the whole Google Test suite on Linux (GCC and clang) and on Windows.   Simulator — gcc and clang builds, then</text>
+  <text x="40" y="378" class="small">a functional test that talks the TunerStudio protocol to a running simulator over TCP port 29001.</text>
+  <text x="40" y="402" class="small">Hardware CI — two real boards on self-hosted runners: an STM32F4 Discovery and an STM32F767 Nucleo. Proteus is not in HW CI.</text>
+
+  <!-- row 4: after merge (orange) -->
+  <rect class="drive" x="20" y="440" width="920" height="74" rx="6"/>
+  <text x="480" y="466" text-anchor="middle">after the merge — master is the release</text>
+  <text x="480" y="484" text-anchor="middle" class="small">rusEFI keeps a stable master with no release branches; the nightly build makes the bundles, the TunerStudio .ini and the</text>
+  <text x="480" y="501" text-anchor="middle" class="small">binaries published from the build server, and the changelog entry you wrote becomes the release notes.</text>
+
+  <path class="wire-drive" d="M140,220 V235 H480 V248"/>
+  <path class="wire-drive" d="M480,420 V438" marker-end="url(#a)"/>
+</svg>

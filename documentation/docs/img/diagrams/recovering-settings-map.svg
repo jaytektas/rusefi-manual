@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 472" role="img" aria-labelledby="t d">
+  <title id="t">The three copies of the settings and what each recovery action touches</title>
+  <desc id="d">Your settings exist in three places: the TunerStudio tune file on the computer, the
+  settings in the ECU's memory which the engine runs on, and two copies in the ECU's flash, each with a
+  CRC, a version number and a size. TunerStudio edits go into memory at once; Burn writes memory to
+  flash and is postponed while the engine runs; at power-on the ECU loads flash into memory, or factory
+  defaults if the flash copy fails its checks. Restoring your file answers the Difference Report.
+  Reset firmware settings or resetconfig put defaults into memory only. rewriteconfig or writeconfig
+  write to flash immediately. Flashing firmware touches the bootloader and firmware areas and never the
+  settings. Full DFU Erase erases firmware, bootloader and both settings copies.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- the three stores -->
+  <rect class="box" x="30" y="30" width="250" height="96" rx="6"/>
+  <text x="155" y="56" text-anchor="middle">On the computer</text>
+  <text x="155" y="76" text-anchor="middle">your tune file</text>
+  <text x="155" y="94" text-anchor="middle" class="mono">.msq</text>
+  <text x="155" y="112" text-anchor="middle" class="small">plus the project copy</text>
+
+  <rect class="loop" x="355" y="30" width="250" height="96" rx="6"/>
+  <text x="480" y="56" text-anchor="middle">ECU memory</text>
+  <text x="480" y="76" text-anchor="middle">what the engine runs on</text>
+  <text x="480" y="94" text-anchor="middle" class="small">every edit lands here at once</text>
+  <text x="480" y="112" text-anchor="middle" class="small">lost on a power cycle</text>
+
+  <rect class="box" x="680" y="30" width="250" height="96" rx="6"/>
+  <text x="805" y="56" text-anchor="middle">ECU flash: two copies</text>
+  <text x="805" y="76" text-anchor="middle">CRC, version and size</text>
+  <text x="805" y="94" text-anchor="middle" class="small">a bad copy falls back to the other</text>
+  <text x="805" y="112" text-anchor="middle" class="mono">0x0810 0000 on a 2 MB part</text>
+
+  <!-- arrows between stores -->
+  <path class="wire-ask" d="M280,78 H353" marker-end="url(#a)"/>
+  <text x="316" y="70" text-anchor="middle" class="small">edits</text>
+
+  <path class="wire-loop" d="M605,62 H678" marker-end="url(#a)"/>
+  <text x="641" y="54" text-anchor="middle" class="small">Burn</text>
+  <path class="wire-loop" d="M678,104 H608" marker-end="url(#a)"/>
+  <text x="643" y="122" text-anchor="middle" class="small">at power-on</text>
+  <text x="641" y="42" text-anchor="middle" class="small">engine off</text>
+
+  <!-- what each action touches -->
+  <rect class="ask" x="30" y="230" width="250" height="80" rx="6"/>
+  <text x="155" y="254" text-anchor="middle">Difference Report:</text>
+  <text x="155" y="273" text-anchor="middle">Send Current TunerStudio</text>
+  <text x="155" y="292" text-anchor="middle">Settings, then Burn</text>
+  <path class="wire-ask" d="M155,228 V128" marker-end="url(#a)"/>
+
+  <rect class="drive" x="355" y="230" width="250" height="80" rx="6"/>
+  <text x="480" y="254" text-anchor="middle">Reset firmware settings</text>
+  <text x="480" y="273" text-anchor="middle" class="small">console: resetconfig</text>
+  <text x="480" y="292" text-anchor="middle" class="small">defaults - the button also writes</text>
+  <path class="wire-drive" d="M480,228 V128" marker-end="url(#a)"/>
+
+  <rect class="drive" x="680" y="230" width="250" height="80" rx="6"/>
+  <text x="805" y="254" text-anchor="middle" class="mono">rewriteconfig</text>
+  <text x="805" y="273" text-anchor="middle">forces a settings write</text>
+  <text x="805" y="292" text-anchor="middle" class="small">both copies replaced now</text>
+  <path class="wire-drive" d="M805,228 V128" marker-end="url(#a)"/>
+
+  <!-- flashing and erasing -->
+  <rect class="box" x="30" y="350" width="420" height="76" rx="6"/>
+  <text x="240" y="376" text-anchor="middle">Flashing firmware</text>
+  <text x="240" y="396" text-anchor="middle" class="small">writes the bootloader and firmware areas only,</text>
+  <text x="240" y="414" text-anchor="middle" class="small">never the settings</text>
+
+  <rect class="safe" x="490" y="350" width="420" height="76" rx="6"/>
+  <text x="700" y="376" text-anchor="middle">Full DFU Erase</text>
+  <text x="700" y="396" text-anchor="middle" class="small">firmware, bootloader AND both settings copies:</text>
+  <text x="700" y="414" text-anchor="middle" class="small">the tune is gone and the engine type resets</text>
+  <path class="wire-safe" d="M930,388 H948 V78 H932" marker-end="url(#a)"/>
+
+  <text x="480" y="452" text-anchor="middle" class="small">TunerStudio's <tspan class="mono">Burn</tspan> is postponed while the engine runs: wait for the Settings saved indicator before switching off.</text>
+</svg>

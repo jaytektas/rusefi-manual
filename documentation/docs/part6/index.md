@@ -4,5 +4,6 @@
 
 Keeping the ECU and its tune safe: recovering from a failed flash, backing up tunes, and building rusEFI yourself.
 
-
-**Still being written:** Recovering an ECU, Tunes and backups, Building rusEFI yourself.
+- **[Recovering an ECU](recovering.md)** — An ECU that will not run its firmware is very rarely dead — one of three doors is still open (the running firmware, the OpenBLT bootloader, or the STM32's own DFU bootloader), and your tune lives in its own area of flash above the firmware, so it usually survives whatever killed the program.
+- **[Tunes and backups](tunes-backups.md)** — Your tune — every setting that turns a blank ECU into *your* engine's ECU — lives in three places at once, and this chapter keeps those copies in step, saves one before every change, and moves it safely onto new firmware.
+- **[Building rusEFI yourself](building-rusefi.md)** — RusEFI is one source tree that the same Makefiles build four ways — the firmware for your ECU, a simulator that runs on your PC, a unit-test binary that runs on your PC, and the tool that generates the TunerStudio `.ini` — so you can prove a change does what you think before it is anywhere near an engine.

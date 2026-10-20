@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 462" role="img" aria-labelledby="t d">
+  <title id="t">A tune across a firmware update</title>
+  <desc id="d">Before the update, save the tune to a dated .msq. The rusEFI console also saves its own copy from
+  the ECU. The new firmware is written, then at every power-on the ECU compares the stored settings' CRC,
+  version number and size with its own. If they match, the tune is used as it is. If the version or size
+  differs, the ECU loads factory defaults and keeps only the engine type. Either way, restore your saved
+  .msq, burn, and check the safety-critical settings by hand.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- step 1..3 -->
+  <rect class="ask" x="24" y="24" width="248" height="86" rx="6"/>
+  <text x="148" y="46" text-anchor="middle">1 · Save your own copy</text>
+  <text x="148" y="66" text-anchor="middle" class="mono">File ▸ Save Tune As</text>
+  <text x="148" y="84" text-anchor="middle" class="small">after Burn, and after the front page</text>
+  <text x="148" y="100" text-anchor="middle" class="small">says Settings saved</text>
+
+  <rect class="box" x="308" y="24" width="248" height="86" rx="6"/>
+  <text x="432" y="46" text-anchor="middle">2 · The console backs up</text>
+  <text x="432" y="66" text-anchor="middle" class="mono">2026-10-20-14-05_</text>
+  <text x="432" y="82" text-anchor="middle" class="mono">backup_from_ecu.msq</text>
+  <text x="432" y="100" text-anchor="middle" class="small">in console/state/, beside the .ini</text>
+
+  <rect class="drive" x="592" y="24" width="248" height="86" rx="6"/>
+  <text x="716" y="46" text-anchor="middle">3 · Write the new firmware</text>
+  <text x="716" y="66" text-anchor="middle" class="small">OpenBLT update, or DFU</text>
+  <text x="716" y="84" text-anchor="middle" class="small">the settings area is not touched</text>
+  <text x="716" y="100" text-anchor="middle" class="small">by an OpenBLT update</text>
+
+  <path class="wire-ask" d="M274,67 H305" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M558,67 H589" marker-end="url(#a)"/>
+
+  <!-- step 4: the check the ECU makes -->
+  <rect class="ask" x="24" y="158" width="816" height="76" rx="6"/>
+  <text x="432" y="182" text-anchor="middle">4 · At every power-on the ECU reads its settings and checks them against this firmware</text>
+  <text x="432" y="202" text-anchor="middle" class="small">checksum, version number and size of the stored block</text>
+  <text x="432" y="220" text-anchor="middle" class="mono">FLASH_DATA_VERSION · persistentState.crc, .version, .size</text>
+  <path class="wire-drive" d="M716,112 V155" marker-end="url(#a)"/>
+  <text x="778" y="140" text-anchor="middle" class="small">power-cycle</text>
+
+  <!-- outcomes -->
+  <rect class="loop" x="24" y="276" width="390" height="76" rx="6"/>
+  <text x="219" y="300" text-anchor="middle">All three match</text>
+  <text x="219" y="320" text-anchor="middle" class="small">your tune runs the engine, nothing to do</text>
+  <text x="219" y="338" text-anchor="middle" class="small">Read valid configuration from flash!</text>
+
+  <rect class="safe" x="450" y="276" width="390" height="76" rx="6"/>
+  <text x="645" y="300" text-anchor="middle">Version or size differs</text>
+  <text x="645" y="320" text-anchor="middle" class="small">factory defaults, only the engine type is kept</text>
+  <text x="645" y="338" text-anchor="middle" class="small">a bad checksum also resets the engine type</text>
+
+  <path class="wire-loop" d="M219,236 V273" marker-end="url(#a)"/>
+  <text x="160" y="258" text-anchor="middle" class="small">match</text>
+  <path class="wire-safe" d="M645,236 V273" marker-end="url(#a)"/>
+  <text x="578" y="258" text-anchor="middle" class="small">no match</text>
+
+  <!-- step 5 -->
+  <rect class="loop" x="24" y="392" width="816" height="58" rx="6"/>
+  <text x="432" y="414" text-anchor="middle">5 · Restore, then check: Open Tune your .msq → Burn → wait for Settings saved → power-cycle</text>
+  <text x="432" y="434" text-anchor="middle" class="small">by hand: engine type, pinout, injector flow, sensor calibrations, units, second tables and Lua script</text>
+  <path class="wire-loop" d="M219,354 V389" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M645,354 V389" marker-end="url(#a)"/>
+</svg>
