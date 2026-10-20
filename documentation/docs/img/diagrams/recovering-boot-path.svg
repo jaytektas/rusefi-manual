@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+  <title id="t">How a Proteus F7 starts, and where it can stop</title>
+  <desc id="d">After power-on or reset the OpenBLT bootloader runs first. It stays in the bootloader if
+  the firmware asked it to (reboot_openblt) or if it sees a reset loop (more than 10 watchdog or more
+  than 15 software resets in a row). Otherwise it checks the firmware image's checksum; if the image is
+  not valid it also stays in the bootloader, where the update image can be flashed. If the image is
+  valid, rusEFI starts and reads the settings. Valid settings (CRC, version number and size) are used;
+  otherwise the factory defaults are loaded. Separately, the STM32's own DFU bootloader in ROM can be
+  entered with reboot_dfu, Reset to DFU, or the BOOT0 pin at reset, and takes the full image.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: bootloader decisions -->
+  <rect class="box" x="20" y="30" width="130" height="74" rx="6"/>
+  <text x="85" y="62" text-anchor="middle">Power on</text>
+  <text x="85" y="80" text-anchor="middle" class="small">or reset</text>
+
+  <rect class="box" x="175" y="30" width="150" height="74" rx="6"/>
+  <text x="250" y="62" text-anchor="middle">OpenBLT starts</text>
+  <text x="250" y="80" text-anchor="middle" class="small">bootloader, 32 KB</text>
+
+  <rect class="ask" x="350" y="30" width="250" height="74" rx="6"/>
+  <text x="475" y="52" text-anchor="middle">Asked to stay, or reset loop?</text>
+  <text x="475" y="71" text-anchor="middle" class="mono">reboot_openblt</text>
+  <text x="475" y="89" text-anchor="middle" class="small">or &gt;10 watchdog / &gt;15 software resets</text>
+
+  <rect class="ask" x="630" y="30" width="200" height="74" rx="6"/>
+  <text x="730" y="62" text-anchor="middle">Firmware image valid?</text>
+  <text x="730" y="80" text-anchor="middle" class="small">checksum over the image</text>
+
+  <path class="wire" d="M150,67 H173" marker-end="url(#a)"/>
+  <path class="wire" d="M325,67 H348" marker-end="url(#a)"/>
+  <path class="wire" d="M600,67 H628" marker-end="url(#a)"/>
+  <text x="604" y="60" class="small">no</text>
+
+  <!-- row 2: stays in bootloader (red: protective state) -->
+  <rect class="safe" x="350" y="150" width="480" height="60" rx="6"/>
+  <text x="590" y="174" text-anchor="middle">Stays in the OpenBLT bootloader</text>
+  <text x="590" y="194" text-anchor="middle" class="small">shows up as an OpenBLT device · LEDs blink · flash the update image</text>
+  <path class="wire-safe" d="M475,104 V148" marker-end="url(#a)"/>
+  <text x="482" y="130" class="small">yes</text>
+  <path class="wire-safe" d="M730,104 V148" marker-end="url(#a)"/>
+  <text x="737" y="130" class="small">no</text>
+
+  <!-- valid image: route down the right edge -->
+  <path class="wire-loop" d="M830,67 H920 V258" marker-end="url(#a)"/>
+  <text x="840" y="60" class="small">yes</text>
+
+  <!-- row 3: firmware and settings (green: normal running path) -->
+  <rect class="loop" x="720" y="260" width="220" height="64" rx="6"/>
+  <text x="830" y="286" text-anchor="middle">rusEFI firmware starts</text>
+  <text x="830" y="305" text-anchor="middle" class="small">reads the settings from flash</text>
+
+  <rect class="ask" x="440" y="260" width="250" height="64" rx="6"/>
+  <text x="565" y="286" text-anchor="middle">Settings valid?</text>
+  <text x="565" y="305" text-anchor="middle" class="small">CRC, version number and size</text>
+
+  <rect class="loop" x="190" y="260" width="210" height="64" rx="6"/>
+  <text x="295" y="286" text-anchor="middle">Runs your tune</text>
+  <text x="295" y="305" text-anchor="middle" class="small">"Read valid configuration"</text>
+
+  <rect class="box" x="440" y="370" width="250" height="76" rx="6"/>
+  <text x="565" y="394" text-anchor="middle">Factory defaults loaded</text>
+  <text x="565" y="413" text-anchor="middle" class="small">version or size changed:</text>
+  <text x="565" y="430" text-anchor="middle" class="small">engine type kept, rest reset</text>
+
+  <path class="wire-loop" d="M720,292 H692" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M440,292 H402" marker-end="url(#a)"/>
+  <text x="410" y="284" class="small">yes</text>
+  <path class="wire" d="M565,324 V368" marker-end="url(#a)"/>
+  <text x="572" y="350" class="small">no</text>
+
+  <!-- separate way in: ROM DFU (orange: what you drive from outside) -->
+  <rect class="drive" x="20" y="370" width="390" height="76" rx="6"/>
+  <text x="215" y="394" text-anchor="middle">STM32 DFU bootloader (in ROM)</text>
+  <text x="215" y="413" text-anchor="middle" class="small">entered by reboot_dfu, Reset to DFU, or BOOT0 at reset</text>
+  <text x="215" y="430" text-anchor="middle" class="small">does not need OpenBLT or firmware · takes the full image</text>
+</svg>

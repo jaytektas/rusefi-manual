@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
+  <title id="t">Proteus sensor wiring</title>
+  <desc id="d">Three sensor types on Proteus. A 3-wire ratiometric sensor takes 5 V supply from White 9, signal to Analog Volt 1 on White 13, ground to sensor ground White 1. A 2-wire thermistor goes to Analog Temp 3 on White 20, which has a 2.7 kilohm pull-up to 5 V inside the ECU, and to sensor ground. A VR sensor goes to VR 1 positive Black 5 and negative Black 13 as a twisted pair.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+  <rect class="box" x="640" y="20" width="300" height="360" rx="8"/>
+  <text x="790" y="44" text-anchor="middle">Proteus</text>
+  <!-- ratiometric -->
+  <rect class="ask" x="20" y="40" width="200" height="100" rx="6"/>
+  <text x="120" y="70" text-anchor="middle">3-wire sensor</text>
+  <text x="120" y="90" text-anchor="middle" class="small">MAP, TPS, pressure</text>
+  <text x="120" y="108" text-anchor="middle" class="small">output ≈ 0.5–4.5 V</text>
+  <path class="wire-drive" d="M220,60 H640"/><text x="430" y="54" class="small">+5 V supply</text>
+  <text x="650" y="64" class="mono">White 9 · +5 V #1</text>
+  <path class="wire-ask" d="M220,90 H640" marker-end="url(#a)"/><text x="430" y="84" class="small">signal</text>
+  <text x="650" y="94" class="mono">White 13 · Analog Volt 1</text>
+  <path class="wire" d="M220,120 H640"/><text x="430" y="114" class="small">sensor ground</text>
+  <text x="650" y="124" class="mono">White 1 · GNDA</text>
+  <!-- thermistor -->
+  <rect class="ask" x="20" y="170" width="200" height="80" rx="6"/>
+  <text x="120" y="200" text-anchor="middle">2-wire thermistor</text>
+  <text x="120" y="220" text-anchor="middle" class="small">CLT, IAT, oil temp</text>
+  <path class="wire-ask" d="M220,190 H640" marker-end="url(#a)"/><text x="430" y="184" class="small">signal</text>
+  <text x="650" y="194" class="mono">White 20 · Analog Temp 3</text>
+  <text x="650" y="212" class="small">2.7 kΩ pull-up to 5 V inside</text>
+  <path class="wire" d="M220,230 H640"/><text x="430" y="224" class="small">sensor ground</text>
+  <text x="650" y="234" class="mono">White 2 · GNDA</text>
+  <!-- VR -->
+  <rect class="ask" x="20" y="280" width="200" height="90" rx="6"/>
+  <text x="120" y="310" text-anchor="middle">VR sensor</text>
+  <text x="120" y="330" text-anchor="middle" class="small">2 wires, AC signal</text>
+  <text x="120" y="348" text-anchor="middle" class="small">shielded twisted pair</text>
+  <path class="wire-ask" d="M220,300 C330,300 330,350 430,350 S530,300 640,300" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M220,350 C330,350 330,300 430,300 S530,350 640,350" marker-end="url(#a)"/>
+  <text x="650" y="304" class="mono">Black 5 · VR 1 +</text>
+  <text x="650" y="354" class="mono">Black 13 · VR 1 −</text>
+  <text x="430" y="384" text-anchor="middle" class="small">swap the two wires if the signal is inverted (see text)</text>
+</svg>

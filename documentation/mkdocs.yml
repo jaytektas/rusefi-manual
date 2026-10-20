@@ -63,13 +63,60 @@ extra_css:
 nav:
   - Home: index.md
   - Read this first — safety and disclaimer: safety.md
-  - Part 0 — About rusEFI: part0/index.md
-  - Part I — Getting started: part1/index.md
-  - Part II — Hardware and wiring: part2/index.md
+  - Part 0 — About rusEFI:
+      - part0/index.md
+      - What rusEFI is: part0/about-rusefi.md
+  - Part I — Getting started:
+      - part1/index.md
+      - How EFI works: part1/how-efi-works.md
+      - The rusEFI system: part1/rusefi-system.md
+      - Your two tools: part1/two-tools.md
+      - Installing the software: part1/installing.md
+      - Flashing firmware: part1/flashing-firmware.md
+      - First connection: part1/first-connection.md
+      - Quick start: part1/quick-start.md
+  - Part II — Hardware and wiring:
+      - part2/index.md
+      - The official boards: part2/official-boards.md
+      - Wiring basics: part2/wiring-basics.md
+      - Power, grounds and ground loops: part2/power-grounds.md
   - Part III — Configuring the engine:
       - part3/index.md
+      - Engine and vehicle basics: part3/engine-basics.md
+      - The trigger system: part3/trigger.md
+      - Sensors and calibration: part3/sensors.md
+      - Outputs and pins: part3/outputs.md
+      - Fuel: part3/fuel.md
+      - Ignition: part3/ignition.md
+      - Cranking: part3/cranking.md
+      - Idle: part3/idle.md
       - Electronic throttle: part3/electronic-throttle.md
-  - Part IV — Tuning: part4/index.md
-  - Part V — Testing and troubleshooting: part5/index.md
-  - Part VI — Firmware and maintenance: part6/index.md
-  - Part VII — Reference: part7/index.md
+      - Closed-loop lambda: part3/closed-loop-lambda.md
+      - Boost: part3/boost.md
+      - Limits and engine protection: part3/limits-protection.md
+      - Knock: part3/knock.md
+  - Part IV — Tuning:
+      - part4/index.md
+      - Tuning principles: part4/tuning-principles.md
+  - Part V — Testing and troubleshooting:
+      - part5/index.md
+      - Bench testing: part5/bench-testing.md
+  - Part VI — Firmware and maintenance:
+      - part6/index.md
+  - Part VII — Reference:
+      - part7/index.md
+      - Every setting, by menu:
+          - part7/settings.md
+          - Setup: part7/settings-setup.md
+          - Fuel: part7/settings-fuel.md
+          - Ignition: part7/settings-ignition.md
+          - Cranking: part7/settings-cranking.md
+          - Idle: part7/settings-idle.md
+          - Advanced: part7/settings-advanced.md
+          - Sensors: part7/settings-sensors.md
+          - CAN-bus: part7/settings-can-bus.md
+          - Controller: part7/settings-controller.md
+          - Help: part7/settings-help.md
+          - View: part7/settings-view.md
+      - Error codes: part7/error-codes.md
+      - Console commands: part7/console-commands.md

@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+  <title id="t">rusEFI fuel calculation, from air mass to injector pulse width</title>
+  <desc id="d">The Fuel strategy (Speed Density, MAF Air Charge, Alpha-N or Lua) gives the air mass per cylinder.
+  Dividing by the stoichiometric ratio times the target lambda gives the base fuel mass. Running corrections
+  (warm-up, intake air temperature, after-start, barometric) multiply it; acceleration enrichment adds to it;
+  fuel trims, including the closed-loop short-term trim, multiply it per cylinder; wall wetting adjusts each
+  injection. The injector model divides by injector flow and adds the dead time from battery voltage and fuel
+  pressure, giving the pulse width in milliseconds, which is scheduled at the injection angle.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: Fuel strategy, one of four -->
+  <text x="20" y="20" class="small">Fuel strategy — one of:</text>
+  <rect class="ask" x="20" y="28" width="210" height="60" rx="6"/>
+  <text x="125" y="50" text-anchor="middle">Speed Density</text>
+  <text x="125" y="68" text-anchor="middle" class="small">MAP, charge temp, VE table</text>
+  <text x="125" y="82" text-anchor="middle" class="small">gas law × displacement</text>
+
+  <rect class="ask" x="255" y="28" width="210" height="60" rx="6"/>
+  <text x="360" y="50" text-anchor="middle">MAF Air Charge</text>
+  <text x="360" y="68" text-anchor="middle" class="small">MAF airflow ÷ RPM</text>
+  <text x="360" y="82" text-anchor="middle" class="small">× VE table as a correction</text>
+
+  <rect class="ask" x="490" y="28" width="210" height="60" rx="6"/>
+  <text x="595" y="50" text-anchor="middle">Alpha-N</text>
+  <text x="595" y="68" text-anchor="middle" class="small">VE table by TPS × RPM</text>
+  <text x="595" y="82" text-anchor="middle" class="small">at standard air (opt. IAT)</text>
+
+  <rect class="ask" x="725" y="28" width="215" height="60" rx="6"/>
+  <text x="832" y="50" text-anchor="middle">Lua</text>
+  <text x="832" y="68" text-anchor="middle" class="small">a script supplies the air mass</text>
+
+  <path class="wire-ask" d="M125,88 V102 M360,88 V102 M595,88 V102 M832,88 V102 M125,102 H832"/>
+  <path class="wire-ask" d="M125,102 V128" marker-end="url(#a)"/>
+
+  <!-- row 2: air -> base fuel -> corrections -->
+  <rect class="ask" x="20" y="130" width="210" height="64" rx="6"/>
+  <text x="125" y="155" text-anchor="middle">air mass per cylinder</text>
+  <text x="125" y="173" text-anchor="middle" class="small">grams per cycle</text>
+  <text x="125" y="187" text-anchor="middle" class="mono">→ also the load axis</text>
+
+  <rect class="ask" x="265" y="130" width="210" height="64" rx="6"/>
+  <text x="370" y="155" text-anchor="middle">÷ (stoich × target λ)</text>
+  <text x="370" y="173" text-anchor="middle" class="small">Stoichiometric ratio,</text>
+  <text x="370" y="187" text-anchor="middle" class="small">Target lambda table</text>
+
+  <rect class="ask" x="510" y="130" width="185" height="64" rx="6"/>
+  <text x="602" y="155" text-anchor="middle">base fuel mass</text>
+  <text x="602" y="173" text-anchor="middle" class="small">mg per cylinder per cycle</text>
+
+  <rect class="ask" x="730" y="130" width="210" height="64" rx="6"/>
+  <text x="835" y="155" text-anchor="middle">× running corrections</text>
+  <text x="835" y="173" text-anchor="middle" class="small">warm-up (CLT), IAT, after-start,</text>
+  <text x="835" y="187" text-anchor="middle" class="small">baro, launch …</text>
+
+  <path class="wire-ask" d="M230,162 H263" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M475,162 H508" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M695,162 H728" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M835,194 V238" marker-end="url(#a)"/>
+  <text x="825" y="222" text-anchor="end" class="small">while cranking, cranking fuel replaces the running fuel</text>
+
+  <!-- row 3 (right to left): AE -> trims -> wall wetting -->
+  <rect class="ask" x="730" y="240" width="210" height="64" rx="6"/>
+  <text x="835" y="265" text-anchor="middle">+ acceleration enrich.</text>
+  <text x="835" y="283" text-anchor="middle" class="small">extra fuel when the throttle</text>
+  <text x="835" y="297" text-anchor="middle" class="small">opens quickly</text>
+
+  <rect class="loop" x="480" y="240" width="215" height="64" rx="6"/>
+  <text x="587" y="265" text-anchor="middle">× fuel trims</text>
+  <text x="587" y="283" text-anchor="middle" class="small">short-term (lambda, closed loop),</text>
+  <text x="587" y="297" text-anchor="middle" class="small">long-term, per cylinder</text>
+
+  <rect class="ask" x="265" y="240" width="180" height="64" rx="6"/>
+  <text x="355" y="265" text-anchor="middle">wall wetting</text>
+  <text x="355" y="283" text-anchor="middle" class="small">fuel film on the port walls</text>
+
+  <rect class="ask" x="20" y="240" width="210" height="64" rx="6"/>
+  <text x="125" y="265" text-anchor="middle">fuel mass</text>
+  <text x="125" y="283" text-anchor="middle" class="small">for this injection, mg</text>
+
+  <path class="wire-ask" d="M730,272 H697" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M480,272 H447" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M265,272 H232" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M125,304 V348" marker-end="url(#a)"/>
+
+  <!-- row 4: injector model -> pulse width -> scheduled -->
+  <rect class="drive" x="20" y="350" width="210" height="64" rx="6"/>
+  <text x="125" y="375" text-anchor="middle">÷ injector flow</text>
+  <text x="125" y="393" text-anchor="middle" class="small">Injector flow, cc/min or g/s</text>
+  <text x="125" y="407" text-anchor="middle" class="small">(optionally pressure-corrected)</text>
+
+  <rect class="drive" x="265" y="350" width="210" height="64" rx="6"/>
+  <text x="370" y="375" text-anchor="middle">+ dead time</text>
+  <text x="370" y="393" text-anchor="middle" class="small">table: battery voltage ×</text>
+  <text x="370" y="407" text-anchor="middle" class="small">fuel pressure</text>
+
+  <rect class="drive" x="510" y="350" width="185" height="64" rx="6"/>
+  <text x="602" y="375" text-anchor="middle">pulse width</text>
+  <text x="602" y="393" text-anchor="middle" class="small">milliseconds the injector</text>
+  <text x="602" y="407" text-anchor="middle" class="small">is held open</text>
+
+  <rect class="drive" x="730" y="350" width="210" height="64" rx="6"/>
+  <text x="835" y="375" text-anchor="middle">scheduled</text>
+  <text x="835" y="393" text-anchor="middle" class="small">at the angle from the</text>
+  <text x="835" y="407" text-anchor="middle" class="small">Injection Timing table</text>
+
+  <path class="wire-drive" d="M230,382 H263" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M475,382 H508" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M695,382 H728" marker-end="url(#a)"/>
+
+  <text x="20" y="446" class="small">Blue: worked out by the ECU · green: corrected from the lambda sensor · orange: what drives the injector.</text>
+  <text x="20" y="462" class="small">Recalculated 200 times a second; each injection takes the latest values.</text>
+</svg>

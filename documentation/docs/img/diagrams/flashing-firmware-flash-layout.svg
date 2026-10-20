@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="t d">
+  <title id="t">Proteus F7 flash memory and the two firmware images</title>
+  <desc id="d">The STM32's own DFU bootloader sits in read-only system memory. Internal flash holds, from
+  0x0800 0000, the 32 KB OpenBLT bootloader with its version marker at 0x0800 0024, then the rusEFI
+  firmware from 0x0800 8000 (up to 736 KB), then unused flash, then two copies of the settings, whose
+  address depends on the chip's flash size (0x0810 0000 on a 2 MB chip). The full image covers the
+  bootloader and the firmware and is written by DFU or ST-Link. The update image covers only the
+  firmware and is written by OpenBLT over USB. Settings are written by the firmware itself and are kept
+  by both kinds of flashing. Only a full erase wipes everything.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- system memory (ROM) -->
+  <text x="150" y="24" class="small">STM32 system memory (read-only)</text>
+  <rect class="drive" x="150" y="32" width="260" height="56" rx="6"/>
+  <text x="280" y="56" text-anchor="middle">STM32 DFU bootloader</text>
+  <text x="280" y="74" text-anchor="middle" class="small">built into the chip, cannot be erased</text>
+  <text x="140" y="50" text-anchor="end" class="mono">0x1FF0 0000</text>
+
+  <!-- internal flash -->
+  <text x="150" y="118" class="small">internal flash</text>
+  <rect class="box" x="150" y="126" width="260" height="64"/>
+  <text x="280" y="152" text-anchor="middle">OpenBLT bootloader · 32 KB</text>
+  <text x="280" y="172" text-anchor="middle" class="small">version marker "BL10" at 0x0800 0024</text>
+  <text x="140" y="142" text-anchor="end" class="mono">0x0800 0000</text>
+
+  <rect class="box" x="150" y="190" width="260" height="130"/>
+  <text x="280" y="248" text-anchor="middle">rusEFI firmware</text>
+  <text x="280" y="268" text-anchor="middle" class="small">up to 736 KB</text>
+  <text x="140" y="206" text-anchor="end" class="mono">0x0800 8000</text>
+
+  <rect class="box" x="150" y="320" width="260" height="40"/>
+  <text x="280" y="345" text-anchor="middle" class="small">unused</text>
+
+  <rect class="loop" x="150" y="360" width="260" height="70"/>
+  <text x="280" y="386" text-anchor="middle">Settings · two copies</text>
+  <text x="280" y="406" text-anchor="middle" class="small">address depends on flash size</text>
+  <text x="140" y="376" text-anchor="end" class="mono">0x0810 0000</text>
+  <text x="140" y="392" text-anchor="end" class="small">(2 MB chip)</text>
+
+  <!-- brackets: full image covers bootloader + firmware; update image covers firmware only -->
+  <path class="wire-drive" d="M414,128 H424 V318 H414"/>
+  <path class="wire-drive" d="M436,192 H446 V318 H436"/>
+
+  <!-- full image -->
+  <rect class="ask" x="640" y="126" width="300" height="76" rx="6"/>
+  <text x="790" y="148" text-anchor="middle">Full image: bootloader + firmware</text>
+  <text x="790" y="167" text-anchor="middle" class="mono">rusefi_…_proteus_f7_….bin</text>
+  <text x="790" y="186" text-anchor="middle" class="small">written by DFU or ST-Link from 0x0800 0000</text>
+  <path class="wire-drive" d="M640,164 H428" marker-end="url(#a)"/>
+
+  <!-- update image -->
+  <rect class="ask" x="640" y="230" width="300" height="76" rx="6"/>
+  <text x="790" y="252" text-anchor="middle">Update image: firmware only</text>
+  <text x="790" y="271" text-anchor="middle" class="mono">rusefi_…_update.srec</text>
+  <text x="790" y="290" text-anchor="middle" class="small">written by OpenBLT over USB (the console)</text>
+  <path class="wire-drive" d="M640,268 H450" marker-end="url(#a)"/>
+  <text x="458" y="290" class="small">never below 0x0800 8000</text>
+
+  <!-- settings -->
+  <rect class="loop" x="640" y="358" width="300" height="76" rx="6"/>
+  <text x="790" y="380" text-anchor="middle">Settings (your tune)</text>
+  <text x="790" y="399" text-anchor="middle" class="small">written by the firmware when you burn</text>
+  <text x="790" y="418" text-anchor="middle" class="small">kept when either image is flashed</text>
+  <path class="wire-loop" d="M640,396 H414" marker-end="url(#a)"/>
+
+  <!-- full erase -->
+  <rect class="safe" x="150" y="456" width="790" height="48" rx="6"/>
+  <text x="545" y="477" text-anchor="middle">Full DFU Erase (mass erase) wipes all of internal flash</text>
+  <text x="545" y="494" text-anchor="middle" class="small">bootloader, firmware and settings: save your tune first</text>
+</svg>

@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 200" role="img" aria-labelledby="t d">
+<title id="t">Order of tuning work</title>
+<desc id="d">Six stages from base settings through idle, cruise, load and WOT to corrections, with a loop of log, change in small steps, burn.</desc>
+<style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+<rect class="ask" x="10" y="30" width="138" height="56" rx="6"/>
+<text x="79" y="54" text-anchor="middle">1 Base settings</text><text x="79" y="72" text-anchor="middle" class="small">injectors, MAP, trigger</text>
+<path class="wire" d="M148,58 H166" marker-end="url(#a)"/>
+<rect class="ask" x="168" y="30" width="138" height="56" rx="6"/>
+<text x="237" y="54" text-anchor="middle">2 Idle</text><text x="237" y="72" text-anchor="middle" class="small">warm, steady</text>
+<path class="wire" d="M306,58 H324" marker-end="url(#a)"/>
+<rect class="ask" x="326" y="30" width="138" height="56" rx="6"/>
+<text x="395" y="54" text-anchor="middle">3 Cruise</text><text x="395" y="72" text-anchor="middle" class="small">part throttle</text>
+<path class="wire" d="M464,58 H482" marker-end="url(#a)"/>
+<rect class="safe" x="484" y="30" width="138" height="56" rx="6"/>
+<text x="553" y="54" text-anchor="middle">4 Load</text><text x="553" y="72" text-anchor="middle" class="small">dyno / closed course</text>
+<path class="wire" d="M622,58 H640" marker-end="url(#a)"/>
+<rect class="safe" x="642" y="30" width="138" height="56" rx="6"/>
+<text x="711" y="54" text-anchor="middle">5 WOT</text><text x="711" y="72" text-anchor="middle" class="small">most margin</text>
+<path class="wire" d="M780,58 H798" marker-end="url(#a)"/>
+<rect class="ask" x="800" y="30" width="138" height="56" rx="6"/>
+<text x="869" y="54" text-anchor="middle">6 Corrections</text><text x="869" y="72" text-anchor="middle" class="small">warm-up, AE, temp</text>
+<rect class="loop" x="200" y="120" width="560" height="56" rx="6"/>
+<text x="480" y="144" text-anchor="middle">At every stage: log → change in small steps → log again → Burn</text>
+<text x="480" y="162" text-anchor="middle" class="small">save the tune file as a restore point before each session; red = dyno or closed course only</text>
+</svg>

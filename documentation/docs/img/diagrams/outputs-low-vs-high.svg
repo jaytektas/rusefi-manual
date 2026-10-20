@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 392" role="img" aria-labelledby="t d">
+  <title id="t">Low-side and high-side outputs</title>
+  <desc id="d">On the left a low-side output sits between the load and ground: battery plus through a fuse to the load, the load to Lowside 11 on Black 35 pin 9, and that output switches the ground path. On the right a high-side output sits between the supply and the load: the main-relay feed on Black 23 pin 23 powers the driver, Highside 1 on Black 35 pin 2 switches plus to the load, and the load returns to ground.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+
+  <text x="180" y="26" text-anchor="middle" class="small">low-side output — the ECU switches the ground side</text>
+  <text x="660" y="26" text-anchor="middle" class="small">high-side output — the ECU switches the plus side</text>
+
+  <rect class="safe" x="30" y="40" width="300" height="44" rx="6"/>
+  <text x="180" y="60" text-anchor="middle">Battery +</text>
+  <text x="180" y="76" text-anchor="middle" class="small">12 V, fused near the battery</text>
+
+  <rect class="drive" x="30" y="112" width="300" height="52" rx="6"/>
+  <text x="180" y="134" text-anchor="middle">The load</text>
+  <text x="180" y="152" text-anchor="middle" class="small">relay coil, pump, lamp, injector</text>
+
+  <rect class="box" x="30" y="192" width="300" height="62" rx="6"/>
+  <text x="180" y="214" text-anchor="middle">Low-side driver in the ECU</text>
+  <text x="180" y="232" text-anchor="middle" class="mono">Lowside 11 = Black 35 pin 9</text>
+  <text x="180" y="248" text-anchor="middle" class="small">logical on = the pin goes to ground</text>
+
+  <rect class="box" x="30" y="282" width="300" height="44" rx="6"/>
+  <text x="180" y="300" text-anchor="middle">Ground</text>
+  <text x="180" y="316" text-anchor="middle" class="mono">Black 35 pins 17 / 18 / 24</text>
+
+  <path class="wire-safe" d="M180,84 V110" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M180,164 V190" marker-end="url(#a)"/>
+  <path class="wire" d="M180,254 V280" marker-end="url(#a)"/>
+
+  <rect class="safe" x="510" y="40" width="300" height="44" rx="6"/>
+  <text x="660" y="60" text-anchor="middle">Supply for the high-side drivers</text>
+  <text x="660" y="76" text-anchor="middle" class="mono">Black 23 pin 23, from the main relay</text>
+
+  <rect class="box" x="510" y="112" width="300" height="62" rx="6"/>
+  <text x="660" y="134" text-anchor="middle">High-side driver in the ECU</text>
+  <text x="660" y="152" text-anchor="middle" class="mono">Highside 1 = Black 35 pin 2</text>
+  <text x="660" y="168" text-anchor="middle" class="small">logical on = the pin goes to plus</text>
+
+  <rect class="drive" x="510" y="202" width="300" height="52" rx="6"/>
+  <text x="660" y="224" text-anchor="middle">The load</text>
+  <text x="660" y="242" text-anchor="middle" class="small">the other side of it goes to ground</text>
+
+  <rect class="box" x="510" y="282" width="300" height="44" rx="6"/>
+  <text x="660" y="300" text-anchor="middle">Ground</text>
+  <text x="660" y="316" text-anchor="middle" class="mono">Black 35 pins 17 / 18 / 24</text>
+
+  <path class="wire-safe" d="M660,84 V110" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M660,174 V200" marker-end="url(#a)"/>
+  <path class="wire" d="M660,254 V280" marker-end="url(#a)"/>
+
+  <rect class="safe" x="30" y="344" width="780" height="40" rx="6"/>
+  <text x="420" y="360" text-anchor="middle" class="small">A coil keeps conducting the instant an output lets go. The board files mark Lowside 13, 14, 15 and 16 as "with flyback";</text>
+  <text x="420" y="376" text-anchor="middle" class="small">a coil switched anywhere else still needs its own diode, band to the plus side.</text>
+</svg>

@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-labelledby="t2 d2">
+  <title id="t2">Injection timing against crank angle</title>
+  <desc id="d2">One cylinder's 720 degree cycle from compression TDC. The default table value of minus 400 degrees equals 320 degrees after compression TDC, 40 degrees before intake TDC. In End of injection mode the pulse ends there and starts one pulse duration earlier; in Start mode it starts there; in Center mode it is centred there.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="b" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <!-- axis: 0..720 deg mapped to x 60..900 (1.1667 px/deg) -->
+  <path class="wire" d="M60,240 H900"/>
+  <path class="wire" d="M60,232 V248 M270,232 V248 M480,232 V248 M690,232 V248 M900,232 V248"/>
+  <text x="60" y="266" text-anchor="middle" class="small">0°</text>
+  <text x="270" y="266" text-anchor="middle" class="small">180°</text>
+  <text x="480" y="266" text-anchor="middle" class="small">360°</text>
+  <text x="690" y="266" text-anchor="middle" class="small">540°</text>
+  <text x="900" y="266" text-anchor="middle" class="small">720°</text>
+  <text x="60" y="286" text-anchor="middle" class="small">compression TDC</text>
+  <text x="480" y="286" text-anchor="middle" class="small">intake TDC (exhaust → intake)</text>
+  <text x="165" y="226" text-anchor="middle" class="small">power</text>
+  <text x="375" y="226" text-anchor="middle" class="small">exhaust</text>
+  <text x="585" y="226" text-anchor="middle" class="small">intake</text>
+  <text x="795" y="226" text-anchor="middle" class="small">compression</text>
+  <!-- table angle 320 deg -> x = 60 + 320*1.1667 = 433 -->
+  <path class="wire-ask" d="M433,30 V240" stroke-dasharray="5 4"/>
+  <text x="433" y="22" text-anchor="middle">table value −400° = 320° (40° before intake TDC)</text>
+  <!-- pulse 60 deg wide = 70 px -->
+  <rect class="drive" x="363" y="50" width="70" height="30" rx="3"/>
+  <text x="355" y="70" text-anchor="end">End of injection (default)</text>
+  <rect class="drive" x="398" y="100" width="70" height="30" rx="3"/>
+  <text x="390" y="120" text-anchor="end">Center of injection</text>
+  <rect class="drive" x="433" y="150" width="70" height="30" rx="3"/>
+  <text x="425" y="170" text-anchor="end">Start of injection</text>
+  <path class="wire" d="M363,90 H431" marker-end="url(#b)" marker-start="url(#b)"/>
+  <text x="560" y="70" class="small">pulse length in degrees = pulse ms × RPM × 6 / 1000</text>
+  <text x="560" y="88" class="small">so End and Center move the start earlier as the pulse grows</text>
+</svg>

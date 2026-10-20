@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" role="img" aria-labelledby="t d">
+  <title id="t">rusEFI fuel calculation</title>
+  <desc id="d">The fuel strategy gives air mass per cylinder. Divided by stoichiometric ratio times target lambda it gives base fuel mass. Running corrections multiply it, acceleration enrichment adds to it, and trims scale it per cylinder. The injector model converts mass to milliseconds with flow and adds dead time, giving the pulse width.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <rect class="ask" x="20" y="30" width="200" height="70" rx="6"/>
+  <text x="120" y="56" text-anchor="middle">Air mass per cylinder</text>
+  <text x="120" y="74" text-anchor="middle" class="small">Fuel strategy: MAP or TPS × VE,</text>
+  <text x="120" y="89" text-anchor="middle" class="small">MAF × VE, or Lua</text>
+  <rect class="ask" x="260" y="30" width="200" height="70" rx="6"/>
+  <text x="360" y="56" text-anchor="middle">÷ (stoich × target λ)</text>
+  <text x="360" y="74" text-anchor="middle" class="small">Stoichiometric ratio (flex blend)</text>
+  <text x="360" y="89" text-anchor="middle" class="small">Target lambda / AFR table</text>
+  <rect class="ask" x="500" y="30" width="200" height="70" rx="6"/>
+  <text x="600" y="56" text-anchor="middle">Base fuel mass</text>
+  <text x="600" y="74" text-anchor="middle" class="small">mg per cylinder per cycle</text>
+  <text x="600" y="89" text-anchor="middle" class="mono">running_baseFuel</text>
+  <rect class="ask" x="740" y="30" width="200" height="70" rx="6"/>
+  <text x="840" y="56" text-anchor="middle">× running corrections</text>
+  <text x="840" y="74" text-anchor="middle" class="small">warm-up (CLT), IAT, after-start,</text>
+  <text x="840" y="89" text-anchor="middle" class="small">baro, launch, limits</text>
+  <path class="wire-ask" d="M220,65 H258" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M460,65 H498" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M700,65 H738" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M840,100 V130 H120 V158" marker-end="url(#a)"/>
+  <rect class="box" x="20" y="160" width="200" height="70" rx="6"/>
+  <text x="120" y="186" text-anchor="middle">÷ injections per cycle</text>
+  <text x="120" y="204" text-anchor="middle" class="small">sequential 1, batch 2,</text>
+  <text x="120" y="219" text-anchor="middle" class="small">simultaneous = cylinders</text>
+  <rect class="box" x="260" y="160" width="200" height="70" rx="6"/>
+  <text x="360" y="186" text-anchor="middle">+ acceleration enrichment</text>
+  <text x="360" y="204" text-anchor="middle" class="small">MS / Percent adder or Lua</text>
+  <text x="360" y="219" text-anchor="middle" class="small">(MAP prediction acts on air)</text>
+  <rect class="loop" x="500" y="160" width="200" height="70" rx="6"/>
+  <text x="600" y="186" text-anchor="middle">× trims</text>
+  <text x="600" y="204" text-anchor="middle" class="small">STFT / LTFT per bank,</text>
+  <text x="600" y="219" text-anchor="middle" class="small">cylinder trim, wall wetting</text>
+  <rect class="drive" x="740" y="160" width="200" height="70" rx="6"/>
+  <text x="840" y="186" text-anchor="middle">Injector model</text>
+  <text x="840" y="204" text-anchor="middle" class="small">mass ÷ flow (+ small-pulse corr.)</text>
+  <text x="840" y="219" text-anchor="middle" class="small">+ dead time (battery V, pressure)</text>
+  <path class="wire-ask" d="M220,195 H258" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M460,195 H498" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M700,195 H738" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M840,230 V258" marker-end="url(#a)"/>
+  <rect class="drive" x="690" y="260" width="250" height="50" rx="6"/>
+  <text x="815" y="282" text-anchor="middle">Pulse width (ms)</text>
+  <text x="815" y="299" text-anchor="middle" class="mono">actualLastInjection</text>
+  <rect class="safe" x="260" y="260" width="380" height="50" rx="6"/>
+  <text x="450" y="282" text-anchor="middle">Fuel cuts: limits, DFCO, duty-cycle limit</text>
+  <text x="450" y="299" text-anchor="middle" class="small">pulse is skipped, not shortened</text>
+  <path class="wire-safe" d="M640,285 H688" marker-end="url(#a)"/>
+</svg>

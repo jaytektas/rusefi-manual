@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 372" role="img" aria-labelledby="t3 d3">
+  <title id="t3">Injection modes on a four cylinder engine</title>
+  <desc id="d3">Pulse patterns for sequential, batch and simultaneous injection on a four cylinder engine with firing order 1-3-4-2, plotted over one 720 degree engine cycle at the factory injection angle of 320 degrees after each cylinder's compression TDC. Sequential gives one pulse per injector per cycle with the full per-cylinder fuel. Batch pulses two paired injectors twice per cycle with half the fuel each. Simultaneous pulses all injectors four times per cycle with a quarter of the fuel each.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <text x="8" y="22">One engine cycle = 720° of crankshaft rotation. Firing order 1-3-4-2, four injector outputs.</text>
+  <text x="8" y="40" class="small">Pulses are drawn at the factory Injection Timing value of -400° (= 320° after each cylinder's compression TDC).</text>
+
+  <!-- axis: 0..720 deg mapped to x 200..920 (1 px per degree) -->
+  <g>
+    <path class="wire" d="M200,116 H920 M200,196 H920 M200,276 H920"/>
+    <path class="wire" d="M200,108 V124 M380,108 V124 M560,108 V124 M740,108 V124 M920,108 V124"/>
+    <text x="200" y="140" text-anchor="middle" class="small">0°</text>
+    <text x="380" y="140" text-anchor="middle" class="small">180°</text>
+    <text x="560" y="140" text-anchor="middle" class="small">360°</text>
+    <text x="740" y="140" text-anchor="middle" class="small">540°</text>
+    <text x="920" y="140" text-anchor="middle" class="small">720°</text>
+  </g>
+
+  <!-- sequential: cyl1 @320, cyl3 @500, cyl4 @680, cyl2 @140 -->
+  <text x="8" y="92">Sequential</text>
+  <text x="8" y="108" class="small">one output per cylinder</text>
+  <text x="8" y="124" class="small">1 pulse per cycle · full fuel</text>
+  <rect class="drive" x="320" y="86" width="40" height="22" rx="3"/>
+  <rect class="drive" x="500" y="86" width="40" height="22" rx="3"/>
+  <rect class="drive" x="680" y="86" width="40" height="22" rx="3"/>
+  <rect class="drive" x="860" y="86" width="40" height="22" rx="3"/>
+  <text x="340" y="78" text-anchor="middle" class="mono">Inj 2</text>
+  <text x="520" y="78" text-anchor="middle" class="mono">Inj 1</text>
+  <text x="700" y="78" text-anchor="middle" class="mono">Inj 3</text>
+  <text x="880" y="78" text-anchor="middle" class="mono">Inj 4</text>
+
+  <!-- batch: pair 1+4 at 320 and 680, pair 3+2 at 140 and 500 -->
+  <text x="8" y="172">Batch</text>
+  <text x="8" y="188" class="small">paired injectors</text>
+  <text x="8" y="204" class="small">2 pulses per cycle · half fuel</text>
+  <rect class="drive" x="320" y="166" width="40" height="22" rx="3"/>
+  <rect class="drive" x="500" y="166" width="40" height="22" rx="3"/>
+  <rect class="drive" x="680" y="166" width="40" height="22" rx="3"/>
+  <rect class="drive" x="860" y="166" width="40" height="22" rx="3"/>
+  <text x="340" y="158" text-anchor="middle" class="mono">Inj 3 + 2</text>
+  <text x="520" y="158" text-anchor="middle" class="mono">Inj 1 + 4</text>
+  <text x="700" y="158" text-anchor="middle" class="mono">Inj 3 + 2</text>
+  <text x="880" y="158" text-anchor="middle" class="mono">Inj 1 + 4</text>
+
+  <!-- simultaneous: all four injectors at all four positions -->
+  <text x="8" y="252">Simultaneous</text>
+  <text x="8" y="268" class="small">all outputs fire together</text>
+  <text x="8" y="284" class="small">4 pulses per cycle · ¼ fuel each</text>
+  <rect class="drive" x="320" y="246" width="40" height="22" rx="3"/>
+  <rect class="drive" x="500" y="246" width="40" height="22" rx="3"/>
+  <rect class="drive" x="680" y="246" width="40" height="22" rx="3"/>
+  <rect class="drive" x="860" y="246" width="40" height="22" rx="3"/>
+  <text x="340" y="238" text-anchor="middle" class="mono">all four</text>
+  <text x="520" y="238" text-anchor="middle" class="mono">all four</text>
+  <text x="700" y="238" text-anchor="middle" class="mono">all four</text>
+  <text x="880" y="238" text-anchor="middle" class="mono">all four</text>
+
+  <rect class="ask" x="120" y="306" width="720" height="48" rx="6"/>
+  <text x="480" y="326" text-anchor="middle">Every mode injects the same total fuel per cycle: the pulse is split by the number of injections</text>
+  <text x="480" y="344" text-anchor="middle" class="small">In batch, one shared pulse lands near one cylinder's intake TDC and near its twin's compression TDC</text>
+</svg>

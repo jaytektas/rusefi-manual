@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" role="img" aria-labelledby="t d">
+  <title id="t">Lua script lifecycle</title>
+  <desc id="d">At start or reset a new Lua VM loads the script once, running top-level code. Then a loop: deliver queued CAN frames to callbacks, run an interactive command, call onTick, sleep for the tick period (default 5 ms, set by setTickRate). A reset tears the VM down and clears every Lua adjustment.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+  <rect class="ask" x="20" y="40" width="190" height="60" rx="6"/><text x="115" y="66" text-anchor="middle">new VM, load script</text><text x="115" y="86" text-anchor="middle" class="small">top-level code runs once</text>
+  <rect class="loop" x="260" y="40" width="180" height="60" rx="6"/><text x="350" y="66" text-anchor="middle">CAN RX callbacks</text><text x="350" y="86" text-anchor="middle" class="mono">onCanRx / per-filter</text>
+  <rect class="loop" x="480" y="40" width="160" height="60" rx="6"/><text x="560" y="76" text-anchor="middle" class="mono">onTick()</text>
+  <rect class="loop" x="680" y="40" width="200" height="60" rx="6"/><text x="780" y="66" text-anchor="middle">sleep tick period</text><text x="780" y="86" text-anchor="middle" class="mono">setTickRate(hz)</text>
+  <path class="wire" d="M210,70 H258" marker-end="url(#a)"/><path class="wire" d="M440,70 H478" marker-end="url(#a)"/><path class="wire" d="M640,70 H678" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M780,100 V130 H350 V102" marker-end="url(#a)"/>
+  <rect class="safe" x="260" y="170" width="620" height="60" rx="6"/><text x="570" y="196" text-anchor="middle">Lua reset (luareset, Write to ECU): VM closed, outputs released,</text><text x="570" y="216" text-anchor="middle" class="small">fuel/timing/idle/ETB adjustments and CAN filters cleared, then reload</text>
+  <path class="wire-safe" d="M260,200 H115 V102" marker-end="url(#a)"/>
+</svg>

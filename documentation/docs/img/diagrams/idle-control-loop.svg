@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 360" role="img" aria-labelledby="t d">
+  <title id="t">Idle control loop</title>
+  <desc id="d">Coolant temperature gives the target RPM and the open-loop position. Adders for A/C, fans, park/neutral and the dashpot are added. In the Idling phase a PID on RPM error adds a correction. The sum drives the ETB, stepper or solenoid; measured RPM closes the loop. The phase decides which parts are active.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <rect class="ask" x="20" y="30" width="170" height="56" rx="6"/>
+  <text x="105" y="54" text-anchor="middle">Coolant temp</text>
+  <text x="105" y="72" text-anchor="middle" class="small">A/C button</text>
+  <rect class="ask" x="230" y="30" width="200" height="56" rx="6"/>
+  <text x="330" y="54" text-anchor="middle">Target RPM</text>
+  <text x="330" y="72" text-anchor="middle" class="mono">cltIdleRpm, acIdleRpmTarget</text>
+  <rect class="ask" x="230" y="120" width="200" height="70" rx="6"/>
+  <text x="330" y="144" text-anchor="middle">Open-loop position</text>
+  <text x="330" y="162" text-anchor="middle" class="small">table: CLT × target RPM</text>
+  <text x="330" y="179" text-anchor="middle" class="small">+ A/C, fans, P/N, dashpot</text>
+  <rect class="loop" x="470" y="30" width="200" height="56" rx="6"/>
+  <text x="570" y="54" text-anchor="middle">PID on RPM error</text>
+  <text x="570" y="72" text-anchor="middle" class="small">only in phase Idling</text>
+  <rect class="drive" x="710" y="120" width="230" height="70" rx="6"/>
+  <text x="825" y="144" text-anchor="middle">Σ idle position 0–100 %</text>
+  <text x="825" y="162" text-anchor="middle" class="small">ETB (× idle range), stepper,</text>
+  <text x="825" y="179" text-anchor="middle" class="small">or PWM solenoid valve</text>
+  <rect class="box" x="710" y="250" width="230" height="56" rx="6"/>
+  <text x="825" y="274" text-anchor="middle">Engine</text>
+  <text x="825" y="292" text-anchor="middle" class="small">air → RPM</text>
+  <rect class="safe" x="20" y="230" width="440" height="96" rx="6"/>
+  <text x="240" y="254" text-anchor="middle">Phase (every fast tick)</text>
+  <text x="240" y="274" text-anchor="middle" class="small">Cranking → cranking curve only · CrankToIdleTaper → blend, no PID</text>
+  <text x="240" y="292" text-anchor="middle" class="small">Idling → open loop + PID · Coasting / Running → open loop, PID reset</text>
+  <text x="240" y="310" text-anchor="middle" class="small">decided from RPM, pedal/TPS, VSS, clutch</text>
+  <path class="wire-ask" d="M190,58 H228" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M105,86 V155 H228" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M330,86 V118" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M430,58 H468" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M430,155 H708" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M670,58 H780 V118" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M825,190 V248" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M710,278 H600 V88" marker-end="url(#a)"/>
+  <text x="608" y="230" class="small">measured RPM</text>
+  <path class="wire-safe" d="M460,300 H690 V175 H708" marker-end="url(#a)"/>
+</svg>

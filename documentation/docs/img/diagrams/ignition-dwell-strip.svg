@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" role="img" aria-labelledby="t d">
+  <title id="t">Dwell and spark on a crank-angle strip</title>
+  <desc id="d">Cylinder 1 approaching compression TDC at 3000 RPM. The spark is at 20 degrees BTDC. A 4 ms dwell is 72 degrees at 3000 RPM, so the coil output goes high (charging) at 92 degrees BTDC and goes low (spark) at 20 degrees BTDC.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <!-- crank axis: x = 860 - 6*deg BTDC (TDC at 860, 120 BTDC at 140) -->
+  <path class="wire" d="M120,250 H900" marker-end="url(#a)"/>
+  <g class="small" text-anchor="middle">
+    <text x="140" y="270">120° BTDC</text><text x="260" y="270">100°</text><text x="380" y="270">80°</text>
+    <text x="500" y="270">60°</text><text x="620" y="270">40°</text><text x="740" y="270">20°</text><text x="860" y="270">TDC</text>
+  </g>
+  <g class="wire"><path d="M140,245 v10 M260,245 v10 M380,245 v10 M500,245 v10 M620,245 v10 M740,245 v10 M860,245 v10"/></g>
+  <text x="510" y="295" text-anchor="middle" class="small">crank angle, cylinder 1 approaching compression TDC (3000 RPM: 1 ms = 18°)</text>
+
+  <!-- coil output signal -->
+  <text x="20" y="128" class="mono">coil output</text>
+  <path class="wire-drive" d="M120,150 H308 V90 H740 V150 H900"/>
+  <text x="524" y="80" text-anchor="middle">output high = coil charging (dwell 4 ms = 72°)</text>
+  <!-- coil current, illustrative -->
+  <text x="20" y="208" class="mono">coil current</text>
+  <path class="wire" d="M120,225 H308 Q520,215 740,170 V225 H900"/>
+  <text x="560" y="238" class="small" text-anchor="middle">primary current builds during dwell (illustrative)</text>
+
+  <!-- markers -->
+  <path class="wire-ask" d="M308,40 V250" stroke-dasharray="4 4"/>
+  <path class="wire-ask" d="M740,40 V250" stroke-dasharray="4 4"/>
+  <rect class="ask" x="190" y="18" width="236" height="44" rx="6"/>
+  <text x="308" y="36" text-anchor="middle">charge starts: 92° BTDC</text>
+  <text x="308" y="53" text-anchor="middle" class="small">= spark angle + dwell angle</text>
+  <rect class="drive" x="640" y="18" width="200" height="44" rx="6"/>
+  <text x="740" y="36" text-anchor="middle">spark: 20° BTDC</text>
+  <text x="740" y="53" text-anchor="middle" class="small">output falls, coil fires</text>
+</svg>

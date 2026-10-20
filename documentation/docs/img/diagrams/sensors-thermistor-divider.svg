@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
+  <title id="t">Thermistor input: pull-up divider and conversion</title>
+  <desc id="d">Inside the Proteus a 2700 ohm pull-up resistor feeds the temperature input from 5 V. The coolant
+  sensor, an NTC thermistor, connects the input pin White 20 (Analog Temp 3) to sensor ground on White 23.
+  The voltage at the pin goes through the input divider to the ADC; the firmware multiplies by 1.56 to get
+  the pin voltage, works out the sensor resistance from the divider equation, and converts resistance to
+  temperature with the Steinhart-Hart equation fitted through three calibration points.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- ECU outline -->
+  <rect class="box" x="20" y="20" width="580" height="360" rx="8"/>
+  <text x="36" y="44">Proteus ECU</text>
+
+  <!-- 5 V and pull-up (orange = what the ECU drives) -->
+  <text x="400" y="58" text-anchor="middle">5 V</text>
+  <path class="wire-drive" d="M400,64 V84"/>
+  <path class="wire-drive" d="M400,84 l10,6 l-20,10 l20,10 l-20,10 l20,10 l-20,10 l10,6 V164"/>
+  <text x="422" y="112">pull-up 2700 Ω</text>
+  <text x="422" y="128" class="mono">PROTEUS_DEFAULT_AT_PULLUP</text>
+  <circle cx="400" cy="170" r="4" class="arrow"/>
+  <path class="wire-drive" d="M400,164 V170"/>
+
+  <!-- node to the pin -->
+  <path class="wire-loop" d="M400,170 H578"/>
+  <rect class="loop" x="578" y="158" width="24" height="24" rx="3"/>
+  <text x="612" y="150">White 20</text>
+  <text x="612" y="166" class="small">Analog Temp 3</text>
+
+  <!-- sensor outside -->
+  <path class="wire-loop" d="M602,170 H820 V196"/>
+  <text x="640" y="192" class="small">grey wire</text>
+  <rect class="loop" x="760" y="130" width="190" height="200" rx="6" fill-opacity="0.6"/>
+  <text x="855" y="152" text-anchor="middle">CLT sensor</text>
+  <text x="855" y="168" text-anchor="middle" class="small">NTC: hotter = lower Ω</text>
+  <rect x="806" y="196" width="28" height="64" class="box"/>
+  <path class="wire" d="M790,270 L850,186" marker-end="url(#a)"/>
+  <text x="860" y="232" class="small">R(T)</text>
+  <path class="wire" d="M820,260 V350 H602"/>
+  <rect class="box" x="578" y="338" width="24" height="24" rx="3"/>
+  <text x="612" y="377" class="small">White 23 · GNDA sensor ground</text>
+
+  <!-- ground inside -->
+  <path class="wire" d="M578,350 H400 V340"/>
+  <path class="wire" d="M384,340 H416 M390,334 H410 M396,328 H404"/>
+
+  <!-- firmware chain (green = the measurement) -->
+  <path class="wire-loop" d="M400,170 H262" marker-end="url(#a)"/>
+  <rect class="loop" x="40" y="146" width="220" height="48" rx="6"/>
+  <text x="150" y="166" text-anchor="middle">input divider + ADC</text>
+  <text x="150" y="183" text-anchor="middle" class="small">MCU sees 0–3.3 V</text>
+
+  <rect class="loop" x="40" y="212" width="220" height="42" rx="6"/>
+  <text x="150" y="231" text-anchor="middle">× 1.56 → pin volts V</text>
+  <text x="150" y="247" text-anchor="middle" class="mono">analogInputDividerCoefficient</text>
+
+  <rect class="loop" x="40" y="272" width="220" height="42" rx="6"/>
+  <text x="150" y="291" text-anchor="middle">R = 2700 / (5 / V − 1)</text>
+  <text x="150" y="307" text-anchor="middle" class="small">invalid below 0.05 V or above 4.9 V</text>
+
+  <rect class="loop" x="40" y="332" width="220" height="38" rx="6"/>
+  <text x="150" y="350" text-anchor="middle">Steinhart–Hart → °C</text>
+  <text x="150" y="364" text-anchor="middle" class="small">three calibration points</text>
+
+  <path class="wire-loop" d="M150,194 V210" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M150,254 V270" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M150,314 V330" marker-end="url(#a)"/>
+</svg>

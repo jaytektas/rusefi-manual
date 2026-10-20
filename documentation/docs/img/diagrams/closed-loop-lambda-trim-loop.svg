@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
+  <title id="t">Closed-loop lambda trim loop</title>
+  <desc id="d">The base fuel mass from the VE table is multiplied by the short term trim and the long term trim to give the injected fuel mass. The engine burns it; the lambda sensor measures the exhaust. Measured lambda minus target lambda is the error; the active STFT region cell integrates the error, clamped by max add and max remove. LTFT learns from the STFT correction into a table. Lambda protection compares measured lambda with target plus the lambda difference table and cuts fuel.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: fuel path -->
+  <rect class="ask" x="20" y="30" width="170" height="56" rx="6"/>
+  <text x="105" y="54" text-anchor="middle">base fuel mass</text>
+  <text x="105" y="72" text-anchor="middle" class="small">VE, target lambda, corrections</text>
+
+  <rect class="drive" x="230" y="30" width="200" height="56" rx="6"/>
+  <text x="330" y="54" text-anchor="middle">× STFT × LTFT</text>
+  <text x="330" y="72" text-anchor="middle" class="small">per bank, 1.00 = no change</text>
+
+  <rect class="drive" x="470" y="30" width="200" height="56" rx="6"/>
+  <text x="570" y="54" text-anchor="middle">injected fuel mass</text>
+  <text x="570" y="72" text-anchor="middle" class="small">per cylinder</text>
+
+  <rect class="box" x="710" y="30" width="230" height="56" rx="6"/>
+  <text x="825" y="54" text-anchor="middle">engine + exhaust</text>
+  <text x="825" y="72" text-anchor="middle" class="small">lambda sensor (wideband)</text>
+
+  <path class="wire-ask" d="M190,58 H228" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M430,58 H468" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M670,58 H708" marker-end="url(#a)"/>
+
+  <!-- measured lambda down -->
+  <path class="wire-loop" d="M825,86 V146" marker-end="url(#a)"/>
+  <text x="815" y="112" text-anchor="end" class="small">measured lambda</text>
+
+  <!-- row 2: error and STFT -->
+  <rect class="loop" x="690" y="148" width="250" height="62" rx="6"/>
+  <text x="815" y="172" text-anchor="middle">error = measured − target</text>
+  <text x="815" y="190" text-anchor="middle" class="small">ignored inside the deadband</text>
+  <text x="815" y="204" text-anchor="middle" class="mono">stftInputError1</text>
+
+  <rect class="ask" x="690" y="240" width="250" height="44" rx="6"/>
+  <text x="815" y="267" text-anchor="middle">target lambda table</text>
+  <path class="wire-ask" d="M815,240 V212" marker-end="url(#a)"/>
+
+  <rect class="loop" x="360" y="148" width="290" height="62" rx="6"/>
+  <text x="505" y="170" text-anchor="middle">STFT: integrate in the active region</text>
+  <text x="505" y="187" text-anchor="middle" class="small">Idle / Overrun / Power / Main cell</text>
+  <text x="505" y="203" text-anchor="middle" class="small">rate 1 / Time const, clamp Max add / remove</text>
+  <path class="wire-loop" d="M690,179 H652" marker-end="url(#a)"/>
+
+  <rect class="loop" x="20" y="148" width="290" height="62" rx="6"/>
+  <text x="165" y="170" text-anchor="middle">LTFT: learn into a table</text>
+  <text x="165" y="187" text-anchor="middle" class="small">same axes as the VE table</text>
+  <text x="165" y="203" text-anchor="middle" class="small">saved to the SD card</text>
+  <path class="wire-loop" d="M360,179 H312" marker-end="url(#a)"/>
+
+  <!-- trims back up to the multiplier -->
+  <path class="wire-loop" d="M505,148 V120 H360 V88" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M165,148 V120 H300 V88" marker-end="url(#a)"/>
+
+  <!-- safety -->
+  <rect class="safe" x="20" y="310" width="640" height="70" rx="6"/>
+  <text x="340" y="334" text-anchor="middle">lambda protection (separate from the trims)</text>
+  <text x="340" y="352" text-anchor="middle" class="small">above load, TPS and RPM thresholds: measured ≥ target + Lambda Difference Table for longer than the delay</text>
+  <text x="340" y="369" text-anchor="middle" class="small">→ cut fuel until load, TPS and RPM fall below the restore values</text>
+  <path class="wire-safe" d="M825,132 H950 V345 H662" marker-end="url(#a)"/>
+  <path class="wire-safe" d="M670,310 V90" marker-end="url(#a)"/><text x="676" y="300" class="small">fuel cut</text>
+</svg>

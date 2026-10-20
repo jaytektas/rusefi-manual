@@ -113,7 +113,7 @@ td code { white-space: nowrap; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 """
 
-page_html = f"""<title>rusEFI Electronic Throttle</title>
+page_html = f"""<title>rusEFI {pathlib.Path(page).name.replace("-", " ").title()}</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans+Condensed:wght@600&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap">

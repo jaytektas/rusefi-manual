@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="t d">
+  <title id="t">What happens when TunerStudio connects to rusEFI</title>
+  <desc id="d">On the computer, the TunerStudio project holds a copy of the bundle's .ini (with its signature), the
+  project tune and restore points. On the ECU, the firmware has a built-in signature, the working settings in RAM
+  and a saved copy in flash. Over the USB virtual serial port: first the signatures are compared; then the project
+  tune is compared with the ECU's settings and a Difference Report appears if they differ; every edit is written to
+  the working settings at once; Burn makes the ECU save its working settings to flash; and live data flows back to
+  the gauges and indicators.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- the computer -->
+  <rect class="box" x="16" y="16" width="290" height="428" rx="8"/>
+  <text x="161" y="40" text-anchor="middle">Computer: TunerStudio project</text>
+
+  <rect class="safe" x="32" y="56" width="258" height="56" rx="6"/>
+  <text x="161" y="78" text-anchor="middle">ECU definition (.ini)</text>
+  <text x="161" y="96" text-anchor="middle" class="mono">projectCfg/mainController.ini</text>
+
+  <rect class="ask" x="32" y="128" width="258" height="56" rx="6"/>
+  <text x="161" y="150" text-anchor="middle">Project tune</text>
+  <text x="161" y="168" text-anchor="middle" class="mono">CurrentTune.msq</text>
+
+  <rect class="ask" x="32" y="200" width="258" height="56" rx="6"/>
+  <text x="161" y="222" text-anchor="middle">Your edits in dialogs</text>
+  <text x="161" y="240" text-anchor="middle" class="small">values, tables, curves</text>
+
+  <rect class="ask" x="32" y="272" width="258" height="56" rx="6"/>
+  <text x="161" y="294" text-anchor="middle">Burn button</text>
+  <text x="161" y="312" text-anchor="middle" class="small">at the bottom of every dialog</text>
+
+  <rect class="loop" x="32" y="344" width="258" height="84" rx="6"/>
+  <text x="161" y="366" text-anchor="middle">Gauges and indicators</text>
+  <text x="161" y="384" text-anchor="middle" class="small">the front page, data logs</text>
+  <text x="161" y="402" text-anchor="middle" class="mono">restorePoints/  DataLogs/</text>
+
+  <!-- the ECU -->
+  <rect class="box" x="654" y="16" width="290" height="428" rx="8"/>
+  <text x="799" y="40" text-anchor="middle">ECU: rusEFI firmware</text>
+
+  <rect class="safe" x="670" y="56" width="258" height="56" rx="6"/>
+  <text x="799" y="78" text-anchor="middle">Built-in signature</text>
+  <text x="799" y="96" text-anchor="middle" class="small">fixed when the firmware is built</text>
+
+  <rect class="drive" x="670" y="128" width="258" height="200" rx="6"/>
+  <text x="799" y="152" text-anchor="middle">Working settings (RAM)</text>
+  <text x="799" y="170" text-anchor="middle" class="small">what the engine runs on, right now</text>
+  <text x="799" y="188" text-anchor="middle" class="small">lost at power-off unless burned</text>
+
+  <rect class="drive" x="690" y="246" width="218" height="66" rx="6"/>
+  <text x="799" y="270" text-anchor="middle">Saved settings (flash)</text>
+  <text x="799" y="288" text-anchor="middle" class="small">loaded at every power-up</text>
+  <text x="799" y="303" text-anchor="middle" class="small">while queued: Unsaved changes</text>
+  <path class="wire-drive" d="M799,196 V244" marker-end="url(#a)"/>
+  <text x="808" y="226" class="small">save to flash</text>
+
+  <rect class="loop" x="670" y="344" width="258" height="84" rx="6"/>
+  <text x="799" y="366" text-anchor="middle">Output channels</text>
+  <text x="799" y="384" text-anchor="middle" class="small">RPM, sensors, error and</text>
+  <text x="799" y="402" text-anchor="middle" class="small">status flags, many times a second</text>
+
+  <!-- the link -->
+  <text x="480" y="30" text-anchor="middle">USB virtual serial port</text>
+  <text x="480" y="46" text-anchor="middle" class="mono">COMx · /dev/ttyACMx</text>
+
+  <path class="wire-safe" d="M292,84 H652" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="472" y="76" text-anchor="middle" class="small">1 · signatures compared: must match</text>
+
+  <path class="wire" d="M292,156 H668" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="480" y="148" text-anchor="middle" class="small">2 · settings compared (CRC): differ → Difference Report</text>
+
+  <path class="wire-ask" d="M292,228 H668" marker-end="url(#a)"/>
+  <text x="480" y="220" text-anchor="middle" class="small">3 · each edit sent at once, used at once</text>
+
+  <path class="wire-ask" d="M292,300 H668" marker-end="url(#a)"/>
+  <text x="466" y="292" text-anchor="middle" class="small">4 · Burn: "save your settings"</text>
+
+  <path class="wire-loop" d="M668,386 H292" marker-end="url(#a)"/>
+  <text x="480" y="378" text-anchor="middle" class="small">5 · live data to the gauges</text>
+</svg>

@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img" aria-labelledby="t d">
+  <title id="t">VVT closed loop</title>
+  <desc id="d">RPM and fuelling load look up the VVT target table. Activation gates (RPM, coolant, delay after start, target above the rest band) must pass. A PID with Hold Duty on target minus measured cam position gives solenoid duty, which moves the phaser. The cam sensor tooth time, compared with the crank position and the VVT offset, gives the measured position.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <rect class="ask" x="20" y="30" width="220" height="56" rx="6"/>
+  <text x="130" y="54" text-anchor="middle">VVT target table</text>
+  <text x="130" y="72" text-anchor="middle" class="small">RPM × fuelling load → degrees</text>
+  <rect class="safe" x="280" y="30" width="300" height="56" rx="6"/>
+  <text x="430" y="54" text-anchor="middle">activation gates</text>
+  <text x="430" y="72" text-anchor="middle" class="small">RPM, CLT, delay after start, target &gt; 3°</text>
+  <path class="wire-ask" d="M240,58 H278" marker-end="url(#a)"/>
+  <rect class="loop" x="620" y="30" width="320" height="56" rx="6"/>
+  <text x="780" y="54" text-anchor="middle">PID: Hold Duty + P·I·D on error</text>
+  <text x="780" y="72" text-anchor="middle" class="mono">auxPid · Min / Max duty</text>
+  <path class="wire-ask" d="M580,58 H618" marker-end="url(#a)"/>
+  <rect class="drive" x="700" y="140" width="240" height="56" rx="6"/>
+  <text x="820" y="164" text-anchor="middle">solenoid PWM</text>
+  <text x="820" y="182" text-anchor="middle" class="small">vvtOutputFrequency (300 Hz)</text>
+  <path class="wire-drive" d="M820,86 V138" marker-end="url(#a)"/>
+  <rect class="drive" x="400" y="140" width="250" height="56" rx="6"/>
+  <text x="525" y="164" text-anchor="middle">oil-fed cam phaser</text>
+  <text x="525" y="182" text-anchor="middle" class="small">needs oil pressure to move</text>
+  <path class="wire-drive" d="M700,168 H652" marker-end="url(#a)"/>
+  <rect class="loop" x="400" y="250" width="250" height="56" rx="6"/>
+  <text x="525" y="274" text-anchor="middle">cam sensor tooth</text>
+  <text x="525" y="292" text-anchor="middle" class="small">Cam mode decodes the sync tooth</text>
+  <path class="wire-loop" d="M525,196 V248" marker-end="url(#a)"/>
+  <rect class="loop" x="20" y="250" width="330" height="56" rx="6"/>
+  <text x="185" y="274" text-anchor="middle">position = VVT offset − tooth angle</text>
+  <text x="185" y="292" text-anchor="middle" class="small">tooth angle from the crank trigger (degrees)</text>
+  <path class="wire-loop" d="M400,278 H352" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M185,250 V220 H680 V120 H780 V88" marker-end="url(#a)"/>
+  <text x="200" y="214" class="mono">VVT: bank 1 intake</text>
+  <rect class="safe" x="20" y="330" width="920" height="40" rx="6"/>
+  <text x="480" y="355" text-anchor="middle">gate fails, or no cam position for 1 s → duty 0 %, PID reset → phaser returns to its rest (lock) position</text>
+</svg>

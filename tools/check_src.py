@@ -24,7 +24,7 @@ for md in sorted((ROOT / "documentation" / "docs").rglob("*.md")):
         where = f"{md.relative_to(ROOT)}: <!-- src:{m.group(1).strip()[:60]}... -->"
         if LINE_NO.search(m.group(1)):
             problems.append(f"{where}\n    cites a line number")
-        for part in m.group(1).split(";"):
+        for part in re.split(r";(?![^()]*\))", m.group(1)):
             path = part.strip().split(" ")[0].strip()
             if path and not (RUSEFI / path).exists():
                 problems.append(f"{where}\n    no such file: {path}")

@@ -1,0 +1,166 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="t d">
+  <title id="t">A 60-2 trigger wheel and the signal it makes</title>
+  <desc id="d">A crank wheel with 58 teeth on a 6 degree pitch and a gap where two teeth are missing. The first tooth after the gap is the sync point. The angle from the sync point to the tooth that is at the sensor when cylinder 1 is at top dead centre is the Trigger Angle Advance. On the right, the sensor signal: evenly spaced pulses, then a gap three times as long, so the ratio of tooth times jumps to about 3 at the sync point.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <style>
+    .tooth { fill: #d1d5db; stroke: #6b7280; stroke-width: 1; }
+    .synct { fill: #bbf7d0; stroke: #2e9d4f; stroke-width: 2; }
+    .tdct { fill: #fed7aa; stroke: #e8710a; stroke-width: 2; }
+    .hub { fill: #f3f4f6; stroke: #6b7280; stroke-width: 2; }
+    .sig { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .arc-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .ask-t { fill: #2563eb; } .loop-t { fill: #2e9d4f; } .drive-t { fill: #e8710a; }
+    .guide { stroke: #9ca3af; stroke-width: 1; stroke-dasharray: 3 3; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      .tooth { fill: #4b5563; stroke: #9ca3af; } .hub { fill: #111827; stroke: #9ca3af; }
+      .synct { fill: #14532d; } .tdct { fill: #7c2d12; }
+      .ask-t { fill: #93c5fd; } .loop-t { fill: #86efac; } .drive-t { fill: #fdba74; }
+      .arc-ask { stroke: #93c5fd; } .sig { stroke: #86efac; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <circle class="hub" cx="250" cy="265" r="145"/>
+  <path class="synct" d="M246.0,121.1 L245.4,100.1 L254.6,100.1 L254.0,121.1 z"/>
+  <path class="tooth" d="M231.0,122.3 L228.2,101.4 L237.3,100.5 L239.0,121.4 z"/>
+  <path class="tooth" d="M216.1,125.0 L211.2,104.6 L220.2,102.7 L224.0,123.4 z"/>
+  <path class="tooth" d="M201.7,129.3 L194.7,109.6 L203.4,106.7 L209.3,126.9 z"/>
+  <path class="tooth" d="M187.8,135.1 L178.7,116.2 L187.1,112.4 L195.1,131.9 z"/>
+  <path class="tooth" d="M174.5,142.4 L163.5,124.5 L171.5,119.9 L181.5,138.3 z"/>
+  <path class="tooth" d="M162.1,150.9 L149.3,134.3 L156.8,128.9 L168.6,146.2 z"/>
+  <path class="tooth" d="M150.7,160.7 L136.2,145.5 L143.1,139.3 L156.7,155.3 z"/>
+  <path class="tooth" d="M140.3,171.7 L124.3,158.1 L130.5,151.2 L145.7,165.7 z"/>
+  <path class="tooth" d="M131.2,183.6 L113.9,171.8 L119.3,164.3 L135.9,177.1 z"/>
+  <path class="tooth" d="M123.3,196.5 L104.9,186.5 L109.5,178.5 L127.4,189.5 z"/>
+  <path class="tooth" d="M116.9,210.1 L97.4,202.1 L101.2,193.7 L120.1,202.8 z"/>
+  <path class="tooth" d="M111.9,224.3 L91.7,218.4 L94.6,209.7 L114.3,216.7 z"/>
+  <path class="tooth" d="M108.4,239.0 L87.7,235.2 L89.6,226.2 L110.0,231.1 z"/>
+  <path class="tooth" d="M106.4,254.0 L85.5,252.3 L86.4,243.2 L107.3,246.0 z"/>
+  <path class="tooth" d="M106.1,269.0 L85.1,269.6 L85.1,260.4 L106.1,261.0 z"/>
+  <path class="tooth" d="M107.3,284.0 L86.4,286.8 L85.5,277.7 L106.4,276.0 z"/>
+  <path class="tooth" d="M110.0,298.9 L89.6,303.8 L87.7,294.8 L108.4,291.0 z"/>
+  <path class="tooth" d="M114.3,313.3 L94.6,320.3 L91.7,311.6 L111.9,305.7 z"/>
+  <path class="tdct" d="M120.1,327.2 L101.2,336.3 L97.4,327.9 L116.9,319.9 z"/>
+  <path class="tooth" d="M127.4,340.5 L109.5,351.5 L104.9,343.5 L123.3,333.5 z"/>
+  <path class="tooth" d="M135.9,352.9 L119.3,365.7 L113.9,358.2 L131.2,346.4 z"/>
+  <path class="tooth" d="M145.7,364.3 L130.5,378.8 L124.3,371.9 L140.3,358.3 z"/>
+  <path class="tooth" d="M156.7,374.7 L143.1,390.7 L136.2,384.5 L150.7,369.3 z"/>
+  <path class="tooth" d="M168.6,383.8 L156.8,401.1 L149.3,395.7 L162.1,379.1 z"/>
+  <path class="tooth" d="M181.5,391.7 L171.5,410.1 L163.5,405.5 L174.5,387.6 z"/>
+  <path class="tooth" d="M195.1,398.1 L187.1,417.6 L178.7,413.8 L187.8,394.9 z"/>
+  <path class="tooth" d="M209.3,403.1 L203.4,423.3 L194.7,420.4 L201.7,400.7 z"/>
+  <path class="tooth" d="M224.0,406.6 L220.2,427.3 L211.2,425.4 L216.1,405.0 z"/>
+  <path class="tooth" d="M239.0,408.6 L237.3,429.5 L228.2,428.6 L231.0,407.7 z"/>
+  <path class="tooth" d="M254.0,408.9 L254.6,429.9 L245.4,429.9 L246.0,408.9 z"/>
+  <path class="tooth" d="M269.0,407.7 L271.8,428.6 L262.7,429.5 L261.0,408.6 z"/>
+  <path class="tooth" d="M283.9,405.0 L288.8,425.4 L279.8,427.3 L276.0,406.6 z"/>
+  <path class="tooth" d="M298.3,400.7 L305.3,420.4 L296.6,423.3 L290.7,403.1 z"/>
+  <path class="tooth" d="M312.2,394.9 L321.3,413.8 L312.9,417.6 L304.9,398.1 z"/>
+  <path class="tooth" d="M325.5,387.6 L336.5,405.5 L328.5,410.1 L318.5,391.7 z"/>
+  <path class="tooth" d="M337.9,379.1 L350.7,395.7 L343.2,401.1 L331.4,383.8 z"/>
+  <path class="tooth" d="M349.3,369.3 L363.8,384.5 L356.9,390.7 L343.3,374.7 z"/>
+  <path class="tooth" d="M359.7,358.3 L375.7,371.9 L369.5,378.8 L354.3,364.3 z"/>
+  <path class="tooth" d="M368.8,346.4 L386.1,358.2 L380.7,365.7 L364.1,352.9 z"/>
+  <path class="tooth" d="M376.7,333.5 L395.1,343.5 L390.5,351.5 L372.6,340.5 z"/>
+  <path class="tooth" d="M383.1,319.9 L402.6,327.9 L398.8,336.3 L379.9,327.2 z"/>
+  <path class="tooth" d="M388.1,305.7 L408.3,311.6 L405.4,320.3 L385.7,313.3 z"/>
+  <path class="tooth" d="M391.6,291.0 L412.3,294.8 L410.4,303.8 L390.0,298.9 z"/>
+  <path class="tooth" d="M393.6,276.0 L414.5,277.7 L413.6,286.8 L392.7,284.0 z"/>
+  <path class="tooth" d="M393.9,261.0 L414.9,260.4 L414.9,269.6 L393.9,269.0 z"/>
+  <path class="tooth" d="M392.7,246.0 L413.6,243.2 L414.5,252.3 L393.6,254.0 z"/>
+  <path class="tooth" d="M390.0,231.1 L410.4,226.2 L412.3,235.2 L391.6,239.0 z"/>
+  <path class="tooth" d="M385.7,216.7 L405.4,209.7 L408.3,218.4 L388.1,224.3 z"/>
+  <path class="tooth" d="M379.9,202.8 L398.8,193.7 L402.6,202.1 L383.1,210.1 z"/>
+  <path class="tooth" d="M372.6,189.5 L390.5,178.5 L395.1,186.5 L376.7,196.5 z"/>
+  <path class="tooth" d="M364.1,177.1 L380.7,164.3 L386.1,171.8 L368.8,183.6 z"/>
+  <path class="tooth" d="M354.3,165.7 L369.5,151.2 L375.7,158.1 L359.7,171.7 z"/>
+  <path class="tooth" d="M343.3,155.3 L356.9,139.3 L363.8,145.5 L349.3,160.7 z"/>
+  <path class="tooth" d="M331.4,146.2 L343.2,128.9 L350.7,134.3 L337.9,150.9 z"/>
+  <path class="tooth" d="M318.5,138.3 L328.5,119.9 L336.5,124.5 L325.5,142.4 z"/>
+  <path class="tooth" d="M304.9,131.9 L312.9,112.4 L321.3,116.2 L312.2,135.1 z"/>
+  <path class="tooth" d="M290.7,126.9 L296.6,106.7 L305.3,109.6 L298.3,129.3 z"/>
+  <circle class="box" cx="250" cy="265" r="38"/>
+  <text x="250" y="269" text-anchor="middle" class="small">crank</text>
+  <rect class="loop" x="238.0" y="50.0" width="24" height="40" rx="4"/>
+  <text x="268.0" y="72.0">sensor</text>
+  <path class="wire" d="M315.3,444.5 A191,191 0 0,1 184.7,444.5" marker-end="url(#a)"/>
+  <text x="335.3" y="447.1" class="small">rotation</text>
+  <path class="wire" d="M277.4,92.2 L347.4,62.2"/>
+  <text x="351.4" y="60.2">gap: 2 missing teeth</text>
+  <text x="226.0" y="64.0" class="loop-t" text-anchor="end">sync tooth</text>
+  <text x="226.0" y="79.0" class="small" text-anchor="end">first tooth after the gap</text>
+  <path class="wire" d="M88.0,339.4 L40.0,395.4"/>
+  <text x="12" y="413.4" class="drive-t">tooth at the sensor</text>
+  <text x="12" y="429.4" class="drive-t">when cylinder 1 is at TDC</text>
+  <path class="arc-ask" d="M250.0,157.0 A108,108 0 0,0 151.3,308.9" marker-end="url(#a)"/>
+  <text x="195.6" y="217.8" class="ask-t" text-anchor="middle">Trigger Angle</text>
+  <text x="195.6" y="233.8" class="ask-t" text-anchor="middle">Advance</text>
+  <text x="195.6" y="249.8" class="small" text-anchor="middle">19 × 6° = 114°</text>
+  <text x="250" y="508" text-anchor="middle" class="small">60 positions × 6° = 360°; 58 teeth</text>
+  <text x="480" y="44">Sensor signal as rusEFI sees it (rising edges used)</text>
+  <path class="sig" d="M480,180 H490 V130 H507 V180 H524 V130 H541 V180 H558 V130 H575 V180 H592 V130 H609 V180 H626 V130 H643 V180 H728 V130 H745 V180 H762 V130 H779 V180 H796 V130 H813 V180 H830 V130 H847 V180 H864 V130 H881 V180 H898 V130 H915 V180 H932"/>
+  <text x="480" y="116" class="mono">crank signal</text>
+  <path class="guide" d="M524,124 V256"/>
+  <text x="521" y="220" text-anchor="end" class="small">t</text>
+  <path class="guide" d="M558,124 V256"/>
+  <text x="555" y="220" text-anchor="end" class="small">t</text>
+  <text x="558" y="272" text-anchor="middle" class="small">1.0</text>
+  <path class="guide" d="M592,124 V256"/>
+  <text x="589" y="220" text-anchor="end" class="small">t</text>
+  <text x="592" y="272" text-anchor="middle" class="small">1.0</text>
+  <path class="guide" d="M626,124 V256"/>
+  <text x="623" y="220" text-anchor="end" class="small">t</text>
+  <text x="626" y="272" text-anchor="middle" class="small">1.0</text>
+  <path class="guide" d="M728,124 V256"/>
+  <text x="725" y="220" text-anchor="end" class="small">3t</text>
+  <text x="728" y="272" text-anchor="middle" class="loop-t">3.0</text>
+  <path class="guide" d="M762,124 V256"/>
+  <text x="759" y="220" text-anchor="end" class="small">t</text>
+  <text x="762" y="272" text-anchor="middle" class="small">0.33</text>
+  <path class="guide" d="M796,124 V256"/>
+  <text x="793" y="220" text-anchor="end" class="small">t</text>
+  <text x="796" y="272" text-anchor="middle" class="small">1.0</text>
+  <path class="guide" d="M830,124 V256"/>
+  <text x="827" y="220" text-anchor="end" class="small">t</text>
+  <text x="830" y="272" text-anchor="middle" class="small">1.0</text>
+  <path class="guide" d="M864,124 V256"/>
+  <text x="861" y="220" text-anchor="end" class="small">t</text>
+  <text x="864" y="272" text-anchor="middle" class="small">1.0</text>
+  <path class="guide" d="M898,124 V256"/>
+  <text x="895" y="220" text-anchor="end" class="small">t</text>
+  <text x="898" y="272" text-anchor="middle" class="small">1.0</text>
+  <text x="480" y="238" class="small">tooth time</text>
+  <text x="480" y="292" class="small">ratio to the tooth before</text>
+  <path class="wire-loop" d="M728,84 V126" marker-end="url(#a)"/>
+  <text x="728" y="80" text-anchor="middle" class="loop-t">sync point</text>
+  <text x="685" y="196" text-anchor="middle" class="small">gap</text>
+  <rect class="box" x="480" y="350" width="460" height="140" rx="6"/>
+  <text x="496" y="376">How rusEFI finds the sync point on a 60-2 wheel</text>
+  <text x="496" y="400" class="small">• ratio of this tooth time to the previous one must be 2.25 – 3.75</text>
+  <text x="496" y="424" class="small">• and the previous ratio must be 0.75 – 1.25 (a normal tooth)</text>
+  <text x="496" y="448" class="small">• then exactly 58 teeth must arrive before the next gap</text>
+  <text x="496" y="472" class="small">• engine angle = angle since the sync point − Trigger Angle Advance</text>
+</svg>

@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
+  <title id="t">Boost control loop</title>
+  <desc id="d">RPM and TPS look up the open-loop duty table, multiplied by the CLT and IAT multipliers, plus blend and gear adders. In closed loop the target table plus adders gives a target pressure; a PID on target minus MAP adds a correction. The sum drives either the solenoid output or the electronic wastegate. Below the RPM, TPS or MAP gates the safe duty is used. Separately, boost cut stops fuel above the cut pressure.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <rect class="ask" x="20" y="30" width="200" height="56" rx="6"/>
+  <text x="120" y="54" text-anchor="middle">open-loop duty table</text>
+  <text x="120" y="72" text-anchor="middle" class="small">RPM × Y axis (default TPS)</text>
+  <rect class="ask" x="250" y="30" width="200" height="56" rx="6"/>
+  <text x="350" y="54" text-anchor="middle">× CLT, IAT multipliers</text>
+  <text x="350" y="72" text-anchor="middle" class="small">+ blends, gear adder, Lua</text>
+  <path class="wire-ask" d="M220,58 H248" marker-end="url(#a)"/>
+  <rect class="ask" x="20" y="130" width="200" height="56" rx="6"/>
+  <text x="120" y="154" text-anchor="middle">target table (kPa)</text>
+  <text x="120" y="172" text-anchor="middle" class="small">RPM × TPS/pedal</text>
+  <rect class="ask" x="250" y="130" width="200" height="56" rx="6"/>
+  <text x="350" y="154" text-anchor="middle">+ blends, CLT/IAT adders</text>
+  <text x="350" y="172" text-anchor="middle" class="small">Lua add / mult</text>
+  <path class="wire-ask" d="M220,158 H248" marker-end="url(#a)"/>
+  <rect class="loop" x="490" y="130" width="190" height="56" rx="6"/>
+  <text x="585" y="154" text-anchor="middle">PID on target − MAP</text>
+  <text x="585" y="172" text-anchor="middle" class="mono">boostPid · ±20 %</text>
+  <path class="wire-ask" d="M450,158 H488" marker-end="url(#a)"/>
+  <rect class="drive" x="720" y="80" width="220" height="56" rx="6"/>
+  <text x="830" y="104" text-anchor="middle">open loop + closed loop</text>
+  <text x="830" y="122" text-anchor="middle" class="mono">Boost: Output (0–100 %)</text>
+  <path class="wire-ask" d="M450,58 H830 V78" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M680,158 H830 V138" marker-end="url(#a)"/>
+  <rect class="drive" x="590" y="230" width="170" height="56" rx="6"/>
+  <text x="675" y="254" text-anchor="middle">solenoid PWM</text>
+  <text x="675" y="272" text-anchor="middle" class="mono">boostControlPin</text>
+  <rect class="drive" x="780" y="230" width="160" height="56" rx="6"/>
+  <text x="860" y="254" text-anchor="middle">electronic WG</text>
+  <text x="860" y="272" text-anchor="middle" class="small">H-bridge, position %</text>
+  <path class="wire-drive" d="M800,136 V170 H675 V228" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M860,136 V228" marker-end="url(#a)"/>
+  <rect class="loop" x="250" y="230" width="200" height="56" rx="6"/>
+  <text x="350" y="254" text-anchor="middle">turbo + MAP sensor</text>
+  <text x="350" y="272" text-anchor="middle" class="small">measured pressure (kPa)</text>
+  <path class="wire-loop" d="M590,258 H452" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M450,245 H585 V188" marker-end="url(#a)"/>
+  <rect class="safe" x="20" y="320" width="440" height="60" rx="6"/>
+  <text x="240" y="344" text-anchor="middle">below min RPM / TPS / MAP, or sensor failure</text>
+  <text x="240" y="362" text-anchor="middle" class="small">→ output = Safe duty cycle</text>
+  <rect class="safe" x="500" y="320" width="440" height="60" rx="6"/>
+  <text x="720" y="344" text-anchor="middle">boost cut (limp manager)</text>
+  <text x="720" y="362" text-anchor="middle" class="small">MAP ≥ cut pressure → fuel cut until MAP &lt; cut − hysteresis</text>
+</svg>

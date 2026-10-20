@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-labelledby="t d">
+  <title id="t">CAN bus topology</title>
+  <desc id="d">A CAN bus is one twisted pair, CAN High and CAN Low, with a 120 ohm terminator at each physical end. The Proteus, with its on-board terminator, is one end; a dash at the far end has the other terminator; a rusEFI wideband controller joins on a short stub.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+  <path class="wire-loop" d="M150,120 H810"/><text x="480" y="112" text-anchor="middle" class="small">CAN High (green in the Proteus yaml)</text>
+  <path class="wire-ask" d="M150,160 H810"/><text x="280" y="182" text-anchor="middle" class="small">CAN Low (blue) · twisted together along the whole run</text>
+  <rect class="box" x="20" y="80" width="130" height="120" rx="6"/>
+  <text x="85" y="110" text-anchor="middle">Proteus</text>
+  <text x="85" y="130" text-anchor="middle" class="mono">Black23 17 H</text>
+  <text x="85" y="148" text-anchor="middle" class="mono">Black23 16 L</text>
+  <text x="85" y="176" text-anchor="middle" class="small">120 Ω on board</text>
+  <rect class="box" x="810" y="80" width="130" height="120" rx="6"/>
+  <text x="875" y="110" text-anchor="middle">dash / far end</text>
+  <text x="875" y="140" text-anchor="middle" class="small">120 Ω</text>
+  <text x="875" y="158" text-anchor="middle" class="small">terminator</text>
+  <path class="wire-loop" d="M440,120 V230"/><path class="wire-ask" d="M460,160 V230"/>
+  <rect class="box" x="370" y="230" width="160" height="56" rx="6"/>
+  <text x="450" y="254" text-anchor="middle">rusEFI wideband</text>
+  <text x="450" y="272" text-anchor="middle" class="small">short stub, no terminator</text>
+  <text x="560" y="250" class="small">keep stubs as short as you can</text>
+  <text x="480" y="40" text-anchor="middle">two ends, two 120 Ω terminators: about 60 Ω between H and L</text>
+</svg>

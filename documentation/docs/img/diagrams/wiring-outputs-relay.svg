@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
+  <title id="t">Low-side relay and injector wiring</title>
+  <desc id="d">Battery positive goes through a fuse to the main relay contact and to the fuel pump relay contact. The main relay output feeds the injectors, coils and Proteus Black 23 pin 23. The main relay coil is switched to ground by Lowside 12 on Black 35 pin 21. The fuel pump relay coil, with a diode across it, is fed from the main relay output and switched to ground by Lowside 10 on Black 35 pin 20. The injector is fed from the main relay output and switched to ground by Lowside 1 on Black 35 pin 3.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+  <rect class="safe" x="20" y="30" width="120" height="50" rx="6"/>
+  <text x="80" y="52" text-anchor="middle">Battery +</text>
+  <text x="80" y="70" text-anchor="middle" class="small">12 V</text>
+  <rect class="safe" x="170" y="40" width="80" height="30" rx="4"/>
+  <text x="210" y="60" text-anchor="middle" class="small">fuse</text>
+  <path class="wire-drive" d="M140,55 H170"/>
+  <rect class="drive" x="290" y="30" width="170" height="70" rx="6"/>
+  <text x="375" y="54" text-anchor="middle">main relay</text>
+  <text x="375" y="72" text-anchor="middle" class="small">contact 30 → 87</text>
+  <text x="375" y="90" text-anchor="middle" class="small">coil 85 / 86</text>
+  <path class="wire-drive" d="M250,55 H290"/>
+  <path class="wire-drive" d="M460,55 H600" marker-end="url(#a)"/>
+  <text x="470" y="48" class="small">switched 12 V</text>
+  <rect class="box" x="600" y="30" width="340" height="50" rx="6"/>
+  <text x="770" y="52" text-anchor="middle">injectors, coils, sensors' 12 V</text>
+  <text x="770" y="70" text-anchor="middle" class="mono">+ Black23 pin 23 (driver supply)</text>
+  <!-- pump relay -->
+  <rect class="drive" x="290" y="150" width="170" height="80" rx="6"/>
+  <text x="375" y="174" text-anchor="middle">fuel pump relay</text>
+  <text x="375" y="192" text-anchor="middle" class="small">coil + diode across it</text>
+  <text x="375" y="210" text-anchor="middle" class="small">(band to the + side)</text>
+  <path class="wire-drive" d="M530,55 V170 H460"/>
+  <path class="wire-drive" d="M250,62 V190 H290"/>
+  <text x="150" y="130" class="small">fused 12 V to contact</text>
+  <path class="wire-drive" d="M290,215 H200 V290" marker-end="url(#a)"/>
+  <rect class="box" x="140" y="290" width="120" height="44" rx="6"/>
+  <text x="200" y="317" text-anchor="middle">fuel pump</text>
+  <!-- ECU -->
+  <rect class="box" x="600" y="140" width="340" height="230" rx="8"/>
+  <text x="770" y="164" text-anchor="middle">Proteus (switches to ground)</text>
+  <path class="wire-ask" d="M375,100 V120 H580 V200 H600" />
+  <text x="610" y="204" class="mono">Black35 21 · Lowside 12 (main relay)</text>
+  <path class="wire-ask" d="M460,220 H560 V240 H600"/>
+  <text x="610" y="244" class="mono">Black35 20 · Lowside 10 (fuel pump)</text>
+  <rect class="box" x="290" y="270" width="170" height="50" rx="6"/>
+  <text x="375" y="300" text-anchor="middle">injector (high-Z)</text>
+  <path class="wire-drive" d="M560,55 V130 H480 V285 H460"/>
+  <path class="wire-ask" d="M375,320 V345 H580 V284 H600"/>
+  <text x="610" y="288" class="mono">Black35 3 · Lowside 1 (injector 1)</text>
+  <text x="610" y="330" class="small">ECU ground: Black23 14/19/20,</text>
+  <text x="610" y="348" class="small">Black35 17/18/24 → engine block</text>
+</svg>

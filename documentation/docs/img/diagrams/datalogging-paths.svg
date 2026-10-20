@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-labelledby="t d">
+  <title id="t">The two logging paths</title>
+  <desc id="d">The ECU sends its output channels over USB to TunerStudio, which writes an .mlg log into the
+  project's DataLogs folder. The ECU can also write its own .mlg log to the SD card; the card is read on the
+  PC as a USB drive in PC mode. Both logs open in MegaLogViewer.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <rect class="box" x="20" y="105" width="160" height="80" rx="6"/>
+  <text x="100" y="135" text-anchor="middle">ECU</text>
+  <text x="100" y="155" text-anchor="middle" class="small">output channels</text>
+  <text x="100" y="172" text-anchor="middle" class="mono">[Datalog] / log fields</text>
+
+  <!-- path 1: TunerStudio -->
+  <rect class="ask" x="270" y="30" width="230" height="64" rx="6"/>
+  <text x="385" y="56" text-anchor="middle">TunerStudio on the PC</text>
+  <text x="385" y="76" text-anchor="middle" class="small">Data Logging ▸ Start Logging</text>
+  <rect class="ask" x="560" y="30" width="190" height="64" rx="6"/>
+  <text x="655" y="56" text-anchor="middle">.mlg on the PC</text>
+  <text x="655" y="76" text-anchor="middle" class="mono">Project/DataLogs/</text>
+  <path class="wire-ask" d="M180,130 H225 V62 H268" marker-end="url(#a)"/>
+  <text x="20" y="54" class="small">USB, while connected</text>
+  <path class="wire-ask" d="M500,62 H558" marker-end="url(#a)"/>
+
+  <!-- path 2: SD card -->
+  <rect class="drive" x="270" y="196" width="230" height="64" rx="6"/>
+  <text x="385" y="222" text-anchor="middle">SD card in the ECU</text>
+  <text x="385" y="242" text-anchor="middle" class="mono">re_*.mlg · ECU mode</text>
+  <rect class="drive" x="560" y="196" width="190" height="64" rx="6"/>
+  <text x="655" y="222" text-anchor="middle">USB drive on the PC</text>
+  <text x="655" y="242" text-anchor="middle" class="small">PC mode (mass storage)</text>
+  <path class="wire-drive" d="M180,160 H225 V228 H268" marker-end="url(#a)"/>
+  <text x="20" y="285" class="small">no PC needed, written by the ECU itself</text>
+  <path class="wire-drive" d="M500,228 H558" marker-end="url(#a)"/>
+  <text x="506" y="218" class="small">copy</text>
+
+  <!-- analysis -->
+  <rect class="loop" x="800" y="105" width="140" height="80" rx="6"/>
+  <text x="870" y="135" text-anchor="middle">MegaLogViewer</text>
+  <text x="870" y="155" text-anchor="middle" class="small">graphs, scatter,</text>
+  <text x="870" y="172" text-anchor="middle" class="small">histograms</text>
+  <path class="wire" d="M750,62 H775 V130 H798" marker-end="url(#a)"/>
+  <path class="wire" d="M750,228 H775 V160 H798" marker-end="url(#a)"/>
+</svg>

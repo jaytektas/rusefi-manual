@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 520" role="img" aria-labelledby="t d">
+  <title id="t">What the ECU measures and what it drives</title>
+  <desc id="d">On the left, the sensors: crank and cam position, manifold pressure, mass air flow, throttle and pedal
+  position, coolant and intake air temperature, lambda, battery voltage and knock. In the middle, the ECU decodes
+  engine position, works out air, fuel and timing, and schedules events by crank angle. On the right, the outputs it
+  drives: injectors, ignition coils, electronic throttle or idle valve, main relay, fuel pump, fans, boost and VVT
+  solenoids, tachometer and check engine light. The lambda sensor measures the result of the fuelling and closes
+  the fuel loop.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .head { font-size: 14px; font-weight: bold; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    .arrow-loop { fill: #2e9d4f; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+    <marker id="al" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-loop"/>
+    </marker>
+  </defs>
+
+  <text x="135" y="20" text-anchor="middle" class="head">Measures</text>
+  <text x="480" y="20" text-anchor="middle" class="head">Decides</text>
+  <text x="825" y="20" text-anchor="middle" class="head">Drives</text>
+
+  <!-- sensors -->
+  <rect class="box" x="20" y="32" width="230" height="38" rx="6"/>
+  <text x="30" y="49">Crank position</text><text x="30" y="64" class="small">where the crank is, engine speed</text>
+  <rect class="box" x="20" y="78" width="230" height="38" rx="6"/>
+  <text x="30" y="95">Cam position</text><text x="30" y="110" class="small">which stroke; cam (VVT) angle</text>
+  <rect class="box" x="20" y="124" width="230" height="38" rx="6"/>
+  <text x="30" y="141">MAP</text><text x="30" y="156" class="small">manifold pressure, kPa</text>
+  <rect class="box" x="20" y="170" width="230" height="38" rx="6"/>
+  <text x="30" y="187">MAF (if fitted)</text><text x="30" y="202" class="small">mass of air flowing in, kg/h</text>
+  <rect class="box" x="20" y="216" width="230" height="38" rx="6"/>
+  <text x="30" y="233">TPS / pedal</text><text x="30" y="248" class="small">throttle and pedal position, %</text>
+  <rect class="box" x="20" y="262" width="230" height="38" rx="6"/>
+  <text x="30" y="279">CLT</text><text x="30" y="294" class="small">coolant temperature, °C</text>
+  <rect class="box" x="20" y="308" width="230" height="38" rx="6"/>
+  <text x="30" y="325">IAT</text><text x="30" y="340" class="small">intake air temperature, °C</text>
+  <rect class="loop" x="20" y="354" width="230" height="38" rx="6"/>
+  <text x="30" y="371">Lambda (wideband O2)</text><text x="30" y="386" class="small">air–fuel ratio in the exhaust</text>
+  <rect class="box" x="20" y="400" width="230" height="38" rx="6"/>
+  <text x="30" y="417">Battery voltage</text><text x="30" y="432" class="small">for injector and coil timing</text>
+  <rect class="box" x="20" y="446" width="230" height="38" rx="6"/>
+  <text x="30" y="463">Knock sensor</text><text x="30" y="478" class="small">detonation noise</text>
+
+  <!-- sensor wires into ECU -->
+  <path class="wire" d="M250,51 H338 M250,97 H338 M250,143 H338 M250,189 H338 M250,235 H338 M250,281 H338 M250,327 H338 M250,419 H338 M250,465 H338"/>
+  <path class="wire-loop" d="M250,373 H338"/>
+
+  <!-- ECU -->
+  <rect class="ask" x="340" y="32" width="280" height="452" rx="8"/>
+  <text x="480" y="56" text-anchor="middle" class="head">ECU running rusEFI</text>
+  <text x="480" y="72" text-anchor="middle" class="small">e.g. Proteus</text>
+
+  <rect class="box" x="360" y="88" width="240" height="56" rx="6"/>
+  <text x="480" y="110" text-anchor="middle">trigger decoder</text>
+  <text x="480" y="128" text-anchor="middle" class="small">crank angle, stroke, RPM</text>
+
+  <rect class="box" x="360" y="160" width="240" height="72" rx="6"/>
+  <text x="480" y="182" text-anchor="middle">fuel</text>
+  <text x="480" y="200" text-anchor="middle" class="small">air model → fuel mass</text>
+  <text x="480" y="216" text-anchor="middle" class="small">→ injector pulse width</text>
+
+  <rect class="box" x="360" y="248" width="240" height="56" rx="6"/>
+  <text x="480" y="270" text-anchor="middle">ignition</text>
+  <text x="480" y="288" text-anchor="middle" class="small">timing table → spark angle, dwell</text>
+
+  <rect class="box" x="360" y="320" width="240" height="56" rx="6"/>
+  <text x="480" y="342" text-anchor="middle">scheduler</text>
+  <text x="480" y="360" text-anchor="middle" class="small">fires each event at its crank angle</text>
+
+  <rect class="box" x="360" y="392" width="240" height="72" rx="6"/>
+  <text x="480" y="414" text-anchor="middle">everything else</text>
+  <text x="480" y="432" text-anchor="middle" class="small">idle, throttle, fans, pump, relays,</text>
+  <text x="480" y="448" text-anchor="middle" class="small">boost, VVT, protection</text>
+
+  <!-- ECU to actuators -->
+  <path class="wire-drive" d="M620,59 H698 M620,113 H698 M620,167 H698 M620,221 H698 M620,275 H698 M620,329 H698 M620,383 H698 M620,437 H698"/>
+
+  <!-- actuators -->
+  <rect class="drive" x="700" y="38" width="240" height="42" rx="6"/>
+  <text x="710" y="56">Injectors</text><text x="710" y="72" class="small">how much fuel, and when</text>
+  <rect class="drive" x="700" y="92" width="240" height="42" rx="6"/>
+  <text x="710" y="110">Ignition coils</text><text x="710" y="126" class="small">charge (dwell), then spark</text>
+  <rect class="drive" x="700" y="146" width="240" height="42" rx="6"/>
+  <text x="710" y="164">Electronic throttle / idle valve</text><text x="710" y="180" class="small">air for idle and driving</text>
+  <rect class="drive" x="700" y="200" width="240" height="42" rx="6"/>
+  <text x="710" y="218">Main relay</text><text x="710" y="234" class="small">power for injectors, coils, sensors</text>
+  <rect class="drive" x="700" y="254" width="240" height="42" rx="6"/>
+  <text x="710" y="272">Fuel pump relay</text><text x="710" y="288" class="small">pressure in the fuel rail</text>
+  <rect class="drive" x="700" y="308" width="240" height="42" rx="6"/>
+  <text x="710" y="326">Cooling fans</text><text x="710" y="342" class="small">from coolant temperature</text>
+  <rect class="drive" x="700" y="362" width="240" height="42" rx="6"/>
+  <text x="710" y="380">Boost / VVT solenoids</text><text x="710" y="396" class="small">turbo pressure, cam angle</text>
+  <rect class="drive" x="700" y="416" width="240" height="42" rx="6"/>
+  <text x="710" y="434">Tachometer, check engine light</text><text x="710" y="450" class="small">for the driver</text>
+
+  <!-- closed loop: injectors' result read back by lambda -->
+  <path class="wire-loop" d="M820,80 V86 H950 V500 H8 V373 H18" marker-end="url(#al)"/>
+  <text x="560" y="512" text-anchor="middle" class="small">the exhaust shows what the fuelling did: lambda closes the fuel loop</text>
+</svg>

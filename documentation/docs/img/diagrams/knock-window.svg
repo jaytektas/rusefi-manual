@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 250" role="img" aria-labelledby="t d">
+  <title id="t">Knock sampling window on crank angle</title>
+  <desc id="d">The spark fires; the window opens Detection Window Start degrees later (default 20) and lasts Sampling Duration degrees (default 45). Samples are band-pass filtered, their energy in dB is compared with the threshold curve.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+  <path class="wire" d="M40,150 H860" marker-end="url(#a)"/>
+  <text x="860" y="175" text-anchor="end" class="small">crank angle (degrees after spark)</text>
+  <rect class="safe" x="140" y="60" width="16" height="90"/>
+  <text x="148" y="50" text-anchor="middle">spark</text>
+  <rect class="ask" x="300" y="80" width="420" height="70" rx="4"/>
+  <text x="510" y="110" text-anchor="middle">sampling window</text>
+  <text x="510" y="130" text-anchor="middle" class="mono">knockSamplingDuration = 45°</text>
+  <path class="wire-ask" d="M156,200 H298" marker-end="url(#a)"/>
+  <text x="227" y="222" text-anchor="middle" class="mono">knockDetectionWindowStart = 20°</text>
+  <rect class="loop" x="540" y="190" width="320" height="50" rx="6"/>
+  <text x="700" y="212" text-anchor="middle">band-pass → energy (dB) → + gain</text>
+  <text x="700" y="230" text-anchor="middle" class="small">compare with threshold curve</text>
+</svg>

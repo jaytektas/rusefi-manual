@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 380" role="img" aria-labelledby="t d">
+  <title id="t">Coil wiring options</title>
+  <desc id="d">Left: a smart coil with a built-in igniter takes switched 12 V, a ground, and the logic signal from Proteus Ign 1 on Black35 pin 35. Right: a coil without an igniter needs an external igniter module; Ign 1 drives the igniter input and the igniter switches the coil primary negative.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+  <text x="20" y="28">A — smart coil (built-in igniter)</text>
+  <text x="500" y="28">B — plain coil with an external igniter</text>
+
+  <!-- A -->
+  <rect class="box" x="20" y="60" width="150" height="120" rx="6"/>
+  <text x="95" y="84" text-anchor="middle">Proteus</text>
+  <text x="95" y="112" text-anchor="middle" class="mono">Ign 1</text>
+  <text x="95" y="128" text-anchor="middle" class="small">Black35 pin 35</text>
+  <text x="95" y="156" text-anchor="middle" class="small">GND Black35 17/18/24</text>
+  <rect class="drive" x="300" y="60" width="170" height="150" rx="6"/>
+  <text x="385" y="84" text-anchor="middle">smart coil</text>
+  <text x="385" y="102" text-anchor="middle" class="small">igniter inside</text>
+  <text x="310" y="124" class="mono">signal</text><text x="310" y="152" class="mono">ground</text><text x="310" y="180" class="mono">+12 V</text>
+  <path class="wire-drive" d="M170,120 H298" marker-end="url(#a)"/>
+  <text x="234" y="112" text-anchor="middle" class="small">logic signal</text>
+  <path class="wire" d="M300,148 H240 V250"/>
+  <text x="240" y="268" text-anchor="middle" class="small">engine ground (black)</text>
+  <path class="wire-safe" d="M300,176 H270 V320" style="stroke-dasharray:none"/>
+  <text x="270" y="338" text-anchor="middle" class="small">fused 12 V from main relay (red)</text>
+  <path class="wire" d="M385,210 V250"/>
+  <text x="385" y="268" text-anchor="middle" class="small">to spark plug (HV)</text>
+
+  <!-- B -->
+  <rect class="box" x="500" y="60" width="130" height="90" rx="6"/>
+  <text x="565" y="84" text-anchor="middle">Proteus</text>
+  <text x="565" y="112" text-anchor="middle" class="mono">Ign 1</text>
+  <text x="565" y="128" text-anchor="middle" class="small">Black35 pin 35</text>
+  <rect class="drive" x="680" y="60" width="120" height="90" rx="6"/>
+  <text x="740" y="90" text-anchor="middle">igniter</text>
+  <text x="740" y="108" text-anchor="middle" class="small">module</text>
+  <text x="740" y="126" text-anchor="middle" class="small">switches coil −</text>
+  <path class="wire-drive" d="M630,105 H678" marker-end="url(#a)"/>
+  <rect class="drive" x="830" y="60" width="110" height="150" rx="6"/>
+  <text x="885" y="90" text-anchor="middle">plain coil</text>
+  <text x="840" y="124" class="mono">coil −</text><text x="840" y="180" class="mono">coil +</text>
+  <path class="wire-drive" d="M800,120 H828" marker-end="url(#a)"/>
+  <path class="wire" d="M740,150 V250"/>
+  <text x="740" y="268" text-anchor="middle" class="small">igniter ground (black)</text>
+  <path class="wire-safe" d="M830,176 H815 V320" style="stroke-dasharray:none"/>
+  <text x="815" y="338" text-anchor="middle" class="small">fused 12 V (red)</text>
+  <path class="wire" d="M885,210 V250"/>
+  <text x="885" y="268" text-anchor="middle" class="small">HV to plug / distributor</text>
+</svg>

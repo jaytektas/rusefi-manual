@@ -1,0 +1,142 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="t d">
+  <title id="t">Proteus power supply: battery, fuses, ignition switch, main relay</title>
+  <desc id="d">The battery positive feeds a main fuse. One branch goes through the ignition switch and a small
+  fuse to Black 18, the ECU's ignition power input. A second branch goes through a fuse to terminal 30 of
+  the main relay; the relay's terminal 87 feeds a fuse block for Black 23 (power from main relay),
+  injectors, coils and 12 V sensors. The main relay coil is fed from fused 12 V on terminal 86 and switched
+  to ground on terminal 85 by the ECU's Lowside 12 on Black 21. The fuel pump relay coil is switched by
+  Lowside 10 on Black 20 and its contacts feed the pump through its own fuse. Power grounds on Black 14,
+  19, 20 and Black 17, 18, 24 return to the engine block.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .wire-pos { stroke: #c8412d; stroke-width: 3; fill: none; }
+    .wire-gnd { stroke: #1f2937; stroke-width: 3; fill: none; }
+    .arrow { fill: #6b7280; }
+    .dot { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+      .wire-gnd { stroke: #e5e7eb; } .dot { fill: #9ca3af; }
+    }
+  </style>
+
+  <!-- battery -->
+  <rect class="box" x="20" y="200" width="110" height="80" rx="6"/>
+  <text x="75" y="230" text-anchor="middle">Battery</text>
+  <text x="75" y="250" text-anchor="middle" class="small">12 V</text>
+  <text x="40" y="272" class="small">−</text>
+  <text x="104" y="216" class="small">+</text>
+
+  <!-- main fuse -->
+  <rect class="safe" x="160" y="186" width="90" height="36" rx="6"/>
+  <text x="205" y="209" text-anchor="middle">main fuse</text>
+  <path class="wire-pos" d="M130,204 H160"/>
+  <text x="138" y="196" class="small">red</text>
+
+  <!-- bus from main fuse -->
+  <path class="wire-pos" d="M250,204 H280 V70 H310"/>
+  <path class="wire-pos" d="M280,204 V260 H310"/>
+  <path class="wire-pos" d="M280,260 V420 H310"/>
+  <circle class="dot" cx="280" cy="204" r="4"/>
+  <circle class="dot" cx="280" cy="260" r="4"/>
+
+  <!-- ignition branch (blue: what is asked for) -->
+  <rect class="ask" x="310" y="46" width="130" height="48" rx="6"/>
+  <text x="375" y="67" text-anchor="middle">ignition switch</text>
+  <text x="375" y="84" text-anchor="middle" class="small">key on</text>
+  <rect class="safe" x="470" y="52" width="70" height="36" rx="6"/>
+  <text x="505" y="75" text-anchor="middle">fuse</text>
+  <path class="wire-ask" d="M440,70 H470"/>
+  <path class="wire-ask" d="M540,70 H740"/>
+  <text x="560" y="62" class="small">ignition 12 V</text>
+
+  <!-- main relay branch -->
+  <rect class="safe" x="310" y="242" width="70" height="36" rx="6"/>
+  <text x="345" y="265" text-anchor="middle">fuse</text>
+  <path class="wire-pos" d="M380,260 H420"/>
+
+  <rect class="drive" x="420" y="200" width="150" height="120" rx="6"/>
+  <text x="495" y="222" text-anchor="middle">main relay</text>
+  <text x="430" y="264" class="mono">30</text>
+  <text x="545" y="264" class="mono">87</text>
+  <text x="430" y="306" class="mono">86</text>
+  <text x="545" y="306" class="mono">85</text>
+  <path class="wire" d="M455,258 L520,244"/>
+  <rect class="box" x="470" y="282" width="50" height="22" rx="3"/>
+  <text x="495" y="298" text-anchor="middle" class="small">coil</text>
+
+  <!-- 87 to distribution -->
+  <path class="wire-pos" d="M570,260 H610"/>
+  <rect class="safe" x="610" y="214" width="110" height="92" rx="6"/>
+  <text x="665" y="236" text-anchor="middle">fuse block</text>
+  <text x="665" y="254" text-anchor="middle" class="small">one fuse per</text>
+  <text x="665" y="268" text-anchor="middle" class="small">circuit, sized</text>
+  <text x="665" y="282" text-anchor="middle" class="small">to its wire</text>
+
+  <path class="wire-pos" d="M720,236 H740"/>
+  <path class="wire-pos" d="M720,262 H760 V300 H780"/>
+  <path class="wire-pos" d="M720,262 H780"/>
+  <path class="wire-pos" d="M760,300 V338 H780"/>
+  <text x="790" y="266">injectors, coils (+12 V)</text>
+  <text x="790" y="304">other relay-fed loads</text>
+  <text x="790" y="342">12 V sensor feeds</text>
+
+  <!-- coil feed and switch -->
+  <path class="wire-pos" d="M300,260 V350 H440 V312"/>
+  <text x="318" y="344" class="small">fused 12 V to coil (86)</text>
+  <path class="wire-drive" d="M555,312 V370 H740"/>
+  <text x="590" y="364" class="small">switched to ground by the ECU</text>
+
+  <!-- fuel pump relay -->
+  <rect class="safe" x="310" y="402" width="70" height="36" rx="6"/>
+  <text x="345" y="425" text-anchor="middle">fuse</text>
+  <path class="wire-pos" d="M380,420 H420"/>
+  <rect class="drive" x="420" y="396" width="150" height="48" rx="6"/>
+  <text x="495" y="417" text-anchor="middle">fuel pump relay</text>
+  <text x="495" y="434" text-anchor="middle" class="small">coil from fused 12 V</text>
+  <path class="wire-pos" d="M570,412 H600"/>
+  <rect class="drive" x="600" y="396" width="110" height="34" rx="6"/>
+  <text x="655" y="418" text-anchor="middle">fuel pump</text>
+  <path class="wire-drive" d="M540,444 V470 H740"/>
+  <text x="590" y="464" class="small">coil switched by the ECU</text>
+
+  <!-- ECU -->
+
+  <rect class="box" x="740" y="28" width="200" height="190" rx="6"/>
+  <text x="840" y="48" text-anchor="middle">Proteus</text>
+  <text x="752" y="74" class="mono">Black 18  ignition power</text>
+  <text x="752" y="96" class="mono">Black 23  main relay power</text>
+  <text x="752" y="118" class="small">(ETB drivers, high-side outputs)</text>
+  <text x="752" y="146" class="mono">Black 21  Lowside 12 (relay)</text>
+  <text x="752" y="168" class="mono">Black 20  Lowside 10 (pump)</text>
+  <text x="752" y="196" class="mono">power GND: Black 14 19 20</text>
+  <text x="752" y="210" class="mono">           Black 17 18 24</text>
+
+  <!-- 87 also to Black 23 -->
+  <path class="wire-pos" d="M740,236 V100"/>
+  <!-- relay switch line up to Black 21 -->
+  <path class="wire-drive" d="M740,370 H730 V150 H740"/>
+  <!-- pump switch line up to Black 20 -->
+  <path class="wire-drive" d="M740,470 H720 V172 H740"/>
+
+  <!-- grounds -->
+  <path class="wire-gnd" d="M40,280 V480 H200"/>
+  <rect class="box" x="200" y="462" width="80" height="34" rx="6"/>
+  <text x="240" y="484" text-anchor="middle">block</text>
+  <path class="wire-gnd" d="M940,200 H950 V488 H720"/>
+  <text x="760" y="482" class="small">power grounds to the block</text>
+  <path class="wire-gnd" d="M720,488 H280" stroke-dasharray="2 0"/>
+</svg>

@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 350" role="img" aria-labelledby="t d">
+  <title id="t">One four-stroke cycle on a 720 degree crank-angle strip</title>
+  <desc id="d">Cylinder 1 goes through intake, compression, power and exhaust in two crank revolutions, 720 degrees.
+  The coil charges (dwell) for 4 ms, 48 degrees at 2000 RPM, and fires about 28 degrees before the firing top dead
+  centre. The injector sprays for 7.3 ms, 88 degrees, ending 400 degrees before the firing top dead centre, onto the
+  closed intake valve; that fuel is drawn in on the next intake stroke.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .guide { stroke: #9ca3af; stroke-width: 1; fill: none; stroke-dasharray: 4 4; }
+    .arrow { fill: #6b7280; }
+    .arrow-drive { fill: #e8710a; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+      .guide { stroke: #6b7280; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+    <marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-drive"/>
+    </marker>
+  </defs>
+
+  <!-- firing TDC guide -->
+
+  <!-- row labels -->
+  <text x="20" y="60">Stroke</text>
+  <text x="20" y="76" class="small">cylinder 1</text>
+  <text x="20" y="124">Crank angle</text>
+  <text x="20" y="166">rusEFI angle</text>
+  <text x="20" y="180" class="small">from firing TDC</text>
+  <text x="20" y="216">Injector</text>
+  <text x="20" y="296">Ignition coil</text>
+
+  <!-- strokes -->
+  <rect class="box" x="150" y="34" width="195" height="56" rx="6"/>
+  <text x="247.5" y="58" text-anchor="middle">Intake</text>
+  <text x="247.5" y="76" text-anchor="middle" class="small">piston down · intake valve open</text>
+
+  <rect class="box" x="345" y="34" width="195" height="56" rx="6"/>
+  <text x="442.5" y="58" text-anchor="middle">Compression</text>
+  <text x="442.5" y="76" text-anchor="middle" class="small">piston up · valves shut</text>
+
+  <rect class="box" x="540" y="34" width="195" height="56" rx="6"/>
+  <text x="637.5" y="58" text-anchor="middle">Power</text>
+  <text x="637.5" y="76" text-anchor="middle" class="small">burning gas pushes piston down</text>
+
+  <rect class="box" x="735" y="34" width="195" height="56" rx="6"/>
+  <text x="832.5" y="58" text-anchor="middle">Exhaust</text>
+  <text x="832.5" y="76" text-anchor="middle" class="small">piston up · exhaust valve open</text>
+
+  <!-- crank-angle axis -->
+  <path class="wire" d="M150,108 H930"/>
+  <path class="wire" d="M150,102 V114 M247.5,104 V112 M345,102 V114 M442.5,104 V112 M540,102 V114 M637.5,104 V112 M735,102 V114 M832.5,104 V112 M930,102 V114"/>
+  <text x="150" y="128" text-anchor="middle" class="small">0°</text>
+  <text x="345" y="128" text-anchor="middle" class="small">180°</text>
+  <text x="540" y="128" text-anchor="middle" class="small">360°</text>
+  <text x="735" y="128" text-anchor="middle" class="small">540°</text>
+  <text x="922" y="128" text-anchor="middle" class="small">720°</text>
+  <text x="150" y="143" text-anchor="middle" class="small">TDC</text>
+  <text x="345" y="143" text-anchor="middle" class="small">BDC</text>
+  <text x="540" y="143" text-anchor="middle" class="small">TDC (firing)</text>
+  <text x="735" y="143" text-anchor="middle" class="small">BDC</text>
+  <text x="922" y="143" text-anchor="middle" class="small">TDC</text>
+
+  <!-- rusEFI angle axis -->
+  <text x="158" y="170" text-anchor="middle" class="mono">−360</text>
+  <text x="345" y="170" text-anchor="middle" class="mono">−180</text>
+  <text x="540" y="170" text-anchor="middle" class="mono">0</text>
+  <text x="735" y="170" text-anchor="middle" class="mono">+180</text>
+  <text x="916" y="170" text-anchor="middle" class="mono">+360</text>
+
+  <!-- injector -->
+  <rect class="drive" x="791.3" y="200" width="95.4" height="24" rx="3"/>
+  <text x="780" y="216" text-anchor="end" class="small">sprayed onto the closed intake valve, drawn in next intake →</text>
+  <text x="886.7" y="242" text-anchor="end" class="small">7.3 ms = 88° at 2000 RPM</text>
+  <text x="886.7" y="256" text-anchor="end" class="mono">ends at −400 ≡ +320 (default)</text>
+
+  <!-- ignition: dwell then spark -->
+  <rect class="drive" x="457.7" y="280" width="52" height="24" rx="3"/>
+  <text x="450" y="296" text-anchor="end" class="small">coil charging (dwell) 4 ms = 48°</text>
+  <path class="wire-drive" d="M509.7,270 L503,282 L515,290 L505,302 L512,314" />
+  <text x="520" y="296" class="small">spark ≈ 28° BTDC</text>
+  <text x="520" y="312" class="mono">≈ −28</text>
+</svg>

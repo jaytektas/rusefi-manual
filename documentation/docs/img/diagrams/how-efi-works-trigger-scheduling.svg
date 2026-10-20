@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
+  <title id="t">From trigger teeth to an output switched at the right crank angle</title>
+  <desc id="d">A 60-2 crank wheel passes the crank sensor: 58 teeth 6 degrees apart and a gap where two teeth are missing.
+  The gap is about three times longer than a normal tooth gap, so the decoder recognises it and knows which tooth is
+  which. A cam sensor pulse once every 720 degrees tells it which half of the cycle the engine is in. An event that
+  falls between teeth, here a coil starting to charge 4 degrees after tooth 26, is scheduled from the last tooth
+  before it: 4 degrees times the current time per degree, 0.33 ms at 2000 RPM, on a hardware timer.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    .arrow-drive { fill: #e8710a; }
+    .tooth { stroke: #6b7280; stroke-width: 2; fill: none; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; } .tooth { stroke: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+    <marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-drive"/>
+    </marker>
+  </defs>
+
+  <text x="50" y="24">Crank sensor: 60-2 wheel, one revolution (360°)</text>
+  <text x="50" y="42" class="small">a tooth every 6°, two teeth missing</text>
+  <path class="tooth" d="M50,78 H60 V56 H67 V78 H74 V56 H81 V78 H88 V56 H95 V78 H102 V56 H109 V78 H116 V56 H123 V78 H130 V56 H137 V78 H144 V56 H151 V78 H158 V56 H165 V78 H172 V56 H179 V78 H186 V56 H193 V78 H200 V56 H207 V78 H214 V56 H221 V78 H228 V56 H235 V78 H242 V56 H249 V78 H256 V56 H263 V78 H270 V56 H277 V78 H284 V56 H291 V78 H298 V56 H305 V78 H312 V56 H319 V78 H326 V56 H333 V78 H340 V56 H347 V78 H354 V56 H361 V78 H368 V56 H375 V78 H382 V56 H389 V78 H396 V56 H403 V78 H410 V56 H417 V78 H424 V56 H431 V78 H438 V56 H445 V78 H452 V56 H459 V78 H466 V56 H473 V78 H480 V56 H487 V78 H494 V56 H501 V78 H508 V56 H515 V78 H522 V56 H529 V78 H536 V56 H543 V78 H550 V56 H557 V78 H564 V56 H571 V78 H578 V56 H585 V78 H592 V56 H599 V78 H606 V56 H613 V78 H620 V56 H627 V78 H634 V56 H641 V78 H648 V56 H655 V78 H662 V56 H669 V78 H676 V56 H683 V78 H690 V56 H697 V78 H704 V56 H711 V78 H718 V56 H725 V78 H732 V56 H739 V78 H746 V56 H753 V78 H760 V56 H767 V78 H774 V56 H781 V78 H788 V56 H795 V78 H802 V56 H809 V78 H816 V56 H823 V78 H830 V56 H837 V78 H844 V56 H851 V78 H858 V56 H865 V78 H900 V56 H907 V78 H915"/>
+  <text x="63.5" y="96" text-anchor="middle" class="mono">1</text>
+  <text x="413.5" y="96" text-anchor="middle" class="mono">26</text>
+  <text x="861.5" y="96" text-anchor="middle" class="mono">58</text>
+  <text x="903.5" y="96" text-anchor="middle" class="mono">1</text>
+  <path class="wire-ask" d="M866,48 H900" marker-start="url(#a)" marker-end="url(#a)"/>
+  <text x="883" y="40" text-anchor="middle" class="small">gap ≈ 3×</text>
+
+  <!-- cam -->
+  <text x="50" y="136" class="small">Cam sensor: one pulse per 720°</text>
+  <path class="tooth" d="M50,180 H200 V160 H240 V180 H360"/>
+  <text x="50" y="204" class="small">tells the decoder which half of the cycle</text>
+
+  <!-- zoom marker on the wheel -->
+  <path class="wire" d="M396,84 V104 H540 V150" stroke-dasharray="4 3"/>
+  <text x="550" y="136" class="small">zoom: teeth 25 – 28</text>
+
+  <!-- inset -->
+  <path class="tooth" d="M540,190 H560 V160 H602 V190 H644 V160 H686 V190 H728 V160 H770 V190 H812 V160 H854 V190 H920"/>
+  <text x="665" y="154" text-anchor="middle" class="mono">26</text>
+  <path class="wire-drive" d="M644,150 V212"/>
+  <path class="wire-drive" d="M700,150 V212" stroke-dasharray="4 3"/>
+  <path class="wire-drive" d="M644,206 H698" marker-end="url(#ad)"/>
+  <text x="708" y="210" class="small">coil starts charging at 154°:</text>
+  <text x="708" y="224" class="small">4° × 83.3 µs/° = 0.33 ms after tooth 26</text>
+
+  <!-- steps -->
+  <rect class="ask" x="50" y="250" width="270" height="78" rx="6"/>
+  <text x="185" y="273" text-anchor="middle">1 · tooth edge arrives</text>
+  <text x="185" y="291" text-anchor="middle" class="small">the input captures the exact time</text>
+  <text x="185" y="307" text-anchor="middle" class="small">(sensor on a VR or digital input)</text>
+
+  <rect class="ask" x="345" y="250" width="270" height="78" rx="6"/>
+  <text x="480" y="273" text-anchor="middle">2 · decoder</text>
+  <text x="480" y="291" text-anchor="middle" class="small">gap ratio → sync; tooth → crank angle;</text>
+  <text x="480" y="307" text-anchor="middle" class="small">tooth times → RPM, time per degree</text>
+
+  <rect class="drive" x="640" y="250" width="275" height="78" rx="6"/>
+  <text x="777" y="273" text-anchor="middle">3 · schedule</text>
+  <text x="777" y="291" text-anchor="middle" class="small">angle still to go × time per degree</text>
+  <text x="777" y="307" text-anchor="middle" class="small">→ hardware timer switches the output</text>
+
+  <path class="wire-ask" d="M320,289 H343" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M615,289 H638" marker-end="url(#a)"/>
+
+  <text x="50" y="360" class="small">An event many teeth ahead (the spark, at the end of dwell) is parked and converted to a time only when</text>
+  <text x="50" y="376" class="small">the last tooth before it arrives, so the conversion uses the engine speed measured at the nearest tooth.</text>
+</svg>
