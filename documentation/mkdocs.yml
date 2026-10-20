@@ -81,6 +81,8 @@ nav:
       - The official boards: part2/official-boards.md
       - Wiring basics: part2/wiring-basics.md
       - Power, grounds and ground loops: part2/power-grounds.md
+      - Shielding and noise: part2/shielding-noise.md
+      - Wiring sensors: part2/wiring-sensors.md
   - Part III — Configuring the engine:
       - part3/index.md
       - Engine and vehicle basics: part3/engine-basics.md
@@ -99,6 +101,7 @@ nav:
       - Limits and engine protection: part3/limits-protection.md
       - Knock: part3/knock.md
       - CAN configuration: part3/can.md
+      - Lua scripting: part3/lua.md
   - Part IV — Tuning:
       - part4/index.md
       - Tuning principles: part4/tuning-principles.md

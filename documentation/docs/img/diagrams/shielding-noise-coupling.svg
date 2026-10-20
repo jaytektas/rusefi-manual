@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="t d">
+  <title id="t">Three ways noise reaches a sensor wire</title>
+  <desc id="d">Top: a coil wire carrying pulsed current runs alongside a crank sensor cable and induces
+  spikes in it. Middle: the same two cables cross at a right angle, so they couple only over a few
+  millimetres. Bottom: a load's return current shares the sensor ground wire, and its voltage drop
+  lifts the sensor's ground above the ECU's.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 3; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    .arrow-noise { fill: #c8412d; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+    <marker id="n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-noise"/>
+    </marker>
+  </defs>
+
+  <!-- 1: inductive coupling, running parallel -->
+  <text x="20" y="22">1 · Magnetic field of a switching current — the two cables run alongside each other</text>
+  <rect class="drive" x="20" y="36" width="110" height="46" rx="6"/>
+  <text x="75" y="56" text-anchor="middle">coil pack</text>
+  <text x="75" y="73" text-anchor="middle" class="small">current switched</text>
+
+  <path class="wire-drive" d="M130,64 H190 V42 H240 V64 H320 V42 H370 V64 H450 V42 H500 V64 H580" />
+  <text x="300" y="100" class="small">coil wire — its current changes in microseconds</text>
+
+  <rect class="ask" x="20" y="106" width="110" height="46" rx="6"/>
+  <text x="75" y="126" text-anchor="middle">crank sensor</text>
+  <text x="75" y="143" text-anchor="middle" class="small">VR, millivolts</text>
+
+  <path class="wire-ask" d="M130,129 H580"/>
+  <text x="198" y="152" class="small">crank sensor cable in the same loom — every metre picks up a spike</text>
+
+  <path class="wire-safe" d="M215,70 C225,95 235,100 243,124" marker-end="url(#n)"/>
+  <path class="wire-safe" d="M350,70 C360,95 370,100 378,124" marker-end="url(#n)"/>
+  <path class="wire-safe" d="M480,70 C490,95 500,100 508,124" marker-end="url(#n)"/>
+
+  <rect class="box" x="600" y="86" width="340" height="70" rx="6"/>
+  <text x="614" y="108">what the ECU then sees: extra edges,</text>
+  <text x="614" y="126">or teeth it never hears at all</text>
+  <text x="614" y="146" class="mono">totalTriggerErrorCounter climbs</text>
+
+  <!-- 2: right-angle crossing -->
+  <text x="20" y="196">2 · Same two cables crossing at a right angle — they share only a few millimetres</text>
+  <path class="wire-ask" d="M120,250 H600"/>
+  <text x="130" y="272" class="small">sensor cable, kept straight</text>
+  <path class="wire-drive" d="M430,205 V295"/>
+  <text x="445" y="292" class="small">coil wire</text>
+  <path class="wire-safe" d="M438,248 L488,232" marker-end="url(#n)"/>
+  <rect class="loop" x="620" y="222" width="320" height="60" rx="6"/>
+  <text x="634" y="242">cross circuits at right angles, and keep</text>
+  <text x="634" y="260">the sensor cable on the side of the engine</text>
+  <text x="634" y="273" class="small">away from the coils</text>
+
+  <!-- 3: shared ground return -->
+  <text x="20" y="330">3 · A load's return current sharing the sensor's ground wire</text>
+  <rect class="ask" x="20" y="346" width="120" height="52" rx="6"/>
+  <text x="80" y="366" text-anchor="middle">sensor</text>
+  <text x="80" y="383" text-anchor="middle" class="small">signal + its ground</text>
+
+  <path class="wire-ask" d="M140,372 H560"/>
+  <path class="wire-ask" d="M636,372 H760"/>
+  <path class="wire" d="M560,372 L575,358 L590,386 L605,358 L620,386 L636,372"/>
+  <text x="540" y="404" class="mono">the wire's own resistance</text>
+
+  <rect class="drive" x="200" y="412" width="140" height="48" rx="6"/>
+  <text x="270" y="432" text-anchor="middle">fan, pump, coil</text>
+  <text x="270" y="449" text-anchor="middle" class="small">its return joins here</text>
+  <path class="wire-drive" d="M270,412 V378" marker-end="url(#a)"/>
+  <path class="wire-safe" d="M300,360 H548" marker-end="url(#n)"/>
+  <text x="310" y="352" class="small">this section now carries someone else's current</text>
+
+  <rect class="box" x="760" y="346" width="180" height="52" rx="6"/>
+  <text x="850" y="366" text-anchor="middle">ECU sensor ground</text>
+  <text x="850" y="383" text-anchor="middle" class="small">White GNDA pin</text>
+
+  <text x="20" y="490" class="small">red = interference and unwanted ground current · orange = what the ECU switches · blue = sensor signals</text>
+</svg>

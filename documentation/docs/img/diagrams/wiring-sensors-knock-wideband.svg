@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="t d">
+  <title id="t">Knock and wideband connections on Proteus</title>
+  <desc id="d">One or two piezo knock sensors connect to the two fixed knock inputs, White 34 and White 35, in shielded cable. A wideband can reach the ECU two ways: through its controller on the CAN bus (Black 17 High and Black 16 Low, or the second bus on Black 22 and Black 21), or as an analog voltage on White 28 Analog Volt 10, which is the factory AFR input. The controller powers the sensor itself; the red panel warns against ever putting the heater or 12 V on an ECU input.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+
+  <!-- ECU rows -->
+  <rect class="box" x="600" y="20" width="340" height="376" rx="8"/>
+  <text x="770" y="42" text-anchor="middle">Proteus — where each wire lands</text>
+  <line class="wire" x1="600" y1="130" x2="940" y2="130"/>
+  <line class="wire" x1="600" y1="238" x2="940" y2="238"/>
+  <text x="614" y="76" class="mono">White 34  Knock input 1</text>
+  <text x="614" y="100" class="mono">White 35  Knock input 2</text>
+  <text x="614" y="120" class="small">fixed by the board — no pin choice in TunerStudio</text>
+  <text x="614" y="176" class="mono">Black 17  CAN High</text>
+  <text x="614" y="200" class="mono">Black 16  CAN Low</text>
+  <text x="614" y="226" class="small">second bus: Black 22 High, Black 21 Low</text>
+  <text x="614" y="284" class="mono">White 28  Analog Volt 10   AFR input</text>
+  <text x="614" y="304" class="small">rusEFI's factory AFR input on Proteus</text>
+  <text x="614" y="352" class="mono">White 3   GNDA sensor ground</text>
+
+  <!-- knock -->
+  <rect class="ask" x="20" y="44" width="210" height="90" rx="6"/>
+  <text x="125" y="70" text-anchor="middle">Knock sensor(s)</text>
+  <text x="125" y="88" text-anchor="middle" class="small">piezo element on the block,</text>
+  <text x="125" y="106" text-anchor="middle" class="small">2 wires, no supply</text>
+  <path class="wire-ask" d="M230,62 H598" marker-end="url(#a)"/>
+  <text x="252" y="58" class="small">channel 1 — always used</text>
+  <path class="wire-ask" d="M230,96 H598" marker-end="url(#a)"/>
+  <text x="252" y="92" class="small">channel 2 — second sensor, e.g. one per bank</text>
+  <text x="252" y="120" class="small">short shielded cable, shield at the ECU end only</text>
+
+  <!-- wideband on CAN -->
+  <rect class="ask" x="20" y="160" width="210" height="90" rx="6"/>
+  <text x="125" y="186" text-anchor="middle">Wideband controller</text>
+  <text x="125" y="204" text-anchor="middle" class="small">own fused 12 V, own sensor;</text>
+  <text x="125" y="222" text-anchor="middle" class="small">reports lambda over CAN</text>
+  <path class="wire-loop" d="M230,172 H598" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M230,196 H598" marker-end="url(#a)"/>
+  <text x="252" y="168" class="small">two twisted wires: High and Low</text>
+  <text x="252" y="232" class="small">the controller heats and pumps the sensor itself</text>
+
+  <!-- wideband analog -->
+  <rect class="ask" x="20" y="264" width="210" height="100" rx="6"/>
+  <text x="125" y="290" text-anchor="middle">Wideband with an</text>
+  <text x="125" y="308" text-anchor="middle" class="small">analog output: its controller</text>
+  <text x="125" y="326" text-anchor="middle" class="small">gives 0–5 V that stands for</text>
+  <text x="125" y="344" text-anchor="middle" class="small">a range of AFR or lambda</text>
+  <path class="wire-ask" d="M230,290 H598" marker-end="url(#a)"/>
+  <text x="252" y="286" class="small">signal — scaled by the two points on the dialog</text>
+  <path class="wire" d="M230,348 H598"/>
+  <text x="252" y="332" class="small">controller's signal ground to a GNDA pin</text>
+
+  <!-- safety note -->
+  <rect class="safe" x="20" y="410" width="920" height="58" rx="6"/>
+  <text x="480" y="432" text-anchor="middle">The wideband sensor's heater is driven by the controller, never by the ECU. Nothing from the sensor or its</text>
+  <text x="480" y="450" text-anchor="middle">heater wiring may reach an ECU input, and <tspan class="mono">Force O2 sensor heating</tspan> is for testing only — TunerStudio</text>
+  <text x="480" y="464" text-anchor="middle">says it can damage the sensor if left on.</text>
+</svg>

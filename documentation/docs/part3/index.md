@@ -20,5 +20,4 @@ One chapter for each job the ECU does. Each follows the same shape: what it does
 - **[Limits and engine protection](limits-protection.md)** — The protection manager watches engine speed, boost, oil pressure, lambda and injector duty, and cuts fuel, spark or both the moment one of them goes outside the limits you set.
 - **[Knock](knock.md)** — RusEFI listens to the knock sensor for a short window after every spark, and when the sound is louder than a threshold it takes ignition timing away, then gives it back slowly.
 - **[CAN configuration](can.md)** — CAN is the two-wire network the ECU uses to talk to a dash, a wideband controller, an EGT gauge, the car's own instrument cluster and extra input/output boxes — one dialog turns the network on, a handful more decide what the ECU listens for and what it sends.
-
-**Still being written:** Lua scripting.
+- **[Lua scripting](lua.md)** — RusEFI runs a small Lua interpreter inside the ECU, so a plain-text script you edit in the rusEFI console can read any sensor, drive spare outputs, and add to — or take away from — the fuel, spark, idle, boost and throttle the firmware is already calculating.

@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
+  <title id="t">VR and Hall crank sensors on Proteus</title>
+  <desc id="d">A two-wire VR pick-up goes to the VR 1 pair, Black 5 positive and Black 13 negative, as a twisted shielded pair, and has no supply of its own. A three-wire Hall sensor takes 5 V or protected 12 V supply, returns to a White GNDA pin, and feeds its signal to a digital trigger input such as Digital 1 on Black 10. The red panel explains that reversed VR wires show up as a short gap with a long tooth before it, and are fixed by swapping the pair or by the Primary Edge setting.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
+
+  <!-- ECU rows: each row lines up with the wire that lands on it -->
+  <rect class="box" x="600" y="20" width="340" height="360" rx="8"/>
+  <text x="770" y="42" text-anchor="middle">Proteus — where each wire lands</text>
+  <line class="wire" x1="600" y1="128" x2="940" y2="128"/>
+  <line class="wire" x1="600" y1="242" x2="940" y2="242"/>
+  <text x="614" y="72" class="mono">Black 5   VR 1 +</text>
+  <text x="614" y="100" class="mono">Black 13  VR 1 −</text>
+  <text x="614" y="120" class="small">one VR input = one twisted pair, no supply</text>
+  <text x="614" y="180" class="mono">Black 10  Digital 1  factory crank input</text>
+  <text x="614" y="204" class="mono">Black 1   Digital 2  suggested for a cam</text>
+  <text x="614" y="228" class="mono">Black 2, 3, 9, 11  Digital 3 to 6</text>
+  <text x="614" y="262" class="small">second VR input: VR 2 is Black 4 (+), Black 12 (−)</text>
+  <text x="614" y="288" class="mono">White 9   +5 V supply #1</text>
+  <text x="614" y="312" class="mono">White 11  12 V protected, sensors</text>
+  <text x="614" y="336" class="mono">White 1   GNDA sensor ground</text>
+  <text x="614" y="362" class="small">White 1-8, 23 and 29 are all GNDA</text>
+
+  <!-- VR sensor -->
+  <rect class="ask" x="20" y="44" width="200" height="80" rx="6"/>
+  <text x="120" y="70" text-anchor="middle">VR pick-up</text>
+  <text x="120" y="88" text-anchor="middle" class="small">2 wires, no supply pin</text>
+  <text x="120" y="106" text-anchor="middle" class="small">makes its own AC signal</text>
+  <path class="wire-ask" d="M220,68 H420 L470,96 H598" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M220,96 H420 L470,68 H598" marker-end="url(#a)"/>
+  <text x="246" y="62" class="small">twist the pair along the whole run</text>
+  <text x="246" y="120" class="small">shielded cable, shield to the ECU end only</text>
+
+  <!-- Hall sensor -->
+  <rect class="ask" x="20" y="250" width="200" height="100" rx="6"/>
+  <text x="120" y="276" text-anchor="middle">Hall sensor</text>
+  <text x="120" y="294" text-anchor="middle" class="small">3 wires: supply, signal,</text>
+  <text x="120" y="312" text-anchor="middle" class="small">return — needs power</text>
+  <path class="wire-ask" d="M220,262 H300 V176 H598" marker-end="url(#a)"/>
+  <text x="312" y="172" class="small">signal, square wave, to a digital trigger input</text>
+  <path class="wire-drive" d="M220,284 H598" marker-end="url(#a)"/>
+  <text x="246" y="280" class="small">5 V (White 9) or protected 12 V (White 11)</text>
+  <path class="wire" d="M220,332 H598"/>
+  <text x="246" y="352" class="small">return on its own wire, never to the block</text>
+
+  <!-- polarity note -->
+  <rect class="safe" x="20" y="394" width="920" height="58" rx="6"/>
+  <text x="480" y="416" text-anchor="middle">VR wires reversed? The teeth still count, but a 60-2 wheel shows a short gap with a long tooth before it.</text>
+  <text x="480" y="434" text-anchor="middle">Swap the pair, or change the Primary Edge setting (invertPrimaryTriggerSignal), then check the timing again.</text>
+</svg>

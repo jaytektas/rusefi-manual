@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" role="img" aria-labelledby="t d">
+  <title id="t">Where a rusEFI Lua script lives</title>
+  <desc id="d">The rusEFI console editor writes the script into the ECU's own Lua settings page in RAM and
+  then sends luareset, so it runs immediately without being saved. Burn to ECU writes that page to flash.
+  At power-up the ECU reads the burned page and starts that script; resetting the tune to defaults puts
+  rusEFI's factory script in the page instead.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: edit, write, run -->
+  <rect class="ask" x="20" y="40" width="200" height="64" rx="6"/>
+  <text x="120" y="66" text-anchor="middle">rusEFI console editor</text>
+  <text x="120" y="86" text-anchor="middle" class="small">ASCII text, up to 48 000 bytes</text>
+
+  <rect class="loop" x="280" y="40" width="220" height="64" rx="6"/>
+  <text x="390" y="66" text-anchor="middle">the ECU's Lua page, in RAM</text>
+  <text x="390" y="86" text-anchor="middle" class="mono">page 0x0400 · 48 000 bytes</text>
+
+  <rect class="loop" x="560" y="40" width="200" height="64" rx="6"/>
+  <text x="660" y="66" text-anchor="middle">a new Lua VM</text>
+  <text x="660" y="86" text-anchor="middle" class="small">onTick runs within milliseconds</text>
+
+  <path class="wire-ask" d="M220,72 H278" marker-end="url(#a)"/>
+  <text x="250" y="34" text-anchor="middle" class="small">Write to ECU</text>
+  <path class="wire-loop" d="M500,72 H558" marker-end="url(#a)"/>
+  <text x="530" y="34" text-anchor="middle" class="mono">luareset</text>
+
+  <!-- row 2: what survives -->
+  <rect class="drive" x="280" y="176" width="220" height="64" rx="6"/>
+  <text x="390" y="200" text-anchor="middle">the same page, in flash</text>
+  <text x="390" y="220" text-anchor="middle" class="small">survives a power cycle and a</text>
+  <text x="390" y="234" text-anchor="middle" class="small">battery disconnect</text>
+
+  <rect class="box" x="560" y="176" width="200" height="64" rx="6"/>
+  <text x="660" y="202" text-anchor="middle">ECU start-up</text>
+  <text x="660" y="222" text-anchor="middle" class="small">loads the saved script</text>
+
+  <path class="wire-drive" d="M390,104 V174" marker-end="url(#a)"/>
+  <text x="398" y="144" class="small">Burn to ECU</text>
+  <path class="wire" d="M500,208 H558" marker-end="url(#a)"/>
+  <path class="wire-safe" d="M660,176 V106" marker-end="url(#a)"/>
+  <text x="668" y="144" class="small">power cycle: the VM starts</text>
+
+  <text x="450" y="276" text-anchor="middle" class="small">Resetting the tune to defaults, or applying an engine type, puts rusEFI's factory script in this page.</text>
+</svg>

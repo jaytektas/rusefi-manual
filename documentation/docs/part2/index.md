@@ -7,5 +7,7 @@ The official boards and everything that connects to them: tools, wiring practice
 - **[The official boards](official-boards.md)** — RusEFI runs on a family of official boards; this manual uses the Proteus F7 for every example, and this chapter shows what is on each of its three connectors.
 - **[Wiring basics](wiring-basics.md)** — A reliable engine harness is made with the right tools, automotive wire, properly crimped and sealed terminals, and careful routing — and is checked before it ever sees power.
 - **[Power, grounds and ground loops](power-grounds.md)** — The ECU, its sensors and its outputs need clean 12 V in, separate ground paths back out, and a fuse on every supply — get this right and most "strange sensor" problems never happen.
+- **[Shielding and noise](shielding-noise.md)** — An engine bay is full of sparks and switching currents, and the two inputs rusEFI is most sensitive on — the crank and cam trigger, and the knock sensor — sit right in the middle of them, so those wires must be kept short, twisted, shielded at one end and run away from the coils, injectors and throttle motor.
+- **[Wiring sensors](wiring-sensors.md)** — Every sensor gets a supply (or nothing), one signal wire, and a return wire of its own back to the ECU's sensor ground — and Proteus puts each kind of sensor on its own family of pins, so the connector you use tells you what the firmware expects to find there.
 
-**Still being written:** Shielding and noise, Wiring sensors, Wiring outputs, CAN bus.
+**Still being written:** Wiring outputs, CAN bus.

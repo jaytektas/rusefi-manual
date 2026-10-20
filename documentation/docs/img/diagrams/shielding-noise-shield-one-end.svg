@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 410" role="img" aria-labelledby="t d">
+  <title id="t">Shielded cable grounded at one end, and at both ends</title>
+  <desc id="d">Left: a shielded twisted pair from a crank sensor to the Proteus Black connector, with the
+  shield connected only at the ECU end, to the same ground point the ECU's power ground wires use, and
+  left insulated at the sensor end. Right: the same cable with the shield connected at both ends, so
+  ground current circulates in the shield and disturbs the signal pair.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 3; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    .arrow-loop { fill: #2e9d4f; }
+    .arrow-noise { fill: #c8412d; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+    <marker id="g" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-loop"/>
+    </marker>
+    <marker id="n" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-noise"/>
+    </marker>
+  </defs>
+
+  <!-- ===== left panel: one end ===== -->
+  <rect class="loop" x="10" y="14" width="450" height="380" rx="8"/>
+  <text x="26" y="38">Do this: the shield is grounded at the ECU end only</text>
+
+  <text x="26" y="62" class="mono">VR 1 + → Black 5      VR 1 − → Black 13</text>
+  <text x="26" y="80" class="small">the shield never touches the sensor body or the block</text>
+
+  <rect class="ask" x="30" y="150" width="110" height="56" rx="6"/>
+  <text x="85" y="174" text-anchor="middle">crank sensor</text>
+  <text x="85" y="191" text-anchor="middle" class="small">VR, two wires</text>
+
+  <path class="wire" d="M140,152 H400"/>
+  <path class="wire" d="M140,204 H400"/>
+  <path class="wire-ask" d="M140,168 H400"/>
+  <path class="wire-ask" d="M140,188 H400"/>
+  <text x="170" y="230" class="small">shielded twisted pair</text>
+  <text x="170" y="245" class="small">shield cut back and taped at the sensor end</text>
+  <path class="wire-safe" d="M158,220 L146,208" marker-end="url(#n)"/>
+
+  <rect class="box" x="400" y="140" width="46" height="76" rx="4"/>
+  <text x="423" y="164" text-anchor="middle">Black</text>
+  <text x="423" y="182" text-anchor="middle" class="small">23</text>
+
+  <rect class="box" x="300" y="290" width="146" height="72" rx="6"/>
+  <text x="373" y="312" text-anchor="middle">ground stud (star)</text>
+  <text x="373" y="330" text-anchor="middle" class="small">the block point the ECU's</text>
+  <text x="373" y="345" text-anchor="middle" class="small">Power/Chassis GND share</text>
+  <path class="wire-loop" d="M400,204 V250 H373 V288" marker-end="url(#g)"/>
+  <text x="404" y="262" class="small">drain</text>
+
+  <!-- ===== right panel: both ends ===== -->
+  <rect class="safe" x="500" y="14" width="450" height="380" rx="8"/>
+  <text x="516" y="38">Not this: the shield is grounded at both ends</text>
+
+  <text x="516" y="62" class="small">the block and the ECU ground sit at slightly different voltages,</text>
+  <text x="516" y="77" class="small">and shield plus block form a loop that works as an antenna</text>
+
+  <rect class="ask" x="520" y="150" width="110" height="56" rx="6"/>
+  <text x="575" y="174" text-anchor="middle">crank sensor</text>
+  <text x="575" y="191" text-anchor="middle" class="small">bolted to the block</text>
+
+  <path class="wire" d="M630,152 H890"/>
+  <path class="wire" d="M630,204 H890"/>
+  <path class="wire-ask" d="M630,168 H890"/>
+  <path class="wire-ask" d="M630,188 H890"/>
+
+  <rect class="box" x="890" y="140" width="46" height="76" rx="4"/>
+  <text x="913" y="164" text-anchor="middle">Black</text>
+  <text x="913" y="182" text-anchor="middle" class="small">23</text>
+
+  <rect class="box" x="540" y="290" width="130" height="60" rx="6"/>
+  <text x="605" y="312" text-anchor="middle">engine block</text>
+  <text x="605" y="330" text-anchor="middle" class="small">second ground point</text>
+
+  <path class="wire-safe" d="M520,206 V320 H538" marker-end="url(#n)"/>
+  <path class="wire-safe" d="M890,204 V330 H672" marker-end="url(#n)"/>
+  <text x="600" y="356" class="small">shield grounded at the sensor body and at the ECU</text>
+
+  <path class="wire-safe" d="M660,152 C710,122 790,122 840,152" marker-end="url(#n)"/>
+  <path class="wire-safe" d="M840,204 C790,234 710,234 660,204" marker-end="url(#n)"/>
+  <text x="676" y="112" class="small">current circulates in the shield</text>
+  <text x="662" y="258" class="small">…and is injected into the signal pair</text>
+</svg>
