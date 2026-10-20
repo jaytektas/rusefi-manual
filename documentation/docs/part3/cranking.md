@@ -176,6 +176,11 @@ All of it is in TunerStudio's **Cranking** menu.
 
 <!-- shot: img/ts/cranking-menu.png | Cranking menu (open) | menu dropped down, all entries visible | The Cranking menu. -->
 
+<figure markdown>
+  ![Cranking menu (open): menu dropped down, all entries visible](../img/ts/cranking-menu.png)
+  <figcaption>Figure 3 — The Cranking menu.</figcaption>
+</figure>
+
 ### 1 · Cranking settings
 
 Open **Cranking ▸ Cranking settings**. Set **Cranking RPM limit** a little above your engine's real
@@ -185,6 +190,11 @@ start. Leave **Flood clear** and **Faster engine spin-up** on.
 
 <!-- shot: img/ts/cranking-settings.png | Cranking ▸ Cranking settings | defaults: 550 RPM, Simultaneous, Fixed, Fixed (auto taper) 6 deg, dwell 6 ms, flood clear enabled | The Cranking Settings dialog with factory defaults. -->
 
+<figure markdown>
+  ![Cranking ▸ Cranking settings: defaults: 550 RPM, Simultaneous, Fixed, Fixed (auto taper) 6 deg, dwell 6 ms, flood clear enabled](../img/ts/cranking-settings.png)
+  <figcaption>Figure 4 — The Cranking Settings dialog with factory defaults.</figcaption>
+</figure>
+
 ### 2 · Cranking fuel
 
 Open **Cranking ▸ Cranking Base Fuel (Engine Cycle vs CLT)** and **Cranking ▸ Cranking Fuel
@@ -192,7 +202,17 @@ multiplier**. The product is the mass per cylinder per cycle (Figure 2). Scale t
 cylinder size: the defaults suit about 500 cc per cylinder.
 
 <!-- shot: img/ts/cranking-base-fuel.png | Cranking ▸ Cranking Base Fuel (Engine Cycle vs CLT) | default 27 mg table | Cranking base fuel table, default. -->
+
+<figure markdown>
+  ![Cranking ▸ Cranking Base Fuel (Engine Cycle vs CLT): default 27 mg table](../img/ts/cranking-base-fuel.png)
+  <figcaption>Figure 5 — Cranking base fuel table, default.</figcaption>
+</figure>
 <!-- shot: img/ts/cranking-clt-mult.png | Cranking ▸ Cranking Fuel multiplier | default curve 2.8 … 1.0 | Cranking coolant multiplier, default. -->
+
+<figure markdown>
+  ![Cranking ▸ Cranking Fuel multiplier: default curve 2.8 … 1.0](../img/ts/cranking-clt-mult.png)
+  <figcaption>Figure 6 — Cranking coolant multiplier, default.</figcaption>
+</figure>
 
 ### 3 · Priming pulse and after-start enrichment
 
@@ -200,7 +220,17 @@ Open **Cranking ▸ Priming pulse** and **Cranking ▸ After-start enrichment**.
 first start.
 
 <!-- shot: img/ts/cranking-priming.png | Cranking ▸ Priming pulse | priming delay 0.5 s, default curve | Priming pulse settings. -->
+
+<figure markdown>
+  ![Cranking ▸ Priming pulse: priming delay 0.5 s, default curve](../img/ts/cranking-priming.png)
+  <figcaption>Figure 7 — Priming pulse settings.</figcaption>
+</figure>
 <!-- shot: img/ts/cranking-ase.png | Cranking ▸ After-start enrichment | default table, all 1.2 | After-start enrichment table, default. -->
+
+<figure markdown>
+  ![Cranking ▸ After-start enrichment: default table, all 1.2](../img/ts/cranking-ase.png)
+  <figcaption>Figure 8 — After-start enrichment table, default.</figcaption>
+</figure>
 
 ### 4 · Cranking idle air
 
@@ -208,6 +238,11 @@ Open **Cranking ▸ Cranking Air Amount vs CLT**. Start with the default 50 %; w
 **ETB idle maximum angle** on the same dialog.
 
 <!-- shot: img/ts/cranking-air.png | Cranking ▸ Cranking Air Amount vs CLT | ETB idle maximum angle 15, curve 50 % | Cranking idle air, default. -->
+
+<figure markdown>
+  ![Cranking ▸ Cranking Air Amount vs CLT: ETB idle maximum angle 15, curve 50 %](../img/ts/cranking-air.png)
+  <figcaption>Figure 9 — Cranking idle air, default.</figcaption>
+</figure>
 
 ### 5 · Starter control (optional)
 
@@ -217,6 +252,11 @@ input needs a restart).
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (startStopDialog; requiresPowerCycle startStopButtonPin) -->
 
 <!-- shot: img/ts/cranking-starter-control.png | Setup ▸ Outputs | Starter Control panel: button input set, Starter Control Lowside 14 or starter, max time 3 s | Starter control settings. -->
+
+<figure markdown>
+  ![Setup ▸ Outputs: Starter Control panel: button input set, Starter Control Lowside 14 or starter, max time 3 s](../img/ts/cranking-starter-control.png)
+  <figcaption>Figure 10 — Starter control settings.</figcaption>
+</figure>
 
 !!! danger "The starter can turn the engine by itself"
     Once starter control is set up, the ECU can crank the engine. Keep the gearbox in neutral and

@@ -84,6 +84,11 @@ most engines). Leave **Tuning View** on *Full* so every setup menu is shown. Bur
 
 <!-- shot: img/ts/quick-start-vehicle-information.png | Setup ▸ Vehicle Information | 4 cylinders, 2.0 L, firing order 1-3-4-2, Fuel strategy Speed Density, Tuning View Full | Figure 2 — Vehicle Information: the first settings for any engine. -->
 
+<figure markdown>
+  ![Setup ▸ Vehicle Information: 4 cylinders, 2.0 L, firing order 1-3-4-2, Fuel strategy Speed Density, Tuning View Full](../img/ts/quick-start-vehicle-information.png)
+  <figcaption>Figure 2 — Vehicle Information: the first settings for any engine.</figcaption>
+</figure>
+
 ### 6 · Trigger
 
 **Setup ▸ Trigger**: **Trigger type** `trigger_type` (factory default 60-2), the cam input if you
@@ -143,6 +148,11 @@ on the right cylinder. Test injectors with the fuel system depressurised; ground
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (ioTest "Bench Test & Commands": testSpark, testInjectors, testOther, testMisc); firmware/controllers/bench_test.cpp (pinbench) -->
 
 <!-- shot: img/ts/quick-start-bench-test.png | Controller ▸ Bench test | 4-cylinder engine: Spark #1–#4, Injector #1–#4 buttons, Count / On Time / Off Time visible | Figure 3 — Bench Test & Commands. -->
+
+<figure markdown>
+  ![Controller ▸ Bench test: 4-cylinder engine: Spark #1–#4, Injector #1–#4 buttons, Count / On Time / Off Time visible](../img/ts/quick-start-bench-test.png)
+  <figcaption>Figure 3 — Bench Test & Commands.</figcaption>
+</figure>
 
 ### 13 · First crank
 

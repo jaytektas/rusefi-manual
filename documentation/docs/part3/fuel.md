@@ -247,6 +247,11 @@ Everything here is in TunerStudio. Fuel settings live under **Fuel**; a few shar
 
 <!-- shot: img/ts/fuel-menu.png | Fuel (menu open) | TunerStudio Fuel menu showing VE, VE 3D view, Injector Setup submenu with Injection configuration, Injection hardware, Injector deadtime, Injection Timing, Cylinder bank selection and Injector small-pulse correction, Cylinder fuel trims, Staged injection, VE blend tables, Target AFR, Warmup enrichment, IAT multiplier, Deceleration fuel cutoff, Short term fuel trim/Closed loop and Long term fuel trims | Figure 5 — The <b>Fuel</b> menu on a Proteus F7. The Injector Setup entries are the hardware half of this chapter; the tables above and below are the tuning half. -->
 
+<figure markdown>
+  ![Fuel (menu open): TunerStudio Fuel menu showing VE, VE 3D view, Injector Setup submenu with Injection configuration, Injection hardware, Injector deadtime, Injection Timing, Cylinder bank selection and Injector small-pulse correction, Cylinder fuel trims, Staged injection, VE blend tables, Target AFR, Warmup enrichment, IAT multiplier, Deceleration fuel cutoff, Short term fuel trim/Closed loop and Long term fuel trims](../img/ts/fuel-menu.png)
+  <figcaption>Figure 5 — The <b>Fuel</b> menu on a Proteus F7. The Injector Setup entries are the hardware half of this chapter; the tables above and below are the tuning half.</figcaption>
+</figure>
+
 ### 1 · Engine size and firing order
 
 Open **Setup ▸ Vehicle Information** and set **Number of cylinders**, **Displacement** and
@@ -257,6 +262,11 @@ once.
 <!-- src: firmware/controllers/algo/fuel_math.cpp (getStandardAirCharge uses displacement divided by cylindersCount); firmware/controllers/algo/airmass/speed_density_base.cpp (SpeedDensityBase::getAirmassImpl) -->
 
 <!-- shot: img/ts/fuel-vehicle-information.png | Setup ▸ Vehicle Information | Vehicle Information dialog with Number of cylinders 4, Displacement 2.0, Firing order 1-3-4-2, the Fuel panel showing Fuel strategy Speed Density and Baro-compensated MAP load axis disabled, Tuning View, Lambda display AFR | Figure 6 — Vehicle Information. The <b>Fuel</b> panel here is the same one inside <b>Fuel ▸ VE</b>. -->
+
+<figure markdown>
+  ![Setup ▸ Vehicle Information: Vehicle Information dialog with Number of cylinders 4, Displacement 2.0, Firing order 1-3-4-2, the Fuel panel showing Fuel strategy Speed Density and Baro-compensated MAP load axis disabled, Tuning View, Lambda display AFR](../img/ts/fuel-vehicle-information.png)
+  <figcaption>Figure 6 — Vehicle Information. The <b>Fuel</b> panel here is the same one inside <b>Fuel ▸ VE</b>.</figcaption>
+</figure>
 
 ### 2 · Choose the fuel strategy
 
@@ -297,6 +307,11 @@ fuel calculation, rather than guessing.
 
 <!-- shot: img/ts/fuel-injector-config.png | Fuel ▸ Injector Setup ▸ Injection configuration | Injection configuration dialog with Injection enabled, Mode Sequential, Injector flow 260, Injector flow units cc/min, Injector flow compensation mode None, Injector reference pressure 300, Stoichiometric ratio 14.7 | Figure 7 — Injection configuration with the values used in this chapter's examples. Everything here except Mode is a number the calculation uses directly. -->
 
+<figure markdown>
+  ![Fuel ▸ Injector Setup ▸ Injection configuration: Injection configuration dialog with Injection enabled, Mode Sequential, Injector flow 260, Injector flow units cc/min, Injector flow compensation mode None, Injector reference pressure 300, Stoichiometric ratio 14.7](../img/ts/fuel-injector-config.png)
+  <figcaption>Figure 7 — Injection configuration with the values used in this chapter's examples. Everything here except Mode is a number the calculation uses directly.</figcaption>
+</figure>
+
 ### 4 · Injection mode, outputs and firing order
 
 Set **Mode** on the same dialog to **Sequential** if each injector is wired to its own output
@@ -313,6 +328,11 @@ output assigned raises a *no_pin_inj* warning naming the missing output.
 
 <!-- shot: img/ts/fuel-injection-hardware.png | Fuel ▸ Injector Setup ▸ Injection hardware | Injection hardware dialog with Firing order 1-3-4-2 and Injection Output 1 to 4 assigned to Lowside 1 to Lowside 4, dropdowns closed, Injector Test button panel at right | Figure 8 — Injection outputs, one per cylinder, in cylinder order. -->
 
+<figure markdown>
+  ![Fuel ▸ Injector Setup ▸ Injection hardware: Injection hardware dialog with Firing order 1-3-4-2 and Injection Output 1 to 4 assigned to Lowside 1 to Lowside 4, dropdowns closed, Injector Test button panel at right](../img/ts/fuel-injection-hardware.png)
+  <figcaption>Figure 8 — Injection outputs, one per cylinder, in cylinder order.</figcaption>
+</figure>
+
 ### 5 · Injection timing
 
 Open **Fuel ▸ Injector Setup ▸ Injection Timing** (Figure 4 shows what the numbers mean). The factory
@@ -327,6 +347,11 @@ reason to change it.
     reference, not a fuelling trim.
 
 <!-- shot: img/ts/fuel-injection-timing-table.png | Fuel ▸ Injector Setup ▸ Injection Timing | Injection Timing 3D table with every cell at -400 degrees after compression TDC, engine speed axis 650 to 7000, load axis 10 to 160 kPa | Figure 9 — The factory Injection Timing table: one phase for the whole map. -->
+
+<figure markdown>
+  ![Fuel ▸ Injector Setup ▸ Injection Timing: Injection Timing 3D table with every cell at -400 degrees after compression TDC, engine speed axis 650 to 7000, load axis 10 to 160 kPa](../img/ts/fuel-injection-timing-table.png)
+  <figcaption>Figure 9 — The factory Injection Timing table: one phase for the whole map.</figcaption>
+</figure>
 
 ### 6 · Injector dead time
 
@@ -343,7 +368,12 @@ characterisation sheet, or the dead time at which an injector just stops deliver
     pulse; at full throttle the pulse may be 15 ms and the same 0.85 ms is 6 %. A wrong dead time shows
     up as an idle that is rich or lean but corrects itself as load rises.
 
-<!-- shot: img/ts/fuel-deadtime-table.png | Fuel ▸ Injector Setup ▸ Injector deadtime (BatV vs fuel pressure) | Injector dead time table dialog: the 8 battery voltage columns (6, 8, 10, 11, 12, 13, 14, 15 volts) and two fuel pressure rows (206.8 and 413.7 kPa) filled with the factory values, gauges for battery and pressure alongside | Figure 10 — The dead-time table. *Fuel: injector lag* in a log is the value this table produced. -->
+<!-- shot: img/ts/fuel-deadtime-table.png | Fuel ▸ Injector Setup ▸ Injector deadtime (BatV vs fuel pressure) | Injector dead time table dialog: the 8 battery voltage columns (6, 8, 10, 11, 12, 13, 14, 15 volts) and two fuel pressure rows (206.8 and 413.7 kPa) filled with the factory values | Figure 10 — The dead-time table. *Fuel: injector lag* in a log is the value this table produced. -->
+
+<figure markdown>
+  ![Fuel ▸ Injector Setup ▸ Injector deadtime (BatV vs fuel pressure): Injector dead time table dialog: the 8 battery voltage columns (6, 8, 10, 11, 12, 13, 14, 15 volts) and two fuel pressure rows (206.8 and 413.7 kPa) filled with the factory values](../img/ts/fuel-deadtime-table.png)
+  <figcaption>Figure 10 — The dead-time table. *Fuel: injector lag* in a log is the value this table produced.</figcaption>
+</figure>
 
 ### 7 · Target AFR table
 
@@ -356,6 +386,11 @@ and the reference the **Fuel trim** tables and the closed loop work around. If y
 loop follows the new target.
 
 <!-- shot: img/ts/fuel-target-afr-table.png | Fuel ▸ Target AFR | Target AFR 3D table with stoichiometric values at low load falling to rich at high load, and Override AFR table load axis set to None | Figure 11 — The factory target table. Load here is manifold pressure because the strategy is Speed Density. -->
+
+<figure markdown>
+  ![Fuel ▸ Target AFR: Target AFR 3D table with stoichiometric values at low load falling to rich at high load, and Override AFR table load axis set to None](../img/ts/fuel-target-afr-table.png)
+  <figcaption>Figure 11 — The factory target table. Load here is manifold pressure because the strategy is Speed Density.</figcaption>
+</figure>
 
 <figure markdown>
   ![Plot of the factory target lambda curve against load with a matching AFR scale, flat at 1.00 then falling to 0.73](../img/plots/fuel-target-lambda-default.svg)
@@ -481,6 +516,11 @@ before you trust the wiring.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (injTest dialog: benchTestCount, benchTestOnTime, benchTestOffTime, testInjectors buttons); firmware/controllers/bench_test.cpp -->
 
 <!-- shot: img/ts/fuel-injector-test.png | Controller ▸ Injector test | Injector test dialog with Iterations, On Time and Off Time fields, Injector buttons for each cylinder and a battery gauge | Figure 23 — The injector test pulses one output at a time. -->
+
+<figure markdown>
+  ![Controller ▸ Injector test: Injector test dialog with Iterations, On Time and Off Time fields, Injector buttons for each cylinder and a battery gauge](../img/ts/fuel-injector-test.png)
+  <figcaption>Figure 23 — The injector test pulses one output at a time.</figcaption>
+</figure>
 
 ## Worked examples
 
