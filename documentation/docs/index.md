@@ -2,6 +2,8 @@
 
 *From first spark to full tune*
 
+--8<-- "_edition.md"
+
 The complete guide to running an engine on rusEFI: how electronic fuel injection works, installing
 the software, flashing firmware, wiring, configuring, tuning and troubleshooting — on official rusEFI
 hardware, with the rusEFI console and TunerStudio.

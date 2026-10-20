@@ -6,6 +6,10 @@ An engine control unit decides when fuel is sprayed, when a spark fires and how 
 opens. Mistakes in wiring or settings can destroy an engine, start a fire or injure someone. Read
 this page before you connect anything.
 
+## This manual is unofficial
+
+--8<-- "_edition.md"
+
 ## What rusEFI is licensed for
 
 rusEFI is free software, distributed under the GNU General Public License version 3 with three
