@@ -102,6 +102,7 @@ nav:
   - Part V — Testing and troubleshooting:
       - part5/index.md
       - Bench testing: part5/bench-testing.md
+      - Diagnostics and error codes: part5/diagnostics.md
   - Part VI — Firmware and maintenance:
       - part6/index.md
   - Part VII — Reference:
