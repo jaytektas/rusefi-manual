@@ -126,11 +126,11 @@ Proteus F7 trigger inputs (Black connector):
 
 | TunerStudio name | Pins | Use |
 |---|---|---|
-| VR 1 | Black 5 (+, blue), Black 13 (−, white) | VR sensor, via the on-board conditioner |
-| VR 2 | Black 4 (+, blue), Black 12 (−, white) | VR sensor, via the on-board conditioner |
-| Digital 1 | Black 10 (yellow) | Hall / digital; the factory primary trigger input |
-| Digital 2 | Black 1 (green) | Hall; suggested for a Hall cam sensor |
-| Digital 3–6 | Black 2, 3, 9, 11 | Hall / digital |
+| VR 1 | Black23 pin 5 (+, blue), Black23 pin 13 (−, white) | VR sensor, via the on-board conditioner |
+| VR 2 | Black23 pin 4 (+, blue), Black23 pin 12 (−, white) | VR sensor, via the on-board conditioner |
+| Digital 1 | Black23 pin 10 (yellow) | Hall / digital; the factory primary trigger input |
+| Digital 2 | Black23 pin 1 (green) | Hall; suggested for a Hall cam sensor |
+| Digital 3–6 | Black23 pins 2, 3, 9, 11 | Hall / digital |
 
 Hall sensors take power from a 5 V supply (White 9/21/32 or 10/22/33) or the 12 V protected sensor
 output (White 11), and ground from sensor ground (White 1–8) — use whichever the sensor needs.
@@ -245,9 +245,9 @@ tooth now at the sensor. Multiply by 6° (60-2) or 10° (36-1). Enter that.
 | Setting | Value | Why |
 |---|---|---|
 | Trigger type / Skipped wheel location | 60-2 / On crankshaft | 58 teeth, 6° pitch |
-| Crank Sensor (Primary channel) | VR 1 | VR sensor on Black 5/13 |
+| Crank Sensor (Primary channel) | VR 1 | VR sensor on Black23 pins 5/13 |
 | Trigger Angle Advance | 114 (start) | sensor at tooth 20 after the gap at TDC: 19 × 6°; then timing light |
-| Cam mode (intake) / Cam sensor bank 1 intake | Single Tooth / VR 2 | one cam pulse per cycle, Black 4/12 |
+| Cam mode (intake) / Cam sensor bank 1 intake | Single Tooth / VR 2 | one cam pulse per cycle, Black23 pins 4/12 |
 | Ignition Mode / Injection Mode | Individual Coils / Sequential | full sequential after cam sync |
 | Advanced Trigger | defaults | wasted spark until the cam tooth arrives |
 

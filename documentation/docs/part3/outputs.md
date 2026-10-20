@@ -20,7 +20,7 @@ a modest current, and its *contacts* carry the big current the fan or pump actua
 switches the coil.
 
 <figure markdown>
-  ![A fan controller reads its pin setting fanPin, whose value is a connector name such as Lowside 11; the board maps that name to Black 35 pin 9, which switches the fan relay coil to ground](../img/diagrams/outputs-pin-model.svg)
+  ![A fan controller reads its pin setting fanPin, whose value is a connector name such as Lowside 11; the board maps that name to Black35 pin 9, which switches the fan relay coil to ground](../img/diagrams/outputs-pin-model.svg)
   <figcaption>Figure 1 — There is no separate "pin configuration" step. You set the *output's* pin, in the
   output's own dialog, and the board translates that name into a connector pin.</figcaption>
 </figure>
@@ -29,9 +29,9 @@ rusEFI has one setting per output, and you set it in the dialog of the feature t
 
 | Output | Setting | Where TunerStudio asks for it | Proteus F7 factory pin | What it switches |
 |---|---|---|---|---|
-| Main relay | `mainRelayPin` | **Setup ▸ Outputs** | Lowside 12 · Black 35 pin 21 | main relay coil |
-| Fuel pump | `fuelPumpPin` | **Setup ▸ Fuel Pump Control** | Lowside 10 · Black 35 pin 20 | fuel pump relay coil |
-| Cooling fan 1 | `fanPin` | **Setup ▸ Cooling Fans** | Lowside 11 · Black 35 pin 9 | fan relay coil |
+| Main relay | `mainRelayPin` | **Setup ▸ Outputs** | Lowside 12 · Black35 pin 21 | main relay coil |
+| Fuel pump | `fuelPumpPin` | **Setup ▸ Fuel Pump Control** | Lowside 10 · Black35 pin 20 | fuel pump relay coil |
+| Cooling fan 1 | `fanPin` | **Setup ▸ Cooling Fans** | Lowside 11 · Black35 pin 9 | fan relay coil |
 | Cooling fan 2 | `fan2Pin` | **Setup ▸ Cooling Fans** | not assigned | second fan relay coil |
 | Check engine light | `malfunctionIndicatorPin` | **Setup ▸ Check Engine Settings** | not assigned | the MIL bulb, or a lamp relay |
 | Tachometer | `tachOutputPin` | **Setup ▸ Outputs** | not assigned | pulses for an analogue tachometer |
@@ -124,9 +124,9 @@ it really is there. If the pin comes up wrong — shorted to plus, or driven by 
 :material-circle:{ .level-basic } Basic
 
 <figure markdown>
-  ![Left: battery plus through a fuse to the load, the load to Lowside 11 on Black 35 pin 9, and the low-side driver switches that path to ground. Right: the main-relay feed on Black 23 pin 23 feeds the high-side driver, Highside 1 on Black 35 pin 2 switches plus to the load, and the load returns to ground](../img/diagrams/outputs-low-vs-high.svg)
+  ![Left: battery plus through a fuse to the load, the load to Lowside 11 on Black35 pin 9, and the low-side driver switches that path to ground. Right: the main-relay feed on Black23 pin 23 feeds the high-side driver, Highside 1 on Black35 pin 2 switches plus to the load, and the load returns to ground](../img/diagrams/outputs-low-vs-high.svg)
   <figcaption>Figure 2 — A low-side output completes the load's ground path; a high-side output supplies
-  plus to it. On Proteus the high-side drivers are fed from Black 23 pin 23, so they are dead until the
+  plus to it. On Proteus the high-side drivers are fed from Black23 pin 23, so they are dead until the
   main relay closes.</figcaption>
 </figure>
 
@@ -149,7 +149,7 @@ Three consequences of that table:
 - **Lowside 10–12 are shared with injection.** They exist as injector outputs 10–12 on a V12. Assign the
   fuel pump, fan or main relay to them only if your cylinder count does not need those injectors; if two
   features end up owning one of them the ECU will tell you, not let you find out on the road.
-- **High-side outputs need their supply.** Black 23 pin 23 is the "power supply from main relay" input, and
+- **High-side outputs need their supply.** Black23 pin 23 is the "power supply from main relay" input, and
   the board files state that it supplies the electronic throttle drivers and the high-side outputs. Wire
   it to your main relay's switched output, or Highside 1…4 do nothing at all.
 <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (pin 23 function text: supplies ETB drivers and high side outputs) -->
@@ -173,10 +173,10 @@ signal-level jobs only.
   and main relay follow it. With only USB connected the ECU runs but never sees ignition, so it will look
   as if the outputs are dead.
   <!-- src: firmware/controllers/ignition_controller.cpp (isIgnVoltage: digital ignition input if assigned, otherwise IgnKeyVoltage or battery voltage above 6 V) -->
-- **Battery sense must be fed.** Black 23 pin 18 is *Battery Sense*: "connect this pin to the output of
+- **Battery sense must be fed.** Black23 pin 18 is *Battery Sense*: "connect this pin to the output of
   your ignition switch". Without it the ECU cannot decide that the ignition is on.
   <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (pin 18 Battery Sense) -->
-- **Grounds.** Black 35 pins 17, 18 and 24 and Black 23 pins 14, 19 and 20 are power/chassis ground. An
+- **Grounds.** Black35 pins 17, 18 and 24 and Black23 pins 14, 19 and 20 are power/chassis ground. An
   output switching to ground only works if the load's ground path returns to those.
   <!-- src: firmware/config/boards/proteus/connectors/black35.yaml (ground pins 17/18/24); firmware/config/boards/proteus/connectors/black23.yaml (ground pins 14/19/20) -->
 - **Engine stopped, fuel and fan checked.** The bench tests in this chapter drive the outputs directly.
@@ -198,7 +198,7 @@ pointing at the same pin before you start.
 Open **Setup ▸ Fuel Pump Control** and check the **Fuel Pump** panel:
 
 - **Control mode** `fuelPumpMode` — *Single relay* is the normal choice; the pump is one relay, on or off.
-- **Output** `fuelPumpPin` — on Proteus leave the factory *Lowside 10* (Black 35 pin 20) unless your wiring
+- **Output** `fuelPumpPin` — on Proteus leave the factory *Lowside 10* (Black35 pin 20) unless your wiring
   says otherwise.
 - **Output mode** `fuelPumpPinMode` — *default* for a relay coil switched to ground.
 - **Prime duration** `startUpFuelPumpDuration` — how long the pump runs when the ignition comes on, before
@@ -222,7 +222,7 @@ firmware has any fatal error, the pump is switched off.
 ### 3 · Assign the main relay
 
 Open **Setup ▸ Outputs** and set the **Main relay output** panel: **Output** `mainRelayPin` (Proteus factory:
-Lowside 12, Black 35 pin 21), **Output mode**, and **Main Relay Disable Time** `mainRelayDisableTime`
+Lowside 12, Black35 pin 21), **Output mode**, and **Main Relay Disable Time** `mainRelayDisableTime`
 (default 1 s). **Test Main Relay** pulses it.
 
 <!-- shot: img/ts/outputs-main-relay.png | Setup ▸ Outputs | Proteus F7, ignition on, engine stopped, Main relay output panel: Output Lowside 12, Output mode default, Main Relay Disable Time 1, Test Main Relay button visible, dropdowns closed | The main relay half of the Outputs dialog: the relay follows the ignition input, so the only decisions here are which pin and how long it stays in. -->
@@ -234,7 +234,7 @@ moment the starter loads the battery.
 <!-- src: firmware/controllers/actuators/main_relay.cpp (MainRelayController::onSlowCallback: mainRelayState = hasIgnitionVoltage or a requested delayed shutoff; needsDelayedShutoff uses mainRelayDisableTime); firmware/controllers/algo/defaults/default_base_engine.cpp (mainRelayDisableTime 1 s); firmware/controllers/ignition_controller.cpp (isIgnVoltage) -->
 
 !!! warning "Wire the main relay around itself"
-    On a typical Proteus installation the main relay's switched output feeds **Black 23 pin 23**, which
+    On a typical Proteus installation the main relay's switched output feeds **Black23 pin 23**, which
     powers the high-side drivers and the throttle drivers, and feeds the injectors and coils. If you test
     the main relay output before that wire is in place, the high-side outputs and the throttle drivers have
     no supply and everything downstream of the relay looks dead.
@@ -246,8 +246,8 @@ and **Test Fan 1** / **Test Fan 2** along the bottom (fan 1 is held on two secon
 
 <!-- shot: img/ts/outputs-cooling-fans.png | Setup ▸ Cooling Fans | Proteus F7, ignition on, engine warm and idling, Fan 1 panel: Output Lowside 11, Output mode default, A/C control mode Disabled, Disable when engine stopped no, Disable above vehicle speed 0, Idle adder 0, Fan 1 On/Off panel On temperature 92 Off temperature 88, Enable PWM mode no, Status column with the hot and On indicators lit for a warm idling engine, Fan 2 column with Output unassigned, dropdowns closed | Cooling Fans: both fans' settings, the status column that says why a fan is running, and the two test buttons along the bottom. -->
 
-For an on/off fan relay, on Proteus, **Output** *Lowside 11* (Black 35 pin 9) with **Output mode**
-*default* is the factory wiring; *Lowside 13* (Black 35 pin 10) is a good free choice with a fan relay coil
+For an on/off fan relay, on Proteus, **Output** *Lowside 11* (Black35 pin 9) with **Output mode**
+*default* is the factory wiring; *Lowside 13* (Black35 pin 10) is a good free choice with a fan relay coil
 across it. Then:
 
 - **On temperature** `fanOnTemperature` — factory 92 °C, **Off temperature** `fanOffTemperature` — factory
@@ -350,17 +350,17 @@ check-engine bulb and an analogue tachometer that wants two pulses per revolutio
 
 | Setting | Value | Why |
 |---|---|---|
-| Main relay — **Output** | Lowside 12 (Black 35 pin 21) | the factory choice; it doubles as injector 12, which a four-cylinder does not need |
+| Main relay — **Output** | Lowside 12 (Black35 pin 21) | the factory choice; it doubles as injector 12, which a four-cylinder does not need |
 | Main relay — **Main Relay Disable Time** | 1 s | factory value is enough for a normal cranking voltage dip |
 | Fuel pump — **Control mode** / **Output** | Single relay / Lowside 10 | factory; relay coil to ground |
 | Fuel pump — **Prime duration** | 4 s | fills the lines before the first crank |
-| Fan 1 — **Output** | Lowside 11 (Black 35 pin 9) | factory |
+| Fan 1 — **Output** | Lowside 11 (Black35 pin 9) | factory |
 | Fan 1 — **On / Off temperature** | 98 / 92 °C | this engine runs 91 °C; the 6 °C gap keeps the fan off at warm idle and stops cycling |
 | Fan 1 — **Disable when engine stopped** | no | the fan must still cool a hot stationary engine |
 | Fan 1 — **Disable above vehicle speed** | 60 km/h (37 mph) | on the highway airflow does the work |
 | Fan 1 — **Idle adder** | 2 % | the fan's drag costs a few idle rpm |
-| Check engine — **Output** | Highside 1 (Black 35 pin 2), mode *default* | a 12 V bulb needs the plus side; Highside 1 is fed from Black 23 pin 23 |
-| Tachometer — **Output** | Lowside 15 (Black 35 pin 12) | flyback-marked and free on a four |
+| Check engine — **Output** | Highside 1 (Black35 pin 2), mode *default* | a 12 V bulb needs the plus side; Highside 1 is fed from Black23 pin 23 |
+| Tachometer — **Output** | Lowside 15 (Black35 pin 12) | flyback-marked and free on a four |
 | Tachometer — **Pulse per Rev** | 2 | the gauge is calibrated for 2; at 3000 RPM the pin outputs 100 Hz |
 | Tachometer — **Pulse Mode / duration** | Constant time / 0.50 ms | factory values suit a pulse-counting gauge |
 
@@ -373,13 +373,13 @@ controls, and a fan speed controller that accepts a 250 Hz PWM command:
 
 | Setting | Value | Why |
 |---|---|---|
-| Fan 1 — **Output** | Lowside 11 (Black 35 pin 9) | factory |
+| Fan 1 — **Output** | Lowside 11 (Black35 pin 9) | factory |
 | Fan 1 — **Enable PWM mode** | yes | the fan has a speed controller, not just a relay |
 | Fan 1 — **PWM frequency** | 250 Hz | factory value and the controller's input rate |
 | Fan 1 — **PWM duty for fan OFF / FULL speed** | 0 % / 100 % | the straight case; if your controller wants an inverted command, put 100 and 0 and the firmware interpolates the other way |
 | Fan 1 — **Soft-start time** | 2 s | ramps the demand, so the fan does not stamp on at full speed and stress the wiring |
 | Fan 1 — **A/C control mode** | Relay | the fan goes to full demand whenever the compressor is commanded |
-| Fan 2 — **Output** | Lowside 13 (Black 35 pin 10) | flyback-marked, free on a four-cylinder |
+| Fan 2 — **Output** | Lowside 13 (Black35 pin 10) | flyback-marked, free on a four-cylinder |
 | Fan 2 — **On / Off temperature** | 95 / 91 °C | factory second-fan pair: the second fan joins later |
 | Fan 2 — **A/C control mode** | Pressure, on 1800 kPa / off 1400 kPa | needs an A/C pressure sensor; the fan follows head pressure whether or not the compressor is engaged |
 
@@ -493,8 +493,8 @@ its owner, taken from the ECU rather than from the tune file.
 
 | Symptom | Likely cause | Check |
 |---|---|---|
-| Nothing happens on any output, ECU otherwise alive | ignition is never detected: Black 23 pin 18 unfed, or USB power only | **View ▸ main_relay** shows *Has IGN voltage*; the ignition wiring |
-| Main relay clicks, then drops out when cranking starts | **Main Relay Disable Time** too short for the voltage dip, or the battery sense input is downstream of the relay it drives | raise the disable time; check what feeds Black 23 pin 18 and pin 23 |
+| Nothing happens on any output, ECU otherwise alive | ignition is never detected: Black23 pin 18 unfed, or USB power only | **View ▸ main_relay** shows *Has IGN voltage*; the ignition wiring |
+| Main relay clicks, then drops out when cranking starts | **Main Relay Disable Time** too short for the voltage dip, or the battery sense input is downstream of the relay it drives | raise the disable time; check what feeds Black23 pin 18 and pin 23 |
 | Fan never runs | pin unassigned, or **Disable when engine stopped** is on and the engine is not running, or the temperature has not passed the on threshold | the fan's **Status** indicators |
 | Fan runs the moment the ignition comes on | coolant sensor broken or unplugged — the fan-on fail-safe | **brokenClt** indicator; sensor wiring and calibration |
 | Fan chatters on and off every few seconds | on/off thresholds too close together | widen the gap by lowering **Off temperature** |
@@ -503,7 +503,7 @@ its owner, taken from the ECU rather than from the tune file.
 | Fuel pump runs only for the prime, then stops | the pump stays on only while the trigger wheel says the engine is moving — with the engine stopped that is correct behaviour, so the real question is why there are no trigger events | log **isFuelPumpOn**; the Trigger chapter for the trigger wheel itself |
 | Fuel pump keeps running with the engine off | **Main Relay Disable Time** extended, or a module asking for delayed shutoff | log **isFuelPumpOn**; the pump always shuts off on a fatal error |
 | Pump and fan both dead at once | one pin assigned to both, so the ECU raised a fatal error | the two-owners message; **Controller ▸ Full pinout - Output** |
-| High-side outputs do nothing at all | Black 23 pin 23 has no supply, so the high-side drivers are unpowered | the main relay wiring |
+| High-side outputs do nothing at all | Black23 pin 23 has no supply, so the high-side drivers are unpowered | the main relay wiring |
 | Tachometer reads half (or twice) the real rpm | **Pulse per Rev** does not match the gauge's calibration | set it to what the gauge expects; verify with the 100 Hz at 3000 rpm calculation |
 | Tachometer needle jittery at low rpm | 0.5 ms pulses are too narrow for the gauge | **Pulse Mode** *Duty cycle* with a wider pulse |
 | Check engine lamp stays on with a healthy engine | the lamp is unassigned but codes exist and you are reading the **checkEngine** channel, or a range monitor is tripped | read the stored codes; review **Minimum/Maximum … voltage** limits |
@@ -548,7 +548,7 @@ Every output setting in one table — useful as the pin map of a tune.
 - Part II — wiring outputs and relay coils: fusing, flyback diodes, ground paths
 - Fuel — the pump's place in the fuel system, pressure sensors and the pressure target table
 - Idle — the fan and A/C idle adders
-- Electronic throttle — the A/C and fan inputs, and the throttle-body supply on Black 23 pin 23
+- Electronic throttle — the A/C and fan inputs, and the throttle-body supply on Black23 pin 23
 - Sensors and calibration — why a failed coolant sensor runs the fan
 - Limits and engine protection — fatal errors, warnings and what each one shuts down
 - Lua scripting — driving outputs from custom logic

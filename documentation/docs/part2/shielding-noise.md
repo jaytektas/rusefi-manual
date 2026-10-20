@@ -89,10 +89,10 @@ positive and a negative pin each, plus six digital (Hall-type) inputs:
 
 | TunerStudio name | Pins | Notes |
 |---|---|---|
-| **VR 1** | Black 5 (+), Black 13 (−) | the board conditions the VR signal on these pins |
-| **VR 2** | Black 4 (+), Black 12 (−) | same, second input |
-| **Digital 1** | Black 10 | Hall / switch input, factory primary trigger input |
-| **Digital 2 … 6** | Black 1, 2, 3, 9, 11 | Hall / switch inputs |
+| **VR 1** | Black23 pin 5 (+), Black23 pin 13 (−) | the board conditions the VR signal on these pins |
+| **VR 2** | Black23 pin 4 (+), Black23 pin 12 (−) | same, second input |
+| **Digital 1** | Black23 pin 10 | Hall / switch input, factory primary trigger input |
+| **Digital 2 … 6** | Black23 pins 1, 2, 3, 9, 11 | Hall / switch inputs |
 
 A **Hall** sensor has three wires (supply, ground, signal) and gives a clean square wave at any speed,
 so it is far less sensitive to magnetic noise — but it is still a 5 V signal referenced to its own
@@ -267,7 +267,7 @@ wire of its own — the two wires are the whole signal, so the twist is what pro
 1. Use shielded cable for the knock input, for any sensor run longer than about a metre, and for the VR pair if the sensor is far from the ECU.
 2. Land the shield **at the ECU end**: on the same ground stud the ECU's Power/Chassis GND wires go
    to (the star point described in *Power, grounds and ground loops*), or on the connector shell if
-   the connector has one. The ECU's power ground pins are Black 14, 19 and 20.
+   the connector has one. The ECU's power ground pins are Black23 pins 14, 19 and 20.
 3. At the sensor end, cut the shield back, tape or heatshrink it, and make sure it cannot touch the
    sensor body, the bracket or the block.
 4. Some knock-sensor harnesses are built with the shield grounded at the sensor body instead. That is

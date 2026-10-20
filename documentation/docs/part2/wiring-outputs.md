@@ -24,7 +24,7 @@ The load's plus side has to come from somewhere else — the main relay's output
 complete the circuit for exactly as long as it decides.
 
 <figure markdown>
-  ![Battery plus through a fuse to the main relay contact; the relay's switched 12 V feeds the injectors, the coils and Proteus Black 23 pin 23; the main relay coil is switched to ground by Lowside 12 on Black 35 pin 21; the fuel pump relay coil, with a diode across it, is fed from the switched 12 V and switched by Lowside 10 on Black 35 pin 20; an injector is fed from the switched 12 V and switched by Lowside 1 on Black 35 pin 3](../img/diagrams/wiring-outputs-relay.svg)
+  ![Battery plus through a fuse to the main relay contact; the relay's switched 12 V feeds the injectors, the coils and Proteus Black23 pin 23; the main relay coil is switched to ground by Lowside 12 on Black35 pin 21; the fuel pump relay coil, with a diode across it, is fed from the switched 12 V and switched by Lowside 10 on Black35 pin 20; an injector is fed from the switched 12 V and switched by Lowside 1 on Black35 pin 3](../img/diagrams/wiring-outputs-relay.svg)
   <figcaption>Figure 1 — The three output jobs a Proteus does most often. Note where the 12 V comes from, and
   that the ECU only ever switches the small side of the circuit: the relay coil, never the fan or the pump
   itself.</figcaption>
@@ -56,7 +56,7 @@ The connector files sort the outputs into families for you, and the family tells
     coil that has no load. A throttle motor can pull a throttle plate shut or open against your fingers. Do
     the first tests with the engine off, the fuel lines checked, the coil leads seated, and the fan area
     clear. Work with the ECU on **12 V with the ignition on**, never on USB power alone: the main relay, the
-    fuel pump and every bench test key off the ignition voltage the ECU measures on **Black 18**.
+    fuel pump and every bench test key off the ignition voltage the ECU measures on **Black23 pin 18**.
     <!-- src: firmware/controllers/ignition_controller.cpp (isIgnVoltage); firmware/controllers/actuators/main_relay.cpp (mainRelayState follows hasIgnitionVoltage) -->
 
 ## Five rules for every output
@@ -70,7 +70,7 @@ The connector files sort the outputs into families for you, and the family tells
    <!-- src: firmware/config/boards/proteus/connectors/black35.yaml (the Lowside pins and their ls and inj types) -->
 2. **The load's plus comes from the main relay.** Injectors, coils and everything else that runs only when the
    engine runs are fed from the relay's contacts, not straight from the battery. The same switched feed also
-   goes to **Black 23 pin 23**, whose own board-file description is "Power supply from main relay … Supplies
+   goes to **Black23 pin 23**, whose own board-file description is "Power supply from main relay … Supplies
    power to electronic throttle drivers and high side outputs".
    <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (pin 23 function text) -->
 3. **A relay carries the load; the ECU carries only the relay coil.** A fan, a fuel pump, an electric water
@@ -92,7 +92,7 @@ The connector files sort the outputs into families for you, and the family tells
 :material-circle:{ .level-basic } Basic → :material-circle:{ .level-intermediate } Intermediate
 
 <figure markdown>
-  ![Battery plus through a fuse to the main relay contact and on to a bus that feeds the plus side of four injectors; each injector's minus side goes to its own Proteus Black 35 pin — 3, 15, 4 and 16 — where a low-side driver switches it to ground. Side panels give the 4 A driver rating and the dual-purpose Lowside 10, 11 and 12 pins](../img/diagrams/wiring-outputs-injectors.svg)
+  ![Battery plus through a fuse to the main relay contact and on to a bus that feeds the plus side of four injectors; each injector's minus side goes to its own Proteus Black35 pin — 3, 15, 4 and 16 — where a low-side driver switches it to ground. Side panels give the 4 A driver rating and the dual-purpose Lowside 10, 11 and 12 pins](../img/diagrams/wiring-outputs-injectors.svg)
   <figcaption>Figure 2 — Four injectors on a Proteus. Output number is cylinder number: rusEFI handles the
   firing order, so you wire by cylinder and the firmware decides which ones open together.</figcaption>
 </figure>
@@ -102,7 +102,7 @@ injector's plus terminal, the ECU's pin to the minus terminal.** The factory ass
 on the pins below, and it is the assignment you should use unless you have a very good reason not to. TunerStudio's
 note above the panel says the rule: *"# wire each output to the corresponding cylinder number"*.
 
-| Injection Output (TunerStudio) | Proteus pin name | Black 35 pin | What the board files call that pin |
+| Injection Output (TunerStudio) | Proteus pin name | Black35 pin | What the board files call that pin |
 |---|---|---|---|
 | Injection Output 1 | *Lowside 1* | 3 | Injector 1 |
 | Injection Output 2 | *Lowside 2* | 15 | Injector 2 |
@@ -151,10 +151,10 @@ dead time and pressure compensation, not current.
 
 :material-circle:{ .level-basic } Basic
 
-*Lowside 10*, *11* and *12* (Black 35 pins 20, 9 and 21) are the factory **fuel pump**, **radiator fan** and
+*Lowside 10*, *11* and *12* (Black35 pins 20, 9 and 21) are the factory **fuel pump**, **radiator fan** and
 **main relay** outputs — and they are also injectors 10, 11 and 12. On a four-, six- or eight-cylinder engine
 they are relays. On a twelve-cylinder engine they are injectors, and the three relay jobs have to move to the
-spare outputs *Lowside 13 … 16* (Black 35 pins 10, 11, 12 and 23), which the board files single out as having a
+spare outputs *Lowside 13 … 16* (Black35 pins 10, 11, 12 and 23), which the board files single out as having a
 flyback diode on the board.
 <!-- src: firmware/config/boards/proteus/board_configuration.cpp (proteus_boardDefaultConfiguration: mainRelayPin, fanPin, fuelPumpPin on Lowside 12, 11 and 10); firmware/config/boards/proteus/connectors/black35.yaml (Lowside 13 to 16 "with flyback") -->
 
@@ -187,12 +187,12 @@ setting disagree — fix the setting or re-make the wire, but do not leave them 
 :material-circle:{ .level-intermediate } Intermediate
 
 <figure markdown>
-  ![Left panel: a logic-level smart coil pack with its power stage inside the housing, connected by fused 12 V, ground and a trigger wire to Proteus Black 35 pin 35 (Ign 1). Right panel: a coil whose minus terminal carries the primary current, wired through an external driver which the ECU's Ign 1 signal drives, with a dashed red cross showing that the coil minus must never go straight to an ECU pin](../img/diagrams/wiring-outputs-coils.svg)
+  ![Left panel: a logic-level smart coil pack with its power stage inside the housing, connected by fused 12 V, ground and a trigger wire to Proteus Black35 pin 35 (Ign 1). Right panel: a coil whose minus terminal carries the primary current, wired through an external driver which the ECU's Ign 1 signal drives, with a dashed red cross showing that the coil minus must never go straight to an ECU pin](../img/diagrams/wiring-outputs-coils.svg)
   <figcaption>Figure 3 — The two coil connections. Proteus's twelve ignition outputs are logic-level trigger
   outputs: they tell a coil what to do, they do not carry the coil's current.</figcaption>
 </figure>
 
-Proteus's twelve ignition outputs are Black 35 pins 35, 34, 22, 33, 32, 31, 30, 29, 28, 27, 26 and 25, and the
+Proteus's twelve ignition outputs are Black35 pins 35, 34, 22, 33, 32, 31, 30, 29, 28, 27, 26 and 25, and the
 board files call them **Smart Ignition Coil 1 … 12**. The firmware drives one per cylinder in the order the
 firing order says, and what it does on the pin is simple: it pulls the output **active** to start charging the
 coil (that is dwell), and it releases it — the spark happens at that release.
@@ -285,7 +285,7 @@ milliseconds instead of punching a hole in the output stage. Two things follow:
 
 - **Prefer a relay with a built-in diode**, or add one at the relay, across terminals 85 and 86.
 - **The Proteus board files mark only four of the free low-side outputs as having a flyback diode on the
-  board** — *Lowside 13, 14, 15* and *16* (Black 35 pins 10, 11, 12 and 23). Nothing in the board files makes
+  board** — *Lowside 13, 14, 15* and *16* (Black35 pins 10, 11, 12 and 23). Nothing in the board files makes
   that claim for the other low-side pins, so for anything wired to those, fit the diode (or buy a relay that
   already has one) and do not assume the board did it for you.
 
@@ -302,8 +302,8 @@ milliseconds instead of punching a hole in the output stage. Two things follow:
 :material-circle:{ .level-basic } Basic
 
 Four of Proteus's outputs do the opposite of the low-side family: they supply plus, and the load's other
-terminal goes to ground. These are *Highside 1 … 4* — Black 35 pins 2, 1, 13 and 14 — documented in the Proteus
-hardware documentation as four 12 V 3 A outputs, and they are fed from the main-relay supply on Black 23 pin 23.
+terminal goes to ground. These are *Highside 1 … 4* — Black35 pins 2, 1, 13 and 14 — documented in the Proteus
+hardware documentation as four 12 V 3 A outputs, and they are fed from the main-relay supply on Black23 pin 23.
 A check-engine lamp is the classic use: the bulb's other terminal goes to ground, and the ECU feeds it 12 V.
 
 Because a high-side output sources current rather than sinking it, the "inverted" question comes up again in its
@@ -321,12 +321,12 @@ rusEFI configures them through three control lines each — a PWM line, a direct
 which is exactly the trio the board's setup code passes for each bridge.
 
 <figure markdown>
-  ![Inside the ECU the throttle controller's duty command drives the MCU's three control lines D12 Control, D10 DIR and D11 DIS, which drive a TLE9201 half-bridge chip; the chip's 12 V is Black 23 pin 23 from the main relay; its two outputs leave on Black 23 pin 7 (ETB 1 positive) and Black 23 pin 6 (ETB 1 negative) to the throttle motor. A panel lists the ±90 percent duty clamp, the 100 to 3000 Hz frequency range and the chip's overcurrent and overtemperature shutdowns](../img/diagrams/wiring-outputs-etb-hbridge.svg)
+  ![Inside the ECU the throttle controller's duty command drives the MCU's three control lines D12 Control, D10 DIR and D11 DIS, which drive a TLE9201 half-bridge chip; the chip's 12 V is Black23 pin 23 from the main relay; its two outputs leave on Black23 pin 7 (ETB 1 positive) and Black23 pin 6 (ETB 1 negative) to the throttle motor. A panel lists the ±90 percent duty clamp, the 100 to 3000 Hz frequency range and the chip's overcurrent and overtemperature shutdowns](../img/diagrams/wiring-outputs-etb-hbridge.svg)
   <figcaption>Figure 4 — H-bridge #1 from command to motor. The part to remember is the red one: the bridge's
-  own 12 V is a separate input, Black 23 pin 23.</figcaption>
+  own 12 V is a separate input, Black23 pin 23.</figcaption>
 </figure>
 
-The wiring is on the **Black 23** connector: throttle 1 is pins **7** (positive) and **6** (negative), throttle 2
+The wiring is on the **Black23 pin 23** connector: throttle 1 is pins **7** (positive) and **6** (negative), throttle 2
 is pins **15** (positive) and **8** (negative). Swap the two wires of a bridge and the throttle runs backwards;
 rusEFI's own bench test (**Bench Test ETB 1 (open 300ms)**, in the Electronic throttle chapter) is how you check
 which way it turns.
@@ -343,7 +343,7 @@ Three numbers govern what those pins can be asked to do:
 
 <!-- src: firmware/controllers/actuators/electronic_throttle.cpp (ETB_DUTY_LIMIT 0.9); firmware/controllers/actuators/dc_motors.cpp (DcHardware::start: clamp to at least 100 Hz, criticalError above ETB_HW_MAX_FREQUENCY); firmware/controllers/generated/rusefi_generated_proteus_f7.h (ETB_HW_MAX_FREQUENCY 3000); firmware/hw_layer/drivers/gpio/tle9201.h (TLE9201_POLL_INTERVAL_MS); firmware/hw_layer/drivers/gpio/tle9201.cpp (overcurrent, overtemperature and outputs-disabled diagnostics) -->
 
-The supply is the part that catches people out. The bridge's power is **Black 23 pin 23**, fed from the output
+The supply is the part that catches people out. The bridge's power is **Black23 pin 23**, fed from the output
 of the car's main relay, exactly as that pin's own board-file description says. If that pin has no 12 V, the
 throttle will not move *at all* even though the ECU is alive, the sensors read correctly and TunerStudio looks
 healthy — and the same pin feeds the high-side outputs.
@@ -380,7 +380,7 @@ healthy — and the same pin feeds the high-side outputs.
 2. **Decide what the ECU is switching**: a relay coil, an injector, a logic-level coil, a lamp, or a motor. If
    the answer is anything that draws more than a couple of amps on its own, the answer includes a relay.
 3. **Give the load its plus from the right place.** Relays, injectors and coils are fed from the main relay's
-   contacts; Black 23 pin 23 carries that same switched supply into the ECU for the H-bridges and the high
+   contacts; Black23 pin 23 carries that same switched supply into the ECU for the H-bridges and the high
    sides. Battery-fed accessories get their own fused wire — see *Power, grounds and ground loops*.
 4. **Run the control wire to the named pin**, sized like any other signal wire, and kept out of the same loom as
    the trigger and knock cables (see [Shielding and noise](shielding-noise.md)).
@@ -404,7 +404,7 @@ healthy — and the same pin feeds the high-side outputs.
 
 Every output wire this engine needs on a Proteus, with the factory pin for each:
 
-| Load | Proteus pin | Black 35 pin | Assigned in | Notes |
+| Load | Proteus pin | Black35 pin | Assigned in | Notes |
 |---|---|---|---|---|
 | Injector 1 … 4 | *Lowside 1 … 4* | 3, 15, 4, 16 | Fuel ▸ Injector Setup ▸ Injection hardware | plus side from the main relay, common fused feed |
 | Coil 1 … 4 (logic-level) | *Ign 1 … 4* | 35, 34, 22, 33 | Ignition ▸ Ignition hardware | plus 12 V and ground at the coil pack, trigger only at the ECU |
@@ -439,7 +439,7 @@ Outputs chapter and the Idle chapter.
 
 On a V12 every *Lowside 1 … 12* pin is an injector, so the fuel pump, fan and main relay have to move to the
 four protected spares — say main relay to *Lowside 13*, fuel pump to *Lowside 14* and fan to *Lowside 15*
-(Black 35 pins 10, 11 and 12). Those four pins are the ones the board files mark as having a flyback diode, so
+(Black35 pins 10, 11 and 12). Those four pins are the ones the board files mark as having a flyback diode, so
 they are a sensible home for relay coils. Then change the three settings — **Output** in **Setup ▸ Outputs** and
 **Setup ▸ Fuel Pump Control**, and **Output** in **Setup ▸ Cooling Fans** — and **Burn**. If you leave the fan
 pointed at *Lowside 11* while injector 11 is also using it, the ECU will not let you run: it reports which two
@@ -464,9 +464,9 @@ the low-side or high-side outputs.
 |---|---|---|
 | No injector click on the bench test | pin assigned to another cylinder, wrong connector pin, or the injectors have no switched 12 V | the Injection Output list against the harness; 12 V at the injector rail with the main relay in |
 | One cylinder misfires only when the engine is warm | injector driver failing hot, or an over-current injector (low-impedance on a switch rated 4 A) | coil resistance, injector duty cycle at temperature, swap the injector to another output to see whether the fault follows |
-| Main relay drops out at cranking or when the fan runs | the relay coil is on a pin whose supply collapses, or the ignition feed is not on Black 18 | battery voltage during the drop, the ignition feed, the main relay's own ground path |
-| Everything works on the bench, nothing moves under the hood | Black 23 pin 23 unpowered, or the main relay contacts are not feeding the harness | 12 V on Black 23 pin 23 with the ignition on |
-| Throttle does not move, ETB calibration fails, "check your wiring" | no bridge supply, or the motor wires are on the wrong connector | 12 V on Black 23 pin 23; motor leads on Black 23 pins 7 and 6 for throttle 1 |
+| Main relay drops out at cranking or when the fan runs | the relay coil is on a pin whose supply collapses, or the ignition feed is not on Black23 pin 18 | battery voltage during the drop, the ignition feed, the main relay's own ground path |
+| Everything works on the bench, nothing moves under the hood | Black23 pin 23 unpowered, or the main relay contacts are not feeding the harness | 12 V on Black23 pin 23 with the ignition on |
+| Throttle does not move, ETB calibration fails, "check your wiring" | no bridge supply, or the motor wires are on the wrong connector | 12 V on Black23 pin 23; motor leads on Black23 pins 7 and 6 for throttle 1 |
 | Throttle moves, then stops, and the log shows an overcurrent record | shorted motor wiring, or a binding throttle shaft | motor lead insulation, the throttle's freedom by hand with power off |
 | A fan or pump stays on for ever | the pin is shorted to ground externally, or the relay contacts have welded | unplug the relay: if the fault stays, the driver is shorted; if it goes, the relay is |
 | Outputs die and the ECU names two owners of one pin | the same pin assigned to two features | **Controller ▸ Full pinout - Output** and the error text, which names both features |

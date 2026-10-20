@@ -386,8 +386,8 @@ a cable-drawn throttle. The wizard is offered on connect; these answers are typi
 | CLT Sensor | *Analog Temp 3*, preset **Bosch Various** | *Analog Temp 3* is White 20, the board files' coolant sensor input |
 | Crank Trigger | **36-1**, crank sensor on its event input, primary edge as the wheel requires, offset 0 | a common wheel; **Skip / Use Default** is fine if the defaults are already right |
 | Cam Trigger | **Skip / Use Default** | no cam wheel fitted yet |
-| Ignition Outputs | *Ign 1* to *Ign 4* — Black 35 pins 35, 34, 22, 33 — and no **Test** presses | four of the board's twelve ignition outputs |
-| Injector Outputs | *Lowside 1* to *Lowside 4* — Black 35 pins 3, 15, 4, 16 | four of the board's twelve injector outputs, one per cylinder |
+| Ignition Outputs | *Ign 1* to *Ign 4* — Black35 pins 35, 34, 22, 33 — and no **Test** presses | four of the board's twelve ignition outputs |
+| Injector Outputs | *Lowside 1* to *Lowside 4* — Black35 pins 3, 15, 4, 16 | four of the board's twelve injector outputs, one per cylinder |
 | Injector Flow | **305** cc/min | the injectors' flow at the pressure the car runs |
 
 <!-- src: firmware/config/boards/proteus/connectors/white35.yaml (Analog Volt 1 with its MAP function text, Analog Volt 2 as suggested TPS on pin 24, Analog Temp 3 as the coolant input on pin 20) -->

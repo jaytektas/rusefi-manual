@@ -137,11 +137,11 @@ You need:
 - **A MAP sensor that reads your boost.** Boost control and boost cut both use the MAP sensor, so
   set it up first (see the Sensors chapter).
 - **For a solenoid:** a low-side output. Solenoids are inductive, so use one with a flyback diode.
-  On Proteus, **Lowside 13** (Black 10), **Lowside 14** (Black 11), **Lowside 15** (Black 12) and
-  **Lowside 16** (Black 23) have flyback. Wire 12 V (switched) to the solenoid and its other pin to
+  On Proteus, **Lowside 13** (Black35 pin 10), **Lowside 14** (Black35 pin 11), **Lowside 15** (Black35 pin 12) and
+  **Lowside 16** (Black35 pin 23) have flyback. Wire 12 V (switched) to the solenoid and its other pin to
   the output.
 - **For an electronic wastegate:** a free H-bridge and a position-sensor input. On Proteus the
-  second H-bridge is **Black 15** (+) and **Black 8** (−) if throttle 1 uses the first. A spare
+  second H-bridge is **Black23 pin 15** (+) and **Black23 pin 8** (−) if throttle 1 uses the first. A spare
   analog input such as **Analog Volt 4** (White 25) for the position sensor, with 5 V and sensor
   ground.
 - The ECU on **12 V (ignition on)** for every calibration — never USB power alone.
@@ -249,7 +249,7 @@ not from a measured engine. Your turbo, wastegate spring and solenoid decide the
 | Setting | Value | Why |
 |---|---|---|
 | Boost Control / Control Mode | enabled / Open Loop | learn the solenoid first |
-| Output | Lowside 13 (Black 10) | flyback-protected low-side |
+| Output | Lowside 13 (Black35 pin 10) | flyback-protected low-side |
 | Frequency | 33 Hz | default; use the solenoid's rating |
 | Safe duty cycle | 0 % | least boost on a normally-open solenoid setup |
 | Gates | 2000 RPM / 30 % TPS / 110 kPa | defaults |

@@ -28,16 +28,16 @@ ground wire can make a sensor read wrong. It assumes you have read *Wiring basic
 ### How power reaches a Proteus
 
 <figure markdown>
-  ![Battery positive through a main fuse; one branch through the ignition switch and a fuse to Black 18; one branch through a fuse to the main relay, whose output feeds Black 23 and the injectors and coils; the relay coil and the fuel pump relay coil are switched to ground by Lowside 12 (Black 21) and Lowside 10 (Black 20); power grounds return to the block](../img/diagrams/power-grounds-supply.svg)
+  ![Battery positive through a main fuse; one branch through the ignition switch and a fuse to Black23 pin 18; one branch through a fuse to the main relay, whose output feeds Black23 pin 23 and the injectors and coils; the relay coil and the fuel pump relay coil are switched to ground by Lowside 12 (Black35 pin 21) and Lowside 10 (Black35 pin 20); power grounds return to the block](../img/diagrams/power-grounds-supply.svg)
   <figcaption>Figure 1 — Power on a Proteus. Red is battery 12 V, blue the ignition-switched feed,
   orange what the ECU switches, black the power grounds.</figcaption>
 </figure>
 
 A Proteus takes 12 V on two pins of the Black 23-pin connector:
 
-- **Black 18 — ignition power.** The board files say: connect this pin to the output of your
+- **Black23 pin 18 — ignition power.** The board files say: connect this pin to the output of your
   ignition switch. It powers the ECU, and the ECU measures battery voltage on it.
-- **Black 23 — power from the main relay.** Connect it to the output of the car's main relay, the
+- **Black23 pin 23 — power from the main relay.** Connect it to the output of the car's main relay, the
   relay that also powers the injectors and coils. It supplies the electronic throttle drivers and the
   high-side outputs.
 <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (pin 18 Battery Sense / ignition power, pin 23 power supply from main relay); firmware/config/boards/proteus/board_configuration.cpp (setupVbatt: vbattAdcChannel EFI_ADC_7) -->
@@ -51,7 +51,7 @@ need it.)
 
 The **main relay** switches the heavy loads — injectors, coils, the throttle drivers — so their
 current does not pass through the ignition switch. On Proteus the ECU drives the relay's coil from
-**Lowside 12** (Black 35 pin 21), which is the factory setting of **Setup ▸ Outputs ▸ Main relay
+**Lowside 12** (Black35 pin 21), which is the factory setting of **Setup ▸ Outputs ▸ Main relay
 output**. A *low-side* output switches to ground: the relay coil gets fused 12 V on one side, and the
 ECU completes the circuit on the other.
 <!-- src: firmware/config/boards/proteus/board_configuration.cpp (proteus_boardDefaultConfiguration: mainRelayPin = PROTEUS_LS_12); firmware/config/boards/proteus/connectors/black35.yaml (pin 21 Injector #12 or Main relay) -->
@@ -61,8 +61,8 @@ Time** `mainRelayDisableTime` after the ignition goes off (1–60 s), so a short
 starter engages does not kill the engine.
 <!-- src: firmware/controllers/actuators/main_relay.cpp (MainRelayController::onSlowCallback, needsDelayedShutoff); firmware/integration/rusefi_config.txt (mainRelayDisableTime) -->
 
-The fuel pump relay is driven the same way from **Lowside 10** (Black 35 pin 20) and the radiator fan
-relay from **Lowside 11** (Black 35 pin 9) by default.
+The fuel pump relay is driven the same way from **Lowside 10** (Black35 pin 20) and the radiator fan
+relay from **Lowside 11** (Black35 pin 9) by default.
 <!-- src: firmware/config/boards/proteus/board_configuration.cpp (fuelPumpPin = PROTEUS_LS_10, fanPin = PROTEUS_LS_11); firmware/config/boards/proteus/connectors/black35.yaml (pins 9, 20) -->
 
 !!! danger "Fuel pump wiring"
@@ -153,9 +153,9 @@ and charges the coils for that wrong voltage.
 
 1. Disconnect the battery negative.
 2. Fit the main fuse at the battery positive; run fused feeds to the main relay contact (30), the
-   fuel pump relay contact, and through the ignition switch and a small fuse to **Black 18**.
-3. Wire main relay output (87) through a fuse block to **Black 23**, the injectors' and coils' 12 V.
-4. Feed each relay coil (86) from fused 12 V; wire its other side (85) to **Black 35 pin 21**
+   fuel pump relay contact, and through the ignition switch and a small fuse to **Black23 pin 18**.
+3. Wire main relay output (87) through a fuse block to **Black23 pin 23**, the injectors' and coils' 12 V.
+4. Feed each relay coil (86) from fused 12 V; wire its other side (85) to **Black35 pin 21**
    (main relay) or **pin 20** (fuel pump).
 5. Run each of the six power ground pins on its own wire to the block star point.
 6. Return every sensor to a White GNDA pin on its own wire.
@@ -179,7 +179,7 @@ with current flowing:
 2. Put the multimeter's black probe on the battery negative post and the red probe on an ECU power
    ground pin (back-probe the connector). Good wiring reads a few tens of millivolts; several hundred
    millivolts means a bad ground.
-3. Red probe on battery positive, black on Black 18 or Black 23: the drop along the feed.
+3. Red probe on battery positive, black on Black23 pin 18 or Black23 pin 23: the drop along the feed.
 4. Compare the front-page **Battery** gauge (`VBatt`) with the voltage at the battery. A large
    difference is a drop in the ECU's feed or ground.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (VBattGauge "Battery", front page gauge6) -->
@@ -200,8 +200,8 @@ with current flowing:
 
 | Symptom | Likely cause | Check |
 |---|---|---|
-| ECU does not power up | no 12 V on Black 18, blown fuse | voltage at Black 18 with key on |
-| ECU on, but injectors, coils or throttle dead | main relay not closing, nothing on Black 23 | relay coil feed, Black 35 pin 21 wiring, *Main relay on* indicator |
+| ECU does not power up | no 12 V on Black23 pin 18, blown fuse | voltage at Black23 pin 18 with key on |
+| ECU on, but injectors, coils or throttle dead | main relay not closing, nothing on Black23 pin 23 | relay coil feed, Black35 pin 21 wiring, *Main relay on* indicator |
 | Engine dies just as the starter engages | supply dips | battery, grounds, voltage drop test |
 | Sensor reading shifts when fan, pump or lights switch | sensor ground shared with a load | return the sensor to White GNDA alone |
 | Battery gauge lower than the battery | drop in ECU feed or ground | voltage drop test |

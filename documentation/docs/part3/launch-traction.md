@@ -226,9 +226,9 @@ so the **lowest row of all three tables applies continuously**, whatever the car
 
 :material-circle:{ .level-basic } Basic
 
-- **A switch.** Any of the digital inputs will do. On Proteus, **Digital 1** (Black 10) is the factory
-  crank trigger input, so leave it alone; free ones include **Digital 5** (Black 9) and **Digital 6**
-  (Black 11). A switch to 12 V uses a *PULLDOWN* input mode; a switch to ground uses *PULLUP*; a normally
+- **A switch.** Any of the digital inputs will do. On Proteus, **Digital 1** (Black23 pin 10) is the factory
+  crank trigger input, so leave it alone; free ones include **Digital 5** (Black23 pin 9) and **Digital 6**
+  (Black23 pin 11). A switch to 12 V uses a *PULLDOWN* input mode; a switch to ground uses *PULLUP*; a normally
   closed switch uses an *INVERTED* mode.
 - **A clutch switch is enough for both launch and flat shift** if you set the arming RPM correctly, and it
   is the arrangement most people end up with. Assign it under **Sensors ▸ Misc sensors** (**Clutch Down**,
@@ -397,14 +397,14 @@ car. Every one of them needs proving up on your engine, logged, one change at a 
 
 ### Example 1 — Naturally aspirated car, standing launch, clutch pedal
 
-A 2.0-litre front-wheel-drive car, clutch-down switch on **Digital 5** (Black 9). The aim is a launch that
+A 2.0-litre front-wheel-drive car, clutch-down switch on **Digital 5** (Black23 pin 9). The aim is a launch that
 holds 3000 RPM and pulls away without spinning the front wheels.
 
 | Setting | Value | Why |
 |---|---|---|
 | Launch Control | enabled | |
 | Activation Mode | Clutch Down Switch | the pedal is already wired and is impossible to press by accident at speed |
-| Clutch Down / mode | Digital 5 (Black 9), default mode | a free Proteus input; Digital 1 is the crank trigger |
+| Clutch Down / mode | Digital 5 (Black23 pin 9), default mode | a free Proteus input; Digital 1 is the crank trigger |
 | Launch RPM Threshold | 0 | one feature, one job: the switch is launch only |
 | Speed Threshold | 30 km/h | factory: launch is off once you are moving |
 | Launch RPM | 3000 | factory default, and a safe place for a NA twin-cam to start |
@@ -423,7 +423,7 @@ Figure 3 is what these settings ask the engine for: 10 % of ignition events skip
 
 ### Example 2 — Turbo car, one button for launch and flat shift
 
-Same car with a turbo and a gear-lever button on **Digital 6** (Black 11), which is also used for launch.
+Same car with a turbo and a gear-lever button on **Digital 6** (Black23 pin 11), which is also used for launch.
 
 | Setting | Value | Why |
 |---|---|---|

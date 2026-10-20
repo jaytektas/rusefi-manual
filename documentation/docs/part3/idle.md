@@ -489,7 +489,7 @@ needs them.
 | Step | What was done |
 |---|---|
 | 1 | **Setup ▸ Basic Configurations ▸ Switch ETB to Stepper** with the engine stopped. That set **Use Stepper**, **Drive stepper with dual H bridges** and left **H-Bridge #1 function** and **H-Bridge #2 function** at *None*, with the driver pins already filled in by the board. |
-| 2 | Coil A to **Black 7** and **Black 6**, coil B to **Black 15** and **Black 8** |
+| 2 | Coil A to **Black23 pin 7** and **Black23 pin 6**, coil B to **Black23 pin 15** and **Black23 pin 8** |
 | 3 | **Stepper total steps** 200, **Stepper reaction time** 3 ms, **Force parking every restart** *yes* while the valve was being proved |
 | 4 | Direction check: ignition on, engine off — the valve walked to 50 % of travel (the factory cranking air position). Raising the warm open-loop cell from 50 % to 60 % and burning made it walk further out, in the direction that admits more air. |
 | 5 | Idle target 850 RPM warm, open-loop position 50 % warm — step 100 of 200 |
@@ -497,7 +497,7 @@ needs them.
 The direction check in step 4 is not optional. rusEFI counts steps and never sees the valve's real
 position: wired the wrong way round, a 50 % command closes the valve instead of opening it, and nothing
 in the firmware can tell.
-<!-- src: firmware/config/boards/proteus/connectors/black23.yaml (Black 6 and 7 = ETB 1 negative and positive, Black 8 and 15 = ETB 2 negative and positive); firmware/hw_layer/stepper.cpp (open-loop step counting and parking); firmware/controllers/algo/basic_configuration.cpp (applyActuatorDefaults: stepper flags and H-bridge functions); firmware/controllers/actuators/idle_hardware.cpp (applyIACposition: steps from the idle position) -->
+<!-- src: firmware/config/boards/proteus/connectors/black23.yaml (Black23 pins 6 and 7 = ETB 1 negative and positive, Black23 pins 8 and 15 = ETB 2 negative and positive); firmware/hw_layer/stepper.cpp (open-loop step counting and parking); firmware/controllers/algo/basic_configuration.cpp (applyActuatorDefaults: stepper flags and H-bridge functions); firmware/controllers/actuators/idle_hardware.cpp (applyIACposition: steps from the idle position) -->
 
 ## Tuning it
 

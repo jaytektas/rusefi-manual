@@ -222,8 +222,8 @@ mean anything.
 
 **CAN wideband (the recommended route).** rusEFI wideband modules and AEM X-series controllers talk CAN:
 
-- Proteus F7 **CAN 1**: **Black 16** (CAN low, blue) and **Black 17** (CAN high, green).
-- Proteus F7 **CAN 2**: **Black 21** (CAN low, blue) and **Black 22** (CAN high, green).
+- Proteus F7 **CAN 1**: **Black23 pin 16** (CAN low, blue) and **Black23 pin 17** (CAN high, green).
+- Proteus F7 **CAN 2**: **Black23 pin 21** (CAN low, blue) and **Black23 pin 22** (CAN high, green).
 - CAN read *and* CAN write must both be enabled (**CAN Bus Settings**); if they are not, enabling CAN
   wideband produces the critical error *CAN read and write are required to use CAN wideband.*
 
@@ -434,7 +434,7 @@ than** 2000). Then switch on **Lambda protection**.
 
 ### Example 1 — naturally aspirated four-cylinder, one CAN wideband
 
-A 2.0 litre four-cylinder on a Proteus F7, rusEFI wideband module on CAN 1 (**Black 16/17**), Speed
+A 2.0 litre four-cylinder on a Proteus F7, rusEFI wideband module on CAN 1 (**Black23 pins 16/17**), Speed
 Density, idle 800 RPM, lambda display on. These are the values this chapter's screenshots use, and they
 are also close to the factory defaults for the two regions that matter most:
 

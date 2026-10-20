@@ -220,8 +220,8 @@ the limp manager, and the **Injection** master switch.
 You need:
 
 - **Injectors wired to injector outputs.** On Proteus, injectors 1 to 4 are **Lowside 1**
-  (Black 35 pin 3), **Lowside 2** (Black 35 pin 15), **Lowside 3** (Black 35 pin 4) and
-  **Lowside 4** (Black 35 pin 16). The outputs are grounded by the ECU; the injectors' other side is
+  (Black35 pin 3), **Lowside 2** (Black35 pin 15), **Lowside 3** (Black35 pin 4) and
+  **Lowside 4** (Black35 pin 16). The outputs are grounded by the ECU; the injectors' other side is
   switched 12 V.
 - **Fuel supply at a known pressure.** The factory tune assumes 300 kPa (3 bar, about 43.5 psi) at
   the injectors; set **Injector reference pressure** to what you actually have. High-impedance

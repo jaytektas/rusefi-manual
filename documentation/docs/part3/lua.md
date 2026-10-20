@@ -237,7 +237,7 @@ script reads them as `getAuxAnalog(0)` … `getAuxAnalog(7)`, in volts. On Prote
 **Advanced ▸ Lua ▸ Lua Digital Inputs** names up to eight switch inputs as **Digital #1 … Digital #8**
 with a **Mode** for each (DEFAULT, PULLUP, PULLDOWN and the INVERTED variants); the script reads them
 as `getAuxDigital(0)` … `getAuxDigital(7)`, and gets `nil` for one you have not assigned. An example
-input is *Digital 1* on **Black 23 pin 10**.
+input is *Digital 1* on **Black23 pin 10**.
 
 <figure markdown>
   <!-- shot: img/ts/lua-digital-inputs.png | Advanced ▸ Lua ▸ Lua Digital Inputs | Proteus F7, ignition on, engine stopped, Digital #1 = Digital 1 with Mode #1 = PULLUP, Digital #2 to Digital #8 unassigned, dropdowns closed | The eight Lua digital inputs and their pull-up modes; the script reads Digital #1 as getAuxDigital(0). -->
@@ -246,7 +246,7 @@ input is *Digital 1* on **Black 23 pin 10**.
 
 **Advanced ▸ Lua ▸ Lua Script PWM Outputs** names up to eight outputs, labelled **output #0 …
 output #7** — the same zero-based numbers `startPwm` uses. Pick an output the rest of the tune does not
-already own; on Proteus, *Lowside 16* (Black 35 pin 23, with flyback protection) is a spare.
+already own; on Proteus, *Lowside 16* (Black35 pin 23, with flyback protection) is a spare.
 `startPwm(0, 100, 0)` then drives output #0 at 100 Hz.
 
 <figure markdown>
@@ -333,7 +333,7 @@ Three more checks:
 
 ### Example 1 — a switch that switches a spare output, with a delay
 
-Wire a switch to **Black 23 pin 10** (*Digital 1*) and a relayed accessory to **Black 35 pin 23**
+Wire a switch to **Black23 pin 10** (*Digital 1*) and a relayed accessory to **Black35 pin 23**
 (*Lowside 16*). In TunerStudio set **Lua Digital Inputs ▸ Digital #1** = *Digital 1* (Mode PULLUP for
 a switch to ground), and **Lua Script PWM Outputs ▸ output #0** = *Lowside 16*. Then, in the console:
 
@@ -375,7 +375,7 @@ Script Setting, so it can be changed in TunerStudio without touching the text. S
 
 An electric fan or A/C compressor drags idle down the moment it engages. Take the load's own switched
 feed as a switch input and add a couple of percent of idle air when it is on. Proteus: the load's
-switched feed is watched on **Black 23 pin 10** (*Digital 1*, set as **Digital #1**), idle air comes
+switched feed is watched on **Black23 pin 10** (*Digital 1*, set as **Digital #1**), idle air comes
 from the electronic throttle's idle controller.
 
 ```lua
@@ -396,7 +396,7 @@ adds when the switch is on would keep the bump after the switch goes off.
 
 | Setting | Value | Why |
 |---|---|---|
-| Lua Digital Inputs ▸ Digital #1 | Digital 1 (Black 23 pin 10), Mode PULLUP | the load's switched feed |
+| Lua Digital Inputs ▸ Digital #1 | Digital 1 (Black23 pin 10), Mode PULLUP | the load's switched feed |
 | Lua Script Settings ▸ Name #1 / Setting #1 | `Idle bump` / 2.00 | two percent, adjustable without re-editing the script |
 | Everything else | factory default | |
 <!-- src: firmware/controllers/lua/lua_hooks.cpp (setIdleAdd, setParkNeutral); firmware/controllers/actuators/idle_thread.cpp (running idle plus luaAdd); firmware/controllers/algo/engine.cpp (Engine::resetLua clears IdleController luaAdd); firmware/integration/rusefi_config.txt (idleParkNeutralOffset help describing the Lua Park/Neutral flag) -->

@@ -124,8 +124,8 @@ and the throttle returns to wherever its spring holds it — if:
 
 You need:
 
-- **The throttle body wired to the H-bridge outputs.** On Proteus, throttle 1 is **Black 7** (motor +)
-  and **Black 6** (motor −); throttle 2 is **Black 15** (+) and **Black 8** (−).
+- **The throttle body wired to the H-bridge outputs.** On Proteus, throttle 1 is **Black23 pin 7** (motor +)
+  and **Black23 pin 6** (motor −); throttle 2 is **Black23 pin 15** (+) and **Black23 pin 8** (−).
 - **Both throttle sensors wired**, with a 5 V supply and sensor ground. On Proteus, the suggested
   inputs are **Analog Volt 2** (White 24) for the first track and **Analog Volt 3** (White 14) for the
   second.

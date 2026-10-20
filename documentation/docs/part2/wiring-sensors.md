@@ -27,7 +27,7 @@ A sensor connection is four decisions, in this order:
    VR or knock signal.
 
 <figure markdown>
-  ![Three sensor types at the Proteus connector: a 3-wire ratiometric sensor on White 9 for 5 V, White 13 for signal and White 1 for sensor ground; a 2-wire thermistor on White 20 with its 2.7 kilohm pull-up inside the ECU and White 2 for ground; a VR sensor as a twisted pair on Black 5 and Black 13](../img/diagrams/wiring-sensors-types.svg)
+  ![Three sensor types at the Proteus connector: a 3-wire ratiometric sensor on White 9 for 5 V, White 13 for signal and White 1 for sensor ground; a 2-wire thermistor on White 20 with its 2.7 kilohm pull-up inside the ECU and White 2 for ground; a VR sensor as a twisted pair on Black23 pin 5 and Black23 pin 13](../img/diagrams/wiring-sensors-types.svg)
   <figcaption>Figure 1 — Three kinds of sensor, three different connections. Note what the thermistor
   does *not* have: a supply wire. Its 5 V comes from inside the ECU.</figcaption>
 </figure>
@@ -36,10 +36,10 @@ A sensor connection is four decisions, in this order:
 |---|---|---|---|
 | Thermistor (temperature) | 2 | *Analog Temp 1–4* — White 19, 20, 30, 31 | no: a pull-up inside the ECU feeds it |
 | Ratiometric analog (MAP, TPS, pedal, pressure) | 3 | *Analog Volt 1–11* — White 13–18 and 24–28 | yes: 5 V, 5 V and sensor ground |
-| VR / magnetic pick-up (crank, cam) | 2 | *VR 1* Black 5 + / Black 13 −, *VR 2* Black 4 + / Black 12 − | no: it makes its own signal |
-| Hall or switch (crank, cam, VSS, flex, clutch, brake) | 2–3 | *Digital 1–6* — Black 10, 1, 2, 3, 9, 11 (and most analog pins too) | the sensor's own: 5 V or 12 V |
+| VR / magnetic pick-up (crank, cam) | 2 | *VR 1* Black23 pin 5 + / Black23 pin 13 −, *VR 2* Black23 pin 4 + / Black23 pin 12 − | no: it makes its own signal |
+| Hall or switch (crank, cam, VSS, flex, clutch, brake) | 2–3 | *Digital 1–6* — Black23 pins 10, 1, 2, 3, 9, 11 (and most analog pins too) | the sensor's own: 5 V or 12 V |
 | Knock | 2 | Knock input 1 White 34, Knock input 2 White 35 | no |
-| CAN sensor (wideband, EGT, dash speed) | 2 | CAN High/Low Black 17/16, second bus Black 22/21 | no: the sensor's controller has its own supply |
+| CAN sensor (wideband, EGT, dash speed) | 2 | CAN High/Low Black23 pins 17/16, second bus Black23 pins 22/21 | no: the sensor's controller has its own supply |
 <!-- src: firmware/config/boards/proteus/connectors/white35.yaml (Analog Volt and Analog Temp pins, ts_name list, knock inputs 34 and 35); firmware/config/boards/proteus/connectors/black23.yaml (VR pairs, Digital 1-6, CAN pairs) -->
 
 !!! danger "12 V is the enemy of a 5 V sensor"
@@ -72,7 +72,7 @@ or fan current lifts the sensor's ground by hundreds of millivolts, and the sens
 engine load or throttle.
 
 <figure markdown>
-  ![A MAP sensor, a two-track pedal sensor and a Hall trigger sensor, each with supply, signal and its own return, wired to named Proteus pins: White 9 and White 10 for the two 5 V supplies, White 13, 17 and 16 for signals, Black 10 for the digital signal and White 1, 23 and 2 for the returns. A red panel states the rules](../img/diagrams/wiring-sensors-supply-return.svg)
+  ![A MAP sensor, a two-track pedal sensor and a Hall trigger sensor, each with supply, signal and its own return, wired to named Proteus pins: White 9 and White 10 for the two 5 V supplies, White 13, 17 and 16 for signals, Black23 pin 10 for the digital signal and White 1, 23 and 2 for the returns. A red panel states the rules](../img/diagrams/wiring-sensors-supply-return.svg)
   <figcaption>Figure 2 — Supplies, signals and returns on a Proteus. Each wire lands on the pin named
   at the right; the two 5 V supplies are kept separate, and every return is its own wire to a GNDA pin.</figcaption>
 </figure>
@@ -81,7 +81,7 @@ engine load or throttle.
     A ratiometric sensor's output is a *fraction* of the 5 V rail: the ECU assumes that rail is 5.0 V
     and does not measure it. With the ECU powered from USB only, the rail does not reach 5 V and every
     such sensor reads several percent low. The ECU decides the ignition is on when the voltage it
-    measures on **Black 18** exceeds **6 V**, and TunerStudio's calibration buttons stay greyed out
+    measures on **Black23 pin 18** exceeds **6 V**, and TunerStudio's calibration buttons stay greyed out
     below that — that is the same rule, enforced for you.
     <!-- src: firmware/controllers/ignition_controller.cpp (isIgnVoltage: 6 V threshold on the battery sense input); firmware/tunerstudio/tunerstudio.template.ini (hasIgnitionVoltage conditions on the calibration command buttons) -->
 
@@ -105,9 +105,9 @@ TunerStudio input dropdowns offer.
 | Pedal, secondary | *Analog Volt 7* | White 16 | "Suggested PPS input 2" | unassigned until you use the preset |
 | Wideband, analog input | *Analog Volt 10* | White 28 | "Auxiliary analog input 10" (the firmware's factory wideband input) | yes, assigned |
 | Oil, fuel, A/C pressure, aux | *Analog Volt 4, 5, 6, 8, 11* | White 25, 15, 26, 27, 18 | "Auxiliary analog input" | unassigned |
-| Crank | *Digital 1* or *VR 1* | Black 10, or Black 5/13 | "Digital trigger/switch input" | crank on *Digital 1*, cam unassigned |
-| Cam (Hall) | *Digital 2* | Black 1 | "Digital trigger/switch input for instance Hall type CAM" | unassigned |
-| Vehicle speed, flex, switches | *Digital 3–6* | Black 2, 3, 9, 11 | VSS, start button, general | unassigned |
+| Crank | *Digital 1* or *VR 1* | Black23 pin 10, or Black23 pins 5/13 | "Digital trigger/switch input" | crank on *Digital 1*, cam unassigned |
+| Cam (Hall) | *Digital 2* | Black23 pin 1 | "Digital trigger/switch input for instance Hall type CAM" | unassigned |
+| Vehicle speed, flex, switches | *Digital 3–6* | Black23 pins 2, 3, 9, 11 | VSS, start button, general | unassigned |
 | Knock | — (no pin choice) | White 34, White 35 | "Knock input 1", "Knock input 2" | knock sensing on, both channels |
 <!-- src: firmware/config/boards/proteus/connectors/white35.yaml (pin functions and ts_name values); firmware/config/boards/proteus/connectors/black23.yaml (digital and VR pin functions and ts_name values); firmware/config/boards/proteus/board_configuration.cpp (setupDefaultSensorInputs: clt, iat, tps1_1, map.hwChannel, afr.hwChannel, triggerInputPins, camInputs) -->
 
@@ -115,7 +115,7 @@ Two things to notice in every input dropdown:
 
 - **NONE** means the sensor is not configured, and the firmware simply does not initialise it — an
   unassigned input costs nothing and reports nothing.
-- The analog dropdown also lists **Battery Sense**. That is **Black 18**, the ECU's own ignition power
+- The analog dropdown also lists **Battery Sense**. That is **Black23 pin 18**, the ECU's own ignition power
   and battery measurement. Never wire a sensor there.
   <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (pin 18 Battery Sense, ignition power); firmware/config/boards/proteus/board_configuration.cpp (setupVbatt: vbattAdcChannel) -->
 
@@ -223,7 +223,7 @@ The settings are on **Sensors ▸ Chassis sensors ▸ Misc sensors** — **Clutc
 **Clutch Down mode** `clutchDownPinMode`, **Brake Pedal** `brakePedalPin` with **Brake Pedal Mode** —
 and the modes are *DEFAULT*, *PULLUP*, *PULLDOWN* and the three *INVERTED* variants. A
 *PULLUP* / *PULLDOWN* mode uses the microcontroller's own weak pull resistor, so no external resistor
-is needed. Proteus labels **Black 3** (*Digital 4*) for a start button.
+is needed. Proteus labels **Black23 pin 3** (*Digital 4*) for a start button.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (otherSensorInputs panel: Clutch Down, Clutch Down mode, Brake Pedal, Brake Pedal Mode, and the pin_input_mode_e labels); firmware/hw_layer/io_pins.cpp (getInputMode turning PULLUP and PULLDOWN into the chip's own pull resistor); firmware/config/boards/proteus/connectors/black23.yaml (pin 3 noted for a start button) -->
 
 !!! warning "Check the board documentation before you switch 12 V onto an input pin"
@@ -241,18 +241,18 @@ Two kinds of crank and cam sensor reach the ECU in completely different ways, an
 different too.
 
 A **VR** (variable reluctance) pick-up is a coil and a magnet: two wires, no supply, and an AC signal
-that grows with engine speed. Proteus gives it a **differential pair**: *VR 1* is **Black 5 (+)** and
-**Black 13 (−)**, *VR 2* is **Black 4 (+)** and **Black 12 (−)**. There are exactly two VR inputs, so
+that grows with engine speed. Proteus gives it a **differential pair**: *VR 1* is **Black23 pin 5 (+)** and
+**Black23 pin 13 (−)**, *VR 2* is **Black23 pin 4 (+)** and **Black23 pin 12 (−)**. There are exactly two VR inputs, so
 beyond crank plus cam you use Hall sensors.
 
 A **Hall** sensor has three wires — supply, signal, ground — and puts out a square wave, so it can read
-at zero RPM where a VR sensor cannot. Its signal goes to one of the *Digital 1–6* inputs: **Black 10**
-(*Digital 1*) is the firmware's factory crank input, and **Black 1** (*Digital 2*) is the board's
+at zero RPM where a VR sensor cannot. Its signal goes to one of the *Digital 1–6* inputs: **Black23 pin 10**
+(*Digital 1*) is the firmware's factory crank input, and **Black23 pin 1** (*Digital 2*) is the board's
 suggestion for a cam. Its supply is whatever the sensor is built for, the 5 V supplies or the protected
 12 V output on White 11, and its ground returns to a White GNDA pin.
 
 <figure markdown>
-  ![A 2-wire VR pick-up wired as a twisted shielded pair to Black 5 and Black 13, and a 3-wire Hall sensor wired to a Digital input with its 5 V or protected 12 V supply and its own GNDA return; a red panel explains the symptom of reversed VR wires and the Primary Edge setting](../img/diagrams/wiring-sensors-crank-vr-vs-hall.svg)
+  ![A 2-wire VR pick-up wired as a twisted shielded pair to Black23 pin 5 and Black23 pin 13, and a 3-wire Hall sensor wired to a Digital input with its 5 V or protected 12 V supply and its own GNDA return; a red panel explains the symptom of reversed VR wires and the Primary Edge setting](../img/diagrams/wiring-sensors-crank-vr-vs-hall.svg)
   <figcaption>Figure 3 — The same 60-tooth wheel read two ways. Note what the VR sensor has and does
   not need: a pair, a twist, a shield, and no supply at all.</figcaption>
 </figure>
@@ -311,7 +311,7 @@ A wideband oxygen sensor is always driven by its own controller: the sensor need
 circuitry the ECU does not provide. What varies is how the controller tells the ECU the answer.
 
 **Over CAN** — the rusEFI Wideband Tools controller or an AEM X-Series — nothing but two wires reaches
-the ECU: **CAN High on Black 17 and CAN Low on Black 16**, or the second bus on **Black 22 / Black 21**.
+the ECU: **CAN High on Black23 pin 17 and CAN Low on Black23 pin 16**, or the second bus on **Black23 pin 22 / Black23 pin 21**.
 Turn it on with **Enable CAN Wideband** `enableAemXSeries` on **Sensors ▸ CAN O2 sensors**, choose the
 bus with **Wideband CAN bus** `widebandOnSecondBus` (*CAN1* or *CAN2*), and identify each controller
 with **UEGO type** `canWbo1_type` (*RusEFI*, *AEM X-series* or *Disabled/Analog*) plus **RusEFI WBO ID**
@@ -338,7 +338,7 @@ own ground return, mounted away from heat and water. Keep its sensor cable away 
 coil wires, and never let the heater feed or battery voltage near an ECU pin.
 
 <figure markdown>
-  ![One or two knock sensors on White 34 and White 35 with short shielded cable; a wideband controller reporting over CAN to Black 17 and Black 16; a wideband controller with an analog output on White 28 Analog Volt 10 and its ground on White 3. A red panel states that the heater is never driven by the ECU](../img/diagrams/wiring-sensors-knock-wideband.svg)
+  ![One or two knock sensors on White 34 and White 35 with short shielded cable; a wideband controller reporting over CAN to Black23 pin 17 and Black23 pin 16; a wideband controller with an analog output on White 28 Analog Volt 10 and its ground on White 3. A red panel states that the heater is never driven by the ECU](../img/diagrams/wiring-sensors-knock-wideband.svg)
   <figcaption>Figure 4 — The two fussiest connections on the engine. The knock inputs are fixed and
   need a short shielded cable; the wideband either lives on the CAN bus or arrives as one scaled voltage.</figcaption>
 </figure>
@@ -422,10 +422,10 @@ The whole sensor side of a simple sequential engine on a Proteus F7:
 | Intake air | White 30 (*Analog Temp 2*) | from inside the ECU | White 4 | 2-wire, 0.5 mm² |
 | MAP (1-bar sensor) | White 13 (*Analog Volt 1*) | White 9 (supply 1) | White 1 | 3-wire, 0.5 mm² |
 | TPS (one track) | White 24 (*Analog Volt 2*) | White 9 (supply 1) | White 3 | 3-wire, 0.5 mm² |
-| Crank, VR 60-2 | Black 5 (+) / Black 13 (−) | none | — (differential) | shielded twisted pair |
-| Cam, Hall | Black 1 (*Digital 2*) | White 9 (supply 1) | White 5 | 3-wire, 0.5 mm² |
+| Crank, VR 60-2 | Black23 pin 5 (+) / Black23 pin 13 (−) | none | — (differential) | shielded twisted pair |
+| Cam, Hall | Black23 pin 1 (*Digital 2*) | White 9 (supply 1) | White 5 | 3-wire, 0.5 mm² |
 | Knock, one sensor | White 34 (Knock input 1) | none | — (shield) | short shielded pair |
-| Wideband, CAN | Black 17 / Black 16 | controller's own fused 12 V | controller's own | twisted pair, terminated |
+| Wideband, CAN | Black23 pin 17 / Black23 pin 16 | controller's own fused 12 V | controller's own | twisted pair, terminated |
 
 Why those choices: the coolant, intake air, MAP, TPS and crank pins are exactly rusEFI's factory
 assignments on a Proteus, so those five need no configuration at all. Two things do need a setting and a

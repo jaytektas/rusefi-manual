@@ -208,11 +208,11 @@ cam sensor misbehaves high in the rev range).
 You need:
 
 - **A cam sensor on an event input.** On Proteus those are on the Black 23-way connector: **VR 1**
-  (Black 23 pins 5 and 13, + and −), **VR 2** (pins 4 and 12) and **Digital 1 … Digital 6** (pins 10, 1, 2,
+  (Black23 pins 5 and 13, + and −), **VR 2** (pins 4 and 12) and **Digital 1 … Digital 6** (pins 10, 1, 2,
   3, 9 and 11). Use a variable-reluctance input for a VR cam wheel and a Digital input for a Hall sensor;
   a Hall cam sensor needs 12 V or 5 V supply and ground as its datasheet says.
 - **The solenoid on a switching output.** Proteus does not dedicate an output for VVT, so use one of the
-  flyback-protected low-side outputs: **Lowside 13** (Black 35 pin 10), **Lowside 14** (pin 11),
+  flyback-protected low-side outputs: **Lowside 13** (Black35 pin 10), **Lowside 14** (pin 11),
   **Lowside 15** (pin 12) or **Lowside 16** (pin 23). Feed the solenoid from switched 12 V and let the ECU
   switch the other side to ground.
 - **Healthy oil.** The phaser is hydraulic: correct oil level, grade and pressure, and a clean spool valve.
@@ -407,13 +407,13 @@ factory values are rusEFI's own; the wiring is what this configuration needs:
 
 | Setting | Value | Why |
 |---|---|---|
-| Trigger type / crank input | 60-2 · **VR 1** (Black 23 pins 5, 13) | see the Trigger chapter |
+| Trigger type / crank input | 60-2 · **VR 1** (Black23 pins 5, 13) | see the Trigger chapter |
 | Cam mode (intake) `vvtMode1` | *Single Tooth* | one tooth per cam revolution |
-| Cam sensor bank 1 intake `camInputs1` | **VR 2** (Black 23 pins 4, 12) | the second VR input is free |
+| Cam sensor bank 1 intake `camInputs1` | **VR 2** (Black23 pins 4, 12) | the second VR input is free |
 | intake Cam Edge Select `invertCamVVTSignal` | *Rising* | factory |
 | Cam for engine sync resolution `engineSyncCam` | *Intake First Bank* | factory; this cam also sets phase |
 | VVT offset bank 1 intake `vvtOffsets1` | 0 until trimmed, then whatever makes the gauge read 0° at rest | Figure 2 |
-| VVT solenoid bank 1 intake `vvtPins1` | **Lowside 13** (Black 35 pin 10) | flyback-protected low side |
+| VVT solenoid bank 1 intake `vvtPins1` | **Lowside 13** (Black35 pin 10) | flyback-protected low side |
 | PWM frequency `vvtOutputFrequency` | 300 Hz | factory (`DEFAULT_SOLENOID_FREQUENCY`) |
 | Intake control direction `invertVvtControlIntake` | *advance* | typical intake phaser |
 | Do not control below RPM `vvtControlMinRpm` | 600 RPM | factory |

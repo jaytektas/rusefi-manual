@@ -28,8 +28,8 @@ A Proteus F7 has **two independent CAN buses**. They are wired to fixed connecto
 
 | Bus | CAN High | CAN Low |
 |---|---|---|
-| CAN1 (primary) | **Black 17** (green) | **Black 16** (blue) |
-| CAN2 (secondary) | **Black 22** (green) | **Black 21** (blue) |
+| CAN1 (primary) | **Black23 pin 17** (green) | **Black23 pin 16** (blue) |
+| CAN2 (secondary) | **Black23 pin 22** (green) | **Black23 pin 21** (blue) |
 
 On Proteus these pins are fixed by the board: TunerStudio does not offer fields to move them, and
 the two buses are always available to the firmware.
@@ -109,8 +109,8 @@ and back on.
 
 :material-circle:{ .level-basic } Basic
 
-- **Wire the pair.** CAN High and CAN Low go to **Black 17** and **Black 16** for the primary bus,
-  **Black 22** and **Black 21** for the secondary. Keep them twisted together for the whole run and
+- **Wire the pair.** CAN High and CAN Low go to **Black23 pin 17** and **Black23 pin 16** for the primary bus,
+  **Black23 pin 22** and **Black23 pin 21** for the secondary. Keep them twisted together for the whole run and
   keep any branch (a *stub*) short.
 <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (CAN bus High/Low, CAN2 bus High/Low) -->
 

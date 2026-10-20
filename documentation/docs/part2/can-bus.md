@@ -28,8 +28,8 @@ A Proteus F7 has **two independent CAN buses**, both on the Black 23-way connect
 
 | Bus | CAN High | CAN Low | TunerStudio calls it |
 |---|---|---|---|
-| CAN1 | **Black 17** (green) | **Black 16** (blue) | *Primary CAN* |
-| CAN2 | **Black 22** (green) | **Black 21** (blue) | *Secondary CAN* |
+| CAN1 | **Black23 pin 17** (green) | **Black23 pin 16** (blue) | *Primary CAN* |
+| CAN2 | **Black23 pin 22** (green) | **Black23 pin 21** (blue) | *Secondary CAN* |
 
 The pairing is fixed by the board: the official Proteus TunerStudio ini has no RX or TX pin fields on the
 CAN panels, because the two buses live on those pins and nowhere else. The CAN pins carry signal only —
@@ -198,11 +198,11 @@ the line ends. You cannot place two terminators until you know which two devices
 
 | Device | Bus | Proteus pins | Notes |
 |---|---|---|---|
-| Dash, in the cabin | CAN1 | Black 17 H, Black 16 L | the far end of the run — carries terminator 2 |
+| Dash, in the cabin | CAN1 | Black23 pin 17 H, Black23 pin 16 L | the far end of the run — carries terminator 2 |
 | rusEFI wideband controller, on the subframe | CAN1 | joins the pair en route | a stub, no terminator |
-| Proteus, in the engine bay | CAN1 | Black 17 / Black 16 | one end — carries terminator 1 |
+| Proteus, in the engine bay | CAN1 | Black23 pin 17 / Black23 pin 16 | one end — carries terminator 1 |
 
-For a device on the second bus use **Black 22** (High, green) and **Black 21** (Low, blue); TunerStudio
+For a device on the second bus use **Black23 pin 22** (High, green) and **Black23 pin 21** (Low, blue); TunerStudio
 calls that bus *Secondary CAN* and gives it its own **Bitrate** field.
 
 <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (CAN bus High/Low and CAN2 bus High/Low with colours); firmware/tunerstudio/tunerstudio.template.ini (canHw1 Primary CAN and canHw2 Secondary CAN panels) -->
@@ -234,11 +234,11 @@ terminator must come out.
 
 With the ECU unplugged and everything unpowered:
 
-1. **Termination:** measure resistance between Black 17 and Black 16 (or 22 and 21). Read **about
+1. **Termination:** measure resistance between Black23 pin 17 and Black23 pin 16 (or 22 and 21). Read **about
    60 Ω**. See Figure 2 for what any other reading means.
-2. **Continuity, and no swaps:** at the far end, short High to Low and confirm continuity between Black 17
-   and Black 16 — then remove the short, and check Black 17 is continuous with the device's High pin and
-   Black 16 with its Low pin. Do it with the meter, not by looking at colours.
+2. **Continuity, and no swaps:** at the far end, short High to Low and confirm continuity between Black23 pin 17
+   and Black23 pin 16 — then remove the short, and check Black23 pin 17 is continuous with the device's High pin and
+   Black23 pin 16 with its Low pin. Do it with the meter, not by looking at colours.
 3. **No shorts to the car:** neither conductor should show continuity to body ground, and neither should
    show continuity to any 12 V pin.
 
@@ -302,24 +302,24 @@ the subframe between them, all on **CAN1**.
 
 | Item | Value |
 |---|---|
-| Bus | CAN1, *Primary CAN*: Black 17 High, Black 16 Low |
+| Bus | CAN1, *Primary CAN*: Black23 pin 17 High, Black23 pin 16 Low |
 | Cable | shielded twisted pair, 0.5 mm², about 4.5 m from ECU to dash, shield grounded at the ECU end only |
-| Terminators | in-line 120 Ω at the Black 23 end, terminator connector at the dash |
+| Terminators | in-line 120 Ω at the Black23 pin 23 end, terminator connector at the dash |
 | Wideband | tee off the trunk 400 mm from the ECU, 150 mm stub into the controller, **no** terminator |
 | Bit rate | 500 kbps on the ECU and the dash and the wideband |
-| What the meter should say at Black 17/16, power off | about 60 Ω — two terminators in parallel |
+| What the meter should say at Black23 pins 17/16, power off | about 60 Ω — two terminators in parallel |
 
 The wideband controller must be pointed at the same bus in TunerStudio (**Wideband CAN bus**
 `widebandOnSecondBus` selects *CAN1* or *CAN2*), and the ECU must be told to read and write CAN; see
 [CAN configuration](../part3/can.md) for those switches. With the ignition on, **CAN: Rx** climbs within a
 second of the dash powering up, and **CAN: Tx err** stays flat.
 
-<!-- src: firmware/integration/rusefi_config.txt (widebandOnSecondBus CAN1 CAN2); firmware/config/boards/proteus/connectors/black23.yaml (Black 17/16) -->
+<!-- src: firmware/integration/rusefi_config.txt (widebandOnSecondBus CAN1 CAN2); firmware/config/boards/proteus/connectors/black23.yaml (Black23 pins 17/16) -->
 
 ### Example 2 — Your sensors on CAN1, the car's cluster on CAN2
 
 A swap engine that keeps its OEM instrument cluster: the cluster is fed on **CAN2**
-(**Black 22** High, **Black 21** Low) because that bus can run the cluster's own rate and carry only the
+(**Black23 pin 22** High, **Black23 pin 21** Low) because that bus can run the cluster's own rate and carry only the
 cluster protocol, while your dash and wideband live on **CAN1** at 500 kbps. Two buses means two
 independent bit rates, two independent sets of terminators, and no need for the car's modules and your
 aftermarket devices to share a network. Treat the OEM pair as somebody else's circuit: identify it, match
@@ -355,7 +355,7 @@ readings that come and go with the road surface is the same fault seen from the 
 | Works with 1 m leads, fails with the loom fitted | untwisted run, long stubs, star wiring or a missing terminator | Figure 2, stub lengths, and one line rather than a star |
 | Three devices are fine one at a time, and fail together | three terminators (about 40 Ω), or the last device hanging off the end of the line | measure 60 Ω, take the terminator out of any mid-bus device |
 | It breaks as soon as a laptop interface is connected | the interface added a third terminator, or its traffic is being injected into the bus | remove its terminator mid-bus, set **Sniffer Tx CAN bus** to *None* |
-| One bus is perfect, the second silent | the pair is in Black 21/22 while TunerStudio was told the device is on the primary bus, or the second **Bitrate** was left different | the Black 23 pinout, and both **Bitrate** fields |
+| One bus is perfect, the second silent | the pair is in Black23 pins 21/22 while TunerStudio was told the device is on the primary bus, or the second **Bitrate** was left different | the Black23 pinout, and both **Bitrate** fields |
 | Wideband or EGT reads nothing on a bus that is otherwise healthy | usually not the wiring: the device is on the other bus, or the ECU is not allowed to run that feature | [CAN configuration](../part3/can.md) |
 | The car's own instruments stop working when the ECU is connected | you are on an OEM body bus, at the wrong rate or unterminated | stop: identify that bus before you go further |
 

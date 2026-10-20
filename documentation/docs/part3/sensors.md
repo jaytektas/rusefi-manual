@@ -191,7 +191,7 @@ CAN silent) as well as the mixture, so TunerStudio can show exactly what the con
     those numbers for years.
 
 rusEFI decides "the ignition is on" from the ignition feed (on Proteus the **Battery Sense** input,
-Black 18): the ignition is counted as on while that input reads above 6 V, and a dip shorter than
+Black23 pin 18): the ignition is counted as on while that input reads above 6 V, and a dip shorter than
 0.2 s — the cranking dip — is ignored. TunerStudio uses exactly that flag to enable the calibration
 buttons on the throttle and pedal dialogs: **Auto Calibrate ETB 1**, **Grab Idle/Up** and
 **Grab WOT/Down** are greyed out until it is set.
@@ -216,10 +216,10 @@ Proteus F7 supplies and inputs, from the board's own connector files:
 | Analog inputs | **Analog Volt 1…11**, White 13–18 and 24–28 | the numbers TunerStudio shows |
 | Thermistor inputs | **Analog Temp 1…4**, White 19, 30, 20, 31 | already pulled up inside the ECU |
 | 12 V protected outputs for sensors | **White 11**, **12** | for sensors that want 12 V, not 5 V |
-| Digital inputs | **Digital 1…6**, Black 10, 1, 2, 3, 9, 11 | Black 2 is suggested for vehicle speed, Black 1 for a cam |
-| Variable reluctance inputs | **VR 1** Black 5 (+) / 13 (−) · **VR 2** Black 4 (+) / 12 (−) | shielded twisted pair, see *Trigger* |
-| Ignition feed | **Black 18** Battery Sense | this is what "ignition on" means |
-| CAN | **Black 17** high / **Black 16** low · **Black 22** / **21** (CAN2) | wideband, EGT, dash |
+| Digital inputs | **Digital 1…6**, Black23 pins 10, 1, 2, 3, 9, 11 | Black23 pin 2 is suggested for vehicle speed, pin 1 for a cam |
+| Variable reluctance inputs | **VR 1** Black23 pin 5 (+) / 13 (−) · **VR 2** Black23 pin 4 (+) / 12 (−) | shielded twisted pair, see *Trigger* |
+| Ignition feed | **Black23 pin 18** Battery Sense | this is what "ignition on" means |
+| CAN | **Black23 pin 17** high / **Black23 pin 16** low · **Black23 pins 22** / **21** (CAN2) | wideband, EGT, dash |
 <!-- src: firmware/config/boards/proteus/connectors/white35.yaml (pin functions and ts_name for the analog and temp inputs, +5 supplies, GNDA); firmware/config/boards/proteus/connectors/black23.yaml (digital and VR inputs, battery sense, CAN) -->
 
 The factory defaults are sensible starting points for a Proteus: coolant on **Analog Temp 3**
@@ -430,7 +430,7 @@ seconds is treated as timed out — deliberately long, so cranking does not look
 
 ### 9 · Vehicle speed
 
-**Sensors ▸ Chassis sensors ▸ Vehicle speed sensor** takes **Input** (a digital input; Black 2 is
+**Sensors ▸ Chassis sensors ▸ Vehicle speed sensor** takes **Input** (a digital input; Black23 pin 2 is
 labelled for it), **Filter parameter** — the number of sensor pulses the reading is averaged over,
 larger is smoother and slower — and the three calibration numbers: **Wheel revolutions per
 kilometer**, **Speed sensor gear ratio** and **Speed sensor tooth count**. The dialog also holds
@@ -490,7 +490,7 @@ defaults unchanged:
 | Intake air | **Sensors ▸ IAT sensor** | **Input channel** Analog Temp 2 (White 30); factory 0 V pairs −20 °C / 18000 Ω, 23.9 °C / 2100 Ω, 120 °C / 100 Ω |
 | MAP | **Sensors ▸ MAP sensor** | **Input pin** Analog Volt 1 (White 13); **Sensor model** MPX4250; faults 5 and 410 kPa |
 | Throttle | **Sensors ▸ TPS** | **Primary sensor input** Analog Volt 2 (White 24); **Grab Closed** and **Grab Fully Open** with the ignition on |
-| Wideband | **Sensors ▸ CAN O2 sensors** | **Enable CAN Wideband** on, bus CAN1, controller on Black 17 / 16 |
+| Wideband | **Sensors ▸ CAN O2 sensors** | **Enable CAN Wideband** on, bus CAN1, controller on Black23 pins 17 / 16 |
 <!-- src: firmware/config/boards/proteus/board_configuration.cpp (default sensor channels); firmware/tunerstudio/tunerstudio.template.ini (the presets above); firmware/init/sensor/init_map.cpp (MPX4250 points); firmware/controllers/algo/engine_configuration.cpp (fault defaults) -->
 
 With the ignition on and the engine cold, expect: CLT and IAT both within a couple of degrees of the
