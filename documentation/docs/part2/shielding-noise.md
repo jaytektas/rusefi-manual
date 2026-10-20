@@ -299,13 +299,11 @@ re-check it with a timing light (the Trigger chapter's procedure).
 
 <!-- shot: img/ts/shielding-noise-trigger-dialog.png | Setup ▸ Trigger | Proteus F7, example values: Trigger type 60-2, Skipped wheel location On crankshaft, Crank Sensor (Primary channel) VR 1, Primary Edge Rising, Cam sensor bank 1 intake VR 2 | The Trigger dialog with the crank sensor on VR 1 -->
 
-<!-- pending-figure
 <figure markdown>
   ![TunerStudio Trigger dialog with Trigger type 60-2, Crank Sensor VR 1 and Primary Edge Rising](../img/ts/shielding-noise-trigger-dialog.png)
   <figcaption>Figure 4 — A VR crank sensor on **VR 1** and a VR cam sensor on **VR 2**: the input
   names here must match the pins the cable is actually landed on.</figcaption>
 </figure>
-pending-figure -->
 
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (trigger_primary dialog, Crank Sensor (Primary channel), Primary Edge) -->
 <!-- src: firmware/config/boards/proteus/board_configuration.cpp (setupDefaultSensorInputs, the factory primary trigger input) -->
@@ -319,13 +317,11 @@ crank wire was the cause; the filter is a stop-gap until the cable is re-routed 
 
 <!-- shot: img/ts/shielding-noise-advanced-trigger.png | Setup ▸ Advanced Trigger | Proteus F7 with Trigger type 60-2 so the noise filtering field is visible: Enable noise filtering yes, Console Logging fields at defaults | The Advanced Trigger dialog with Enable noise filtering set to yes -->
 
-<!-- pending-figure
 <figure markdown>
   ![TunerStudio Advanced Trigger dialog with Enable noise filtering set to yes and the Console Logging panel below](../img/ts/shielding-noise-advanced-trigger.png)
   <figcaption>Figure 5 — **Enable noise filtering** appears only when the trigger type is **60-2** or
   **36-1**; the panel below it holds the console logging switches used in step 8.</figcaption>
 </figure>
-pending-figure -->
 
 ### 8 · Prove it: log the counters, then look at the edges
 

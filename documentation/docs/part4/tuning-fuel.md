@@ -66,7 +66,7 @@ engine felt. Everything below assumes a wideband lambda sensor is fitted, calibr
   running, and warm-up enrichment is nearly out of the way (the factory curve is 1.03 at 60 °C and 1.00
   from 80 °C up).
   <!-- src: firmware/controllers/math/closed_loop_fuel.cpp (ShortTermFuelTrim::getCorrectionState: minClt); firmware/controllers/algo/defaults/default_fuel.cpp (setDefaultStftSettings) -->
-- **Save a restore point** (File ▸ Save Tune As… with a new name) before each session, and **Burn** when
+- **Save the tune under a new name** (File ▸ Save Tune As…) before each session, and **Burn** when
   you are happy with a change: TunerStudio edits the ECU's working copy, and only **Burn** writes them to
   flash. The **Unsaved changes** indicator on the front page tells you which state you are in.
   <!-- src: firmware/tunerstudio/tunerstudio.template.ini (needBurn indicator on FrontPage) -->

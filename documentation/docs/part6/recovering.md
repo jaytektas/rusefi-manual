@@ -232,15 +232,13 @@ pending-figure -->
    switch the ECU off and on, and confirm the values are still there.
 
 <!-- shot: img/ts/recovering-bench-test-misc.png | Controller ▸ Bench test | Proteus F7 connected, ignition on, engine stopped: the Other panel with Reset firmware settings and the bench pulse fields Count, On Time, Off Time, and the Misc panel with Stop Engine, Write Config, Reboot ECU, Reset to DFU, No flash Burn mode; annotate 1 = Reset firmware settings, 2 = Reset to DFU, 3 = Write Config; every dropdown closed | Controller Bench test: the ECU's own maintenance buttons, including Reset firmware settings and Reset to DFU. -->
-<!-- pending-figure
 <figure markdown>
-  ![Controller Bench test dialog with the Misc panel showing Reset firmware settings, Write Config, Reboot ECU and Reset to DFU, and the bench pulse settings Count, On Time and Off Time](../img/ts/recovering-bench-test-misc.png)
+  ![Controller Bench test dialog with the bench pulse settings Count, On Time and Off Time and the Reset firmware settings button below them, and the Misc panel with Write Config, Reboot ECU and Reset to DFU](../img/ts/recovering-bench-test-misc.png)
   <figcaption>Figure 4 — <b>Controller ▸ Bench test</b>. The buttons in the Misc panel are the ECU's
   own maintenance commands; <b>Reset firmware settings</b> is the TunerStudio route to a clean
   configuration.</figcaption>
 </figure>
 
-pending-figure -->
 
 <figure markdown>
   ![Three copies of the settings — the TunerStudio tune file, the settings in the ECU's memory, and two copies in the ECU's flash — with the actions that move or destroy each: edits and Burn, Reset firmware settings, readconfig, rewriteconfig, flashing firmware, and a full erase](../img/diagrams/recovering-settings-map.svg)

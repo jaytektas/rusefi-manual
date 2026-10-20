@@ -88,14 +88,12 @@ keeps the card with the ECU even on USB, which is also the simplest way to let a
 while you tune on the bench.
 
 <!-- shot: img/ts/tunes-backups-sd-card-logger.png | Controller ▸ SD Card Logger | Proteus F7 connected with 12 V ignition on, an SD card inserted and held by the ECU: the dialog shows SD Card Logging ticked, Always start in Logging mode, SD logger mode, MLG logger rate and the Mount to PC, Mount to ECU, Unmount and Format buttons, with the SD card present and ECU logging indicators green; annotate 1 = SD Card Logging, 2 = Always start in Logging mode, 3 = the ECU logging indicator; every dropdown closed | The SD card holds long term fuel trims, the second tables and the Lua script on this board, so its state is part of your backup story. -->
-<!-- pending-figure
 <figure markdown>
-  ![TunerStudio SD Card Logger dialog on a Proteus F7 with SD Card Logging enabled, the Always start in Logging mode field and the mount buttons, and indicators showing the card is held by the ECU](../img/ts/tunes-backups-sd-card-logger.png)
+  ![TunerStudio SD Card Logger dialog on a Proteus F7 with SD Card Logging enabled, the Always start in Logging mode field, the card status indicators and the mount buttons](../img/ts/tunes-backups-sd-card-logger.png)
   <figcaption>Figure 2 — <b>Controller ▸ SD Card Logger</b>. The card is not only for logs: on this board it
   is also where learned trims, second tables and the Lua script are kept.</figcaption>
 </figure>
 
-pending-figure -->
 
 ## Burn: how an edit reaches the engine
 
@@ -146,17 +144,16 @@ Two details worth remembering:
 :material-circle:{ .level-basic } Basic
 
 1. **Press Burn** in the last dialog you changed, and wait for the front page to say **Settings saved**.
-2. **File ▸ Save Tune As**, into your project folder.
+2. **File ▸ Save Tune As**, into your project folder. TunerStudio suggests a name made of the date and
+   time; add what you changed to it.
 
 <!-- shot: img/ts/tunes-backups-save-tune-as.png | File ▸ Save Tune As | TunerStudio project for a Proteus F7 with the save-tune dialog open showing the project folder and a dated file name already typed in, for example 2026-10-21-ej18-current.msq, file type msq selected | A dated tune file in the project folder is the copy you will trust at two in the morning. -->
-<!-- pending-figure
 <figure markdown>
   ![TunerStudio's Save Tune As dialog with a dated file name in the project folder for a Proteus F7 project](../img/ts/tunes-backups-save-tune-as.png)
   <figcaption>Figure 4 — <b>File ▸ Save Tune As</b>. The name is the part people skip, and the part they need
   later.</figcaption>
 </figure>
 
-pending-figure -->
 
 3. **Name it so it still means something later**: the date, the engine, and what changed —
    `2026-10-21-ej18-ve-warmup-cell-fixed.msq`. A folder of files called `tune.msq`, `tune1.msq` and `final.msq`
@@ -189,7 +186,7 @@ pending-figure -->
 
 :material-circle:{ .level-intermediate } Intermediate
 
-Beyond your own files, TunerStudio keeps **restore points**: automatic copies of your settings that TunerStudio
+Beyond your own files, TunerStudio keeps **restore points** (**File ▸ Tune Restore Points**, Ctrl+R): automatic copies of your settings that TunerStudio
 takes as you work. You can go back to one, in whole or in part, and see a difference report
 between the current settings and the restore point you picked.
 
@@ -197,15 +194,13 @@ Treat restore points as your safety net inside a work session, and tune files as
 points live inside the project, on the same disk as everything else, so they do not protect you from a dead
 laptop.
 
-<!-- shot: img/ts/tunes-backups-restore-points.png | File ▸ Restore Points (TunerStudio's tune restore-point list — if your build files this under a different menu, open it wherever it lives) | TunerStudio project for a Proteus F7: a few settings edited and burned, the project closed and reopened so automatic restore points exist, and the list showing several dated entries with the current settings and one saved point selectable and a difference report available | Restore points are TunerStudio's automatic history of your settings — a safety net for a session, not a substitute for a saved tune file. -->
-<!-- pending-figure
+<!-- shot: img/ts/tunes-backups-restore-points.png | File ▸ Tune Restore Points | TunerStudio project for a Proteus F7: a few settings edited and burned, the project closed and reopened so automatic restore points exist, and the list showing several dated entries with the current settings and one saved point selectable and a difference report available | Restore points are TunerStudio's automatic history of your settings — a safety net for a session, not a substitute for a saved tune file. -->
 <figure markdown>
   ![TunerStudio's restore point list for a Proteus F7 project with several dated entries and a difference report beside them](../img/ts/tunes-backups-restore-points.png)
   <figcaption>Figure 5 — Restore points for one project. Entries appear on key events, and the difference
   report shows what changed since the one you select.</figcaption>
 </figure>
 
-pending-figure -->
 
 ## Restoring a tune
 
@@ -213,7 +208,7 @@ pending-figure -->
 
 1. **Check the `.ini` first.** It must be the one from the bundle of the firmware on the ECU. With a mismatched
    `.ini`, restoring a tune writes correct values into the wrong places.
-2. **File ▸ Open Tune**, and pick your file.
+2. **File ▸ Load Tune (msq)**, and pick your file.
 3. **Let the difference report decide.** On connection TunerStudio compares its copy with the ECU's and shows
    what differs. To put your file into the ECU, choose the option that sends the TunerStudio settings to the
    controller. To leave the ECU alone, take the controller's copy instead — and save it before you touch
@@ -225,7 +220,7 @@ pending-figure -->
    second tables and the Lua script (section *Where every part of your tune lives*).
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (the settings block is checksum-compared on connection via crc32CheckCommand, and the firmware signature is in the TunerStudio section); firmware/console/binary/tunerstudio.cpp (finishPendingBurn, and the delay after a burn before the new page is live) -->
 
-<!-- shot: img/ts/tunes-backups-difference-report.png | TunerStudio difference report on connect, after File ▸ Open Tune with an older tune file for the same engine | Proteus F7 connected, ignition on, engine stopped: the difference report comparing the loaded tune with the controller, a handful of rows highlighted with values side by side (for example injector reference pressure and two VE cells), with the option to send the TunerStudio settings to the controller and the option to take the controller's settings; annotate 1 = send TunerStudio settings, 2 = a changed row | The difference report is where you decide, setting by setting, which copy of the tune wins. -->
+<!-- shot: img/ts/tunes-backups-difference-report.png | TunerStudio difference report on connect, after File ▸ Load Tune (msq) with an older tune file for the same engine | Proteus F7 connected, ignition on, engine stopped: the difference report comparing the loaded tune with the controller, a handful of rows highlighted with values side by side (for example injector reference pressure and two VE cells), with the option to send the TunerStudio settings to the controller and the option to take the controller's settings; annotate 1 = send TunerStudio settings, 2 = a changed row | The difference report is where you decide, setting by setting, which copy of the tune wins. -->
 <!-- pending-figure
 <figure markdown>
   ![TunerStudio's difference report comparing the loaded tune with the controller's copy, changed settings side by side, with the button that sends the TunerStudio settings to the ECU](../img/ts/tunes-backups-difference-report.png)
@@ -419,14 +414,12 @@ way back in is a settings reset, which means losing the tune — so write the pi
     stranger reading your numbers — not to protect a tune you still intend to tune.
 
 <!-- shot: img/ts/tunes-backups-tune-lock.png | Controller ▸ Tune Lock | Proteus F7 connected with ignition on, engine stopped, the dialog open with the I understand ECU Locking checkbox ticked and a four-digit Tune read/write pincode entered, the warning line about using the console for unlocking visible, every dropdown closed | Tune Lock stops the tune being read out of the ECU — and stops you backing it up. -->
-<!-- pending-figure
 <figure markdown>
   ![TunerStudio Tune Lock dialog with the I understand ECU Locking checkbox ticked, a Tune read/write pincode field and the note that unlocking is done from the console](../img/ts/tunes-backups-tune-lock.png)
   <figcaption>Figure 8 — <b>Controller ▸ Tune Lock</b>. Useful against a curious stranger, costly if you lose
   the pincode.</figcaption>
 </figure>
 
-pending-figure -->
 
 ## Pitfalls and troubleshooting
 
