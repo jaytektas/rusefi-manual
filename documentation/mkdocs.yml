@@ -67,6 +67,7 @@ nav:
   - Part 0 — About rusEFI:
       - part0/index.md
       - What rusEFI is: part0/about-rusefi.md
+      - Getting help: part0/getting-help.md
   - Part I — Getting started:
       - part1/index.md
       - How EFI works: part1/how-efi-works.md
@@ -84,6 +85,7 @@ nav:
       - Shielding and noise: part2/shielding-noise.md
       - Wiring sensors: part2/wiring-sensors.md
       - Wiring outputs: part2/wiring-outputs.md
+      - CAN bus: part2/can-bus.md
   - Part III — Configuring the engine:
       - part3/index.md
       - Engine and vehicle basics: part3/engine-basics.md

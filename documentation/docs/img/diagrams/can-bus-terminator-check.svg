@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 350" role="img" aria-labelledby="t d">
+  <title id="t">Checking CAN termination with a multimeter</title>
+  <desc id="d">With the ECU and every device unpowered, measure the resistance between CAN High and CAN
+  Low at the ECU connector. About 60 ohm means two terminators and is correct, about 120 ohm means one
+  terminator is missing, an open reading means none is fitted, and near zero means the pair is shorted or
+  a third terminator has been added.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <text x="420" y="30" text-anchor="middle">measure at the ECU connector, with nothing powered</text>
+
+  <rect class="box" x="20" y="70" width="190" height="140" rx="6"/>
+  <text x="115" y="98" text-anchor="middle">Proteus, unplugged</text>
+  <text x="34" y="128" class="mono">17 CAN bus High</text>
+  <text x="34" y="152" class="mono">16 CAN bus Low</text>
+  <text x="34" y="182" class="small">Black23 connector</text>
+  <path class="wire-loop" d="M210,124 H300"/><path class="wire-ask" d="M210,148 H300"/>
+  <text x="255" y="112" text-anchor="middle" class="small">green</text>
+  <text x="255" y="172" text-anchor="middle" class="small">blue</text>
+
+  <rect class="loop" x="300" y="70" width="170" height="130" rx="6"/>
+  <text x="385" y="100" text-anchor="middle">multimeter</text>
+  <text x="385" y="122" text-anchor="middle" class="mono">Ω range</text>
+  <text x="385" y="162" text-anchor="middle" font-size="24">60 Ω</text>
+  <text x="385" y="216" text-anchor="middle" class="small">leads on 17 and 16</text>
+
+  <rect class="loop" x="500" y="52" width="320" height="62" rx="6"/>
+  <text x="516" y="76" font-size="16">≈ 60 Ω</text>
+  <text x="516" y="98" class="small">correct: two terminators, one at each end</text>
+
+  <rect class="drive" x="500" y="124" width="320" height="62" rx="6"/>
+  <text x="516" y="148" font-size="16">≈ 120 Ω</text>
+  <text x="516" y="170" class="small">one terminator is missing — look at the far end</text>
+
+  <rect class="box" x="500" y="196" width="320" height="62" rx="6"/>
+  <text x="516" y="220" font-size="16">OL / very high</text>
+  <text x="516" y="242" class="small">no terminator at all, or a broken wire</text>
+
+  <rect class="safe" x="500" y="268" width="320" height="62" rx="6"/>
+  <text x="516" y="292" font-size="16">≈ 0 Ω</text>
+  <text x="516" y="314" class="small">pair shorted together, or a third terminator</text>
+</svg>

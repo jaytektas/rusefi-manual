@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 536" role="img" aria-labelledby="t d">
+  <title id="t">Where a rusEFI question goes</title>
+  <desc id="d">Six kinds of question each pass through the same gate - search the wiki, the forum and
+  the issue tracker, then attach the evidence bundle - and are then routed to one channel: wiki pages
+  for already-written knowledge, the rusEFI forum for a problem with your own engine, tune or wiring,
+  GitHub issues for a fault in rusEFI's own code, rusEFI Online for the tune and log files, Discord for
+  a quick clarification once the context is written down, and the console's AI Troubleshooting tab when
+  you have a live ECU in front of you. Private messages and chat-first questions are what does not
+  work.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- column 1: what you have (blue = what is being asked) -->
+  <rect class="ask" x="20" y="24" width="212" height="52" rx="6"/>
+  <text x="126" y="45" text-anchor="middle">How do I…? What is…?</text>
+  <text x="126" y="63" text-anchor="middle" class="small">someone has written this</text>
+
+  <rect class="ask" x="20" y="100" width="212" height="52" rx="6"/>
+  <text x="126" y="121" text-anchor="middle">Engine, tune or wiring</text>
+  <text x="126" y="139" text-anchor="middle" class="small">my problem, my hardware</text>
+
+  <rect class="ask" x="20" y="176" width="212" height="52" rx="6"/>
+  <text x="126" y="197" text-anchor="middle">The software is wrong</text>
+  <text x="126" y="215" text-anchor="middle" class="small">a fault in rusEFI's own code</text>
+
+  <rect class="ask" x="20" y="252" width="212" height="52" rx="6"/>
+  <text x="126" y="273" text-anchor="middle">Files someone must open</text>
+  <text x="126" y="291" text-anchor="middle" class="small">tune, log, crash report</text>
+
+  <rect class="ask" x="20" y="328" width="212" height="52" rx="6"/>
+  <text x="126" y="349" text-anchor="middle">One quick clarification</text>
+  <text x="126" y="367" text-anchor="middle" class="small">context already written down</text>
+
+  <rect class="ask" x="20" y="404" width="212" height="52" rx="6"/>
+  <text x="126" y="425" text-anchor="middle">Live ECU, no time to wait</text>
+  <text x="126" y="443" text-anchor="middle" class="small">ask something private first</text>
+
+  <path class="wire-ask" d="M232,50 H274" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M232,126 H274" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M232,202 H274" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M232,278 H274" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M232,354 H274" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M232,430 H274" marker-end="url(#a)"/>
+
+  <!-- column 2: the gate every question passes (green) -->
+  <rect class="loop" x="276" y="24" width="212" height="432" rx="6"/>
+  <text x="382" y="48" text-anchor="middle">before you post</text>
+  <text x="382" y="74" text-anchor="middle" class="small">search the wiki</text>
+  <text x="382" y="90" text-anchor="middle" class="small">search the forum</text>
+  <text x="382" y="106" text-anchor="middle" class="small">search issues, open and closed</text>
+  <text x="382" y="134" text-anchor="middle" class="small">write the question first:</text>
+  <text x="382" y="150" text-anchor="middle" class="small">symptom, not diagnosis</text>
+  <text x="382" y="178" text-anchor="middle" class="small">attach the evidence bundle</text>
+  <text x="382" y="194" text-anchor="middle" class="small">(Figure 2)</text>
+  <text x="382" y="222" text-anchor="middle" class="small">one problem per thread</text>
+  <text x="382" y="238" text-anchor="middle" class="small">say what you checked already</text>
+  <text x="382" y="264" text-anchor="middle" class="small">the answer you get is the</text>
+  <text x="382" y="280" text-anchor="middle" class="small">quality of the evidence</text>
+  <text x="382" y="296" text-anchor="middle" class="small">you bring</text>
+  <text x="382" y="330" text-anchor="middle" class="small">when it is fixed, write up</text>
+  <text x="382" y="346" text-anchor="middle" class="small">the fix in the same place</text>
+
+  <path class="wire-loop" d="M488,50 H530" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M488,126 H530" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M488,202 H530" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M488,278 H530" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M488,354 H530" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M488,430 H530" marker-end="url(#a)"/>
+
+  <!-- column 3: the channel (orange = where it goes) -->
+  <rect class="drive" x="532" y="24" width="250" height="52" rx="6"/>
+  <text x="657" y="45" text-anchor="middle">wiki pages, then a forum search</text>
+  <text x="657" y="63" text-anchor="middle" class="small">indexed, and often the whole answer</text>
+
+  <rect class="drive" x="532" y="100" width="250" height="52" rx="6"/>
+  <text x="657" y="121" text-anchor="middle">rusEFI forum</text>
+  <text x="657" y="139" text-anchor="middle" class="small">primary free channel, stays findable</text>
+
+  <rect class="drive" x="532" y="176" width="250" height="52" rx="6"/>
+  <text x="657" y="197" text-anchor="middle">GitHub issue tracker</text>
+  <text x="657" y="215" text-anchor="middle" class="small">bug template; your analysis goes later</text>
+
+  <rect class="drive" x="532" y="252" width="250" height="52" rx="6"/>
+  <text x="657" y="273" text-anchor="middle">rusEFI Online</text>
+  <text x="657" y="291" text-anchor="middle" class="small">the tune and the log get a URL</text>
+
+  <rect class="drive" x="532" y="328" width="250" height="52" rx="6"/>
+  <text x="657" y="349" text-anchor="middle">Discord</text>
+  <text x="657" y="367" text-anchor="middle" class="small">fast, but context is lost in the stream</text>
+
+  <rect class="drive" x="532" y="404" width="250" height="52" rx="6"/>
+  <text x="657" y="425" text-anchor="middle">console <tspan class="small">AI Troubleshooting</tspan></text>
+  <text x="657" y="443" text-anchor="middle" class="small">read-only tools, no other human yet</text>
+
+  <!-- what does not work (red) -->
+  <rect class="safe" x="20" y="476" width="762" height="44" rx="6"/>
+  <text x="401" y="494" text-anchor="middle">What does not work: private messages and direct messages · asking in chat</text>
+  <text x="401" y="512" text-anchor="middle">before the context is written down · two unrelated problems in one thread</text>
+  <path class="wire-safe" d="M382,456 V476" marker-end="url(#a)"/>
+
+  <!-- store of knowledge note -->
+  <rect class="box" x="806" y="96" width="134" height="64" rx="6"/>
+  <text x="873" y="118" text-anchor="middle" class="small">stays findable for</text>
+  <text x="873" y="134" text-anchor="middle" class="small">the next person</text>
+  <text x="873" y="150" text-anchor="middle" class="small">with your symptom</text>
+  <path class="wire" d="M782,128 H804" marker-end="url(#a)"/>
+</svg>

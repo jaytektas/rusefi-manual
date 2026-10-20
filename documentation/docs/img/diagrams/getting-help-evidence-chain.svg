@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="t d">
+  <title id="t">The evidence bundle for a rusEFI help request</title>
+  <desc id="d">The question is written first, in one or two sentences. It is carried by three groups of
+  evidence: files from the ECU (the tune file, a log covering the same attempt, an SD-card log or a
+  crash report), identity information (board, engine, the firmware identity string, the PC operating
+  system) and things a helper can only see with your eyes (screenshots taken with the window borders
+  visible, a photograph of the connectors). The files go to rusEFI Online and get URLs, the rest goes in
+  the forum thread or GitHub issue, and the result is an answer that can be checked and kept. A missing
+  log, a missing firmware version or a tune from a different attempt is what stops the answer.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- the question (blue) -->
+  <rect class="ask" x="20" y="180" width="200" height="120" rx="6"/>
+  <text x="120" y="204" text-anchor="middle">Write the question first</text>
+  <text x="120" y="226" text-anchor="middle" class="small">one or two sentences:</text>
+  <text x="120" y="242" text-anchor="middle" class="small">what is broken</text>
+  <text x="120" y="258" text-anchor="middle" class="small">what you expected</text>
+  <text x="120" y="274" text-anchor="middle" class="small">what changed just before</text>
+
+  <!-- evidence groups (orange = what you attach) -->
+  <rect class="drive" x="260" y="24" width="286" height="132" rx="6"/>
+  <text x="403" y="48" text-anchor="middle">files from the ECU</text>
+  <text x="403" y="70" text-anchor="middle" class="mono">CurrentTune.msq</text>
+  <text x="403" y="86" text-anchor="middle" class="small">the tune, engine name filled in</text>
+  <text x="403" y="104" text-anchor="middle" class="mono">*.mlg</text>
+  <text x="403" y="120" text-anchor="middle" class="small">a log that contains the failure</text>
+  <text x="403" y="138" text-anchor="middle" class="small">SD-card log, or 00042_fail_HardFault.txt</text>
+
+  <rect class="drive" x="260" y="176" width="286" height="112" rx="6"/>
+  <text x="403" y="200" text-anchor="middle">what you are running</text>
+  <text x="403" y="222" text-anchor="middle" class="small">board, and how the engine is built</text>
+  <text x="403" y="238" text-anchor="middle" class="small">cylinders, injection, ignition, aspiration</text>
+  <text x="403" y="256" text-anchor="middle" class="small">the firmware identity string, from the title bar</text>
+  <text x="403" y="274" text-anchor="middle" class="small">PC operating system</text>
+
+  <rect class="drive" x="260" y="308" width="286" height="112" rx="6"/>
+  <text x="403" y="332" text-anchor="middle">what only you can see</text>
+  <text x="403" y="354" text-anchor="middle" class="small">console and TunerStudio screenshots,</text>
+  <text x="403" y="370" text-anchor="middle" class="small">window border included - it carries versions</text>
+  <text x="403" y="388" text-anchor="middle" class="small">a photo of the connectors and the wiring</text>
+  <text x="403" y="404" text-anchor="middle" class="small">a short video for a noise or a stall</text>
+
+  <path class="wire-ask" d="M220,240 H240 V90 H258" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M220,240 H258" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M220,240 V364 H258" marker-end="url(#a)"/>
+
+  <!-- the channel (green = where it is kept) -->
+  <rect class="loop" x="586" y="110" width="200" height="70" rx="6"/>
+  <text x="686" y="134" text-anchor="middle">rusEFI Online</text>
+  <text x="686" y="152" text-anchor="middle" class="small">upload the tune and the log,</text>
+  <text x="686" y="168" text-anchor="middle" class="small">paste the exact URLs</text>
+
+  <rect class="loop" x="586" y="250" width="200" height="84" rx="6"/>
+  <text x="686" y="274" text-anchor="middle">forum thread</text>
+  <text x="686" y="292" text-anchor="middle" class="small">or GitHub issue</text>
+  <text x="686" y="310" text-anchor="middle" class="small">one problem per thread</text>
+  <text x="686" y="326" text-anchor="middle" class="small">analysis in a later comment</text>
+
+  <path class="wire-drive" d="M546,90 H566 V145 H584" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M546,232 H566 V292 H584" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M546,364 H566 V300 H584" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M686,180 V248" marker-end="url(#a)"/>
+  <text x="694" y="216" class="small">links in the post</text>
+
+  <rect class="loop" x="806" y="240" width="134" height="104" rx="6"/>
+  <text x="873" y="266" text-anchor="middle" class="small">an answer you</text>
+  <text x="873" y="282" text-anchor="middle" class="small">can check,</text>
+  <text x="873" y="298" text-anchor="middle" class="small">and the next</text>
+  <text x="873" y="314" text-anchor="middle" class="small">person can find</text>
+  <path class="wire-loop" d="M786,292 H804" marker-end="url(#a)"/>
+
+  <!-- what stops the answer (red) -->
+  <rect class="safe" x="20" y="436" width="766" height="48" rx="6"/>
+  <text x="403" y="456" text-anchor="middle">What stops the answer: no log of the failure · no firmware identity string ·</text>
+  <text x="403" y="474" text-anchor="middle">a tune from a different attempt than the log · "it does not work" with no symptom</text>
+  <path class="wire-safe" d="M403,420 V436" marker-end="url(#a)"/>
+</svg>

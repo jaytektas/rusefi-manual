@@ -1,6 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 300" role="img" aria-labelledby="t d">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 330" role="img" aria-labelledby="t d">
   <title id="t">CAN bus topology</title>
-  <desc id="d">A CAN bus is one twisted pair, CAN High and CAN Low, with a 120 ohm terminator at each physical end. The Proteus, with its on-board terminator, is one end; a dash at the far end has the other terminator; a rusEFI wideband controller joins on a short stub.</desc>
+  <desc id="d">A CAN bus is one twisted pair, CAN High and CAN Low, with a 120 ohm terminator at each
+  physical end and nothing else. The Proteus is one end and carries the first terminator; a dash at the
+  far end carries the second; a rusEFI wideband controller joins in the middle on a short stub and has no
+  terminator of its own.</desc>
   <style>
     text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
     .small { font-size: 11px; fill: #4b5563; }
@@ -22,22 +25,47 @@
       .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
     }
   </style>
-<defs><marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" class="arrow"/></marker></defs>
-  <path class="wire-loop" d="M150,120 H810"/><text x="480" y="112" text-anchor="middle" class="small">CAN High (green in the Proteus yaml)</text>
-  <path class="wire-ask" d="M150,160 H810"/><text x="280" y="182" text-anchor="middle" class="small">CAN Low (blue) · twisted together along the whole run</text>
-  <rect class="box" x="20" y="80" width="130" height="120" rx="6"/>
-  <text x="85" y="110" text-anchor="middle">Proteus</text>
-  <text x="85" y="130" text-anchor="middle" class="mono">Black23 17 H</text>
-  <text x="85" y="148" text-anchor="middle" class="mono">Black23 16 L</text>
-  <text x="85" y="176" text-anchor="middle" class="small">120 Ω on board</text>
-  <rect class="box" x="810" y="80" width="130" height="120" rx="6"/>
-  <text x="875" y="110" text-anchor="middle">dash / far end</text>
-  <text x="875" y="140" text-anchor="middle" class="small">120 Ω</text>
-  <text x="875" y="158" text-anchor="middle" class="small">terminator</text>
-  <path class="wire-loop" d="M440,120 V230"/><path class="wire-ask" d="M460,160 V230"/>
-  <rect class="box" x="370" y="230" width="160" height="56" rx="6"/>
-  <text x="450" y="254" text-anchor="middle">rusEFI wideband</text>
-  <text x="450" y="272" text-anchor="middle" class="small">short stub, no terminator</text>
-  <text x="560" y="250" class="small">keep stubs as short as you can</text>
-  <text x="480" y="40" text-anchor="middle">two ends, two 120 Ω terminators: about 60 Ω between H and L</text>
+  <text x="480" y="32" text-anchor="middle">one 120 Ω terminator at each physical end — about 60 Ω between H and L, power off</text>
+  <text x="480" y="52" text-anchor="middle" class="small">the pair is twisted for the whole run: a line with short branches, never a star</text>
+
+  <!-- the pair, running the length of the vehicle -->
+  <path class="wire-loop" d="M180,130 H780"/><text x="300" y="122" text-anchor="middle" class="small">CAN High · Black23 17 (green)</text>
+  <path class="wire-ask" d="M180,180 H780"/><text x="300" y="204" text-anchor="middle" class="small">CAN Low · Black23 16 (blue)</text>
+
+  <!-- near end: the ECU, with its terminator -->
+  <rect class="box" x="20" y="90" width="150" height="130" rx="6"/>
+  <text x="95" y="118" text-anchor="middle">Proteus</text>
+  <text x="95" y="140" text-anchor="middle" class="mono">Black23 17 H</text>
+  <text x="95" y="158" text-anchor="middle" class="mono">Black23 16 L</text>
+  <text x="95" y="182" text-anchor="middle" class="small">CAN1 (Primary CAN)</text>
+  <path class="wire-loop" d="M170,130 H180"/><path class="wire-ask" d="M170,180 H180"/>
+  <path class="wire" d="M180,130 V145 M180,175 V180"/>
+  <rect class="box" x="170" y="145" width="20" height="30"/>
+  <text x="200" y="163" class="small">120 Ω</text>
+  <text x="20" y="246" class="small">at the ECU's end: in the connector itself, or an</text>
+  <text x="20" y="262" class="small">in-line plug at the end of the run. Whether your</text>
+  <text x="20" y="278" class="small">board already has one is what the resistance check answers</text>
+
+  <!-- far end: the last device, with the other terminator -->
+  <path class="wire" d="M780,130 V145 M780,175 V180"/>
+  <rect class="box" x="770" y="145" width="20" height="30"/>
+  <text x="760" y="163" text-anchor="end" class="small">120 Ω</text>
+  <path class="wire-loop" d="M790,130 H800"/><path class="wire-ask" d="M790,180 H800"/>
+  <rect class="box" x="800" y="90" width="140" height="130" rx="6"/>
+  <text x="870" y="118" text-anchor="middle">dash / logger</text>
+  <text x="870" y="142" text-anchor="middle" class="small">the far end of the</text>
+  <text x="870" y="160" text-anchor="middle" class="small">physical run</text>
+  <text x="870" y="196" text-anchor="middle" class="mono">H to H · L to L</text>
+
+  <!-- mid-bus device: a stub, no terminator. The High stub hops over the Low wire:
+       a crossing is not a connection. -->
+  <circle cx="580" cy="130" r="3" class="arrow"/><circle cx="560" cy="180" r="3" class="arrow"/>
+  <path class="wire-loop" d="M580,130 V166 C568,172 592,188 580,194 V236"/>
+  <path class="wire-ask" d="M560,180 V236"/>
+  <rect class="box" x="490" y="236" width="180" height="66" rx="6"/>
+  <text x="580" y="262" text-anchor="middle">rusEFI wideband</text>
+  <text x="580" y="282" text-anchor="middle" class="small">mid-bus: no terminator</text>
+  <text x="690" y="252" class="small">a branch off the line is a stub:</text>
+  <text x="690" y="268" class="small">keep it well under 300 mm and</text>
+  <text x="690" y="284" class="small">never put a terminator on it</text>
 </svg>

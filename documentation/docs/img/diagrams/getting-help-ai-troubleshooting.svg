@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 468" role="img" aria-labelledby="t d">
+  <title id="t">The console AI Troubleshooting assistant</title>
+  <desc id="d">You describe the problem in the console's AI Troubleshooting tab. The model itself runs on
+  a hosted service under your ChatGPT plan, so your question and whatever evidence the tools return
+  leave your computer. The console keeps the ECU connection and a local cache of rusEFI's source and
+  wiki text, and hands the model read-only evidence tools: live values, tune fields read fresh from the
+  ECU's memory, the Lua script, a short log capture, a sniffer chart and recent messages. On request it
+  writes an exported diagnostic case to your PC as JSON. The tab has no write path to the ECU; the
+  separate standalone MCP server does, and that one has to be kept away from a running engine.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- you (blue) -->
+  <rect class="ask" x="20" y="30" width="190" height="70" rx="6"/>
+  <text x="115" y="54" text-anchor="middle">You describe the problem</text>
+  <text x="115" y="72" text-anchor="middle" class="small">Model: pick one, then Send</text>
+  <text x="115" y="88" text-anchor="middle" class="small">Stop and New conversation work</text>
+
+  <path class="wire-ask" d="M210,65 H258" marker-end="url(#a)"/>
+  <text x="216" y="56" class="small">prompt</text>
+
+  <!-- the console (host of everything local) -->
+  <rect class="box" x="260" y="24" width="330" height="326" rx="6"/>
+  <text x="425" y="46" text-anchor="middle">rusEFI console, holding the ECU connection</text>
+
+  <rect class="loop" x="278" y="58" width="294" height="124" rx="6"/>
+  <text x="425" y="80" text-anchor="middle">read-only evidence tools</text>
+  <text x="425" y="100" text-anchor="middle" class="mono">ecu_info · list_output_channels</text>
+  <text x="425" y="116" text-anchor="middle" class="mono">read_live_values · diagnostic_snapshot</text>
+  <text x="425" y="132" text-anchor="middle" class="mono">read_tune_fields · get_lua</text>
+  <text x="425" y="148" text-anchor="middle" class="mono">capture_live_log · capture_engine_sniffer</text>
+  <text x="425" y="164" text-anchor="middle" class="mono">read_messages</text>
+
+  <rect class="loop" x="278" y="194" width="294" height="80" rx="6"/>
+  <text x="425" y="216" text-anchor="middle">local knowledge cache</text>
+  <text x="425" y="234" text-anchor="middle" class="small">rusEFI firmware source and wiki text,</text>
+  <text x="425" y="250" text-anchor="middle" class="small">kept on your PC - Start Download</text>
+  <text x="425" y="266" text-anchor="middle" class="mono">search_knowledge · read_knowledge</text>
+
+  <rect class="box" x="278" y="286" width="294" height="48" rx="6"/>
+  <text x="425" y="306" text-anchor="middle">one turn is bounded</text>
+  <text x="425" y="324" text-anchor="middle" class="small">two minutes · eight model requests · 24 calls</text>
+
+  <!-- the model (orange = what leaves your computer) -->
+  <rect class="drive" x="650" y="30" width="220" height="110" rx="6"/>
+  <text x="760" y="54" text-anchor="middle">the model, on a hosted service</text>
+  <text x="760" y="72" text-anchor="middle" class="small">your ChatGPT plan signs you in:</text>
+  <text x="760" y="88" text-anchor="middle" class="small">Continue with ChatGPT</text>
+  <text x="760" y="110" text-anchor="middle" class="small">your question, the tune values</text>
+  <text x="760" y="126" text-anchor="middle" class="small">and the Lua source go there</text>
+
+  <path class="wire-drive" d="M590,90 H648" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M650,118 H592" marker-end="url(#a)"/>
+  <text x="596" y="80" class="small">tools</text>
+  <text x="598" y="136" class="small">answer</text>
+
+  <!-- the ECU (green = what it may look at) -->
+  <rect class="loop" x="20" y="240" width="190" height="104" rx="6"/>
+  <text x="115" y="264" text-anchor="middle">the ECU on USB</text>
+  <text x="115" y="284" text-anchor="middle" class="small">settings are read fresh from</text>
+  <text x="115" y="300" text-anchor="middle" class="small">the ECU's own memory</text>
+  <text x="115" y="318" text-anchor="middle" class="small">engine running, or ignition on</text>
+
+  <path class="wire-loop" d="M210,272 H262" marker-end="url(#a)"/>
+  <path class="wire-loop" d="M262,302 H212" marker-end="url(#a)"/>
+
+  <!-- exported case -->
+  <rect class="loop" x="650" y="240" width="220" height="104" rx="6"/>
+  <text x="760" y="262" text-anchor="middle">export a diagnostic case</text>
+  <text x="760" y="280" text-anchor="middle" class="small">findings, hypotheses, next steps</text>
+  <text x="760" y="296" text-anchor="middle" class="small">and the exact evidence, as JSON</text>
+  <text x="760" y="314" text-anchor="middle" class="mono">~/.rusefi/llm-access/</text>
+  <text x="760" y="330" text-anchor="middle" class="mono">diagnostic-cases/</text>
+
+  <path class="wire-loop" d="M590,296 H648" marker-end="url(#a)"/>
+  <text x="600" y="288" class="small">export</text>
+
+  <path class="wire-loop" d="M760,140 V238" marker-end="url(#a)"/>
+
+  <!-- what the tab cannot do (red) -->
+  <rect class="safe" x="20" y="378" width="850" height="64" rx="6"/>
+  <text x="445" y="400" text-anchor="middle">There is no write path here. The standalone MCP server (:mcp_ecu) is a different program:</text>
+  <text x="445" y="418" text-anchor="middle" class="small">it can write Lua, write tunes and update firmware, and a model holding it can change a running engine</text>
+  <text x="445" y="434" text-anchor="middle" class="small">read the value before anything writes it, and never flash with the engine running</text>
+  <path class="wire-safe" d="M425,350 V378" marker-end="url(#a)"/>
+</svg>

@@ -5,5 +5,4 @@
 What rusEFI is, what open source means for you, how mature it is, and where to get help.
 
 - **[What rusEFI is](about-rusefi.md)** — RusEFI is open-source engine control firmware that anyone can read, build and fix; this chapter says what it is, what its licence lets you do, and what the project's own repository shows about how it is tested and released.
-
-**Still being written:** Getting help.
+- **[Getting help](getting-help.md)** — RusEFI is a community project with no support desk, so where you ask and what you attach decide whether you get an answer — this chapter covers the channels, the evidence to gather first, and how to use rusEFI's AI tools without putting an engine at risk.
