@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="t d">
+  <title id="t">Logic-level coils and power-switched coils at the Proteus ignition outputs</title>
+  <desc id="d">Left: a logic-level smart coil pack, whose own housing contains the power stage, wired with fused 12 V, ground and a trigger wire to Proteus Black 35 pin 35, Ignition 1. Right: a coil whose minus terminal carries the primary current, which must go through an external driver; the ECU's ignition output drives that driver's input instead. A dashed red line marks the forbidden connection of the coil minus straight to the ECU pin.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <text x="20" y="34">Two kinds of coil, two different connections</text>
+  <text x="20" y="52" class="small">Proteus names its twelve ignition outputs "Smart Ignition Coil 1…12" in its own board files</text>
+
+  <!-- left panel -->
+  <rect class="loop" x="20" y="64" width="440" height="250" rx="8"/>
+  <text x="40" y="90">1 · logic-level coil ("smart" coil)</text>
+  <text x="40" y="106" class="small">the power stage is inside the coil housing</text>
+
+  <rect class="box" x="40" y="120" width="150" height="90" rx="6"/>
+  <text x="115" y="146" text-anchor="middle">coil pack</text>
+  <text x="115" y="164" text-anchor="middle" class="small">driver inside</text>
+  <text x="115" y="180" text-anchor="middle" class="small">3 terminals</text>
+
+  <rect class="box" x="320" y="110" width="130" height="150" rx="6"/>
+  <text x="385" y="134" text-anchor="middle">Proteus</text>
+  <text x="385" y="152" text-anchor="middle" class="mono">Ign 1</text>
+  <text x="385" y="168" text-anchor="middle" class="mono">Black35 pin 35</text>
+
+  <path class="wire-drive" d="M190,140 H318"/>
+  <text x="200" y="134" class="small">+12 V, fused</text>
+  <path class="wire" d="M190,170 H318"/>
+  <text x="200" y="164" class="small">ground</text>
+  <path class="wire-ask" d="M190,200 H318" marker-end="url(#a)"/>
+  <text x="200" y="194" class="small">trigger</text>
+
+  <text x="40" y="234" class="small">only the trigger wire reaches the ECU: the coil's</text>
+  <text x="40" y="250" class="small">own housing carries the primary current</text>
+  <text x="40" y="274" class="small">default coil 1 … 4 are Black35 pins 35, 34, 22, 33</text>
+  <text x="40" y="290" class="small">one wire per coil, plus its own 12 V and ground</text>
+
+  <!-- right panel -->
+  <rect class="safe" x="500" y="64" width="440" height="250" rx="8"/>
+  <text x="520" y="90">2 · coil switched at its minus terminal</text>
+  <text x="520" y="106" class="small">several amps in the primary, outside the coil</text>
+
+  <rect class="box" x="515" y="130" width="115" height="80" rx="6"/>
+  <text x="572" y="156" text-anchor="middle">ignition coil</text>
+  <text x="572" y="174" text-anchor="middle" class="small">minus terminal</text>
+
+  <path class="wire" d="M630,170 H698" marker-end="url(#a)"/>
+  <text x="636" y="164" class="small">coil −</text>
+
+  <rect class="drive" x="700" y="130" width="130" height="80" rx="6"/>
+  <text x="765" y="156" text-anchor="middle">external driver</text>
+  <text x="765" y="174" text-anchor="middle" class="small">igniter module</text>
+
+  <path class="wire" d="M765,210 V226 M749,226 H781 M754,232 H776 M759,238 H771"/>
+
+  <rect class="box" x="835" y="130" width="105" height="80" rx="6"/>
+  <text x="887" y="156" text-anchor="middle">Proteus</text>
+  <text x="887" y="174" text-anchor="middle" class="mono">Ign 1</text>
+  <path class="wire-ask" d="M835,185 H800" marker-end="url(#a)"/>
+  <text x="887" y="230" text-anchor="middle" class="mono">Black35 pin 35</text>
+
+  <path class="wire-safe" d="M572,210 V238"/>
+  <path class="wire-safe" d="M562,244 L582,264 M582,244 L562,264"/>
+  <text x="596" y="258" class="small">not this way</text>
+  <text x="530" y="290" class="small">never wire the coil's minus terminal to an ECU output pin:</text>
+  <text x="530" y="306" class="small">that asks a logic-level output to carry the coil current</text>
+
+  <!-- bottom notes -->
+  <rect class="box" x="20" y="330" width="920" height="112" rx="8"/>
+  <text x="32" y="354" class="small">What the pin does: rusEFI drives the ignition output active while the coil charges (dwell), and the spark happens as it releases.</text>
+  <text x="32" y="372" class="small">rusEFI's own note on the Ignition Outputs panel: "Output Mode is dangerous and can burn out your coils, 99% installs is default,</text>
+  <text x="32" y="388" class="small">some Hondas are default inverted" — on Proteus there is no output-mode field for coils or injectors to change.</text>
+  <text x="32" y="410" class="small">Batch or sequential changes which outputs fire together, not where the coils are wired: rusEFI handles the firing order for you.</text>
+  <text x="32" y="428" class="small">Coil current and charge time are tuning questions — see the Ignition chapter; log the dwell duty channel to watch the coil charging.</text>
+</svg>

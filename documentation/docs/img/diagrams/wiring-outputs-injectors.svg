@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 460" role="img" aria-labelledby="t d">
+  <title id="t">Injector outputs: plus from the main relay, the ECU switches the minus</title>
+  <desc id="d">Battery plus goes through a fuse to the main relay contact. The relay's switched 12 V feeds the plus side of every injector. The minus side of each injector goes to its own Proteus Black 35 pin: injector 1 to pin 3, injector 2 to pin 15, injector 3 to pin 4, injector 4 to pin 16. Inside the ECU each of those pins is a low-side driver that switches the injector to ground.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- power path -->
+  <rect class="safe" x="20" y="30" width="110" height="50" rx="6"/>
+  <text x="75" y="52" text-anchor="middle">Battery +</text>
+  <text x="75" y="70" text-anchor="middle" class="small">12 V</text>
+  <path class="wire-drive" d="M130,55 H160"/>
+  <rect class="safe" x="160" y="40" width="70" height="30" rx="4"/>
+  <text x="195" y="60" text-anchor="middle" class="small">fuse</text>
+  <path class="wire-drive" d="M230,55 H260"/>
+  <rect class="drive" x="260" y="30" width="180" height="50" rx="6"/>
+  <text x="350" y="52" text-anchor="middle">main relay contact</text>
+  <text x="350" y="70" text-anchor="middle" class="small">terminal 30 → 87</text>
+
+  <!-- switched 12 V bus -->
+  <path class="wire-drive" d="M350,80 V100"/>
+  <path class="wire-drive" d="M265,100 H905"/>
+  <text x="560" y="94" class="small">switched 12 V from the main relay — the injectors' plus side</text>
+
+  <!-- four injectors -->
+  <path class="wire-drive" d="M330,100 V140"/>
+  <path class="wire-drive" d="M500,100 V140"/>
+  <path class="wire-drive" d="M670,100 V140"/>
+  <path class="wire-drive" d="M840,100 V140"/>
+
+  <rect class="box" x="265" y="140" width="130" height="54" rx="6"/>
+  <text x="330" y="162" text-anchor="middle">injector 1</text>
+  <text x="330" y="180" text-anchor="middle" class="small">coil about 12 Ω</text>
+  <rect class="box" x="435" y="140" width="130" height="54" rx="6"/>
+  <text x="500" y="162" text-anchor="middle">injector 2</text>
+  <text x="500" y="180" text-anchor="middle" class="small">coil about 12 Ω</text>
+  <rect class="box" x="605" y="140" width="130" height="54" rx="6"/>
+  <text x="670" y="162" text-anchor="middle">injector 3</text>
+  <text x="670" y="180" text-anchor="middle" class="small">coil about 12 Ω</text>
+  <rect class="box" x="775" y="140" width="130" height="54" rx="6"/>
+  <text x="840" y="162" text-anchor="middle">injector 4</text>
+  <text x="840" y="180" text-anchor="middle" class="small">coil about 12 Ω</text>
+
+  <!-- down into the ECU -->
+  <path class="wire-ask" d="M330,194 V248" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M500,194 V248" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M670,194 V248" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M840,194 V248" marker-end="url(#a)"/>
+
+  <!-- ECU -->
+  <rect class="box" x="240" y="250" width="690" height="180" rx="8"/>
+  <text x="585" y="274" text-anchor="middle">Proteus — each output switches its injector to ground</text>
+
+  <text x="330" y="300" text-anchor="middle" class="mono">Lowside 1</text>
+  <text x="330" y="316" text-anchor="middle" class="mono">Black35 pin 3</text>
+  <text x="500" y="300" text-anchor="middle" class="mono">Lowside 2</text>
+  <text x="500" y="316" text-anchor="middle" class="mono">Black35 pin 15</text>
+  <text x="670" y="300" text-anchor="middle" class="mono">Lowside 3</text>
+  <text x="670" y="316" text-anchor="middle" class="mono">Black35 pin 4</text>
+  <text x="840" y="300" text-anchor="middle" class="mono">Lowside 4</text>
+  <text x="840" y="316" text-anchor="middle" class="mono">Black35 pin 16</text>
+
+  <!-- switch + ground symbols -->
+  <path class="wire" d="M330,330 V344 M318,344 L342,360 M330,360 V368 M314,368 H346 M319,374 H341 M324,380 H336"/>
+  <path class="wire" d="M500,330 V344 M488,344 L512,360 M500,360 V368 M484,368 H516 M489,374 H511 M494,380 H506"/>
+  <path class="wire" d="M670,330 V344 M658,344 L682,360 M670,360 V368 M654,368 H686 M659,374 H681 M664,380 H676"/>
+  <path class="wire" d="M840,330 V344 M828,344 L852,360 M840,360 V368 M824,368 H856 M829,374 H851 M834,380 H846"/>
+  <text x="585" y="410" text-anchor="middle" class="small">the injector's current loop: battery + → fuse → relay contact → injector coil → driver → ground → battery −</text>
+
+  <!-- left notes -->
+  <rect class="drive" x="20" y="140" width="210" height="90" rx="6"/>
+  <text x="30" y="162" class="small">16 low-side outputs (Black 35)</text>
+  <text x="30" y="180" class="small">drivers rated 4 A each per the</text>
+  <text x="30" y="196" class="small">Proteus hardware documentation</text>
+  <text x="30" y="216" class="small">12 V / 12 Ω ≈ 1 A here</text>
+
+  <rect class="safe" x="20" y="250" width="210" height="200" rx="6"/>
+  <text x="30" y="272" class="small">Lowside 10, 11 and 12 are</text>
+  <text x="30" y="288" class="small">pins 20, 9 and 21 — the fuel</text>
+  <text x="30" y="304" class="small">pump, fan and main relay pins</text>
+  <text x="30" y="326" class="small">on a 12-cylinder engine they</text>
+  <text x="30" y="342" class="small">become injectors 10, 11, 12.</text>
+  <text x="30" y="358" class="small">Move the relays to Lowside</text>
+  <text x="30" y="374" class="small">13–16 (pins 10, 11, 12, 23):</text>
+  <text x="30" y="390" class="small">the board files mark those as</text>
+  <text x="30" y="406" class="small">having a flyback diode.</text>
+  <text x="30" y="426" class="small">One pin, one owner: two jobs</text>
+  <text x="30" y="442" class="small">on one pin is a fatal error.</text>
+</svg>

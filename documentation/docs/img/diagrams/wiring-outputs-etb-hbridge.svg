@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 440" role="img" aria-labelledby="t d">
+  <title id="t">The Proteus electronic throttle H-bridge, from controller to motor terminals</title>
+  <desc id="d">Inside the ECU the throttle controller's duty command reaches the MCU's three control lines, which drive a TLE9201 half-bridge chip on the board. The chip's two outputs leave on Proteus Black 23 pin 7 (ETB 1 positive) and Black 23 pin 6 (ETB 1 negative) and feed the throttle motor. The chip's own 12 V supply is Black 23 pin 23, fed from the output of the main relay. Without that supply the bridge cannot move the throttle even though the logic is alive.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- ECU -->
+  <rect class="box" x="20" y="50" width="500" height="270" rx="8"/>
+  <text x="36" y="74">Proteus — H-bridge #1</text>
+
+  <rect class="ask" x="40" y="90" width="150" height="66" rx="6"/>
+  <text x="115" y="112" text-anchor="middle">throttle controller</text>
+  <text x="115" y="130" text-anchor="middle" class="small">duty, ±90 % limit</text>
+  <text x="115" y="146" text-anchor="middle" class="small">500 Hz loop</text>
+
+  <path class="wire-ask" d="M190,122 H226" marker-end="url(#a)"/>
+
+  <rect class="drive" x="230" y="86" width="130" height="74" rx="6"/>
+  <text x="295" y="106" text-anchor="middle" class="mono">D12 Control</text>
+  <text x="295" y="124" text-anchor="middle" class="mono">D10 DIR</text>
+  <text x="295" y="142" text-anchor="middle" class="mono">D11 DIS</text>
+
+  <path class="wire-drive" d="M360,122 H388" marker-end="url(#a)"/>
+
+  <rect class="drive" x="390" y="80" width="120" height="86" rx="6"/>
+  <text x="450" y="102" text-anchor="middle">TLE9201</text>
+  <text x="450" y="120" text-anchor="middle" class="small">two half-bridges</text>
+  <text x="450" y="136" text-anchor="middle" class="small">reported faults</text>
+  <text x="450" y="152" text-anchor="middle" class="small">checked 10 times/s</text>
+
+  <rect class="safe" x="40" y="220" width="250" height="70" rx="6"/>
+  <text x="52" y="242" class="mono">Black23 pin 23</text>
+  <text x="52" y="258" class="small">switched 12 V from the main relay</text>
+  <text x="52" y="274" class="small">feeds the H-bridges and the high sides</text>
+  <path class="wire-drive" d="M290,250 H450 V170" marker-end="url(#a)"/>
+
+  <text x="36" y="312" class="small">the three control lines are set by the board, not by you</text>
+
+  <!-- to the motor -->
+  <path class="wire-drive" d="M520,115 H698" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M520,165 H698" marker-end="url(#a)"/>
+  <text x="530" y="108" class="mono">Black23 pin 7 · ETB 1 +</text>
+  <text x="530" y="158" class="mono">Black23 pin 6 · ETB 1 −</text>
+
+  <rect class="box" x="700" y="90" width="230" height="100" rx="6"/>
+  <text x="815" y="118" text-anchor="middle">throttle motor</text>
+  <text x="815" y="138" text-anchor="middle" class="small">swap the two wires to reverse it</text>
+  <text x="815" y="156" text-anchor="middle" class="small">bench test: open 300 ms</text>
+
+  <rect class="drive" x="700" y="210" width="230" height="110" rx="6"/>
+  <text x="712" y="232" class="small">duty is clamped to ±90 %</text>
+  <text x="712" y="250" class="small">PWM frequency: 100 … 3000 Hz</text>
+  <text x="712" y="266" class="small">over 3000 Hz → fatal error,</text>
+  <text x="712" y="282" class="small">under 100 Hz → raised to 100 Hz</text>
+  <text x="712" y="298" class="small">overcurrent or overheating shuts</text>
+  <text x="712" y="314" class="small">the chip's outputs off</text>
+
+  <!-- notes -->
+  <rect class="box" x="20" y="340" width="910" height="86" rx="8"/>
+  <text x="32" y="364" class="small">H-bridge #2 is the same circuit: Black23 pin 15 (positive) and pin 8 (negative), driven by D13 Control, D9 DIR and D8 DIS.</text>
+  <text x="32" y="382" class="small">Either bridge can instead drive a stepper idle air valve — the board wires the same three control lines for that (see the Idle chapter).</text>
+  <text x="32" y="400" class="small">Advanced ▸ DC motor actuator(s) function decides what each bridge drives; Advanced ▸ DC motor actuator(s) hardware holds the</text>
+  <text x="32" y="416" class="small">board's own driver wiring — leave those four pin fields exactly as they are.</text>
+</svg>

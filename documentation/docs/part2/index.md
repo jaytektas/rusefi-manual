@@ -9,5 +9,6 @@ The official boards and everything that connects to them: tools, wiring practice
 - **[Power, grounds and ground loops](power-grounds.md)** — The ECU, its sensors and its outputs need clean 12 V in, separate ground paths back out, and a fuse on every supply — get this right and most "strange sensor" problems never happen.
 - **[Shielding and noise](shielding-noise.md)** — An engine bay is full of sparks and switching currents, and the two inputs rusEFI is most sensitive on — the crank and cam trigger, and the knock sensor — sit right in the middle of them, so those wires must be kept short, twisted, shielded at one end and run away from the coils, injectors and throttle motor.
 - **[Wiring sensors](wiring-sensors.md)** — Every sensor gets a supply (or nothing), one signal wire, and a return wire of its own back to the ECU's sensor ground — and Proteus puts each kind of sensor on its own family of pins, so the connector you use tells you what the firmware expects to find there.
+- **[Wiring outputs](wiring-outputs.md)** — Every output on a Proteus is a switch inside the ECU — nearly all of them switch the *minus* side of the load — so each actuator wire needs three decisions: which pin, where the load's plus side comes from, and what gives an inductive load somewhere to dump its magnetic field when the ECU lets go.
 
-**Still being written:** Wiring outputs, CAN bus.
+**Still being written:** CAN bus.

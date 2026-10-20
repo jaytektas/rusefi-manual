@@ -83,6 +83,7 @@ nav:
       - Power, grounds and ground loops: part2/power-grounds.md
       - Shielding and noise: part2/shielding-noise.md
       - Wiring sensors: part2/wiring-sensors.md
+      - Wiring outputs: part2/wiring-outputs.md
   - Part III — Configuring the engine:
       - part3/index.md
       - Engine and vehicle basics: part3/engine-basics.md
@@ -109,6 +110,7 @@ nav:
       - part5/index.md
       - Bench testing: part5/bench-testing.md
       - Diagnostics and error codes: part5/diagnostics.md
+      - Troubleshooting guide: part5/troubleshooting.md
   - Part VI — Firmware and maintenance:
       - part6/index.md
   - Part VII — Reference:

@@ -6,5 +6,4 @@ Proving the wiring before the engine turns, reading what the ECU reports, and fi
 
 - **[Bench testing](bench-testing.md)** — Before the engine ever turns, you can make rusEFI pulse each injector, fire each coil, click each relay and run each fan from TunerStudio, so every wire is proven before the first crank.
 - **[Diagnostics and error codes](diagnostics.md)** — RusEFI reports problems at three levels — a warning it can live with, a configuration error it refuses to run with, and a critical error that stops the engine — and shows each of them in TunerStudio and on the check engine light.
-
-**Still being written:** Troubleshooting guide.
+- **[Troubleshooting guide](troubleshooting.md)** — Start from what you can see — the TunerStudio indicators, a warning code, or what the engine does — and this chapter sends you to the check and the chapter that fixes it.
