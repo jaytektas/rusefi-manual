@@ -12,7 +12,7 @@ import pathlib
 import re
 
 DOCS = pathlib.Path(__file__).resolve().parent.parent / "documentation/docs"
-FIG = re.compile(r"<figure markdown>\n.*?</figure>", re.S)
+FIG = re.compile(r"(?<!<!-- pending-figure\n)<figure markdown>\n.*?</figure>", re.S)   # skip ones already held
 HELD = re.compile(r"<!-- pending-figure\n(.*?)\npending-figure -->", re.S)
 held = shown = 0
 
