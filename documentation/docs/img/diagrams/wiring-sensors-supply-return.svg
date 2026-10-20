@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 510" role="img" aria-labelledby="t d">
   <title id="t">Sensor supplies and sensor returns on Proteus</title>
-  <desc id="d">Each sensor gets its supply, its signal and its own return wire, and each wire lands on a named Proteus pin. A MAP sensor takes +5 V supply 1 on White 9, signals White 13 Analog Volt 1 and returns to White 1 GNDA. A pedal sensor with two tracks takes +5 V supply 2 on White 10, signals White 17 and White 16, and returns to White 23. A Hall trigger sensor takes 5 V or protected 12 V, signals Digital 1 on Black 10, and returns to White 2 GNDA. The red panel warns that 12 V must never reach a 5 V sensor and that sensor grounds never go to the engine block.</desc>
+  <desc id="d">Each sensor gets its supply, its signal and its own return wire, and each wire lands on a named Proteus pin. A MAP sensor takes +5 V supply 1 on White 9, signals White 13 Analog Volt 1 and returns to White 1 GNDA. A pedal sensor with two tracks takes +5 V supply 2 on White 10, signals White 17 and White 16, and returns to White 23. A Hall trigger sensor takes 5 V or protected 12 V, signals Digital 1 on Black23 pin 10, and returns to White 2 GNDA. The red panel warns that 12 V must never reach a 5 V sensor and that sensor grounds never go to the engine block.</desc>
   <style>
     text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
     .small { font-size: 11px; fill: #4b5563; }
@@ -37,7 +37,7 @@
   <text x="614" y="238" class="mono">White 16  Analog Volt 7  (PPS 2)</text>
   <text x="614" y="262" class="mono">White 23  GNDA</text>
   <text x="614" y="318" class="mono">White 9 or 11  supply for the sensor</text>
-  <text x="614" y="342" class="mono">Black 10  Digital 1</text>
+  <text x="614" y="342" class="mono">Black23 pin 10  Digital 1</text>
   <text x="614" y="366" class="mono">White 2   GNDA</text>
   <text x="614" y="394" class="small">1-8, 23, 29 are all GNDA sensor ground</text>
 

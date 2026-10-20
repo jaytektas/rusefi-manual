@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" role="img" aria-labelledby="t d">
   <title id="t">Knock and wideband connections on Proteus</title>
-  <desc id="d">One or two piezo knock sensors connect to the two fixed knock inputs, White 34 and White 35, in shielded cable. A wideband can reach the ECU two ways: through its controller on the CAN bus (Black 17 High and Black 16 Low, or the second bus on Black 22 and Black 21), or as an analog voltage on White 28 Analog Volt 10, which is the factory AFR input. The controller powers the sensor itself; the red panel warns against ever putting the heater or 12 V on an ECU input.</desc>
+  <desc id="d">One or two piezo knock sensors connect to the two fixed knock inputs, White 34 and White 35, in shielded cable. A wideband can reach the ECU two ways: through its controller on the CAN bus (Black23 pin 17 High and Black23 pin 16 Low, or the second bus on Black23 pin 22 and Black23 pin 21), or as an analog voltage on White 28 Analog Volt 10, which is the factory AFR input. The controller powers the sensor itself; the red panel warns against ever putting the heater or 12 V on an ECU input.</desc>
   <style>
     text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
     .small { font-size: 11px; fill: #4b5563; }
@@ -32,9 +32,9 @@
   <text x="614" y="76" class="mono">White 34  Knock input 1</text>
   <text x="614" y="100" class="mono">White 35  Knock input 2</text>
   <text x="614" y="120" class="small">fixed by the board — no pin choice in TunerStudio</text>
-  <text x="614" y="176" class="mono">Black 17  CAN High</text>
-  <text x="614" y="200" class="mono">Black 16  CAN Low</text>
-  <text x="614" y="226" class="small">second bus: Black 22 High, Black 21 Low</text>
+  <text x="614" y="176" class="mono">Black23 pin 17  CAN High</text>
+  <text x="614" y="200" class="mono">Black23 pin 16  CAN Low</text>
+  <text x="614" y="226" class="small">second bus: Black23 pins 22 High, 21 Low</text>
   <text x="614" y="284" class="mono">White 28  Analog Volt 10   AFR input</text>
   <text x="614" y="304" class="small">rusEFI's factory AFR input on Proteus</text>
   <text x="614" y="352" class="mono">White 3   GNDA sensor ground</text>

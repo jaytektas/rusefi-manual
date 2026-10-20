@@ -45,7 +45,7 @@
 
   <rect class="drive" x="190" y="16" width="140" height="38" rx="6"/>
   <text x="260" y="34" text-anchor="middle">throttle body</text>
-  <text x="260" y="48" text-anchor="middle" class="small">motor: Black 6 / 7</text>
+  <text x="260" y="48" text-anchor="middle" class="small">motor: Black23 6/7</text>
   <path class="wire-drive" d="M270,54 V74"/>
 
   <rect class="drive" x="470" y="404" width="130" height="40" rx="6"/>
@@ -56,7 +56,7 @@
   <text x="355" y="174" text-anchor="middle">cam sensor</text>
   <rect class="ask" x="300" y="396" width="130" height="40" rx="6"/>
   <text x="365" y="412" text-anchor="middle">crank sensor</text>
-  <text x="365" y="428" text-anchor="middle" class="mono">VR 1 · Black 5/13</text>
+  <text x="365" y="428" text-anchor="middle" class="mono">VR 1 · Black23 5/13</text>
   <rect class="ask" x="560" y="252" width="130" height="40" rx="6"/>
   <text x="625" y="268" text-anchor="middle">knock sensor</text>
   <text x="625" y="284" text-anchor="middle" class="mono">Knock 1 · White 34</text>

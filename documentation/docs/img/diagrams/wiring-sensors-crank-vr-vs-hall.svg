@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 470" role="img" aria-labelledby="t d">
   <title id="t">VR and Hall crank sensors on Proteus</title>
-  <desc id="d">A two-wire VR pick-up goes to the VR 1 pair, Black 5 positive and Black 13 negative, as a twisted shielded pair, and has no supply of its own. A three-wire Hall sensor takes 5 V or protected 12 V supply, returns to a White GNDA pin, and feeds its signal to a digital trigger input such as Digital 1 on Black 10. The red panel explains that reversed VR wires show up as a short gap with a long tooth before it, and are fixed by swapping the pair or by the Primary Edge setting.</desc>
+  <desc id="d">A two-wire VR pick-up goes to the VR 1 pair, Black23 pin 5 positive and Black23 pin 13 negative, as a twisted shielded pair, and has no supply of its own. A three-wire Hall sensor takes 5 V or protected 12 V supply, returns to a White GNDA pin, and feeds its signal to a digital trigger input such as Digital 1 on Black23 pin 10. The red panel explains that reversed VR wires show up as a short gap with a long tooth before it, and are fixed by swapping the pair or by the Primary Edge setting.</desc>
   <style>
     text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
     .small { font-size: 11px; fill: #4b5563; }
@@ -29,13 +29,13 @@
   <text x="770" y="42" text-anchor="middle">Proteus — where each wire lands</text>
   <line class="wire" x1="600" y1="128" x2="940" y2="128"/>
   <line class="wire" x1="600" y1="242" x2="940" y2="242"/>
-  <text x="614" y="72" class="mono">Black 5   VR 1 +</text>
-  <text x="614" y="100" class="mono">Black 13  VR 1 −</text>
+  <text x="614" y="72" class="mono">Black23 pin 5   VR 1 +</text>
+  <text x="614" y="100" class="mono">Black23 pin 13  VR 1 −</text>
   <text x="614" y="120" class="small">one VR input = one twisted pair, no supply</text>
-  <text x="614" y="180" class="mono">Black 10  Digital 1  factory crank input</text>
-  <text x="614" y="204" class="mono">Black 1   Digital 2  suggested for a cam</text>
-  <text x="614" y="228" class="mono">Black 2, 3, 9, 11  Digital 3 to 6</text>
-  <text x="614" y="262" class="small">second VR input: VR 2 is Black 4 (+), Black 12 (−)</text>
+  <text x="614" y="180" class="mono">Black23 pin 10  Digital 1  factory crank input</text>
+  <text x="614" y="204" class="mono">Black23 pin 1   Digital 2  suggested for a cam</text>
+  <text x="614" y="228" class="mono">Black23 pins 2, 3, 9, 11  Digital 3 to 6</text>
+  <text x="614" y="262" class="small">second VR input: VR 2 is Black23 pin 4 (+), pin 12 (−)</text>
   <text x="614" y="288" class="mono">White 9   +5 V supply #1</text>
   <text x="614" y="312" class="mono">White 11  12 V protected, sensors</text>
   <text x="614" y="336" class="mono">White 1   GNDA sensor ground</text>

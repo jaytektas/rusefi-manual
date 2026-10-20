@@ -26,7 +26,7 @@
   <path class="wire-ask" d="M110,140 H790"/><text x="450" y="160" text-anchor="middle" class="small">CAN Low (blue wire)</text>
   <rect class="safe" x="40" y="85" width="70" height="70" rx="6"/><text x="75" y="118" text-anchor="middle">120 Ω</text><text x="75" y="136" text-anchor="middle" class="small">end</text>
   <rect class="safe" x="790" y="85" width="70" height="70" rx="6"/><text x="825" y="118" text-anchor="middle">120 Ω</text><text x="825" y="136" text-anchor="middle" class="small">end</text>
-  <rect class="drive" x="160" y="190" width="200" height="56" rx="6"/><text x="260" y="213" text-anchor="middle">Proteus CAN1</text><text x="260" y="231" text-anchor="middle" class="mono">Black 17 H · Black 16 L</text>
+  <rect class="drive" x="160" y="190" width="200" height="56" rx="6"/><text x="260" y="213" text-anchor="middle">Proteus CAN1</text><text x="260" y="231" text-anchor="middle" class="mono">Black23 pin 17 H · pin 16 L</text>
   <rect class="box" x="400" y="190" width="160" height="56" rx="6"/><text x="480" y="222" text-anchor="middle">dash</text>
   <rect class="box" x="600" y="190" width="170" height="56" rx="6"/><text x="685" y="222" text-anchor="middle">wideband controller</text>
   <path class="wire" d="M240,100 V190 M280,140 V190 M460,100 V190 M500,140 V190 M665,100 V190 M705,140 V190"/>

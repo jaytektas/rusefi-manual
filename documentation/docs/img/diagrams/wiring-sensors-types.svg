@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 400" role="img" aria-labelledby="t d">
   <title id="t">Proteus sensor wiring</title>
-  <desc id="d">Three sensor types on Proteus. A 3-wire ratiometric sensor takes 5 V supply from White 9, signal to Analog Volt 1 on White 13, ground to sensor ground White 1. A 2-wire thermistor goes to Analog Temp 3 on White 20, which has a 2.7 kilohm pull-up to 5 V inside the ECU, and to sensor ground. A VR sensor goes to VR 1 positive Black 5 and negative Black 13 as a twisted pair.</desc>
+  <desc id="d">Three sensor types on Proteus. A 3-wire ratiometric sensor takes 5 V supply from White 9, signal to Analog Volt 1 on White 13, ground to sensor ground White 1. A 2-wire thermistor goes to Analog Temp 3 on White 20, which has a 2.7 kilohm pull-up to 5 V inside the ECU, and to sensor ground. A VR sensor goes to VR 1 positive Black23 pin 5 and negative Black23 pin 13 as a twisted pair.</desc>
   <style>
     text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
     .small { font-size: 11px; fill: #4b5563; }
@@ -52,7 +52,7 @@
   <text x="120" y="348" text-anchor="middle" class="small">shielded twisted pair</text>
   <path class="wire-ask" d="M220,300 C330,300 330,350 430,350 S530,300 640,300" marker-end="url(#a)"/>
   <path class="wire-ask" d="M220,350 C330,350 330,300 430,300 S530,350 640,350" marker-end="url(#a)"/>
-  <text x="650" y="304" class="mono">Black 5 · VR 1 +</text>
-  <text x="650" y="354" class="mono">Black 13 · VR 1 −</text>
+  <text x="650" y="304" class="mono">Black23 pin 5 · VR 1 +</text>
+  <text x="650" y="354" class="mono">Black23 pin 13 · VR 1 −</text>
   <text x="430" y="384" text-anchor="middle" class="small">swap the two wires if the signal is inverted (see text)</text>
 </svg>

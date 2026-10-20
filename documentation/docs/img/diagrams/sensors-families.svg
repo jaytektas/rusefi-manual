@@ -5,8 +5,8 @@
   White 13, and use sensor ground on White 1 to 8. Thermistors (CLT, IAT, oil temp) hang off an
   internal pull-up and sit on an Analog Temp input such as White 20, with the sensor leg to sensor
   ground on White 23. Frequency and switch sensors (vehicle speed, flex, clutch, brake) are square
-  waves on a Digital input such as Black 2, or on a Variable Reluctance input. CAN sensors (wideband,
-  EGT, speed from the dash) arrive as messages on Black 17 and 16. All four end in the same firmware
+  waves on a Digital input such as Black23 pin 2, or on a Variable Reluctance input. CAN sensors (wideband,
+  EGT, speed from the dash) arrive as messages on Black23 pins 17 and 16. All four end in the same firmware
   chain: measure, scale, convert with a calibration curve, then check the value against its limits
   and its timeout.</desc>
   <style>
@@ -80,9 +80,9 @@
   <text x="36" y="284" class="small">Vehicle speed · flex fuel · turbo speed · shaft speed</text>
   <text x="36" y="300" class="small">Clutch, brake, A/C and start-button switches</text>
   <path class="wire-ask" d="M36,336 h14 l8,-22 l10,44 l10,-22 h14 v-14 h14 l8,-22 l10,44 l10,-22 h14"/>
-  <rect class="ask" x="190" y="312" width="130" height="42" rx="6"/>
+  <rect class="ask" x="164" y="312" width="182" height="42" rx="6"/>
   <text x="255" y="330" text-anchor="middle" class="small">edge counter</text>
-  <text x="255" y="346" text-anchor="middle" class="mono">Black 2 · Digital 3</text>
+  <text x="255" y="346" text-anchor="middle" class="mono">Black23 pin 2 · Digital 3</text>
   <text x="36" y="384" class="small">VR wheels use the shielded <tspan class="mono">VR 1</tspan>/<tspan class="mono">VR 2</tspan> inputs instead</text>
 
   <!-- family 4: CAN -->
@@ -96,7 +96,7 @@
   <text x="520" y="362" class="mono">CAN L</text>
   <rect class="ask" x="650" y="312" width="140" height="42" rx="6"/>
   <text x="720" y="330" text-anchor="middle" class="small">CAN worker + timeout</text>
-  <text x="720" y="346" text-anchor="middle" class="mono">Black 17 / Black 16</text>
+  <text x="720" y="346" text-anchor="middle" class="mono">Black23 17 / 16</text>
   <text x="506" y="384" class="small">Nothing is wired to an analog input; the value has an address</text>
 
   <!-- firmware chain -->

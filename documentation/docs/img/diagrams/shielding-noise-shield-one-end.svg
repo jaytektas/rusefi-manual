@@ -43,7 +43,7 @@
   <rect class="loop" x="10" y="14" width="450" height="380" rx="8"/>
   <text x="26" y="38">Do this: the shield is grounded at the ECU end only</text>
 
-  <text x="26" y="62" class="mono">VR 1 + → Black 5      VR 1 − → Black 13</text>
+  <text x="26" y="62" class="mono">VR 1 + → Black23 pin 5    VR 1 − → pin 13</text>
   <text x="26" y="80" class="small">the shield never touches the sensor body or the block</text>
 
   <rect class="ask" x="30" y="150" width="110" height="56" rx="6"/>

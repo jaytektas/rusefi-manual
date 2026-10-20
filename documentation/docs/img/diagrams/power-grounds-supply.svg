@@ -1,12 +1,12 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 500" role="img" aria-labelledby="t d">
   <title id="t">Proteus power supply: battery, fuses, ignition switch, main relay</title>
   <desc id="d">The battery positive feeds a main fuse. One branch goes through the ignition switch and a small
-  fuse to Black 18, the ECU's ignition power input. A second branch goes through a fuse to terminal 30 of
-  the main relay; the relay's terminal 87 feeds a fuse block for Black 23 (power from main relay),
+  fuse to Black23 pin 18, the ECU's ignition power input. A second branch goes through a fuse to terminal 30 of
+  the main relay; the relay's terminal 87 feeds a fuse block for Black23 pin 23 (power from main relay),
   injectors, coils and 12 V sensors. The main relay coil is fed from fused 12 V on terminal 86 and switched
-  to ground on terminal 85 by the ECU's Lowside 12 on Black 21. The fuel pump relay coil is switched by
-  Lowside 10 on Black 20 and its contacts feed the pump through its own fuse. Power grounds on Black 14,
-  19, 20 and Black 17, 18, 24 return to the engine block.</desc>
+  to ground on terminal 85 by the ECU's Lowside 12 on Black35 pin 21. The fuel pump relay coil is switched by
+  Lowside 10 on Black35 pin 20 and its contacts feed the pump through its own fuse. Power grounds on Black23 pins 14,
+  19, 20 and Black35 pins 17, 18, 24 return to the engine block.</desc>
   <style>
     text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
     .small { font-size: 11px; fill: #4b5563; }
@@ -117,13 +117,13 @@
 
   <rect class="box" x="740" y="28" width="200" height="190" rx="6"/>
   <text x="840" y="48" text-anchor="middle">Proteus</text>
-  <text x="752" y="74" class="mono">Black 18  ignition power</text>
-  <text x="752" y="96" class="mono">Black 23  main relay power</text>
+  <text x="752" y="74" class="mono">Black23 18  ignition power</text>
+  <text x="752" y="96" class="mono">Black23 23  main relay power</text>
   <text x="752" y="118" class="small">(ETB drivers, high-side outputs)</text>
-  <text x="752" y="146" class="mono">Black 21  Lowside 12 (relay)</text>
-  <text x="752" y="168" class="mono">Black 20  Lowside 10 (pump)</text>
-  <text x="752" y="196" class="mono">power GND: Black 14 19 20</text>
-  <text x="752" y="210" class="mono">           Black 17 18 24</text>
+  <text x="752" y="146" class="mono">Black35 21  Lowside 12 (relay)</text>
+  <text x="752" y="168" class="mono">Black35 20  Lowside 10 (pump)</text>
+  <text x="752" y="196" class="mono">power GND: Black23 14 19 20</text>
+  <text x="752" y="210" class="mono">           Black35 17 18 24</text>
 
   <!-- 87 also to Black 23 -->
   <path class="wire-pos" d="M740,236 V100"/>
