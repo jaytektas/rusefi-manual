@@ -88,6 +88,11 @@ Open **Setup ▸ Vehicle Information**.
 
 <!-- shot: img/ts/engine-basics-vehicle-information.png | Setup ▸ Vehicle Information | 4 cylinders, 2.0 L, 1-3-4-2, speed density, Tuning View Full, Metric, Lambda | The Vehicle Information dialog with the chapter's example engine -->
 
+<figure markdown>
+  ![Setup ▸ Vehicle Information: 4 cylinders, 2.0 L, 1-3-4-2, speed density, Tuning View Full, Metric, Lambda](../img/ts/engine-basics-vehicle-information.png)
+  <figcaption>Figure 2 — The Vehicle Information dialog with the chapter's example engine</figcaption>
+</figure>
+
 - **Number of cylinders** `cylindersCount` — 1 to 12. Factory default 4.
 - **Displacement** `displacement` — litres, total for the engine. Factory default 2.0 L.
 - **Firing order** `firingOrder` — pick the one that matches the count. Factory default 1-3-4-2.
@@ -117,6 +122,11 @@ Open **Advanced ▸ Cylinder offsets** (`ignitionCylExtra`). One field per cylin
 zero for an even-fire engine.
 
 <!-- shot: img/ts/engine-basics-cylinder-offsets.png | Advanced ▸ Cylinder offsets | 2 cylinders, Offset cyl 1 = 0, Offset cyl 2 = 45 | Cylinder offsets for the 45° V-twin example -->
+
+<figure markdown>
+  ![Advanced ▸ Cylinder offsets: 2 cylinders, Offset cyl 1 = 0, Offset cyl 2 = 45](../img/ts/engine-basics-cylinder-offsets.png)
+  <figcaption>Figure 3 — Cylinder offsets for the 45° V-twin example</figcaption>
+</figure>
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (dialog ignitionCylExtra); firmware/integration/rusefi_config.txt (timing_offset_cylinder) -->
 
 ### 4 · Basic Configurations (Proteus)
