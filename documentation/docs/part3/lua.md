@@ -220,7 +220,8 @@ This is done in TunerStudio. A script can only touch a pin you have named in the
 group; rusEFI then owns that pin for as long as the script runs and releases it on a reset.
 
 <figure markdown>
-  <!-- shot: img/ts/lua-advanced-menu.png | Advanced ▸ Lua | Proteus F7 tune with injection, boost and ETB enabled so the menu is fully populated: the Lua group open showing Lua Analog Inputs, Lua Digital Inputs, Lua Script PWM Outputs, Lua Buttons, and the Lua Calibrations group below it showing Lua Script Settings and Script Table #1 to #4 | The Lua half of the Advanced menu: pin assignments on top, the numbers your script reads on the bottom, and no script text anywhere in TunerStudio -->
+  <!-- shot: img/ts/lua-advanced-menu.png | Advanced ▸ Lua | the Advanced menu with the Lua group open showing Lua Analog Inputs, Lua Digital Inputs, Lua Script PWM Outputs and Lua Buttons, and the Lua Calibrations group below it | The Lua half of the Advanced menu: pin assignments on top, the numbers your script reads on the bottom, and no script text anywhere in TunerStudio -->
+  ![Advanced ▸ Lua: the Advanced menu with the Lua group open showing Lua Analog Inputs, Lua Digital Inputs, Lua Script PWM Outputs and Lua Buttons, and the Lua Calibrations group below it](../img/ts/lua-advanced-menu.png)
   <figcaption>Figure 4 — The Lua half of the <b>Advanced</b> menu: pin assignments on top, the numbers
   your script reads on the bottom. There is no script text anywhere in TunerStudio.</figcaption>
 </figure>

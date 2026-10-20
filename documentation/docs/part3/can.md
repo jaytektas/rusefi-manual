@@ -315,6 +315,11 @@ rather than typing identifiers by hand.
 
 <!-- shot: img/ts/can-broadcast.png | CAN-bus ▸ CAN Bus Settings | same dialog cropped to the CAN Bus panel only, with Enable rusEFI CAN broadcast checked, rusEFI CAN data bus Primary CAN, rusEFI CAN data base address 512, rusEFI CAN data address type 11 bit, rusEFI CAN data period 50, Board state broadcast unchecked, CAN dash type None, all dropdowns closed | rusEFI's own broadcast enabled: twelve frames starting at the base address, sent on the selected bus at the selected period. -->
 
+<figure markdown>
+  ![CAN-bus ▸ CAN Bus Settings: same dialog cropped to the CAN Bus panel only, with Enable rusEFI CAN broadcast checked, rusEFI CAN data bus Primary CAN, rusEFI CAN data base address 512, rusEFI CAN data address type 11 bit, rusEFI CAN data period 50, Board state broadcast unchecked, CAN dash type None, all dropdowns closed](../img/ts/can-broadcast.png)
+  <figcaption>Figure 3 — rusEFI's own broadcast enabled: twelve frames starting at the base address, sent on the selected bus at the selected period.</figcaption>
+</figure>
+
 What is inside the twelve frames:
 
 | Frame | Contents |

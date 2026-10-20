@@ -92,6 +92,11 @@ Open **Ignition ▸ Knock Control** (dialog *Software Knock*).
 
 <!-- shot: img/ts/knock-dialog.png | Ignition ▸ Knock Control | Knock sensing enabled, bore 86 mm, frequency 0, window 20/45, defaults otherwise | The Knock Control dialog with the example values -->
 
+<figure markdown>
+  ![Ignition ▸ Knock Control: Knock sensing enabled, bore 86 mm, frequency 0, window 20/45, defaults otherwise](../img/ts/knock-dialog.png)
+  <figcaption>Figure 2 — The Knock Control dialog with the example values</figcaption>
+</figure>
+
 - **Knock sensing** `enableSoftwareKnock` — on. Needs an ECU power cycle.
 - **Cylinder Bore** `cylinderBore` — in mm (default 87.5). Needs a power cycle.
 - **Estimated Knock Frequency** `knockFrequency` — leave 0 to use the bore. Enter **Hz**, not kHz:
@@ -135,6 +140,11 @@ Same dialog, *Response* panel. Defaults: **Retard Aggression** 20 %, **Retard Re
 <!-- src: firmware/controllers/algo/defaults/default_base_engine.cpp (setTable maxKnockRetardTable 2); firmware/tunerstudio/tunerstudio.template.ini (knockThresholdCurve, maxKnockRetardTbl, knockGainTbl1) -->
 
 <!-- shot: img/ts/knock-max-retard.png | Ignition ▸ Max knock retard | example table from Worked example 2 | Max knock retard, RPM × load -->
+
+<figure markdown>
+  ![Ignition ▸ Max knock retard: example table from Worked example 2](../img/ts/knock-max-retard.png)
+  <figcaption>Figure 3 — Max knock retard, RPM × load</figcaption>
+</figure>
 
 ## Worked examples
 

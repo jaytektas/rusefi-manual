@@ -224,10 +224,20 @@ Open **Setup ▸ Limits and protection ▸ Limits and fallbacks** (`limitsAndFal
 
 <!-- shot: img/ts/limits-protection-limits.png | Setup ▸ Limits and protection ▸ Limits and fallbacks | cut fuel + cut spark on, RPM hard limit 6800, hysteresis 100, timing retard 5, fuel added 0, boost cut 250 kPa, hysteresis 20 | The Limits and fallbacks dialog with Example 1's values. -->
 
+<figure markdown>
+  ![Setup ▸ Limits and protection ▸ Limits and fallbacks: cut fuel + cut spark on, RPM hard limit 6800, hysteresis 100, timing retard 5, fuel added 0, boost cut 250 kPa, hysteresis 20](../img/ts/limits-protection-limits.png)
+  <figcaption>Figure 3 — The Limits and fallbacks dialog with Example 1's values.</figcaption>
+</figure>
+
 To limit by temperature, turn on **Use Engine Temperature RPM limit curve**: the **Engine Temperature
 RPM Limit** curve appears. Fill **all four** RPM values first.
 
 <!-- shot: img/ts/limits-protection-clt-curve.png | Setup ▸ Limits and protection ▸ Limits and fallbacks | Use Engine Temperature RPM limit curve on; curve -20/0/40/80 °C → 4000/4500/5500/6800 RPM | The coolant-based RPM limit curve, filled. -->
+
+<figure markdown>
+  ![Setup ▸ Limits and protection ▸ Limits and fallbacks: Use Engine Temperature RPM limit curve on; curve -20/0/40/80 °C → 4000/4500/5500/6800 RPM](../img/ts/limits-protection-clt-curve.png)
+  <figcaption>Figure 4 — The coolant-based RPM limit curve, filled.</figcaption>
+</figure>
 
 ### 2 · Oil pressure
 
@@ -239,6 +249,11 @@ Then, if wanted, **High oil pressure protection** (`highOilPressureProtection`):
 
 <!-- shot: img/ts/limits-protection-oil-low.png | Setup ▸ Limits and protection ▸ Low oil pressure protection | after-start 70 kPa, running check on, timeout 0.5 s, curve 100 kPa at idle rising to 250 kPa at 6000 RPM | Low oil pressure protection with Example 2's values. -->
 <!-- shot: img/ts/limits-protection-oil-high.png | Setup ▸ Limits and protection ▸ High oil pressure protection | timeout 1.0 s, curve 0 (disabled) | High oil pressure protection, disabled by its zero curve. -->
+
+<figure markdown>
+  ![Setup ▸ Limits and protection ▸ High oil pressure protection: timeout 1.0 s, curve 0 (disabled)](../img/ts/limits-protection-oil-high.png)
+  <figcaption>Figure 5 — High oil pressure protection, disabled by its zero curve.</figcaption>
+</figure>
 
 !!! danger "Test oil protection before you need it"
     A wrong sensor calibration either cuts a healthy engine or never cuts a dying one. With the
@@ -253,6 +268,11 @@ then switch on **Lambda protection** and set the check and restore thresholds.
 
 <!-- shot: img/ts/limits-protection-lambda.png | Setup ▸ Limits and protection ▸ Lambda protection | enabled, load 60, TPS 50, RPM 2500, delay 0.5 s, restore 30/20/2000, difference table 0.10 everywhere | Lambda protection with a 0.10 lambda margin. -->
 
+<figure markdown>
+  ![Setup ▸ Limits and protection ▸ Lambda protection: enabled, load 60, TPS 50, RPM 2500, delay 0.5 s, restore 30/20/2000, difference table 0.10 everywhere](../img/ts/limits-protection-lambda.png)
+  <figcaption>Figure 6 — Lambda protection with a 0.10 lambda margin.</figcaption>
+</figure>
+
 ### 4 · DFCO
 
 Open **Fuel ▸ Deceleration fuel cutoff (DFCO)** (`coastingFuelCutControl`). Turn on **Enable Fuel
@@ -261,6 +281,11 @@ Cutoff**, leave **Fuel cut on** at *Overrun*, and check the thresholds: the defa
 <!-- src: firmware/controllers/algo/defaults/default_fuel.cpp (coastingFuelCut* defaults) -->
 
 <!-- shot: img/ts/limits-protection-dfco.png | Fuel ▸ Deceleration fuel cutoff (DFCO) | enabled, Overrun, defaults, retard 5°, ramp-in 0.5 s | The DFCO dialog with the factory thresholds. -->
+
+<figure markdown>
+  ![Fuel ▸ Deceleration fuel cutoff (DFCO): enabled, Overrun, defaults, retard 5°, ramp-in 0.5 s](../img/ts/limits-protection-dfco.png)
+  <figcaption>Figure 7 — The DFCO dialog with the factory thresholds.</figcaption>
+</figure>
 
 ### 5 · Misfire detection (optional)
 

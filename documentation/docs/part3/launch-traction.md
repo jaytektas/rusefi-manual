@@ -206,9 +206,9 @@ switch.
 
 | Dialog | Unit | Range | Where it lands |
 |---|---|---|---|
-| **Advanced ▸ Traction Control ETB Drop** | % | −100 … 0 | added to the throttle target, so it closes the throttle |
-| **Advanced ▸ Traction Control Timing Adjustment** | degrees | −100 … 100 | added to the running advance |
-| **Advanced ▸ Traction Control Skip Ignition** | % | 0 … 100 | skip ratio; soft limiter, or hard with **useHardSkipInTraction** |
+| **Controller ▸ Traction Control ETB Drop** | % | −100 … 0 | added to the throttle target, so it closes the throttle |
+| **Controller ▸ Traction Control Timing Adjustment** | degrees | −100 … 100 | added to the running advance |
+| **Controller ▸ Traction Control Skip Ignition** | % | 0 … 100 | skip ratio; soft limiter, or hard with **useHardSkipInTraction** |
 
 All three use the same two axes, which you edit as the table's axis rows: **slip ratio** bins
 `tractionControlSlipBins` (factory 0.9 up to 1.2, six bins, in the ratio unit) and **vehicle speed** bins
@@ -288,6 +288,11 @@ Burn.
 
 <!-- shot: img/ts/launch-traction-launch-control.png | Advanced ▸ Launch Control | Launch Control enabled, Activation Mode Clutch Down Switch, Clutch Down set to Digital 5 with its default mode, Launch RPM Threshold 0, Speed Threshold 30, Launch RPM 3000, Launch Control Window 500, TPS Threshold 3, Use Absolute Timing at Launch off, Ignition Cut off, Fuel Cut off; the launch_control_state panel on the right is visible | Launch Control with the Example 1 settings and its live state panel -->
 
+<figure markdown>
+  ![Advanced ▸ Launch Control: Launch Control enabled, Activation Mode Clutch Down Switch, Clutch Down set to Digital 5 with its default mode, Launch RPM Threshold 0, Speed Threshold 30, Launch RPM 3000, Launch Control Window 500, TPS Threshold 3, Use Absolute Timing at Launch off, Ignition Cut off, Fuel Cut off; the launch_control_state panel on the right is visible](../img/ts/launch-traction-launch-control.png)
+  <figcaption>Figure 5 — Launch Control with the Example 1 settings and its live state panel</figcaption>
+</figure>
+
 ### 2 · Prove the switch, engine off
 
 With the ignition on and the engine stopped, watch the right-hand panel of the same dialog while you press
@@ -339,7 +344,12 @@ Open **Advanced ▸ Torque Control ▸ Shift Torque Reduction (Flat Shift)**:
 5. **Torque Reduction Arming APP** `torqueReductionArmingApp` → 0 by default; raise it (say 20 %) if you do
    not want the reduction while you are part-throttle.
 
-<!-- shot: img/ts/launch-traction-flat-shift.png | Advanced ▸ Torque Control ▸ Shift Torque Reduction (Flat Shift) | Enable Shift Torque Reduction enabled, Activation Mode Launch Button, Launch Button set to Digital 5, Minimal Engine Temperature 60, Torque Reduction Arming RPM 4500, Torque Reduction Arming APP 20; the shift_torque_reduction_state panel on the right is visible | Flat shift settings, sharing the launch button, with its live state panel -->
+<!-- shot: img/ts/launch-traction-flat-shift.png | Advanced ▸ Torque Control ▸ Shift Torque Reduction (Flat Shift) | Enable Shift Torque Reduction enabled, Activation Mode Launch Button, Launch Button set to Digital 6, Minimal Engine Temperature 60, Torque Reduction Arming RPM 4000, Torque Reduction Arming APP 20; the shift_torque_reduction_state panel on the right is visible | Flat shift settings, sharing the launch button, with its live state panel -->
+
+<figure markdown>
+  ![Advanced ▸ Torque Control ▸ Shift Torque Reduction (Flat Shift): Enable Shift Torque Reduction enabled, Activation Mode Launch Button, Launch Button set to Digital 6, Minimal Engine Temperature 60, Torque Reduction Arming RPM 4000, Torque Reduction Arming APP 20; the shift_torque_reduction_state panel on the right is visible](../img/ts/launch-traction-flat-shift.png)
+  <figcaption>Figure 6 — Flat shift settings, sharing the launch button, with its live state panel</figcaption>
+</figure>
 
 Then the three tables in the same **Advanced ▸ Torque Control** group. For each one, choose the **X axis**
 first: *Gear (detected)* or *Vehicle speed* are the sensible ones, because they describe when you are
@@ -354,8 +364,18 @@ shifting; leave the gear rows labelled with the gear numbers you use.
   of 5 … 10 %.
 
 <!-- shot: img/ts/launch-traction-time-table.png | Advanced ▸ Torque Control ▸ Shift Torque Reduction Time table | X axis set to Vehicle speed, both gear rows filled, values 120 ms across the row, live graph of the X axis value alongside | The Time table: how long the reduction is allowed to last -->
-<!-- shot: img/ts/launch-traction-retard-table.png | Advanced ▸ Torque Control ▸ Torque Reduction Ignition Retard Table | X axis set to Vehicle speed, both gear rows at 10 degrees, trqRedIgnRetXaxisValue graph alongside | The retard table is the timing itself during the shift: 10 degrees BTDC, not 10 degrees less -->
-<!-- shot: img/ts/launch-traction-cut-table.png | Advanced ▸ Torque Control ▸ Torque Reduction Ignition Cut Table | X axis set to Vehicle speed, both gear rows at 10 percent, trqRedCutXaxisValue graph alongside | The ignition cut table: percent of ignition events skipped during the shift -->
+<!-- shot: img/ts/launch-traction-retard-table.png | Advanced ▸ Torque Control ▸ Torque Reduction Ignition Retard Table | X axis set to Vehicle speed, both gear rows at 12 degrees | The retard table is the timing itself during the shift: 10 degrees BTDC, not 10 degrees less -->
+
+<figure markdown>
+  ![Advanced ▸ Torque Control ▸ Torque Reduction Ignition Retard Table: X axis set to Vehicle speed, both gear rows at 12 degrees](../img/ts/launch-traction-retard-table.png)
+  <figcaption>Figure 7 — The retard table is the timing itself during the shift: 10 degrees BTDC, not 10 degrees less</figcaption>
+</figure>
+<!-- shot: img/ts/launch-traction-cut-table.png | Advanced ▸ Torque Control ▸ Torque Reduction Ignition Cut Table | X axis set to Vehicle speed, both gear rows at 10 percent | The ignition cut table: percent of ignition events skipped during the shift -->
+
+<figure markdown>
+  ![Advanced ▸ Torque Control ▸ Torque Reduction Ignition Cut Table: X axis set to Vehicle speed, both gear rows at 10 percent](../img/ts/launch-traction-cut-table.png)
+  <figcaption>Figure 8 — The ignition cut table: percent of ignition events skipped during the shift</figcaption>
+</figure>
 
 If you use the gear rows, set gear detection first: **Sensors ▸ Vehicle speed sensor**, the **Gear
 Detection** half of the dialog — **Forward gear count** and one ratio per gear (transmission ratio × final
@@ -372,21 +392,41 @@ Only do this with a car that gives rusEFI individual wheel speeds over CAN.
    `canVssNbcType` → the type that matches the car (one of the two that carry individual wheel speeds,
    *Hyundai PB* or *Nissan 350*), **CAN VSS scaling** `canVssScaling` for the tyre size.
    CAN receive must be enabled on the CAN Bus Settings page.
-2. **Advanced ▸ Traction Control ETB Drop**: leave the lowest slip row at 0, and start with small negative
+2. **Controller ▸ Traction Control ETB Drop**: leave the lowest slip row at 0, and start with small negative
    numbers in the higher rows: −5 % around a slip ratio of 1.05, −20 % at 1.15.
-3. **Advanced ▸ Traction Control Timing Adjustment**: leave the low rows at 0; 2 … 5 degrees of retard
+3. **Controller ▸ Traction Control Timing Adjustment**: leave the low rows at 0; 2 … 5 degrees of retard
    (negative) at the slip ratios where the throttle drop is not enough on its own.
 
-<!-- shot: img/ts/launch-traction-tc-timing.png | Advanced ▸ Traction Control Timing Adjustment | table with 0 in the four lowest slip rows and -2 to -5 degrees in the top two rows, six speed columns, Wheel Slip Ratio gauge alongside | Traction Control Timing Adjustment: degrees added to the advance, so negative means retard -->
-4. **Advanced ▸ Traction Control Skip Ignition**: 0 in the low rows; small percentages in the top rows, and
+<!-- shot: img/ts/launch-traction-tc-timing.png | Controller ▸ Traction Control Timing Adjustment | table with 0 in the four lowest slip rows and -2 to -5 degrees in the top two rows, six speed columns | Traction Control Timing Adjustment: degrees added to the advance, so negative means retard -->
+
+<figure markdown>
+  ![Controller ▸ Traction Control Timing Adjustment: table with 0 in the four lowest slip rows and -2 to -5 degrees in the top two rows, six speed columns](../img/ts/launch-traction-tc-timing.png)
+  <figcaption>Figure 9 — Traction Control Timing Adjustment: degrees added to the advance, so negative means retard</figcaption>
+</figure>
+4. **Controller ▸ Traction Control Skip Ignition**: 0 in the low rows; small percentages in the top rows, and
    leave **useHardSkipInTraction** at *no* until you know what the softer version does.
 
 Burn, and log the wheel slip ratio on every run so the tables mean something afterwards.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (speedSensorCan fields enableCanVss, canVssNbcType, canVssScaling); firmware/controllers/can/can_vss.cpp (initCanVssSupport: canReadEnabled required for the filters) -->
 
 <!-- shot: img/ts/launch-traction-can-vss.png | CAN-bus ▸ CAN Vehicle speed sensor | CAN read enabled, Enable CAN VSS yes, CAN VSS type Hyundai PB, CAN VSS scaling 1.0 | CAN vehicle speed: the only source of the wheel slip ratio traction control uses -->
-<!-- shot: img/ts/launch-traction-tc-etb.png | Advanced ▸ Traction Control ETB Drop | table with zero lowest row, -5 at slip 1.05 and -20 at 1.15 across the speed bins, Wheel Slip Ratio gauge alongside | Traction Control ETB Drop: the gentlest lever, and the one an electronic throttle needs -->
-<!-- shot: img/ts/launch-traction-tc-skip.png | Advanced ▸ Traction Control Skip Ignition | useHardSkipInTraction at no, table with 0 in the low rows and 10 in the top row, Wheel Slip Ratio gauge | The skip table and the hard-versus-soft limiter switch -->
+
+<figure markdown>
+  ![CAN-bus ▸ CAN Vehicle speed sensor: CAN read enabled, Enable CAN VSS yes, CAN VSS type Hyundai PB, CAN VSS scaling 1.0](../img/ts/launch-traction-can-vss.png)
+  <figcaption>Figure 10 — CAN vehicle speed: the only source of the wheel slip ratio traction control uses</figcaption>
+</figure>
+<!-- shot: img/ts/launch-traction-tc-etb.png | Controller ▸ Traction Control ETB Drop | the Example 3 table: 0 in the three lowest slip rows, −5 … −30 at 1.15 and −10 … −40 at 1.20, Wheel Slip Ratio gauge alongside | Traction Control ETB Drop: the gentlest lever, and the one an electronic throttle needs -->
+
+<figure markdown>
+  ![Controller ▸ Traction Control ETB Drop: the Example 3 table: 0 in the three lowest slip rows, −5 … −30 at 1.15 and −10 … −40 at 1.20, Wheel Slip Ratio gauge alongside](../img/ts/launch-traction-tc-etb.png)
+  <figcaption>Figure 11 — Traction Control ETB Drop: the gentlest lever, and the one an electronic throttle needs</figcaption>
+</figure>
+<!-- shot: img/ts/launch-traction-tc-skip.png | Controller ▸ Traction Control Skip Ignition | useHardSkipInTraction at no, table with 0 in the low rows and 10 in the top row | The skip table and the hard-versus-soft limiter switch -->
+
+<figure markdown>
+  ![Controller ▸ Traction Control Skip Ignition: useHardSkipInTraction at no, table with 0 in the low rows and 10 in the top row](../img/ts/launch-traction-tc-skip.png)
+  <figcaption>Figure 12 — The skip table and the hard-versus-soft limiter switch</figcaption>
+</figure>
 
 ## Worked examples
 
@@ -453,14 +493,14 @@ electronic throttle. The factory axes (slip 0.9 … 1.2, speed 10 … 120 km/h) 
 |---|---|---|---|---|---|---|
 | 0.90 | 0 | 0 | 0 | 0 | 0 | 0 |
 | 0.95 | 0 | 0 | 0 | 0 | 0 | 0 |
-| 1.00 | 0 | 0 | −5 | −5 | −5 | −5 |
+| 1.00 | 0 | 0 | 0 | 0 | 0 | 0 |
 | 1.10 | 0 | −5 | −10 | −15 | −20 | −20 |
 | 1.15 | −5 | −10 | −20 | −25 | −30 | −30 |
 | 1.20 | −10 | −15 | −30 | −35 | −40 | −40 |
 
 That is the **ETB Drop** table, in percent off the throttle target. Reasoning:
 
-- the bottom two rows stay at 0 because a slip ratio near 1.0 is normal gripped driving, and because that
+- the bottom three rows stay at 0 because a slip ratio near 1.0 is normal gripped driving, and because that
   lowest row also applies whenever the slip sensor is missing or expired;
 - a slip ratio of 1.15 means the driven axle is 15 % faster than the other: −20 % of throttle is enough to
   answer it without spoiling the drive;
@@ -598,7 +638,7 @@ control tables below, are edited on the table itself, and their axes come from t
 | Traction control (all three) | `tractionControlSlipBins`, ratio 0 … 6.50 in TunerStudio's units, six rows | `tractionControlSpeedBins`, km/h (labelled RPM in TunerStudio) | ETB drop −100 … 0 % / timing −100 … 100 deg / skip 0 … 100 % |
 <!-- src: firmware/integration/rusefi_config.txt (torqueReductionTimeTable, torqueReductionIgnitionRetardTable, torqueReductionIgnitionCutTable, the XBins and GearBins, tractionControlSlipBins, tractionControlSpeedBins, tractionControlEtbDrop, tractionControlTimingDrop, tractionControlIgnitionSkip) -->
 
-### Traction Control Skip Ignition (Advanced ▸ Traction Control Skip Ignition)
+### Traction Control Skip Ignition (Controller ▸ Traction Control Skip Ignition)
 
 This dialog holds the table plus one switch, shown with its internal name: **useHardSkipInTraction**
 `useHardSkipInTraction`. *yes* moves the traction skip request from the soft limiter to the hard one.

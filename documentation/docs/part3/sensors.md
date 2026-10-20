@@ -312,7 +312,12 @@ in the factory configuration and the window is clamped to less than one cylinder
 
 <!-- shot: img/ts/sensors-map.png | Sensors ▸ MAP sensor | Input pin Analog Volt 1, Sensor model MPX4250, Fault if reading below 5 kPa and above 410 kPa, MAP gauge near 100 kPa, ignition on engine stopped | Figure 9 — MAP with the factory model and fault limits. -->
 <!-- shot: img/ts/sensors-map-custom.png | Sensors ▸ MAP sensor | Sensor model Custom, Low point voltage 0.5, Low point pressure 0, High point voltage 4.5, High point pressure 300, ignition on | Figure 10 — A sensor that is not in the list: the same two points, entered by hand. -->
-<!-- shot: img/ts/sensors-map-sampling.png | Sensors ▸ MAP sampling | Window averaging enabled, alpha 0.3, MAP Sampling Start Angle 100 at low rpm rising to 130, MAP Sampling Duration 50 across the range | Figure 11 — MAP sampling; the two curves are read at the current engine speed. -->
+<!-- shot: img/ts/sensors-map-sampling.png | Sensors ▸ MAP sampling | Window averaging enabled, alpha 1 (no smoothing), MAP Sampling Start Angle 100 at low rpm rising to 130, MAP Sampling Duration 50 across the range | Figure 11 — MAP sampling; the two curves are read at the current engine speed. -->
+
+<figure markdown>
+  ![Sensors ▸ MAP sampling: Window averaging enabled, alpha 1 (no smoothing), MAP Sampling Start Angle 100 at low rpm rising to 130, MAP Sampling Duration 50 across the range](../img/ts/sensors-map-sampling.png)
+  <figcaption>Figure 11 — MAP sampling; the two curves are read at the current engine speed.</figcaption>
+</figure>
 
 ### 4 · Barometric pressure
 
@@ -470,8 +475,18 @@ Speed from the car's own CAN bus is configured on the same dialog: turn on **Ena
 
 <!-- shot: img/ts/sensors-maf.png | Sensors ▸ MAF sensor | MAF ADC input Analog Volt 5, MAF 2 ADC input unassigned, MAF filter parameter 0, ignition on | Figure 20 — A mass air flow sensor input. -->
 <!-- shot: img/ts/sensors-maf-curve.png | Sensors ▸ MAF transfer function | Bosch 0280218037 style curve: about 10.5 kg/h at 1.39 V, 105.3 kg/h at 2.91 V, 387.5 kg/h at 4.26 V | Figure 21 — The MAF table is the calibration; a wrong table is a wrong air meter. -->
+
+<figure markdown>
+  ![Sensors ▸ MAF transfer function: Bosch 0280218037 style curve: about 10.5 kg/h at 1.39 V, 105.3 kg/h at 2.91 V, 387.5 kg/h at 4.26 V](../img/ts/sensors-maf-curve.png)
+  <figcaption>Figure 21 — The MAF table is the calibration; a wrong table is a wrong air meter.</figcaption>
+</figure>
 <!-- shot: img/ts/sensors-misc.png | Sensors ▸ Chassis sensors ▸ Misc sensors | Clutch Down Digital 4 with mode, Clutch Up unassigned, Brake Pedal Digital 6 with mode, Turbo Speed Sensor unassigned, ignition on | Figure 22 — Switch inputs, each with its own input mode. -->
 <!-- shot: img/ts/sensors-aux-linear.png | Sensors ▸ Aux sensors ▸ Aux Sensors | Aux Linear Sensor #1 Input Analog Volt 6, low 0.5 V / 0, high 4.5 V / 100, Aux Speed Input 1 unassigned | Figure 23 — One more two-point input, with a unit of your choosing. -->
+
+<figure markdown>
+  ![Sensors ▸ Aux sensors ▸ Aux Sensors: Aux Linear Sensor #1 Input Analog Volt 6, low 0.5 V / 0, high 4.5 V / 100, Aux Speed Input 1 unassigned](../img/ts/sensors-aux-linear.png)
+  <figcaption>Figure 23 — One more two-point input, with a unit of your choosing.</figcaption>
+</figure>
 <!-- shot: img/ts/sensors-fuel-level.png | Sensors ▸ Fuel sensors ▸ Fuel level sensor | Input channel assigned, low and high threshold volts, eight-point curve filled, fuel level gauge with the tank half full, ignition on | Figure 24 — A tank sender: thresholds plus a curve. -->
 
 ## Worked examples

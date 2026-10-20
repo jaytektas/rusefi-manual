@@ -53,6 +53,11 @@ TunerStudio only shows as many spark and injector buttons as the engine has cyli
 
 <!-- shot: img/ts/bench-testing-dialog.png | Controller ▸ Bench test | 4-cylinder tune, default Count/On Time/Off Time | The Bench Test & Commands dialog for a four-cylinder engine -->
 
+<figure markdown>
+  ![Controller ▸ Bench test: 4-cylinder tune, default Count/On Time/Off Time](../img/ts/bench-testing-dialog.png)
+  <figcaption>Figure 1 — The Bench Test & Commands dialog for a four-cylinder engine</figcaption>
+</figure>
+
 **Controller ▸ Injector test** (`injTest`) is a second view of the injector buttons, with the same
 three test settings (labelled **Iterations** here) and two gauges: battery voltage, and **Test
 Bench Iterations**, which counts the pulses as they go out.

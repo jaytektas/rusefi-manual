@@ -12,6 +12,7 @@ import csv
 import difflib
 import io
 import os
+import re
 import subprocess
 import sys
 import time
@@ -31,21 +32,27 @@ def windows():
 
 
 def ocr_lines(x, y, w, h):
-    """Text lines in a screen region, as (text, centre x, centre y) in screen coordinates."""
-    png = run("import", "-window", "root", "-crop", f"{w}x{h}+{x}+{y}", "+repage", "-resize", "200%", "png:-", capture=True)
-    tsv = subprocess.run(["tesseract", "stdin", "stdout", "--psm", "11", "tsv"], input=png, capture_output=True).stdout.decode()
+    """Text lines in a screen region, as (text, x, centre y) in screen coordinates. Tesseract groups the
+    words into lines itself (a menu is one column of text, page segmentation mode 4)."""
+    png = run("import", "-window", "root", "-crop", f"{w}x{h}+{x}+{y}", "+repage", "-colorspace", "Gray",
+              "-resize", "300%", "png:-", capture=True)
+    tsv = subprocess.run(["tesseract", "stdin", "stdout", "--psm", "4", "tsv"], input=png, capture_output=True).stdout.decode()
     lines = {}
     for row in csv.DictReader(io.StringIO(tsv), delimiter="\t", quoting=csv.QUOTE_NONE):
         if row["level"] != "5" or not row["text"].strip():
             continue
-        top = int(row["top"]) // 2
-        key = next((k for k in lines if abs(k - top) <= 6), top)
-        lines.setdefault(key, []).append((int(row["left"]) // 2, int(row["width"]) // 2, row["text"]))
+        key = (row["block_num"], row["par_num"], row["line_num"])
+        cy = (int(row["top"]) + int(row["height"]) // 2) // 3
+        lines.setdefault(key, []).append((int(row["left"]) // 3, cy, row["text"]))
     out = []
-    for top, words in lines.items():
+    for words in lines.values():
         words.sort()
-        text = " ".join(t for _, _, t in words)
-        out.append((text, x + words[0][0] + 20, y + top + 8))
+        # menu icons read as short junk tokens ("©,", "I)", "DD)") ahead of the item text
+        while len(words) > 1 and (len(words[0][2]) <= 2 or re.search(r"[^\w-]", words[0][2])):
+            words.pop(0)
+        text = " ".join(w for _, _, w in words)
+        cy = sorted(c for _, c, _ in words)[len(words) // 2]
+        out.append((text, x + words[0][0] + 10, y + cy))
     return out
 
 
@@ -53,7 +60,10 @@ def score(line, want):
     """Similarity of an OCR line to a menu item; a line that contains the item (OCR merges the first
     item with the tab row behind the menu) counts as a match."""
     text = line.lower()
-    return 1.0 if want in text else difflib.SequenceMatcher(None, text, want).ratio()
+    ratio = difflib.SequenceMatcher(None, text, want).ratio()
+    if text.strip() == want:
+        return 2.0
+    return max(ratio, 0.9) if want in text else ratio
 
 
 def find(lines, want):

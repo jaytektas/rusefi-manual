@@ -162,6 +162,11 @@ Open **Setup ▸ Limits and protection ▸ Limits and fallbacks**. Set **Boost c
 
 <!-- shot: img/ts/boost-limits.png | Setup ▸ Limits and protection ▸ Limits and fallbacks | Boost cut pressure 200 kPa, hysteresis 20 kPa | Limits and fallbacks with the boost cut set -->
 
+<figure markdown>
+  ![Setup ▸ Limits and protection ▸ Limits and fallbacks: Boost cut pressure 200 kPa, hysteresis 20 kPa](../img/ts/boost-limits.png)
+  <figcaption>Figure 2 — Limits and fallbacks with the boost cut set</figcaption>
+</figure>
+
 ### 2 · Boost control options
 
 Open **Advanced ▸ Boost Control ▸ Boost control options**:
@@ -181,6 +186,11 @@ Burn. Power-cycle after changing the output pin.
 
 <!-- shot: img/ts/boost-options.png | Advanced ▸ Boost Control ▸ Boost control options | enabled, Open Loop, output Lowside 13, 33 Hz, safe duty 0 %, gates 2000 RPM / 30 % / 110 kPa | Boost control options for a solenoid -->
 
+<figure markdown>
+  ![Advanced ▸ Boost Control ▸ Boost control options: enabled, Open Loop, output Lowside 13, 33 Hz, safe duty 0 %, gates 2000 RPM / 30 % / 110 kPa](../img/ts/boost-options.png)
+  <figcaption>Figure 3 — Boost control options for a solenoid</figcaption>
+</figure>
+
 ### 3 · Open-loop duty table
 
 Open **Advanced ▸ Boost Control ▸ Boost control Open loop base duty cycle**. Choose the **Y Axis**
@@ -188,6 +198,11 @@ Open **Advanced ▸ Boost Control ▸ Boost control Open loop base duty cycle**.
 solenoid setups.
 
 <!-- shot: img/ts/boost-open-loop.png | Advanced ▸ Boost Control ▸ Boost control Open loop base duty cycle | Y Axis TPS, table from Example 1 | Open-loop duty table -->
+
+<figure markdown>
+  ![Advanced ▸ Boost Control ▸ Boost control Open loop base duty cycle: Y Axis TPS, table from Example 1](../img/ts/boost-open-loop.png)
+  <figcaption>Figure 4 — Open-loop duty table</figcaption>
+</figure>
 
 ### 4 · Closed loop (optional)
 
@@ -199,7 +214,17 @@ solenoid setups.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (boostPidDialog, boostPidHelp); firmware/controllers/actuators/boost_control.cpp (setDefaultBoostParameters) -->
 
 <!-- shot: img/ts/boost-target.png | Advanced ▸ Boost Control ▸ Boost control target | target table from Example 2 | Closed-loop target table -->
-<!-- shot: img/ts/boost-pid.png | Advanced ▸ Boost Control ▸ Boost control PID | closed loop above 110 kPa, P 0.5, I 0.3, D 0, −20/+20 | Boost PID settings -->
+
+<figure markdown>
+  ![Advanced ▸ Boost Control ▸ Boost control target: target table from Example 2](../img/ts/boost-target.png)
+  <figcaption>Figure 5 — Closed-loop target table</figcaption>
+</figure>
+<!-- shot: img/ts/boost-pid.png | Advanced ▸ Boost Control ▸ Boost control PID | closed loop above 120 kPa, P 0.5, I 0.3, D 0, −20/+20 | Boost PID settings -->
+
+<figure markdown>
+  ![Advanced ▸ Boost Control ▸ Boost control PID: closed loop above 120 kPa, P 0.5, I 0.3, D 0, −20/+20](../img/ts/boost-pid.png)
+  <figcaption>Figure 6 — Boost PID settings</figcaption>
+</figure>
 
 ### 5 · Temperature corrections
 

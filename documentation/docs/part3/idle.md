@@ -333,7 +333,12 @@ a little to **Stepper parking extra steps, %**.
 
 <!-- shot: img/ts/idle-stepper-panel.png | Idle ▸ Idle hardware | Use Stepper yes, Drive stepper with dual H bridges yes, Stepper reaction time 3 ms, Stepper total steps 200, Stepper parking extra steps 0, Force parking every restart no | Figure 8 — The stepper part of <b>Idle hardware</b>, after <b>Switch ETB to Stepper</b>. -->
 
-<!-- shot: img/ts/idle-stepper-hbridge-panel.png | Idle ▸ Idle hardware | Stepper H-Bridge Hardware panel: Inverted driver pins no, H-Bridge Hardware No1 and No2 pin fields visible with the board's default driver pins, all dropdowns closed | Figure 9 — The H-bridge pins for a stepper-driven idle valve. Normally you do not touch these on Proteus: the board and the preset already fill them. -->
+<!-- shot: img/ts/idle-stepper-hbridge-panel.png | Idle ▸ Idle hardware | Stepper H-Bridge Hardware panel: Inverted driver pins no, H-Bridge Hardware No1 and No2 pin fields at NONE (the factory setting), all dropdowns closed | Figure 9 — The H-bridge pins for a stepper-driven idle valve. Normally you do not touch these on Proteus: the board and the preset already fill them. -->
+
+<figure markdown>
+  ![Idle ▸ Idle hardware: Stepper H-Bridge Hardware panel: Inverted driver pins no, H-Bridge Hardware No1 and No2 pin fields at NONE (the factory setting), all dropdowns closed](../img/ts/idle-stepper-hbridge-panel.png)
+  <figcaption>Figure 9 — The H-bridge pins for a stepper-driven idle valve. Normally you do not touch these on Proteus: the board and the preset already fill them.</figcaption>
+</figure>
 
 !!! note "The stepper is counted, not sensed"
     rusEFI parks the valve at one end of its travel at start-up (it steps it in the retracting
@@ -379,6 +384,11 @@ car has air conditioning, and **Fan #1 adder** if the fans are switched by the E
 <!-- shot: img/ts/idle-open-loop-table.png | Idle ▸ Idle Position from CLT vs Idle Target RPM | table with 8 coolant rows from minus 40 to 140 C and the 6 target RPM columns as shipped, cells filled with the factory 75 down to 50, live Idle: Position gauge alongside | Figure 11 — The open-loop idle position table. The RPM axis is the idle <b>target</b>, which is why it rarely moves. -->
 <!-- shot: img/ts/idle-taper-curve.png | Idle ▸ Idle After Start (Crank-to-Run) Taper vs CLT | factory 200 cycles at every coolant temperature | Figure 12 — The crank-to-run taper: how long the idle valve stays near its cranking position after firing. -->
 
+<figure markdown>
+  ![Idle ▸ Idle After Start (Crank-to-Run) Taper vs CLT: factory 200 cycles at every coolant temperature](../img/ts/idle-taper-curve.png)
+  <figcaption>Figure 12 — The crank-to-run taper: how long the idle valve stays near its cranking position after firing.</figcaption>
+</figure>
+
 ### 7 · Choose the control mode, and the thresholds
 
 On **Idle ▸ Idle settings**, set **Idle control mode** to **Open Loop + Closed Loop** if you want the
@@ -401,6 +411,11 @@ and **Max** output, **iTerm Min** and **iTerm Max**, **PID Extra for low RPM**, 
 
 <!-- shot: img/ts/idle-settings.png | Idle ▸ Idle settings | Idle control mode Open Loop + Closed Loop, TPS threshold 5, RPM upper limit 300, RPM deadzone 50, Max vehicle speed 0 | Figure 13 — <b>Idle settings</b>, top panel: the mode and the detection thresholds. -->
 <!-- shot: img/ts/idle-pid-panel.png | Idle ▸ Idle settings | Closed Loop Idle panel: P-factor 0.05, I-factor 0.002, D-factor 0, Min -20, Max 20, iTerm Min -20, iTerm Max 20, PID Extra for low RPM 0, Use IAC PID Multiplier Table off | Figure 14 — The idle RPM PID with its factory gains and limits. -->
+
+<figure markdown>
+  ![Idle ▸ Idle settings: Closed Loop Idle panel: P-factor 0.05, I-factor 0.002, D-factor 0, Min -20, Max 20, iTerm Min -20, iTerm Max 20, PID Extra for low RPM 0, Use IAC PID Multiplier Table off](../img/ts/idle-pid-panel.png)
+  <figcaption>Figure 14 — The idle RPM PID with its factory gains and limits.</figcaption>
+</figure>
 <!-- shot: img/ts/idle-extra-panel.png | Idle ▸ Idle settings | Extra Idle Features panel: Separate idle ignition table disabled, Separate idle VE table disabled, Ramp target on return to idle disabled, Ramp target duration 3, Separate idle tables for cranking taper disabled, Separate coasting idle table disabled, dashpot adder 2, dashpot hold and decay times 0 | Figure 15 — The optional idle features. Each one is a way of not having to work harder with the PID. -->
 
 ### 8 · Optional: idle ignition timing
@@ -411,6 +426,11 @@ large-bore engine with a small idle valve, or an ETB whose idle range is deliber
 the factory **Proportional gain** 0.1 and the ±10° limits, and read *Idle: Timing adjustment* in a log.
 
 <!-- shot: img/ts/idle-timing-pid-panel.png | Idle ▸ Closed-loop Ignition idle timing | Enable closed loop idle ignition timing on, Proportional gain 0.1, Integral gain 0, Derivative gain 0, Min adjustment -10, Max adjustment 10, Soft entry time 0 | Figure 16 — The idle timing PID: a fast, small correction on the same RPM error. -->
+
+<figure markdown>
+  ![Idle ▸ Closed-loop Ignition idle timing: Enable closed loop idle ignition timing on, Proportional gain 0.1, Integral gain 0, Derivative gain 0, Min adjustment -10, Max adjustment 10, Soft entry time 0](../img/ts/idle-timing-pid-panel.png)
+  <figcaption>Figure 16 — The idle timing PID: a fast, small correction on the same RPM error.</figcaption>
+</figure>
 
 ### 9 · Prove the valve moves
 
@@ -530,7 +550,12 @@ The order that works:
    **Use IAC PID Multiplier Table**) if the correction is far too strong near closed throttle and too
    weak further out.
 
-<!-- shot: img/ts/idle-pid-mult-table.png | Idle ▸ IAC PID multiplier | table with 8 load rows and 8 RPM columns, values between 0 and 1 across the grid, IAC PID multiplier gauge alongside; Idle control mode Open Loop + Closed Loop and Use IAC PID Multiplier Table enabled | Figure 18 — The PID multiplier: idle correction on demand, by load and RPM. -->
+<!-- shot: img/ts/idle-pid-mult-table.png | Idle ▸ IAC PID multiplier | table with 8 load rows and 8 RPM columns, values between 0 and 1 across the grid | Figure 18 — The PID multiplier: idle correction on demand, by load and RPM. -->
+
+<figure markdown>
+  ![Idle ▸ IAC PID multiplier: table with 8 load rows and 8 RPM columns, values between 0 and 1 across the grid](../img/ts/idle-pid-mult-table.png)
+  <figcaption>Figure 18 — The PID multiplier: idle correction on demand, by load and RPM.</figcaption>
+</figure>
 
 !!! info "Advanced"
     **Modeled flow idle** (**Controller ▸ Experimental/Broken ▸ Modeled flow idle**, plus

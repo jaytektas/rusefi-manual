@@ -193,11 +193,13 @@ cam sensor misbehaves high in the rev range).
 
 <figure markdown>
   <!-- shot: img/ts/vvt-cam-inputs.png | Setup ▸ Trigger | Strokes Four Stroke, Trigger type 60-2, Crank Sensor (Primary channel) VR 1, Trigger Angle Advance 0, Cam mode (intake) Single Tooth, Cam mode (exhaust) Inactive, Cam sensor bank 1 intake VR 2, intake Cam Edge Select Rising, VVT offset bank 1 intake 0, Cam for engine sync resolution Intake First Bank | The Cam Inputs group on the Trigger dialog: a 60-2 crank on VR 1 and a single-tooth cam on VR 2 -->
+  ![Setup ▸ Trigger: Strokes Four Stroke, Trigger type 60-2, Crank Sensor (Primary channel) VR 1, Trigger Angle Advance 0, Cam mode (intake) Single Tooth, Cam mode (exhaust) Inactive, Cam sensor bank 1 intake VR 2, intake Cam Edge Select Rising, VVT offset bank 1 intake 0, Cam for engine sync resolution Intake First Bank](../img/ts/vvt-cam-inputs.png)
   <figcaption>Figure 3 — Cam inputs are configured next to the crank trigger, not in a VVT dialog.</figcaption>
 </figure>
 
 <figure markdown>
   <!-- shot: img/ts/vvt-advanced-trigger.png | Setup ▸ Advanced Trigger | Require cam/VVT sync for ignition yes, Cam sync crank revolution first, Maximum cam/VVT sync RPM 0, Enable noise filtering off, Console Logging panel with Print verbose VVT sync details to console off | The Advanced Trigger dialog with the cam phase options -->
+  ![Setup ▸ Advanced Trigger: Require cam/VVT sync for ignition yes, Cam sync crank revolution first, Maximum cam/VVT sync RPM 0, Enable noise filtering off, Console Logging panel with Print verbose VVT sync details to console off](../img/ts/vvt-advanced-trigger.png)
   <figcaption>Figure 4 — Cam phase options: only the one cam named in Figure 3 corrects the crank's phase.</figcaption>
 </figure>
 
@@ -344,6 +346,7 @@ numbers again.
 
 <figure markdown>
   <!-- shot: img/ts/vvt-intake-target-table.png | Advanced ▸ VVT intake target | Y axis fueling load, RPM bins 700 to 6500, load bins 30 to 85, table filled with 0 degrees below 1500 RPM rising to 20 to 25 degrees at 2500 to 4000 RPM, back to 5 degrees above 5500 RPM | A first intake target map: parked at idle, advancing in the mid range, parked again at the top -->
+  ![Advanced ▸ VVT intake target: Y axis fueling load, RPM bins 700 to 6500, load bins 30 to 85, table filled with 0 degrees below 1500 RPM rising to 20 to 25 degrees at 2500 to 4000 RPM, back to 5 degrees above 5500 RPM](../img/ts/vvt-intake-target-table.png)
   <figcaption>Figure 8 — The target table is degrees of cam rotation, read at the same engine speed and load
   as your VE table.</figcaption>
 </figure>

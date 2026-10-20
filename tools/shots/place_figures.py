@@ -15,7 +15,7 @@ import re
 import sys
 
 DOCS = pathlib.Path(__file__).resolve().parent.parent.parent / "documentation/docs"
-MARK = re.compile(r"^<!-- shot: ([^ |]+) \| ([^|]+)\| ([^|]+)\|([^\n]*?)-->\n", re.M)
+MARK = re.compile(r"^([ \t]*)<!-- shot: ([^ |]+) \| ([^|]+)\| ([^|]+)\|([^\n]*?)-->\n", re.M)   # keeps the marker's indent (inside tabs)
 NUM = re.compile(r"figcaption>Figure (\d+)|\| *Figure (\d+) —")
 
 pages = [pathlib.Path(p).resolve() for p in sys.argv[1:]] or sorted(DOCS.rglob("*.md"))
@@ -24,10 +24,15 @@ pages = [pathlib.Path(p).resolve() for p in sys.argv[1:]] or sorted(DOCS.rglob("
 def place_one(page, text):
     """Text with the first placeable marker's figure added, or None when there is none left."""
     for m in MARK.finditer(text):
-        img, where, state, caption = (g.strip() for g in m.groups())
+        ind = m.group(1)
+        img, where, state, caption = (g.strip() for g in m.groups()[1:])
         rel = os.path.relpath(DOCS / img, page.parent)
         if not (DOCS / img).exists() or f"]({rel})" in text:
             continue
+        alt = f"{where}: {state}".replace("]", ")").replace("[", "(")
+        if text[:m.start()].rstrip().endswith("<figure markdown>"):
+            # the marker stands in for the image inside a figure the chapter already wrote
+            return text[:m.end()] + f"{ind}![{alt}]({rel})\n" + text[m.end():]
         before = [int(a or b) for a, b in NUM.findall(text[:m.start()])]
         after = [int(a or b) for a, b in NUM.findall(text[m.end():])]
         if not re.match(r"Figure \d+ —", caption):
@@ -36,7 +41,7 @@ def place_one(page, text):
                 sys.exit(f"{page.name}: {img} would be Figure {n}, already used later; number it in the marker")
             caption = f"Figure {n} — {caption}"
         alt = f"{where}: {state}".replace("]", ")").replace("[", "(")
-        fig = f"\n<figure markdown>\n  ![{alt}]({rel})\n  <figcaption>{caption}</figcaption>\n</figure>\n"
+        fig = f"\n{ind}<figure markdown>\n{ind}  ![{alt}]({rel})\n{ind}  <figcaption>{caption}</figcaption>\n{ind}</figure>\n"
         return text[:m.end()] + fig + text[m.end():]
     return None
 
