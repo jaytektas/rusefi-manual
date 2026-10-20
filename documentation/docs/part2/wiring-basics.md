@@ -129,7 +129,7 @@ terminals. Solder is fine on circuit boards and in places that are fully support
 3. Every supply fused; fuses of the right value fitted.
 4. All power grounds (Black23 14/19/20, Black35 17/18/24) to the block; sensor grounds only to
    White 1–8/23/29.
-5. ECU unplugged: battery connected, key on — 12 V present on Black 18; main relay off.
+5. ECU unplugged: battery connected, key on — 12 V present on Black23 pin 18 (ignition feed); main relay off.
 6. ECU plugged in, fuel pump fuse out, coils' fuse out: key on, connect TunerStudio, check sensors read
    sensibly, then fit the fuses one at a time.
 <!-- src: firmware/config/boards/proteus/connectors/white35.yaml (+5 supply #1/#2, GNDA); firmware/config/boards/proteus/connectors/black23.yaml (pin 18, gnd pins); firmware/config/boards/proteus/connectors/black35.yaml (gnd pins) -->
