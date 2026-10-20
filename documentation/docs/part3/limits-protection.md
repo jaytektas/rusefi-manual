@@ -41,15 +41,12 @@ When something cuts, TunerStudio's front page shows **Fuel cut: …** or **Ign c
 
 :material-circle:{ .level-intermediate } Intermediate
 
-<!-- TODO figure not drawn yet:
-<!-- pending-figure
 <figure markdown>
   ![Cut priority: each fast-loop the protection manager starts with fuel and spark allowed, then runs the checks in a fixed order; the first check that cuts records its reason; permanent fatal cuts win over everything](../img/diagrams/limits-protection-cut-priority.svg)
   <figcaption>Figure 1 — How the protection manager decides. Red checks cut; the first one to cut an
-  output names the reason you see in TunerStudio.</figcaption>
+  output names the reason you see in TunerStudio. The external GDI module check (code 18), which runs
+  right after the ignition-voltage check on GDI engines only, is left out.</figcaption>
 </figure>
-pending-figure -->
--->
 
 Every fast loop (5 ms) the protection manager starts with fuel and spark allowed (unless injection
 or ignition is switched off in the settings) and runs its checks in a fixed order. Each check can
@@ -59,7 +56,8 @@ them. A **fatal error** is a separate, permanent cut that always wins and lasts 
 restarts.
 <!-- src: firmware/controllers/limp_manager.cpp (LimpManager::updateState order, allowInjection, allowIgnition, fatalError); firmware/controllers/limp_manager.h (Clearable::clear keeps first reason) -->
 
-The order is: ignition off → Lua cut → **RPM limit** → **lambda protection** → engine phase (no cam
+The order is: ignition off → external GDI module silent for over a second (fuel only, GDI engines with an
+external rusEFI GDI module only) → Lua cut → **RPM limit** → **lambda protection** → engine phase (no cam
 sync yet) → **fault RPM limit** → **boost cut** → **oil pressure** → stop requested → **injector duty**
 → GDI limits → flood clear → **launch control** → kick-start.
 <!-- src: firmware/controllers/limp_manager.cpp (LimpManager::updateState) -->
@@ -94,16 +92,12 @@ Across the same window, from L − hysteresis up to L, the soft zone ramps in:
 The ramp follows current RPM, not the cut: at L it is at full strength even before the cut starts.
 <!-- src: firmware/controllers/limp_manager.cpp (updateRevLimit: interpolateClamped resumeRpm..m_revLimit; getLimitingTimingRetard, getLimitingFuelCorrection); firmware/controllers/algo/engine2.cpp (corrections: TM_DYNAMIC, getLimitingTimingRetard); firmware/controllers/algo/fuel_math.cpp (getRunningFuel: getLimitingFuelCorrection) -->
 
-<!-- TODO figure not drawn yet:
-<!-- pending-figure
 <figure markdown>
   ![Plot of the factory-default RPM limiter: 7000 RPM limit, 50 RPM hysteresis, 4 degrees retard ramping in from 6950 to 7000 RPM; the cut turns on above 7000 RPM and off below 6950 RPM](../img/plots/limits-protection-rev-limiter.svg)
   <figcaption>Figure 2 — The factory-default limiter (7000 RPM, 50 RPM hysteresis, 4° retard), drawn
   from the firmware defaults. The retard ramps over the hysteresis window; the cut has the same window
   as its on/off gap.</figcaption>
 </figure>
-pending-figure -->
--->
 <!-- src: firmware/controllers/algo/defaults/default_base_engine.cpp (rpmHardLimit 7000, rpmHardLimitHyst 50, rpmSoftLimitTimingRetard 4, cutFuelOnHardLimit, cutSparkOnHardLimit) -->
 
 !!! warning "Fill the coolant curve before you switch it on"

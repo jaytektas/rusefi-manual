@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-labelledby="t d">
+  <title id="t">rusEFI console Tuning tab data path</title>
+  <desc id="d">The Tuning tab builds its menu tree from the same ini TunerStudio uses. An edit lands in
+  the console's session image, is patched into the ECU's calibration memory about a tenth of a second
+  later without a burn, and takes effect at once. Burn to ECU commits the tune. The state label, Discard
+  changes and Undo track that, and unburned edits are lost if the ECU loses power.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 10px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- row 1: what you edit -->
+  <rect class="ask" x="16" y="16" width="200" height="56" rx="6"/>
+  <text x="116" y="40" text-anchor="middle">the same .ini</text>
+  <text x="116" y="58" text-anchor="middle" class="small">menus, dialogs, ranges, help</text>
+
+  <rect class="ask" x="236" y="16" width="200" height="56" rx="6"/>
+  <text x="336" y="40" text-anchor="middle">menu tree</text>
+  <text x="336" y="58" text-anchor="middle" class="small">searchable; unusable greyed</text>
+
+  <rect class="ask" x="456" y="16" width="200" height="56" rx="6"/>
+  <text x="556" y="40" text-anchor="middle">dialog, table, curve</text>
+  <text x="556" y="58" text-anchor="middle" class="small">can be detached to a window</text>
+
+  <rect class="box" x="676" y="16" width="268" height="56" rx="6"/>
+  <text x="810" y="40" text-anchor="middle">one working image</text>
+  <text x="810" y="58" text-anchor="middle" class="small">every edit, across all dialogs</text>
+
+  <path class="wire-ask" d="M216,44 H234" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M436,44 H454" marker-end="url(#a)"/>
+  <path class="wire-ask" d="M656,44 H674" marker-end="url(#a)"/>
+
+  <!-- row 2: what is driven -->
+  <path class="wire-drive" d="M810,72 V108" marker-end="url(#a)"/>
+  <rect class="drive" x="676" y="110" width="268" height="60" rx="6"/>
+  <text x="810" y="134" text-anchor="middle">sent 0.1 s after the last edit</text>
+  <text x="810" y="152" text-anchor="middle" class="small">only the changed bytes, upload without burn</text>
+
+  <rect class="drive" x="356" y="110" width="280" height="60" rx="6"/>
+  <text x="496" y="134" text-anchor="middle">ECU calibration memory (RAM)</text>
+  <text x="496" y="152" text-anchor="middle" class="small">the running engine uses it at once</text>
+
+  <rect class="drive" x="36" y="110" width="280" height="60" rx="6"/>
+  <text x="176" y="134" text-anchor="middle">Burn to ECU commits it</text>
+  <text x="176" y="152" text-anchor="middle" class="small">the toolbar button writes the tune to flash</text>
+
+  <path class="wire-drive" d="M676,140 H640" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M356,140 H320" marker-end="url(#a)"/>
+
+  <!-- row 3: feedback and files -->
+  <path class="wire-loop" d="M176,170 V198" marker-end="url(#a)"/>
+  <rect class="loop" x="16" y="200" width="580" height="76" rx="6"/>
+  <text x="36" y="224">the toolbar keeps score</text>
+  <text x="36" y="242" class="small">state label: "Pending changes not burned" · "Offline tune" · blank when clean</text>
+  <text x="36" y="258" class="small">Undo and Redo, 15 deep · Discard changes returns to the last load or burn</text>
+
+  <rect class="box" x="616" y="200" width="328" height="76" rx="6"/>
+  <text x="636" y="224">File ▸ Load Tune · Save Tune</text>
+  <text x="636" y="242" class="small">the same .msq files TunerStudio reads and writes;</text>
+  <text x="636" y="258" class="small">you can edit a tune with no ECU connected</text>
+  <path class="wire" d="M780,198 V74" marker-end="url(#a)"/>
+
+  <!-- row 4: what is not saved -->
+  <path class="wire-safe" d="M496,170 V185 H606 V288" marker-end="url(#a)"/>
+  <rect class="safe" x="16" y="290" width="928" height="66" rx="6"/>
+  <text x="36" y="312">an unburned change is not saved</text>
+  <text x="36" y="330" class="small">if the ECU loses power, or the firmware is reflashed, the RAM edits are gone</text>
+  <text x="36" y="346" class="small">closing the console asks first: Burn to ECU and Exit, or Save Tune and Exit</text>
+  <text x="36" y="382" class="small">the Tuning tab is settings only — gauges, live data and logging are on other tabs</text>
+</svg>

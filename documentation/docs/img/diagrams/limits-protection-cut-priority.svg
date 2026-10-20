@@ -1,0 +1,226 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 510" role="img" aria-labelledby="t d">
+  <title id="t">Protection manager cut priority</title>
+  <desc id="d">Every 5 ms fast loop the protection manager starts with fuel and spark allowed, then runs
+  its checks in one fixed order: no ignition voltage, Lua, RPM limit, lambda protection, engine phase,
+  fault RPM limit, boost cut, then oil pressure, stop requested, injector duty, GDI limits, flood clear,
+  launch control and kick-start. Each check clears fuel, spark or both; the first check to clear an
+  output records the cut reason. A fatal error is a permanent cut that wins over the whole list.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .cell { fill: #fef2f2; stroke: #c8412d; stroke-width: 1.5; }
+    .cut { font-size: 11px; fill: #c8412d; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .cell { fill: #450a0a; }
+      .cut { fill: #f87171; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+  </defs>
+
+  <!-- start of one fast loop: both outputs allowed -->
+  <rect class="loop" x="20" y="20" width="170" height="44" rx="6"/>
+  <text x="105" y="39" text-anchor="middle">fuel allowed</text>
+  <text x="105" y="56" text-anchor="middle" class="mono">isInjectionEnabled</text>
+
+  <rect class="loop" x="204" y="20" width="170" height="44" rx="6"/>
+  <text x="289" y="39" text-anchor="middle">spark allowed</text>
+  <text x="289" y="56" text-anchor="middle" class="mono">isIgnitionEnabled</text>
+
+  <text x="392" y="39" class="small">every 5 ms fast loop starts here; the checks below run in</text>
+  <text x="392" y="56" class="small">this fixed order and each one can clear fuel, spark or both</text>
+
+  <path class="wire-loop" d="M105,64 V96" marker-end="url(#a)"/>
+
+  <!-- column headers -->
+  <text x="32" y="90" class="small">check, in code order</text>
+  <text x="343" y="90" text-anchor="middle" class="small">fuel</text>
+  <text x="415" y="90" text-anchor="middle" class="small">spark</text>
+  <text x="504" y="90" class="small">check, in code order (continued)</text>
+  <text x="815" y="90" text-anchor="middle" class="small">fuel</text>
+  <text x="887" y="90" text-anchor="middle" class="small">spark</text>
+
+  <!-- rows: number square + name, then the two output cells (cut = that output is cleared) -->
+  <!-- column 1: checks 1-7, x from 20 to 448 -->
+  <g>
+    <rect class="safe" x="20" y="100" width="286" height="34" rx="5"/>
+    <rect class="box" x="28" y="107" width="20" height="20" rx="3"/>
+    <text x="38" y="122" text-anchor="middle" class="mono">1</text>
+    <text x="56" y="115">no ignition voltage</text>
+    <text x="56" y="129" class="mono">code 14</text>
+    <rect class="cell" x="310" y="100" width="66" height="34" rx="4"/>
+    <text x="343" y="121" text-anchor="middle" class="cut">cut</text>
+    <rect class="cell" x="382" y="100" width="66" height="34" rx="4"/>
+    <text x="415" y="121" text-anchor="middle" class="cut">cut</text>
+  </g>
+  <g>
+    <rect class="safe" x="20" y="140" width="286" height="34" rx="5"/>
+    <rect class="box" x="28" y="147" width="20" height="20" rx="3"/>
+    <text x="38" y="162" text-anchor="middle" class="mono">2</text>
+    <text x="56" y="155">Lua script cut</text>
+    <text x="56" y="169" class="mono">code 15</text>
+    <rect class="cell" x="310" y="140" width="66" height="34" rx="4"/>
+    <text x="343" y="161" text-anchor="middle" class="cut">cut</text>
+    <rect class="cell" x="382" y="140" width="66" height="34" rx="4"/>
+    <text x="415" y="161" text-anchor="middle" class="cut">cut</text>
+  </g>
+  <g>
+    <rect class="safe" x="20" y="180" width="286" height="34" rx="5"/>
+    <rect class="box" x="28" y="187" width="20" height="20" rx="3"/>
+    <text x="38" y="202" text-anchor="middle" class="mono">3</text>
+    <text x="56" y="195">RPM limit (soft zone below it)</text>
+    <text x="56" y="209" class="mono">code 3</text>
+    <rect class="cell" x="310" y="180" width="66" height="34" rx="4"/>
+    <text x="343" y="201" text-anchor="middle" class="cut">cut</text>
+    <rect class="cell" x="382" y="180" width="66" height="34" rx="4"/>
+    <text x="415" y="201" text-anchor="middle" class="cut">cut</text>
+  </g>
+  <g>
+    <rect class="safe" x="20" y="220" width="286" height="34" rx="5"/>
+    <rect class="box" x="28" y="227" width="20" height="20" rx="3"/>
+    <text x="38" y="242" text-anchor="middle" class="mono">4</text>
+    <text x="56" y="235">lambda protection</text>
+    <text x="56" y="249" class="mono">code 17 · fuel only</text>
+    <rect class="cell" x="310" y="220" width="66" height="34" rx="4"/>
+    <text x="343" y="241" text-anchor="middle" class="cut">cut</text>
+    <text x="415" y="241" text-anchor="middle" class="small">ok</text>
+  </g>
+  <g>
+    <rect class="safe" x="20" y="260" width="286" height="34" rx="5"/>
+    <rect class="box" x="28" y="267" width="20" height="20" rx="3"/>
+    <text x="38" y="282" text-anchor="middle" class="mono">5</text>
+    <text x="56" y="275">engine phase (no cam sync)</text>
+    <text x="56" y="289" class="mono">code 12</text>
+    <rect class="cell" x="310" y="260" width="66" height="34" rx="4"/>
+    <text x="343" y="281" text-anchor="middle" class="cut">cut</text>
+    <rect class="cell" x="382" y="260" width="66" height="34" rx="4"/>
+    <text x="415" y="281" text-anchor="middle" class="cut">cut</text>
+  </g>
+  <g>
+    <rect class="safe" x="20" y="300" width="286" height="34" rx="5"/>
+    <rect class="box" x="28" y="307" width="20" height="20" rx="3"/>
+    <text x="38" y="322" text-anchor="middle" class="mono">6</text>
+    <text x="56" y="315">fault RPM limit (ETB jam, 1500)</text>
+    <text x="56" y="329" class="mono">code 4 · fuel only</text>
+    <rect class="cell" x="310" y="300" width="66" height="34" rx="4"/>
+    <text x="343" y="321" text-anchor="middle" class="cut">cut</text>
+    <text x="415" y="321" text-anchor="middle" class="small">ok</text>
+  </g>
+  <g>
+    <rect class="safe" x="20" y="340" width="286" height="34" rx="5"/>
+    <rect class="box" x="28" y="347" width="20" height="20" rx="3"/>
+    <text x="38" y="362" text-anchor="middle" class="mono">7</text>
+    <text x="56" y="355">boost cut (absolute kPa)</text>
+    <text x="56" y="369" class="mono">code 5 · fuel only</text>
+    <rect class="cell" x="310" y="340" width="66" height="34" rx="4"/>
+    <text x="343" y="361" text-anchor="middle" class="cut">cut</text>
+    <text x="415" y="361" text-anchor="middle" class="small">ok</text>
+  </g>
+
+  <!-- wrap from check 7 down and round into check 8 -->
+  <path class="wire" d="M163,374 V388 H470 V117 H488" marker-end="url(#a)"/>
+
+  <!-- column 2: checks 8-14, x from 492 to 920 -->
+  <g>
+    <rect class="safe" x="492" y="100" width="286" height="34" rx="5"/>
+    <rect class="box" x="500" y="107" width="20" height="20" rx="3"/>
+    <text x="510" y="122" text-anchor="middle" class="mono">8</text>
+    <text x="528" y="115">oil pressure (three checks)</text>
+    <text x="528" y="129" class="mono">code 6 · fuel only</text>
+    <rect class="cell" x="782" y="100" width="66" height="34" rx="4"/>
+    <text x="815" y="121" text-anchor="middle" class="cut">cut</text>
+    <text x="887" y="121" text-anchor="middle" class="small">ok</text>
+  </g>
+  <g>
+    <rect class="safe" x="492" y="140" width="286" height="34" rx="5"/>
+    <rect class="box" x="500" y="147" width="20" height="20" rx="3"/>
+    <text x="510" y="162" text-anchor="middle" class="mono">9</text>
+    <text x="528" y="155">engine stop requested</text>
+    <text x="528" y="169" class="mono">code 7 · fuel only</text>
+    <rect class="cell" x="782" y="140" width="66" height="34" rx="4"/>
+    <text x="815" y="161" text-anchor="middle" class="cut">cut</text>
+    <text x="887" y="161" text-anchor="middle" class="small">ok</text>
+  </g>
+  <g>
+    <rect class="safe" x="492" y="180" width="286" height="34" rx="5"/>
+    <rect class="box" x="500" y="187" width="20" height="20" rx="3"/>
+    <text x="510" y="202" text-anchor="middle" class="mono">10</text>
+    <text x="528" y="195">injector duty limit</text>
+    <text x="528" y="209" class="mono">code 10 · holds under 20 %</text>
+    <rect class="cell" x="782" y="180" width="66" height="34" rx="4"/>
+    <text x="815" y="201" text-anchor="middle" class="cut">cut</text>
+    <text x="887" y="201" text-anchor="middle" class="small">ok</text>
+  </g>
+  <g>
+    <rect class="safe" x="492" y="220" width="286" height="34" rx="5"/>
+    <rect class="box" x="500" y="227" width="20" height="20" rx="3"/>
+    <text x="510" y="242" text-anchor="middle" class="mono">11</text>
+    <text x="528" y="235">GDI injector time limit</text>
+    <text x="528" y="249" class="mono">code 21 · fuel only</text>
+    <rect class="cell" x="782" y="220" width="66" height="34" rx="4"/>
+    <text x="815" y="241" text-anchor="middle" class="cut">cut</text>
+    <text x="887" y="241" text-anchor="middle" class="small">ok</text>
+  </g>
+  <g>
+    <rect class="safe" x="492" y="260" width="286" height="34" rx="5"/>
+    <rect class="box" x="500" y="267" width="20" height="20" rx="3"/>
+    <text x="510" y="282" text-anchor="middle" class="mono">12</text>
+    <text x="528" y="275">flood clear (pedal over 90 %)</text>
+    <text x="528" y="289" class="mono">code 11 · fuel only</text>
+    <rect class="cell" x="782" y="260" width="66" height="34" rx="4"/>
+    <text x="815" y="281" text-anchor="middle" class="cut">cut</text>
+    <text x="887" y="281" text-anchor="middle" class="small">ok</text>
+  </g>
+  <g>
+    <rect class="safe" x="492" y="300" width="286" height="34" rx="5"/>
+    <rect class="box" x="500" y="307" width="20" height="20" rx="3"/>
+    <text x="510" y="322" text-anchor="middle" class="mono">13</text>
+    <text x="528" y="315">launch control</text>
+    <text x="528" y="329" class="mono">code 9</text>
+    <rect class="cell" x="782" y="300" width="66" height="34" rx="4"/>
+    <text x="815" y="321" text-anchor="middle" class="cut">cut</text>
+    <rect class="cell" x="854" y="300" width="66" height="34" rx="4"/>
+    <text x="887" y="321" text-anchor="middle" class="cut">cut</text>
+  </g>
+  <g>
+    <rect class="safe" x="492" y="340" width="286" height="34" rx="5"/>
+    <rect class="box" x="500" y="347" width="20" height="20" rx="3"/>
+    <text x="510" y="362" text-anchor="middle" class="mono">14</text>
+    <text x="528" y="355">kick-start cranking</text>
+    <text x="528" y="369" class="mono">code 13 · spark only</text>
+    <text x="815" y="361" text-anchor="middle" class="small">ok</text>
+    <rect class="cell" x="854" y="340" width="66" height="34" rx="4"/>
+    <text x="887" y="361" text-anchor="middle" class="cut">cut</text>
+  </g>
+
+  <!-- permanent cuts and the first-reason rule -->
+  <rect class="safe" x="20" y="400" width="428" height="62" rx="6"/>
+  <text x="34" y="422">a fatal error wins over the list</text>
+  <text x="34" y="439" class="small">fatalError() clears fuel, spark and the ETB permanently and sets</text>
+  <text x="34" y="454" class="small">the fault RPM limit to 0, until the ECU restarts</text>
+  <path class="wire-safe" d="M20,431 H8 V30 H18" marker-end="url(#a)"/>
+
+  <rect class="box" x="492" y="400" width="428" height="62" rx="6"/>
+  <text x="506" y="422">the first cut names the reason</text>
+  <text x="506" y="439" class="small">a later check that would also cut does not change it, so</text>
+  <text x="506" y="454" class="small">TunerStudio shows one reason: fuelCutReason / sparkCutReason</text>
+
+  <text x="480" y="492" text-anchor="middle" class="small">no cut code here: the soft RPM zone, the ETB RPM taper, DFCO, and spark skipping from launch, flat shift and traction control</text>
+</svg>
