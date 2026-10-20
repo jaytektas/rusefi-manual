@@ -10,6 +10,7 @@ strict: true
 # Snippet files are pulled INTO chapters (--8<--) and are not pages of their own.
 exclude_docs: |
   reference/settings/_*.table.md
+  reference/pinout/_*.table.md
   _edition.md
 
 theme:

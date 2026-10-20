@@ -46,7 +46,7 @@ Two ways of asking for air:
 :material-circle:{ .level-intermediate } Intermediate
 
 <figure markdown>
-  ![Coolant temperature gives the target RPM and the open-loop position; adders for A/C, fans, park/neutral and the dashpot are added; in the Idling phase a PID on RPM error adds a correction; the sum drives the ETB, stepper or solenoid; measured RPM closes the loop; the phase decides which parts are active](img/diagrams/idle-control-loop.svg)
+  ![Coolant temperature gives the target RPM and the open-loop position; adders for A/C, fans, park/neutral and the dashpot are added; in the Idling phase a PID on RPM error adds a correction; the sum drives the ETB, stepper or solenoid; measured RPM closes the loop; the phase decides which parts are active](../img/diagrams/idle-control-loop.svg)
   <figcaption>Figure 1 — The idle control loop. Blue is what is asked for, orange is what is driven,
   green is the measurement and the correction that closes the loop, red is the phase logic that
   decides which parts are active.</figcaption>
@@ -94,7 +94,7 @@ engine re-entering idle starts from the entry threshold and the target ramps dow
 Without that option the target is simply the curve value the moment the engine gets back into idle.
 
 <figure markdown>
-  ![Factory idle target RPM against coolant temperature: 1350 RPM at minus 30 falling to 900 RPM at 90 and rising to 1100 at 120, and the factory open-loop idle position falling from 75 percent at the coldest bin to 50 percent at the hottest, with the cranking air position flat at 50 percent](img/plots/idle-default-target.svg)
+  ![Factory idle target RPM against coolant temperature: 1350 RPM at minus 30 falling to 900 RPM at 90 and rising to 1100 at 120, and the factory open-loop idle position falling from 75 percent at the coldest bin to 50 percent at the hottest, with the cranking air position flat at 50 percent](../img/plots/idle-default-target.svg)
   <figcaption>Figure 2 — The factory curves. Note the target is still 1350 RPM at −30 °C and the
   open-loop position has not reached its low end until the engine is warm.</figcaption>
 </figure>
@@ -170,7 +170,7 @@ fully released pedal. So at 25 % idle position the engine's rest opening is 3.75
 still ends at 30 % throttle.
 
 <figure markdown>
-  ![Throttle target against pedal target for idle positions 0, 25, 50 and 100 percent with the ETB idle range at its default 15 percent: the idle adder lifts the rest position to 0, 3.75, 7.5 and 15 percent while every curve still reaches 100 percent at full pedal](img/plots/idle-etb-idle-range.svg)
+  ![Throttle target against pedal target for idle positions 0, 25, 50 and 100 percent with the ETB idle range at its default 15 percent: the idle adder lifts the rest position to 0, 3.75, 7.5 and 15 percent while every curve still reaches 100 percent at full pedal](../img/plots/idle-etb-idle-range.svg)
   <figcaption>Figure 3 — How the idle adder is applied to an electronic throttle (default 15 % idle
   range). The idle position moves the whole map's floor, not the top end.</figcaption>
 </figure>
@@ -224,7 +224,7 @@ throttle passes half and then **TPS threshold**. **Separate idle VE table** does
 :material-circle:{ .level-basic } Basic
 
 <figure markdown>
-  ![The idle position feeds three paths: the electronic throttle scaled by the ETB idle range and driven by the ETB H-bridge, a stepper valve driven as steps by the two H-bridges on Proteus, and a PWM solenoid driven by one flyback-protected lowside output](img/diagrams/idle-hardware-drives.svg)
+  ![The idle position feeds three paths: the electronic throttle scaled by the ETB idle range and driven by the ETB H-bridge, a stepper valve driven as steps by the two H-bridges on Proteus, and a PWM solenoid driven by one flyback-protected lowside output](../img/diagrams/idle-hardware-drives.svg)
   <figcaption>Figure 4 — The three ways rusEFI drives idle air, and where each one plugs into a
   Proteus F7. Note the stepper path reuses the throttle H-bridges.</figcaption>
 </figure>

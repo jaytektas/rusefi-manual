@@ -41,11 +41,13 @@ When something cuts, TunerStudio's front page shows **Fuel cut: …** or **Ign c
 
 :material-circle:{ .level-intermediate } Intermediate
 
+<!-- TODO figure not drawn yet:
 <figure markdown>
   ![Cut priority: each fast-loop the protection manager starts with fuel and spark allowed, then runs the checks in a fixed order; the first check that cuts records its reason; permanent fatal cuts win over everything](../img/diagrams/limits-protection-cut-priority.svg)
   <figcaption>Figure 1 — How the protection manager decides. Red checks cut; the first one to cut an
   output names the reason you see in TunerStudio.</figcaption>
 </figure>
+-->
 
 Every fast loop (5 ms) the protection manager starts with fuel and spark allowed (unless injection
 or ignition is switched off in the settings) and runs its checks in a fixed order. Each check can
@@ -90,12 +92,14 @@ Across the same window, from L − hysteresis up to L, the soft zone ramps in:
 The ramp follows current RPM, not the cut: at L it is at full strength even before the cut starts.
 <!-- src: firmware/controllers/limp_manager.cpp (updateRevLimit: interpolateClamped resumeRpm..m_revLimit; getLimitingTimingRetard, getLimitingFuelCorrection); firmware/controllers/algo/engine2.cpp (corrections: TM_DYNAMIC, getLimitingTimingRetard); firmware/controllers/algo/fuel_math.cpp (getRunningFuel: getLimitingFuelCorrection) -->
 
+<!-- TODO figure not drawn yet:
 <figure markdown>
   ![Plot of the factory-default RPM limiter: 7000 RPM limit, 50 RPM hysteresis, 4 degrees retard ramping in from 6950 to 7000 RPM; the cut turns on above 7000 RPM and off below 6950 RPM](../img/plots/limits-protection-rev-limiter.svg)
   <figcaption>Figure 2 — The factory-default limiter (7000 RPM, 50 RPM hysteresis, 4° retard), drawn
   from the firmware defaults. The retard ramps over the hysteresis window; the cut has the same window
   as its on/off gap.</figcaption>
 </figure>
+-->
 <!-- src: firmware/controllers/algo/defaults/default_base_engine.cpp (rpmHardLimit 7000, rpmHardLimitHyst 50, rpmSoftLimitTimingRetard 4, cutFuelOnHardLimit, cutSparkOnHardLimit) -->
 
 !!! warning "Fill the coolant curve before you switch it on"
