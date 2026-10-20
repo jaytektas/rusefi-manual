@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 430" role="img" aria-labelledby="t d">
+  <title id="t">Launch control: gates, then one of three RPM states</title>
+  <desc id="d">Four gates must all be true: the activation switch is held, optionally latched at the Launch RPM
+  Threshold; vehicle speed is below the Speed Threshold; the pedal is above the TPS Threshold; and the engine
+  speed decides which RPM state applies. Below the window nothing happens. Inside the window is pre-launch:
+  the skip percentage ramps and the retard ramps. At or above Launch RPM is launch: 100 percent skip, absolute
+  timing, fuel adder, and above Launch RPM a full fuel and spark cut.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    .arrow-drive { fill: #e8710a; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+      .arrow-drive { fill: #e8710a; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+    <marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-drive"/>
+    </marker>
+  </defs>
+
+  <text x="20" y="26" class="small">the gates, checked every launch update</text>
+
+  <rect class="ask" x="20" y="40" width="240" height="56" rx="6"/>
+  <text x="30" y="62">Activation switch held</text>
+  <text x="30" y="80" class="small">button, clutch, brake, Lua or always</text>
+  <rect class="ask" x="20" y="106" width="240" height="56" rx="6"/>
+  <text x="30" y="128">Armed at or below</text>
+  <text x="30" y="146" class="small">Launch RPM Threshold (0 = off)</text>
+  <rect class="loop" x="20" y="172" width="240" height="56" rx="6"/>
+  <text x="30" y="194">Vehicle speed gate</text>
+  <text x="30" y="212" class="small">below Speed Threshold, else blocked</text>
+  <rect class="loop" x="20" y="238" width="240" height="56" rx="6"/>
+  <text x="30" y="260">Pedal gate</text>
+  <text x="30" y="278" class="small">above TPS Threshold, and valid</text>
+
+  <path class="wire" d="M260,68 L310,68 L310,140"/>
+  <path class="wire" d="M260,134 L310,134"/>
+  <path class="wire" d="M260,200 L310,200 L310,180"/>
+  <path class="wire" d="M260,266 L330,266 L330,206"/>
+
+  <rect class="box" x="310" y="140" width="120" height="66" rx="6"/>
+  <text x="370" y="166" text-anchor="middle">all four</text>
+  <text x="370" y="184" text-anchor="middle" class="small">true</text>
+  <path class="wire" d="M430,173 L470,173" marker-end="url(#a)"/>
+  <text x="450" y="163" class="small">RPM</text>
+
+  <rect class="box" x="470" y="40" width="470" height="60" rx="6"/>
+  <text x="480" y="62">NotMet - below the window</text>
+  <text x="480" y="80" class="small">rpm below Launch RPM minus Window: no launch activity at all</text>
+
+  <rect class="drive" x="470" y="112" width="470" height="82" rx="6"/>
+  <text x="480" y="134">PreLaunch - inside the window</text>
+  <text x="480" y="152" class="small">skip ramps from Initial Ignition Cut % at the window start to</text>
+  <text x="480" y="168" class="small">Final Ignition Cut % at the corrections end, then holds</text>
+  <text x="480" y="184" class="small">timing ramps down the same way with Smooth Retard Mode</text>
+
+  <rect class="drive" x="470" y="206" width="470" height="82" rx="6"/>
+  <text x="480" y="228">Launch - at or above Launch RPM</text>
+  <text x="480" y="246" class="small">skip request 100 %; absolute timing if Use Absolute Timing</text>
+  <text x="480" y="262" class="small">at Launch is on; fuel adder applied; closed-loop lambda and</text>
+  <text x="480" y="278" class="small">long term trim are paused in both states</text>
+
+  <path class="wire-drive" d="M520,194 L520,206" marker-end="url(#ad)"/>
+
+  <rect class="safe" x="470" y="300" width="470" height="60" rx="6"/>
+  <text x="480" y="322">Above Launch RPM: a full cut</text>
+  <text x="480" y="340" class="small">Fuel Cut and/or Ignition Cut switch fuel and spark off outright,</text>
+  <text x="480" y="354" class="small">cut code LaunchCut, until rpm falls back to Launch RPM</text>
+  <path class="wire-safe" d="M700,288 L700,300" marker-end="url(#a)"/>
+
+  <text x="20" y="392" class="small">The latch and the gates are separate: losing the speed or pedal gate stops the activity, but the switch stays latched</text>
+  <text x="20" y="408" class="small">until it is released. There is no hysteresis on the RPM boundaries, so the engine moves between states freely.</text>
+</svg>

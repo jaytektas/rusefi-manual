@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 470" role="img" aria-labelledby="t d">
+  <title id="t">Launch control, shift torque reduction and traction control: what triggers them and what they drive</title>
+  <desc id="d">Three lanes. Each feature has an activation input, gates that must all be true, and outputs.
+  Launch control uses an RPM window and drives absolute timing, spark skipping, fuel enrichment and a full
+  cut. Shift torque reduction uses a switch plus coolant, RPM, pedal and time gates and drives two tables.
+  Traction control uses a wheel slip ratio from CAN wheel speeds and drives throttle, timing and skipping.
+  All three end in the same three quantities: one timing value, one spark skip ratio, one throttle target.</desc>
+  <style>
+    text { font-family: "DejaVu Sans", Arial, sans-serif; font-size: 13px; fill: #1f2937; }
+    .small { font-size: 11px; fill: #4b5563; }
+    .mono { font-family: "DejaVu Sans Mono", monospace; font-size: 11px; fill: #4b5563; }
+    .box { fill: #ffffff; stroke: #6b7280; stroke-width: 2; }
+    .ask { fill: #eff6ff; stroke: #2563eb; stroke-width: 2; }
+    .drive { fill: #fff7ed; stroke: #e8710a; stroke-width: 2; }
+    .loop { fill: #f0fdf4; stroke: #2e9d4f; stroke-width: 2; }
+    .safe { fill: #fef2f2; stroke: #c8412d; stroke-width: 2; }
+    .wire { stroke: #6b7280; stroke-width: 2; fill: none; }
+    .wire-ask { stroke: #2563eb; stroke-width: 2; fill: none; }
+    .wire-drive { stroke: #e8710a; stroke-width: 2; fill: none; }
+    .wire-loop { stroke: #2e9d4f; stroke-width: 2; fill: none; }
+    .wire-safe { stroke: #c8412d; stroke-width: 2; fill: none; stroke-dasharray: 6 4; }
+    .arrow { fill: #6b7280; }
+    .arrow-drive { fill: #e8710a; }
+    @media (prefers-color-scheme: dark) {
+      text { fill: #e5e7eb; } .small, .mono { fill: #9ca3af; }
+      .box { fill: #1f2937; stroke: #9ca3af; } .ask { fill: #172554; } .drive { fill: #431407; }
+      .loop { fill: #052e16; } .safe { fill: #450a0a; } .wire { stroke: #9ca3af; } .arrow { fill: #9ca3af; }
+      .arrow-drive { fill: #e8710a; }
+    }
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow"/>
+    </marker>
+    <marker id="ad" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" class="arrow-drive"/>
+    </marker>
+  </defs>
+
+  <text x="20" y="26" class="small">activation input</text>
+  <text x="250" y="26" class="small">gates - all must be true</text>
+  <text x="510" y="26" class="small">what it drives</text>
+
+  <!-- lane 1: launch control -->
+  <rect class="ask" x="20" y="40" width="210" height="76" rx="6"/>
+  <text x="30" y="62">Launch Control</text>
+  <text x="30" y="80" class="small">button, clutch down, brake</text>
+  <text x="30" y="96" class="small">pedal, Lua, or always on</text>
+  <rect class="box" x="250" y="40" width="240" height="76" rx="6"/>
+  <text x="260" y="60" class="small">switch held (latched at arming RPM)</text>
+  <text x="260" y="76" class="small">speed below Speed Threshold</text>
+  <text x="260" y="92" class="small">pedal above TPS Threshold</text>
+  <text x="260" y="108" class="small">RPM inside the launch window</text>
+  <rect class="drive" x="510" y="40" width="430" height="76" rx="6"/>
+  <text x="520" y="62">Absolute timing - spark skip ramp - fuel adder</text>
+  <text x="520" y="80" class="small">100 % skip, and above Launch RPM a full fuel</text>
+  <text x="520" y="96" class="small">and/or spark cut (cut code LaunchCut)</text>
+  <path class="wire" d="M230,78 L250,78" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M490,78 L510,78" marker-end="url(#ad)"/>
+
+  <!-- lane 2: shift torque reduction -->
+  <rect class="ask" x="20" y="136" width="210" height="76" rx="6"/>
+  <text x="30" y="158">Shift Torque Reduction</text>
+  <text x="30" y="176" class="small">flat shift: same button, or</text>
+  <text x="30" y="192" class="small">clutch down / clutch up switch</text>
+  <rect class="box" x="250" y="136" width="240" height="76" rx="6"/>
+  <text x="260" y="156" class="small">coolant above Minimum Engine Temp</text>
+  <text x="260" y="172" class="small">RPM at or above Arming RPM</text>
+  <text x="260" y="188" class="small">pedal at or above Arming APP</text>
+  <text x="260" y="204" class="small">still inside the Time table window</text>
+  <rect class="drive" x="510" y="136" width="430" height="76" rx="6"/>
+  <text x="520" y="158">Timing table value, as the timing itself</text>
+  <text x="520" y="176" class="small">Ignition cut table: percent of events skipped;</text>
+  <text x="520" y="192" class="small">both looked up by gear and by the chosen X axis</text>
+  <path class="wire" d="M230,174 L250,174" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M490,174 L510,174" marker-end="url(#ad)"/>
+
+  <!-- lane 3: traction control -->
+  <rect class="loop" x="20" y="232" width="210" height="76" rx="6"/>
+  <text x="30" y="254">Traction control</text>
+  <text x="30" y="272" class="small">wheel slip ratio =</text>
+  <text x="30" y="288" class="small">front / rear axle, from CAN</text>
+  <rect class="box" x="250" y="232" width="240" height="76" rx="6"/>
+  <text x="260" y="254" class="small">three 6 x 6 tables,</text>
+  <text x="260" y="270" class="small">slip ratio against speed:</text>
+  <text x="260" y="286" class="small">ETB drop, timing drop, skip</text>
+  <rect class="drive" x="510" y="232" width="430" height="76" rx="6"/>
+  <text x="520" y="254">Throttle target minus percent - timing in deg</text>
+  <text x="520" y="272" class="small">spark skip percent - soft limiter by default,</text>
+  <text x="520" y="288" class="small">hard limiter with useHardSkipInTraction</text>
+  <path class="wire-loop" d="M230,270 L250,270" marker-end="url(#a)"/>
+  <path class="wire-drive" d="M490,270 L510,270" marker-end="url(#ad)"/>
+
+  <!-- shared outputs -->
+  <rect class="drive" x="20" y="340" width="290" height="66" rx="6"/>
+  <text x="30" y="362">One timing value</text>
+  <text x="30" y="380" class="small">the running advance, plus a percent</text>
+  <text x="30" y="394" class="small">or a table value that replaces it</text>
+  <rect class="drive" x="345" y="340" width="290" height="66" rx="6"/>
+  <text x="355" y="362">One skip ratio</text>
+  <text x="355" y="380" class="small">requests are added together, then the</text>
+  <text x="355" y="394" class="small">limiter decides event by event</text>
+  <rect class="drive" x="670" y="340" width="290" height="66" rx="6"/>
+  <text x="680" y="362">One throttle target</text>
+  <text x="680" y="380" class="small">electronic throttle only;</text>
+  <text x="680" y="394" class="small">never a brake or a gearbox</text>
+
+  <!-- rail from the three lanes into the shared outputs -->
+  <path class="wire-drive" d="M940,78 L975,78"/>
+  <path class="wire-drive" d="M940,174 L975,174"/>
+  <path class="wire-drive" d="M940,270 L975,270"/>
+  <path class="wire-drive" d="M975,78 L975,373 L963,373" marker-end="url(#ad)"/>
+  <text x="978" y="300" class="small" transform="rotate(-90 978 300)">all three</text>
+
+  <!-- safety band -->
+  <rect class="safe" x="20" y="420" width="940" height="38" rx="6"/>
+  <text x="30" y="437" class="small">rusEFI has no brake-based traction control and no hydraulic shift: torque leaves the wheels through ignition</text>
+  <text x="30" y="452" class="small">timing, ignition skipping and the throttle - and nothing else.</text>
+</svg>

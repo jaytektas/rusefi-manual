@@ -94,8 +94,11 @@ nav:
       - Electronic throttle: part3/electronic-throttle.md
       - Closed-loop lambda: part3/closed-loop-lambda.md
       - Boost: part3/boost.md
+      - Cam and valve control: part3/vvt.md
+      - Launch, shift and traction: part3/launch-traction.md
       - Limits and engine protection: part3/limits-protection.md
       - Knock: part3/knock.md
+      - CAN configuration: part3/can.md
   - Part IV — Tuning:
       - part4/index.md
       - Tuning principles: part4/tuning-principles.md
