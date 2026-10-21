@@ -196,9 +196,9 @@ pending-figure -->
 
 The file names tell you what is on the card: **`re_yymmdd_HHMMSS.mlg`** when the ECU's clock knows a
 sane date (its own rule is 2016 to 2030), and **`re_<index>.mlg`** otherwise, where the next index is
-kept in a small file `rusefi.ind` on the card so numbers are never reused. A log file is closed and a
+kept in a small file `index.txt` on the card so numbers are never reused. A log file is closed and a
 new one started every 32 MB, so one drive becomes several files, oldest first.
-<!-- src: firmware/hw_layer/mmc_card.cpp (prepareLogFileName, LOGGER_MAX_FILE_SIZE 32 MB and the rollover in sdLoggerMlg, F_SYNC_FREQUENCY, SD_CARD_LABEL); firmware/hw_layer/mmc_card_util.cpp (incLogFileName and rusefi.ind); firmware/hw_layer/rtc_helper.cpp (dateToStringShort: the 2016 to 2030 range) -->
+<!-- src: firmware/hw_layer/mmc_card.cpp (prepareLogFileName, LOGGER_MAX_FILE_SIZE 32 MB and the rollover in sdLoggerMlg, F_SYNC_FREQUENCY, SD_CARD_LABEL); firmware/hw_layer/mmc_card_util.cpp (incLogFileName and LOG_INDEX_FILENAME "index.txt"); firmware/hw_layer/rtc_helper.cpp (dateToStringShort: the 2016 to 2030 range) -->
 
 !!! warning "**Format** erases the card"
     **Format** (`cmd_format`) builds a new FAT volume on the card and labels it `rusEFI logs`. It takes
@@ -235,7 +235,7 @@ files out; you do not need to keep them on the card, and the ECU does not delete
     the `re_*.mlg` files, and copy them somewhere you can find them again. Use **Safely Remove
     Hardware** before unplugging the ECU's USB cable.
 
-    <!-- shot: img/windows/datalogging-sd-drive.png | Windows 11 File Explorer, This PC, removable drive | state: a Proteus F7 with the SD card mounted to the PC, the drive labelled rusEFI logs, several files named re_YYMMDD_HHMMSS.mlg between 20 and 32 MB plus rusefi.ind, column view with file sizes and dates, nothing selected | The ECU's SD card as Windows sees it after Mount to PC: a normal folder of dated mlg files. -->
+    <!-- shot: img/windows/datalogging-sd-drive.png | Windows 11 File Explorer, This PC, removable drive | state: a Proteus F7 with the SD card mounted to the PC, the drive labelled rusEFI logs, several files named re_YYMMDD_HHMMSS.mlg between 20 and 32 MB plus index.txt, column view with file sizes and dates, nothing selected | The ECU's SD card as Windows sees it after Mount to PC: a normal folder of dated mlg files. -->
 
     <!-- pending-figure
     <figure markdown>

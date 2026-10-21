@@ -384,14 +384,12 @@ TunerStudio is needed to connect to it.
 <!-- src: java_console/io/src/main/java/com/rusefi/io/tcp/TcpConnector.java (DEFAULT_PORT is the local TCP port 29001); java_console/connectivity/src/main/java/com/rusefi/SerialPortScanner.java (TCP ports included in the port scan); java_console/ui/src/main/java/com/rusefi/ui/console/TitleBarPanel.java (connectionLabel renders a simulator connection by its TCP port); simulator/readme.md (the simulator listens on local TCP ports, licensed TS needed) -->
 
 <!-- shot: img/ts/building-rusefi-simulator-front-page.png | TunerStudio front page of a rusEFI Proteus F7 project connected to the PC simulator | simulator/build/rusefi_simulator built from this tree and running on the same PC, TunerStudio connected to it over TCP port 29001, the simulated engine running on its own trigger self-stimulation at 1200 RPM so RPM, MAP and the calculated fuel values are live with no ECU hardware present; crop to the front page, no dropdown open | The simulator is the same firmware with the hardware mocked: it self-stimulates its trigger at 1200 RPM, so the front page runs with no engine connected. -->
-<!-- pending-figure
 <figure markdown>
   ![TunerStudio front page fed by the rusEFI PC simulator, showing live RPM and calculated fuel values with no ECU hardware attached](../img/ts/building-rusefi-simulator-front-page.png)
   <figcaption>Figure 4 — A simulator session: the values come from real firmware logic and a
   self-stimulated trigger, not from an engine.</figcaption>
 </figure>
 
-pending-figure -->
 
 This is done in the rusEFI console: with it connected you can drive the simulator from the command line.
 `set_sensor_mock CLT 85.5` sets a mocked sensor **by name**, and `reset_sensor_mocks` clears the mocks
