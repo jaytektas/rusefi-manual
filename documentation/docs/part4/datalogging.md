@@ -84,23 +84,22 @@ Two details that catch people out:
 
 1. Connect TunerStudio to the ECU with the engine's own **12 V** supply on, not USB power alone
    (*Installing the software*, and the rule repeated below).
-2. Open TunerStudio's **Data Logging** menu and press **Start Logging**. TunerStudio's own *Data
-   Logging* indicator on the front page tells you it is recording; press **Stop Logging** at the end.
+2. Open TunerStudio's **Data Logging** menu and press **Start Logging**, then **Save** to accept the
+   file name it suggests (the date and time). TunerStudio's own *Data Logging* indicator on the front
+   page tells you it is recording; press **Stop** in the same menu at the end.
 3. TunerStudio writes one `.mlg` file per logging session, into the **DataLogs** folder inside your
    TunerStudio project folder. Copy important ones somewhere you will find them again.
 4. Open the file in MegaLogViewer, or in TunerStudio's log viewer, when the run is over.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini ([FrontPage] comment listing the system indicators TunerStudio appends itself, Data Logging among them) -->
 
-<!-- shot: img/ts/datalogging-data-logging-menu.png | Data Logging (TunerStudio's own menu) | state: connected to a Proteus F7 on 12 V with the engine idling, the menu open showing Start Logging and Stop Logging, the front-page Data Logging indicator lit after a session was started, no dropdowns open | Recording on the PC: TunerStudio's Data Logging menu, with every channel in rusEFI's list going into the file. -->
+<!-- shot: img/ts/datalogging-data-logging-menu.png | Data Logging (TunerStudio's own menu) | state: connected to a Proteus F7 on 12 V with the Ardu-Stim feeding a 60-2 crank signal at about 860 rpm, the menu open showing Start Logging and Stop, the front-page Data Logging indicator lit after a session was started, no dropdowns open | Recording on the PC: TunerStudio's Data Logging menu, with every channel in rusEFI's list going into the file. -->
 
-<!-- pending-figure
 <figure markdown>
-  ![TunerStudio Data Logging menu open with Start Logging and Stop Logging, the front page live behind it and the Data Logging indicator lit while recording](../img/ts/datalogging-data-logging-menu.png)
+  ![TunerStudio Data Logging menu open with Start Logging and Stop, the front page live behind it and the Data Logging indicator lit while recording](../img/ts/datalogging-data-logging-menu.png)
   <figcaption>Figure 2 — Recording on the PC: TunerStudio's <b>Data Logging</b> menu. Every channel in
   rusEFI's list goes into the file, whether you want it or not.</figcaption>
 </figure>
 
-pending-figure -->
 
 !!! warning "A bench log taken on USB power records wrong values"
     With only USB connected the firmware runs and logs, but the 5 V sensor supplies cannot reach 5 V, so
@@ -124,14 +123,12 @@ set is on one page: **Controller ▸ SD Card Logger** (`sdCard`).
 
 <!-- shot: img/ts/datalogging-sd-card-logger.png | Controller ▸ SD Card Logger | state: Proteus F7, ignition on (12 V), engine stopped, USB connected so the card is mounted to the ECU for this shot, SD Card Logging enabled, SD logger mode Full MLG, MLG logger rate 50, Conditional logging disabled, SD card present and ECU logging indicators green, SD WR blinking, Logging state readout 3, FRESULT readout 0, Mount to PC / Mount to ECU / Unmount / Format buttons visible, every dropdown closed | The whole SD logging page: what the ECU records by itself and the buttons that hand the card to the computer. -->
 
-<!-- pending-figure
 <figure markdown>
   ![TunerStudio SD Card Logger dialog on a Proteus F7: SD Card Logging enabled, SD logger mode Full MLG, MLG logger rate 50, the SD card present and ECU logging indicators green, the SD WR indicator blinking, Mount to PC and Mount to ECU buttons, the FRESULT readout at zero and the Logging state readout](../img/ts/datalogging-sd-card-logger.png)
   <figcaption>Figure 3 — <b>Controller ▸ SD Card Logger</b>: what the ECU records by itself, and the
   buttons that hand the card to your computer.</figcaption>
 </figure>
 
-pending-figure -->
 
 ### Which mode the card is in
 
@@ -185,14 +182,12 @@ by design, so you can always read the card without pulling it out. Two consequen
 
 <!-- shot: img/ts/datalogging-sd-pc-mode.png | Controller ▸ SD Card Logger, after pressing Mount to PC | state: Proteus F7, ignition on, engine stopped, PC Access indicator green, ECU logging indicator off, SD card present green, Logging state readout unchanged, FRESULT 0 | The card after Mount to PC: the ECU has stopped logging and the files are readable from the computer. -->
 
-<!-- pending-figure
 <figure markdown>
   ![The same SD Card Logger dialog after Mount to PC: the PC Access indicator green, ECU logging off, the card now a drive on the computer](../img/ts/datalogging-sd-pc-mode.png)
   <figcaption>Figure 5 — Card handed to the computer. The ECU stops logging; the files on the card are
   yours to copy.</figcaption>
 </figure>
 
-pending-figure -->
 
 The file names tell you what is on the card: **`re_yymmdd_HHMMSS.mlg`** when the ECU's clock knows a
 sane date (its own rule is 2016 to 2030), and **`re_<index>.mlg`** otherwise, where the next index is
@@ -267,14 +262,12 @@ open.
 
 <!-- shot: img/ts/datalogging-sd-conditional.png | Controller ▸ SD Card Logger (the SD Conditional Logging panel on the right of the dialog) | state: Proteus F7, ignition on, Conditional logging enabled, Start RPM 3000, Stop RPM (hysteresis, < start) 2500, Stop delay 20, Also require TPS above 95, Also require MAP above 0, Also require speed above 0, Toggle button pin unset, Logging state readout 6 | Conditional logging set for dyno pulls, with the state readout that says why the ECU is or is not writing. -->
 
-<!-- pending-figure
 <figure markdown>
   ![The SD Conditional Logging panel of the SD Card Logger dialog: Conditional logging enabled, Start RPM 3000, Stop RPM 2500, Stop delay 20, Also require TPS above 95, MAP and speed left at 0, and the Logging state readout](../img/ts/datalogging-sd-conditional.png)
   <figcaption>Figure 7 — Conditional logging for dyno pulls. The <b>Logging state</b> readout is the
   reason it is or is not writing.</figcaption>
 </figure>
 
-pending-figure -->
 
 How it behaves, in the order the firmware applies it:
 
