@@ -108,15 +108,13 @@ landed. It only counts writes you have asked for: an edit you have not burned ye
 white indicator after an edit means "nothing queued", not "safe in flash".
 <!-- src: firmware/console/status_loop.cpp (needBurn = getNeedToWriteConfiguration()); firmware/controllers/storage.cpp (getNeedToWriteConfiguration: the pending settings-write bit); firmware/console/binary/tunerstudio.cpp (requestBurn is what sets it); firmware/tunerstudio/tunerstudio.template.ini (indicator { needBurn }, white / yellow) -->
 
-<!-- shot: img/ts/tunes-backups-frontpage-burn-state.png | TunerStudio front page of a rusEFI project for the Proteus F7 | Proteus F7 connected with 12 V ignition on and the engine stopped, the Ardu-Stim turning the engine so the write is held (single-bank F7), one setting changed and Burn pressed: the Unsaved changes indicator yellow; crop below the title bar (registration name); annotate 1 = the Settings saved / Unsaved changes indicator; gauges live, no dropdown open | The front-page setting indicator is the only reliable sign that a change has reached the ECU's flash. -->
-<!-- pending-figure
+<!-- shot: img/ts/tunes-backups-frontpage-burn-state.png | TunerStudio front page of a rusEFI project for the Proteus F7 | Proteus F7 connected with 12 V ignition on, no engine, the Ardu-Stim feeding a 60-2 crank signal at about 860 rpm so the write is held (single-bank F7), one setting changed and Burn pressed: the Unsaved changes indicator yellow; crop below the title bar (registration name); gauges live, no dropdown open | The front-page setting indicator is the only reliable sign that a change has reached the ECU's flash. -->
 <figure markdown>
   ![TunerStudio front page for a Proteus F7 with the engine turning and the indicator yellow, reading Unsaved changes, after Burn](../img/ts/tunes-backups-frontpage-burn-state.png)
   <figcaption>Figure 3 — The front page's setting indicator: yellow while a settings write is still queued
   (here held back because the engine is turning), white <b>Settings saved</b> once the ECU has written flash.</figcaption>
 </figure>
 
-pending-figure -->
 
 The commit is not always instant. rusEFI writes the settings flash while the engine is running only if the chip
 can write flash without pausing execution; on hardware that pauses, the write is queued and happens when the
