@@ -303,11 +303,13 @@ of which TunerStudio can do.
 This is the usual outcome of an interrupted or failed update, and it is a normal, recoverable state:
 the ECU is in its bootloader, waiting for a firmware image.
 
-1. **Recognise it.** With the console open, the port is listed as **OpenBLT Bootloader**, the log says
-   *"Board is in the OpenBLT bootloader — click Update Firmware to flash."* and the main button reads
-   **Manual OpenBLT Update**. On the board itself, all four LEDs blink in step. There is nothing for TunerStudio to talk to
+1. **Recognise it.** Open the console: its start window opens on **Update Firmware** with the main
+   button reading **Manual OpenBLT Update**, and its **Connect** tab says *"Board in OpenBLT bootloader
+   on …"* and lists the port as **OpenBLT Bootloader**, with the bootloader version and the board name.
+   If the console was already connected when the ECU dropped into its bootloader, its **Device** tab
+   logs *"Board is in the OpenBLT bootloader — click Update Firmware to flash."* instead. On the board itself, all four LEDs blink in step. There is nothing for TunerStudio to talk to
    there: the port does not answer the TunerStudio protocol, and TunerStudio cannot write firmware.
-    <!-- src: java_console/connectivity/src/main/java/com/rusefi/SerialPortType.java (OpenBlt friendly string); java_console/ui/src/main/java/com/rusefi/DevicePane.java (bootloaderGuidance text); java_console/ui/src/main/java/com/rusefi/maintenance/ProgramSelector.java (mainButtonModeFor: a board in OpenBLT is flashed with Manual OpenBLT Update); java_console/connectivity/src/main/java/com/rusefi/updater/OpenbltDetectorStrategy.java (how a port is positively identified as OpenBLT) -->
+    <!-- src: java_console/connectivity/src/main/java/com/rusefi/SerialPortType.java (OpenBlt friendly string); java_console/connectivity/src/main/java/com/rusefi/PortResult.java (toString adds the bootloader version and board); java_console/ui/src/main/java/com/rusefi/StartupFrame.java ("Board in OpenBLT bootloader on" on the Connect tab); java_console/ui/src/main/java/com/rusefi/DevicePane.java (bootloaderGuidance text, shown when a connected board drops into a bootloader); java_console/ui/src/main/java/com/rusefi/maintenance/ProgramSelector.java (mainButtonModeFor: a board in OpenBLT is flashed with Manual OpenBLT Update); java_console/connectivity/src/main/java/com/rusefi/updater/OpenbltDetectorStrategy.java (how a port is positively identified as OpenBLT) -->
 
 2. **Flash it.** This is done in the rusEFI console — press **Manual OpenBLT Update**. The console
    writes the bundle's **update image** (`…_update.srec`, firmware only, from `0x0800 8000`) and
@@ -325,15 +327,13 @@ the ECU is in its bootloader, waiting for a firmware image.
    When the console does an update itself it also backs up your tune and writes it back afterwards —
    see the Flashing firmware chapter.
 
-<!-- shot: img/console/recovering-openblt-bootloader.png | rusEFI console start window ▸ Update Firmware tab | Proteus F7 sitting in its OpenBLT bootloader after an interrupted update: the port combo lists an OpenBLT Bootloader port, the log line reads "Board is in the OpenBLT bootloader - click Update Firmware to flash.", the main button reads Manual OpenBLT Update, Migrate Settings visible | A board in its OpenBLT bootloader: the console has detected it and offers to write the update image. -->
-<!-- pending-figure
+<!-- shot: img/console/recovering-openblt-bootloader.png | rusEFI console start window ▸ Connect tab | Proteus F7 sitting in its OpenBLT bootloader, console started from the Proteus F7 bundle: the status line "Board in OpenBLT bootloader on <port> — use the Update Firmware tab", the Device list showing the port as OpenBLT Bootloader with version and board, Connect greyed; crop to the Connect card | A board in its bootloader, as the console's start window reports it. -->
 <figure markdown>
-  ![rusEFI console Update Firmware tab with a Proteus F7 sitting in its OpenBLT bootloader: the port list shows an OpenBLT Bootloader port, the log line says the board is in the OpenBLT bootloader and the main button reads Manual OpenBLT Update](../img/console/recovering-openblt-bootloader.png)
-  <figcaption>Figure 6 — A board in its bootloader. The console has detected OpenBLT and offers to
-  write the update image.</figcaption>
+  ![rusEFI console Connect tab with a Proteus F7 sitting in its OpenBLT bootloader: the status line says Board in OpenBLT bootloader, use the Update Firmware tab, the Device list shows the port as OpenBLT Bootloader v1.16.0 for rusefi.proteus_f7, and Connect is greyed out](../img/console/recovering-openblt-bootloader.png)
+  <figcaption>Figure 6 — A board in its bootloader. The console has detected OpenBLT, names the board
+  it was built for, and sends you to <b>Update Firmware</b>.</figcaption>
 </figure>
 
-pending-figure -->
 
 ### Parking a misbehaving ECU in its bootloader on purpose
 
@@ -373,10 +373,12 @@ you put a fresh bootloader on an ECU.
     <!-- src: firmware/controllers/bench_test.cpp (JUMP_DFU_COMMAND calls jump_to_bootloader); firmware/rusefi.cpp (the reboot_dfu console command); firmware/hw_layer/ports/stm32/stm32_common.cpp (jump_to_bootloader); java_console/bin/switch_to_dfu.sh; firmware/tunerstudio/tunerstudio.template.ini (testMisc "Reset to DFU"); firmware/config/boards/proteus/connectors/white35.yaml (the documented Proteus pins include no BOOT0 or PROG pin) -->
 
 2. **Recognise it.** The serial port disappears and a **STM32 BOOTLOADER** device (USB id `0483:df11`)
-   appears. The console notices: *"Board is in the DFU bootloader…"* and its main button becomes
-   **Manual DFU Update**. On Windows the first time you may need the DFU driver — the console's
+   appears. The console's main button becomes **Manual DFU Update**; if the console was connected when
+   the ECU went, its **Device** tab also logs *"Board is in the DFU bootloader…"*. A greyed-out
+   **Manual DFU Update** means the console comes from a bundle for another board (or a development
+   build): run the console from your own board's bundle. On Windows the first time you may need the DFU driver — the console's
    **Install Drivers** button, or `drivers\silent_st_drivers2.exe` in the bundle.
-    <!-- src: java_console/ecu_shared/src/main/java/com/rusefi/maintenance/DfuFlasher.java (STM32 DFU USB id); java_console/ui/src/main/java/com/rusefi/DevicePane.java (the DFU guidance line); java_console/ui/src/main/java/com/rusefi/maintenance/ProgramSelector.java (DFU_MANUAL); java_console/ui/src/main/java/com/rusefi/maintenance/DriverInstall.java -->
+    <!-- src: java_console/ecu_shared/src/main/java/com/rusefi/maintenance/DfuFlasher.java (STM32 DFU USB id); java_console/ui/src/main/java/com/rusefi/DevicePane.java (the DFU guidance line); java_console/ui/src/main/java/com/rusefi/maintenance/ProgramSelector.java (DFU_MANUAL; canUseManualDfu refuses a bundle whose target differs from the board); java_console/ui/src/main/java/com/rusefi/maintenance/DriverInstall.java -->
 
 3. **Write the full image.** This is done in the rusEFI console — press **Manual DFU Update** and pick
    the bundle's **full image** (`rusefi_…_proteus_f7_….bin`: OpenBLT **and** firmware, written from
@@ -397,15 +399,13 @@ you put a fresh bootloader on an ECU.
    to rebuild the configuration (Procedure A, step 4) rather than simply reload a tune.
     <!-- src: java_console/ecu_shared/src/main/java/com/rusefi/maintenance/DfuFlasher.java (the erase command erases all of flash); java_console/ui/src/main/java/com/rusefi/maintenance/UpdateMode.java (DFU_ERASE menu entry) -->
 
-<!-- shot: img/console/recovering-dfu-detected.png | rusEFI console start window ▸ Update Firmware tab ▸ arrow beside the main button | Proteus F7 in the STM32 DFU bootloader: main button reads Manual DFU Update, log line "Board is in the DFU bootloader", the arrow menu open showing Manual DFU Update, Install OpenBLT and Full DFU Erase | A board in the chip's ROM bootloader: this door writes the full image, so it can also repair a damaged OpenBLT. -->
-<!-- pending-figure
+<!-- shot: img/console/recovering-dfu-detected.png | rusEFI console start window ▸ Update Firmware tab ▸ arrow beside the main button | Proteus F7 in the STM32 DFU bootloader, console started from the Proteus F7 bundle, no other serial port present: main button Manual DFU Update, the arrow menu open showing Manual DFU Update, Pick Custom File [DFU], Full DFU Erase and Install OpenBLT | A board in the chip's ROM bootloader: this door writes the full image. -->
 <figure markdown>
-  ![rusEFI console Update Firmware tab with a Proteus F7 sitting in the STM32 DFU bootloader: the log says the board is in the DFU bootloader, the main button reads Manual DFU Update, and the arrow menu lists Full DFU Erase and Install OpenBLT](../img/console/recovering-dfu-detected.png)
+  ![rusEFI console Update Firmware tab with a Proteus F7 sitting in the STM32 DFU bootloader: the main button reads Manual DFU Update and the arrow menu lists Manual DFU Update, Pick Custom File, Full DFU Erase and Install OpenBLT](../img/console/recovering-dfu-detected.png)
   <figcaption>Figure 7 — A board in the chip's ROM bootloader. This door writes the full image, so it
   can also repair a damaged OpenBLT.</figcaption>
 </figure>
 
-pending-figure -->
 
 !!! note "Command line, and which systems"
     `Manual DFU Update` runs ST's command-line programmer (`STM32_Programmer_CLI`), which the bundle
