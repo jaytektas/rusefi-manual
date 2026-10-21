@@ -439,7 +439,8 @@ seconds is treated as timed out — deliberately long, so cranking does not look
 labelled for it), **Filter parameter** — the number of sensor pulses the reading is averaged over,
 larger is smoother and slower — and the three calibration numbers: **Wheel revolutions per
 kilometer**, **Speed sensor gear ratio** and **Speed sensor tooth count**. The dialog also holds
-**Gear Detection**, which needs an output-shaft pulse input and your gear ratios.
+**Gear Detection**, which needs this speed input (or an output-shaft speed sensor) and your gear
+ratios.
 
 Speed from the car's own CAN bus is configured on the same dialog: turn on **Enable CAN VSS**, pick
 **CAN VSS type**, and adjust **CAN VSS scaling** if the reported speed needs a correction factor.
@@ -463,7 +464,7 @@ Speed from the car's own CAN bus is configured on the same dialog: turn on **Ena
   **Pullup resistor** of the input you use. rusEFI warns if you put the pairs in the wrong order.
 - **Extra pressures** — **A/C Pressure** and **Aux Sensors**: two points, in whatever unit you like,
   because **Low value** and **High value** have no fixed unit.
-- **Fuel level** — **Sensors ▸ Fuel level sensor**: input, **Low threshold** and **High threshold**
+- **Fuel level** — **Sensors ▸ Fuel sensors ▸ Fuel level sensor**: input, **Low threshold** and **High threshold**
   volts, and an eight-point curve of voltage to percent, because tank senders are not linear and the
   firmware averages the sloshing reading on a period you choose.
 - **EGT** — **Sensors ▸ Turbo sensors ▸ EGT**: CAN EGT (AEM X-series or rusEFI) or thermocouple

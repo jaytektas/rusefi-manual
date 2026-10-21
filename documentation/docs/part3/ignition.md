@@ -391,7 +391,7 @@ chapter. The settings below belong to this chapter.
 ### Spark cut and limits
 
 Spark is suppressed (the cut code shows as *Ign cut*) for the RPM limiter when **Cut spark on RPM
-limit** is on (**Setup ▸ Limits and fallbacks**), launch control, Lua, ignition off, missing engine
+limit** is on (**Setup ▸ Limits and protection ▸ Limits and fallbacks**), launch control, Lua, ignition off, missing engine
 sync and fatal errors. Its help warns that spark cut can produce exhaust flames and that fuel cut is
 safer. The **Minimum/Maximum timing advance** clamps exist in the firmware but are switched off and
 hidden in TunerStudio.

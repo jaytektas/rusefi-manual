@@ -81,7 +81,8 @@ than guessing.
 
 The target is read from **Idle Target RPM from CLT** `cltIdleRpm` against
 `cltIdleRpmBins`. The factory curve is 1350 RPM at −30 °C falling to 900 RPM at 90 °C and above, with
-the last two bins rising again to 1000 and 1100 RPM.
+the last two bins rising again to 1000 and 1100 RPM. The curve stores the target in 20 RPM steps, so
+TunerStudio shows some factory values rounded up: 1360 for 1350, 1160 for 1150, 1060, 960 and 940.
 
 With the A/C button on, the controller uses whichever is **higher** of that curve and **A/C RPM target**
 `acIdleRpmTarget` (default 900 RPM). The A/C value is a whole target, not an addition, so the A/C bump
@@ -98,15 +99,16 @@ Without that option the target is simply the curve value the moment the engine g
   <figcaption>Figure 2 — The factory curves. Note the target is still 1350 RPM at −30 °C and the
   open-loop position has not reached its low end until the engine is warm.</figcaption>
 </figure>
-<!-- src: firmware/controllers/algo/engine_configuration.cpp (setDefaultIdleSpeedTarget: cltIdleRpmBins and cltIdleRpm, setDefaultIdleOpenLoopParameters: cltIdleCorrBins and cltIdleCorrTable); firmware/controllers/actuators/idle_thread.cpp (IdleController::getTargetRpm: acIdleRpmTarget, idlePidRpmUpperLimit, idleReturnTargetRampDuration); firmware/controllers/actuators/idle_thread_io.cpp (setDefaultIdleParameters: idlePidRpmUpperLimit 300, idleReturnTargetRampDuration 3) -->
+<!-- src: firmware/controllers/algo/engine_configuration.cpp (setDefaultIdleSpeedTarget: cltIdleRpmBins and cltIdleRpm, setDefaultIdleOpenLoopParameters: cltIdleCorrBins and cltIdleCorrTable); firmware/controllers/actuators/idle_thread.cpp (IdleController::getTargetRpm: acIdleRpmTarget, idlePidRpmUpperLimit, idleReturnTargetRampDuration); firmware/controllers/actuators/idle_thread_io.cpp (setDefaultIdleParameters: idlePidRpmUpperLimit 300, idleReturnTargetRampDuration 3); firmware/integration/rusefi_config.txt (cltIdleRpm uint8_t scale 20, rpmIdleCorrBins scale 100); firmware/tunerstudio/tunerstudio.template.ini (cltIdleCorrTable: xBins cltIdleCorrBins, yBins rpmIdleCorrBins); firmware/integration/rusefi_config.txt (cltIdleCorrBins) -->
 
 ### The open-loop position
 
-The base position comes from **Idle Position from CLT vs Idle Target RPM** — a table whose rows are
-coolant temperature and whose columns are the **target** idle speed, not the actual one. The factory
-table is 8 coolant rows (−40 … 140 °C) by 6 target-RPM columns whose axis is generated for you as
-650, 800, 2200, 3600, 5000 and 7000 RPM — so an engine idling near 900 lives in the first two columns.
-Every column holds the same ramp: 75 % at the coldest row falling to 50 % at the hottest. The
+The base position comes from **Idle Position from CLT vs Idle Target RPM** — a table with coolant
+temperature across the top and the **target** idle speed, not the actual one, down the side. The
+factory table has 8 coolant columns (−40 … 140 °C) and 6 target-RPM rows, which TunerStudio shows as
+700, 800, 2200, 3600, 5000 and 7000 RPM (the axis is stored in 100 RPM steps, so the generated 650
+reads 700). A target near 900 RPM falls between the 800 and 2200 rows, close to the 800 one. Every row holds the same
+ramp: 75 % in the coldest column falling to 50 % in the hottest. The
 factory numbers are deliberately generous: they are meant to start an engine, not to be a finished idle.
 
 On top of that base the controller adds, in order:
@@ -210,7 +212,7 @@ throttle passes half and then **TPS threshold**. **Separate idle VE table** does
 
 !!! info "Advanced"
     Three deeper idle features exist and are not needed for a working idle: **modeled flow idle**
-    (**Controller ▸ Experimental/Broken**, which forces closed loop and converts the controller's
+    (**Controller ▸ Experimental 1**, a dialog titled *Experimental/Broken*, which forces closed loop and converts the controller's
     demand into an airflow figure using **Idle flow estimate**, handing the fast part of the demand to
     the timing PID through **Idle airmass/timing equivalence**); **Long Term Idle Trim**, which slowly
     learns a coolant-indexed multiplier on the open-loop position from how hard the idle PID is working
@@ -251,7 +253,7 @@ You also need:
 - A **coolant sensor** that reads correctly: the whole open-loop idle schedule is against it.
 - A **throttle position sensor** (or accelerator pedal) that reads 0 % at rest. With an electronic
   throttle, the idle logic reads pedal position, and **TPS threshold** should be 1–2 %.
-- A **vehicle speed input** and/or a **clutch down** input (**Sensors ▸ Digital**) if you want idle
+- A **vehicle speed input** and/or a **clutch down** input (**Sensors ▸ Chassis sensors ▸ Vehicle speed sensor** and **Misc sensors**) if you want idle
   detection to be smart about gear and road speed; neither is required for a stationary engine.
 - **12 V, ignition on** for anything you measure or calibrate. On USB power alone the 5 V sensor
   supplies sag and every ratiometric reading is wrong.
@@ -279,7 +281,12 @@ You also need:
 Everything is in TunerStudio's **Idle** menu except the throttle and actuator-function dialogs, which
 live under **Advanced**, and the bench test, which is under **Controller**.
 
-<!-- shot: img/ts/idle-menu.png | Idle (menu open) | menu dropped down showing Idle settings, Idle hardware, Idle Target RPM from CLT, Idle Position from CLT vs Idle Target RPM, Idle After Start (Crank-to-Run) Taper vs CLT, Closed-loop Ignition idle timing, Coasting Idle position, Idle VE and Idle Ignition advance | Figure 5 — The <b>Idle</b> menu on a Proteus F7. IAC PID multiplier appears once the closed-loop mode and the multiplier table are enabled. -->
+<!-- shot: img/ts/idle-menu.png | Idle (menu open) | menu dropped down showing Idle settings, Idle hardware, Idle Target RPM from CLT, Idle Position from CLT vs Idle Target RPM, Idle After Start (Crank-to-Run) Taper vs CLT, Closed-loop Ignition idle timing, Coasting Idle position, Idle VE and Idle Ignition advance | Figure 5 — The <b>Idle</b> menu on a Proteus F7. Greyed entries open once their feature is enabled: IAC PID multiplier with Open Loop + Closed Loop and Use IAC PID Multiplier Table, Coasting Idle position with Separate coasting idle table, Idle VE with Separate idle VE table, Idle Ignition advance with Separate idle ignition table. -->
+
+<figure markdown>
+  ![Idle (menu open): menu dropped down showing Idle settings, Idle hardware, Idle Target RPM from CLT, Idle Position from CLT vs Idle Target RPM, Idle After Start (Crank-to-Run) Taper vs CLT, Closed-loop Ignition idle timing, Coasting Idle position, Idle VE and Idle Ignition advance](../img/ts/idle-menu.png)
+  <figcaption>Figure 5 — The <b>Idle</b> menu on a Proteus F7. Greyed entries open once their feature is enabled: IAC PID multiplier with Open Loop + Closed Loop and Use IAC PID Multiplier Table, Coasting Idle position with Separate coasting idle table, Idle VE with Separate idle VE table, Idle Ignition advance with Separate idle ignition table.</figcaption>
+</figure>
 
 ### 1 · Say which valve you have
 
@@ -288,6 +295,11 @@ Open **Idle ▸ Idle hardware**. The dialog warns that these settings need an EC
 **Electronic throttle idle range** matters only with an electronic throttle (default 15 %).
 
 <!-- shot: img/ts/idle-hardware.png | Idle ▸ Idle hardware | Use Stepper no, Electronic throttle idle range 15, Idle Valve Hardware panel open, Idle Solenoid Primary output unassigned, Idle Solenoid Frequency 300 | Figure 6 — <b>Idle hardware</b> with the factory settings: no stepper, and no idle valve output assigned. -->
+
+<figure markdown>
+  ![Idle ▸ Idle hardware: Use Stepper no, Electronic throttle idle range 15, Idle Valve Hardware panel open, Idle Solenoid Primary output unassigned, Idle Solenoid Frequency 300](../img/ts/idle-hardware.png)
+  <figcaption>Figure 6 — <b>Idle hardware</b> with the factory settings: no stepper, and no idle valve output assigned.</figcaption>
+</figure>
 
 ### 2 · Set up the solenoid valve (if you have one)
 
@@ -300,6 +312,11 @@ than de-energised.
 <!-- src: firmware/controllers/algo/engine_configuration.cpp (idle.solenoidFrequency = DEFAULT_SOLENOID_FREQUENCY); firmware/controllers/generated/rusefi_generated_proteus_f7.h (DEFAULT_SOLENOID_FREQUENCY 300); firmware/tunerstudio/tunerstudio.template.ini (idleSolenoid dialog fields) -->
 
 <!-- shot: img/ts/idle-solenoid-panel.png | Idle ▸ Idle hardware | Use Stepper no; Solenoid panel: Idle Solenoid Primary output Lowside 15, Double Solenoid Mode no, Idle Solenoid output(s) Mode as fitted, Idle Solenoid Frequency 300, Keep powered while engine stopped disabled | Figure 7 — The <b>Solenoid</b> panel for a single PWM idle valve. -->
+
+<figure markdown>
+  ![Idle ▸ Idle hardware: Use Stepper no; Solenoid panel: Idle Solenoid Primary output Lowside 15, Double Solenoid Mode no, Idle Solenoid output(s) Mode as fitted, Idle Solenoid Frequency 300, Keep powered while engine stopped disabled](../img/ts/idle-solenoid-panel.png)
+  <figcaption>Figure 7 — The <b>Solenoid</b> panel for a single PWM idle valve.</figcaption>
+</figure>
 
 !!! warning "The idle solenoid is dead at zero RPM"
     With the engine not turning, rusEFI switches the solenoid outputs off, so a bench test you expect
@@ -332,6 +349,11 @@ a little to **Stepper parking extra steps, %**.
     or buzzes at start-up, reduce the extra steps and check the total.
 
 <!-- shot: img/ts/idle-stepper-panel.png | Idle ▸ Idle hardware | Use Stepper yes, Drive stepper with dual H bridges yes, Stepper reaction time 3 ms, Stepper total steps 200, Stepper parking extra steps 0, Force parking every restart no | Figure 8 — The stepper part of <b>Idle hardware</b>, after <b>Switch ETB to Stepper</b>. -->
+
+<figure markdown>
+  ![Idle ▸ Idle hardware: Use Stepper yes, Drive stepper with dual H bridges yes, Stepper reaction time 3 ms, Stepper total steps 200, Stepper parking extra steps 0, Force parking every restart no](../img/ts/idle-stepper-panel.png)
+  <figcaption>Figure 8 — The stepper part of <b>Idle hardware</b>, after <b>Switch ETB to Stepper</b>.</figcaption>
+</figure>
 
 <!-- shot: img/ts/idle-stepper-hbridge-panel.png | Idle ▸ Idle hardware | Stepper H-Bridge Hardware panel: Inverted driver pins no, H-Bridge Hardware No1 and No2 pin fields at NONE (the factory setting), all dropdowns closed | Figure 9 — The H-bridge pins for a stepper-driven idle valve. Normally you do not touch these on Proteus: the board and the preset already fill them. -->
 
@@ -368,20 +390,30 @@ Open **Idle ▸ Idle Target RPM from CLT** and set the warm end first — pick t
 engine to sit at, then make the cold end 200–400 RPM higher. Do not chase a driveability problem here;
 the target is a wish list, the air is the execution.
 
-<!-- shot: img/ts/idle-target-rpm-curve.png | Idle ▸ Idle Target RPM from CLT | factory curve: 1350 RPM at minus 30 C falling to 900 RPM from 90 C, 16 coolant bins from minus 30 to 120 C, live CLT and RPM gauges alongside | Figure 10 — The idle target curve before it is tuned. -->
+<!-- shot: img/ts/idle-target-rpm-curve.png | Idle ▸ Idle Target RPM from CLT | factory curve as TunerStudio shows it: 1360 RPM at minus 30 C falling to 900 RPM from 90 C, 16 coolant bins from minus 30 to 120 C, live CLT and RPM gauges alongside | Figure 10 — The idle target curve before it is tuned. -->
+
+<figure markdown>
+  ![Idle ▸ Idle Target RPM from CLT: factory curve as TunerStudio shows it: 1360 RPM at minus 30 C falling to 900 RPM from 90 C, 16 coolant bins from minus 30 to 120 C, live CLT and RPM gauges alongside](../img/ts/idle-target-rpm-curve.png)
+  <figcaption>Figure 10 — The idle target curve before it is tuned.</figcaption>
+</figure>
 
 ### 6 · Fill in the open-loop position
 
 Open **Idle ▸ Idle Position from CLT vs Idle Target RPM** and start near where the engine actually sits
-— with a hot engine at your target, log **Idle: Position** and put roughly that value in the warm rows
-of the column that applies. Cold rows go up. Also check the two cranking neighbours: **Cranking ▸
+— with a hot engine at your target, log **Idle: Position** and put roughly that value in the warm columns
+of the row that applies. Cold columns go up. Also check the two cranking neighbours: **Cranking ▸
 Cranking Air Amount vs CLT** and **Idle ▸ Idle After Start (Crank-to-Run) Taper vs CLT**, both covered
 in the Cranking chapter, because it is the taper that hands over to these values.
 
 Then, on **Idle ▸ Idle settings**, set the adders you need: **A/C adder** and **A/C RPM target** if the
 car has air conditioning, and **Fan #1 adder** if the fans are switched by the ECU.
 
-<!-- shot: img/ts/idle-open-loop-table.png | Idle ▸ Idle Position from CLT vs Idle Target RPM | table with 8 coolant rows from minus 40 to 140 C and the 6 target RPM columns as shipped, cells filled with the factory 75 down to 50, live Idle: Position gauge alongside | Figure 11 — The open-loop idle position table. The RPM axis is the idle <b>target</b>, which is why it rarely moves. -->
+<!-- shot: img/ts/idle-open-loop-table.png | Idle ▸ Idle Position from CLT vs Idle Target RPM | table with 8 coolant columns from minus 40 to 140 C and the 6 target RPM rows (700 to 7000) as shipped, window enlarged so the cells read, cells filled with the factory 75 down to 50 | Figure 11 — The open-loop idle position table. The RPM axis is the idle <b>target</b>, which is why it rarely moves. -->
+
+<figure markdown>
+  ![Idle ▸ Idle Position from CLT vs Idle Target RPM: table with 8 coolant columns from minus 40 to 140 C and the 6 target RPM rows (700 to 7000) as shipped, window enlarged so the cells read, cells filled with the factory 75 down to 50](../img/ts/idle-open-loop-table.png)
+  <figcaption>Figure 11 — The open-loop idle position table. The RPM axis is the idle <b>target</b>, which is why it rarely moves.</figcaption>
+</figure>
 <!-- shot: img/ts/idle-taper-curve.png | Idle ▸ Idle After Start (Crank-to-Run) Taper vs CLT | factory 200 cycles at every coolant temperature | Figure 12 — The crank-to-run taper: how long the idle valve stays near its cranking position after firing. -->
 
 <figure markdown>
@@ -410,6 +442,11 @@ and **Max** output, **iTerm Min** and **iTerm Max**, **PID Extra for low RPM**, 
 *Tuning it*.
 
 <!-- shot: img/ts/idle-settings.png | Idle ▸ Idle settings | Idle control mode Open Loop + Closed Loop, TPS threshold 5, RPM upper limit 300, RPM deadzone 50, Max vehicle speed 0 | Figure 13 — <b>Idle settings</b>, top panel: the mode and the detection thresholds. -->
+
+<figure markdown>
+  ![Idle ▸ Idle settings: Idle control mode Open Loop + Closed Loop, TPS threshold 5, RPM upper limit 300, RPM deadzone 50, Max vehicle speed 0](../img/ts/idle-settings.png)
+  <figcaption>Figure 13 — <b>Idle settings</b>, top panel: the mode and the detection thresholds.</figcaption>
+</figure>
 <!-- shot: img/ts/idle-pid-panel.png | Idle ▸ Idle settings | Closed Loop Idle panel: P-factor 0.05, I-factor 0.002, D-factor 0, Min -20, Max 20, iTerm Min -20, iTerm Max 20, PID Extra for low RPM 0, Use IAC PID Multiplier Table off | Figure 14 — The idle RPM PID with its factory gains and limits. -->
 
 <figure markdown>
@@ -417,6 +454,11 @@ and **Max** output, **iTerm Min** and **iTerm Max**, **PID Extra for low RPM**, 
   <figcaption>Figure 14 — The idle RPM PID with its factory gains and limits.</figcaption>
 </figure>
 <!-- shot: img/ts/idle-extra-panel.png | Idle ▸ Idle settings | Extra Idle Features panel: Separate idle ignition table disabled, Separate idle VE table disabled, Ramp target on return to idle disabled, Ramp target duration 3, Separate idle tables for cranking taper disabled, Separate coasting idle table disabled, dashpot adder 2, dashpot hold and decay times 0 | Figure 15 — The optional idle features. Each one is a way of not having to work harder with the PID. -->
+
+<figure markdown>
+  ![Idle ▸ Idle settings: Extra Idle Features panel: Separate idle ignition table disabled, Separate idle VE table disabled, Ramp target on return to idle disabled, Ramp target duration 3, Separate idle tables for cranking taper disabled, Separate coasting idle table disabled, dashpot adder 2, dashpot hold and decay times 0](../img/ts/idle-extra-panel.png)
+  <figcaption>Figure 15 — The optional idle features. Each one is a way of not having to work harder with the PID.</figcaption>
+</figure>
 
 ### 8 · Optional: idle ignition timing
 
@@ -443,6 +485,11 @@ same fraction of its total steps whenever the ignition is on.
 
 <!-- shot: img/ts/idle-bench-test.png | Controller ▸ Bench test | Misc part of the Bench Test & Commands dialog with the Idle Air Valve button and Idle Second Air Valve button visible, engine stopped, ignition on, a single solenoid idle valve configured on an output, all pin dropdowns closed | Figure 17 — The idle valve bench test: on a solenoid valve it keeps the valve driven for three seconds. -->
 
+<figure markdown>
+  ![Controller ▸ Bench test: Misc part of the Bench Test & Commands dialog with the Idle Air Valve button and Idle Second Air Valve button visible, engine stopped, ignition on, a single solenoid idle valve configured on an output, all pin dropdowns closed](../img/ts/idle-bench-test.png)
+  <figcaption>Figure 17 — The idle valve bench test: on a solenoid valve it keeps the valve driven for three seconds.</figcaption>
+</figure>
+
 !!! danger "First start with the idle system you have just set up"
     Stand where you can reach the key, in neutral, with the air boot and intake clamped together and no
     loose hoses: an unmeasured open-loop idle can hold the engine at several thousand RPM. If it will
@@ -468,7 +515,7 @@ wanted at 800 RPM.
 | Idle Solenoid Frequency | 300 Hz | Proteus default |
 | Idle control mode | Open Loop + Closed Loop | hold the target, do not just sit near it |
 | Idle Target RPM from CLT | 800 warm (90 °C), 1100 at 0 °C | driveability and fast warm-up |
-| Open-loop position, warm rows | 22 % | the position the engine happened to idle at, read from a log |
+| Open-loop position, warm columns | 22 % | the position the engine happened to idle at, read from a log |
 | TPS threshold | 5 % | cable throttle at rest reads about 0 % |
 | RPM upper limit | 300 | default |
 | RPM deadzone | 30 | tightened so the PID trims smaller errors |
@@ -533,7 +580,7 @@ The order that works:
 1. **Fix the mechanical idle first.** Vacuum leaks, throttle stop, base timing, fast idle. No idle
    tune survives a leak.
 2. **Set the target curve.** Cold and warm targets you actually want.
-3. **Put the real warm position in the open-loop table**, and scale the cold rows so the engine sits
+3. **Put the real warm position in the open-loop table**, and scale the cold columns so the engine sits
    near its cold target with the PID barely working. Read *idle: base value* — that is the table plus
    adders — and *Closed loop*, which is the PID's contribution. If *Closed loop* is pegged near
    **Max**, the table is wrong; fix the table rather than raising the limits.
@@ -558,7 +605,7 @@ The order that works:
 </figure>
 
 !!! info "Advanced"
-    **Modeled flow idle** (**Controller ▸ Experimental/Broken ▸ Modeled flow idle**, plus
+    **Modeled flow idle** (**Controller ▸ Experimental 1**, field **Modeled flow idle**, plus
     **Max idle flow** `idleMaximumAirmass`) changes the arithmetic instead of the settings: the
     controller's position becomes a demanded airmass, the high-frequency part of that demand is routed
     to the timing PID through **Idle airmass/timing equivalence**, and the remaining steady demand is

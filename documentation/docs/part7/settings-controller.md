@@ -186,25 +186,25 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Throttle effective area
 
-**Controller ▸ Throttle effective area**
+**Controller ▸ Torque ▸ Throttle effective area**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Torque
 
-**Controller ▸ Torque**
+**Controller ▸ Torque ▸ Torque**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Torque Table Generator
 
-**Controller ▸ Torque Table Generator**
+**Controller ▸ Torque ▸ Torque Table Generator**
 
 --8<-- "reference/settings/_torqueTableGenerator.table.md"
 
 ### TMF
 
-**Controller ▸ TMF**
+**Controller ▸ Torque ▸ TMF**
 
 A table, curve or tool rather than a dialog of settings.
 

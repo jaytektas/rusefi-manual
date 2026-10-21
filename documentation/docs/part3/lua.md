@@ -232,6 +232,7 @@ script reads them as `getAuxAnalog(0)` … `getAuxAnalog(7)`, in volts. On Prote
 
 <figure markdown>
   <!-- shot: img/ts/lua-analog-inputs.png | Advanced ▸ Lua ▸ Lua Analog Inputs | Proteus F7, ignition on, engine stopped, ADC #1 = Analog Volt 5, ADC #2 = Analog Volt 6, ADC #3 to ADC #8 unassigned, dropdowns closed | The eight Lua analog inputs; #1 here is what getAuxAnalog(0) reads, in volts. -->
+  ![Advanced ▸ Lua ▸ Lua Analog Inputs: Proteus F7, ignition on, engine stopped, ADC #1 = Analog Volt 5, ADC #2 = Analog Volt 6, ADC #3 to ADC #8 unassigned, dropdowns closed](../img/ts/lua-analog-inputs.png)
   <figcaption>Figure 5 — The eight Lua analog inputs; #1 here is what getAuxAnalog(0) reads, in volts.</figcaption>
 </figure>
 
@@ -242,6 +243,7 @@ input is *Digital 1* on **Black23 pin 10**.
 
 <figure markdown>
   <!-- shot: img/ts/lua-digital-inputs.png | Advanced ▸ Lua ▸ Lua Digital Inputs | Proteus F7, ignition on, engine stopped, Digital #1 = Digital 1 with Mode #1 = PULLUP, Digital #2 to Digital #8 unassigned, dropdowns closed | The eight Lua digital inputs and their pull-up modes; the script reads Digital #1 as getAuxDigital(0). -->
+  ![Advanced ▸ Lua ▸ Lua Digital Inputs: Proteus F7, ignition on, engine stopped, Digital #1 = Digital 1 with Mode #1 = PULLUP, Digital #2 to Digital #8 unassigned, dropdowns closed](../img/ts/lua-digital-inputs.png)
   <figcaption>Figure 6 — The eight Lua digital inputs and their pull-up modes; the script reads Digital #1 as getAuxDigital(0).</figcaption>
 </figure>
 
@@ -251,7 +253,8 @@ already own; on Proteus, *Lowside 16* (Black35 pin 23, with flyback protection) 
 `startPwm(0, 100, 0)` then drives output #0 at 100 Hz.
 
 <figure markdown>
-  <!-- shot: img/ts/lua-outputs.png | Advanced ▸ Lua ▸ Lua Script PWM Outputs | Proteus F7, ignition on, engine stopped, output #0 = Lowside 16, output #1 to output #7 unassigned, the note "Use rusEFI console for Lua script editing" visible at the top of the dialog, dropdowns closed | Lua output #0 is the pin startPwm(0, …) will drive; the dialog itself points you at the console for the script. -->
+  <!-- shot: img/ts/lua-outputs.png | Advanced ▸ Lua ▸ Lua Script PWM Outputs | Proteus F7, ignition on, engine stopped, output #0 = Lowside 16, output #1 to output #7 unassigned (this dialog numbers the outputs from #0), the note "Use rusEFI console for Lua script editing" visible at the top of the dialog, dropdowns closed | Lua output #0 is the pin startPwm(0, …) will drive; the dialog itself points you at the console for the script. -->
+  ![Advanced ▸ Lua ▸ Lua Script PWM Outputs: Proteus F7, ignition on, engine stopped, output #0 = Lowside 16, output #1 to output #7 unassigned (this dialog numbers the outputs from #0), the note "Use rusEFI console for Lua script editing" visible at the top of the dialog, dropdowns closed](../img/ts/lua-outputs.png)
   <figcaption>Figure 7 — Lua output #0 is the pin startPwm(0, …) will drive; the dialog itself points you at the console for the script.</figcaption>
 </figure>
 
@@ -275,11 +278,13 @@ show, log and compare them:
 
 <figure markdown>
   <!-- shot: img/ts/lua-script-settings.png | Advanced ▸ Lua Calibrations ▸ Lua Script Settings | Proteus F7, ignition on, Name #1 = A/C idle bump with Setting #1 = 2.00, Name #2 = Fan on volts with Setting #2 = 2.50, Name #3 and Name #4 blank, remaining rows blank | Lua Script Settings: the script asks for these by name, so a calibrator can change them without opening the script. -->
+  ![Advanced ▸ Lua Calibrations ▸ Lua Script Settings: Proteus F7, ignition on, Name #1 = A/C idle bump with Setting #1 = 2.00, Name #2 = Fan on volts with Setting #2 = 2.50, Name #3 and Name #4 blank, remaining rows blank](../img/ts/lua-script-settings.png)
   <figcaption>Figure 8 — Lua Script Settings: the script asks for these by name, so a calibrator can change them without opening the script.</figcaption>
 </figure>
 
 <figure markdown>
-  <!-- shot: img/ts/lua-script-table1.png | Advanced ▸ Lua Calibrations ▸ Script Table #1 | Proteus F7, ignition on, Name = A/C bump by rpm, RPM bins 500 1000 1500 2000 3000 4000 5000 6000, load bins 20 to 90, cells 2 at the top left falling to 0 above 3000 RPM, dropdowns closed | Script Table #1: any named table you can fill in TunerStudio and read with table3d. -->
+  <!-- shot: img/ts/lua-script-table1.png | Advanced ▸ Lua Calibrations ▸ Script Table #1 | Proteus F7, ignition on, Name = A/C bump, RPM bins 500 1000 1500 2000 3000 4000 5000 6000, load bins 20 to 90, cells 2 at the top left falling to 0 above 3000 RPM, dropdowns closed | Script Table #1: any named table you can fill in TunerStudio and read with table3d. -->
+  ![Advanced ▸ Lua Calibrations ▸ Script Table #1: Proteus F7, ignition on, Name = A/C bump, RPM bins 500 1000 1500 2000 3000 4000 5000 6000, load bins 20 to 90, cells 2 at the top left falling to 0 above 3000 RPM, dropdowns closed](../img/ts/lua-script-table1.png)
   <figcaption>Figure 9 — Script Table #1: any named table you can fill in TunerStudio and read with table3d.</figcaption>
 </figure>
 
@@ -320,11 +325,13 @@ Three more checks:
 
 <figure markdown>
   <!-- shot: img/ts/lua-bench-test-luaout.png | Controller ▸ Bench test | Proteus F7, ignition on, engine stopped, Lua Out Test panel with buttons Lua Out #1 to Lua Out #8 and Abort test visible, Count 3 On Time 10 Off Time 100, other panels scrolled out of view, dropdowns closed | The Lua Out Test buttons pulse the pins assigned in Lua Script PWM Outputs, one button per output. -->
+  ![Controller ▸ Bench test: Proteus F7, ignition on, engine stopped, Lua Out Test panel with buttons Lua Out #1 to Lua Out #8 and Abort test visible, Count 3 On Time 10 Off Time 100, other panels scrolled out of view, dropdowns closed](../img/ts/lua-bench-test-luaout.png)
   <figcaption>Figure 11 — The Lua Out Test buttons pulse the pins assigned in Lua Script PWM Outputs, one button per output.</figcaption>
 </figure>
 
 <figure markdown>
   <!-- shot: img/ts/lua-buttons.png | Advanced ▸ Lua ▸ Lua Buttons | Proteus F7, engine stopped, dialog showing the ten buttons Lua Button #1 to Lua Button #10 | Ten buttons whose press counters a script reads with getTsButtonCount. -->
+  ![Advanced ▸ Lua ▸ Lua Buttons: Proteus F7, engine stopped, dialog showing the ten buttons Lua Button #1 to Lua Button #10](../img/ts/lua-buttons.png)
   <figcaption>Figure 12 — Ten buttons whose press counters a script reads with getTsButtonCount.</figcaption>
 </figure>
 

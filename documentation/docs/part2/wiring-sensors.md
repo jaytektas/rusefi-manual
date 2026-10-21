@@ -158,7 +158,7 @@ reads either stuck high or stuck low.
     and it will pick up noise. If the reading jumps when the coils fire, treat it as a routing problem,
     not a calibration problem.
 
-For the temperature dialogs other than coolant and intake air — **Sensors ▸ Oil temp sensor**, **Fuel
+For the temperature dialogs other than coolant and intake air — **Sensors ▸ Oil sensors ▸ Oil temp sensor**, **Fuel
 temp sensor**, **Ambient temp sensor**, **AuxTemp1/2 sensor** — the dialog asks for the **Pullup
 resistor** of the pin you used. Enter the value that pin really has: the whole temperature scale is
 computed from it. The Sensors chapter explains the three temperature-and-resistance pairs and the curve

@@ -31,12 +31,13 @@ def windows():
     return {l.split()[0]: " ".join(l.split()[3:]) for l in run("wmctrl", "-l").splitlines() if l.strip()}
 
 
-def ocr_lines(x, y, w, h):
+def ocr_lines(x, y, w, h, psm=4):
     """Text lines in a screen region, as (text, x, centre y) in screen coordinates. Tesseract groups the
-    words into lines itself (a menu is one column of text, page segmentation mode 4)."""
+    words into lines itself (a menu is one column of text, page segmentation mode 4; mode 6, one block,
+    reads some lines that mode 4 drops)."""
     png = run("import", "-window", "root", "-crop", f"{w}x{h}+{x}+{y}", "+repage", "-colorspace", "Gray",
               "-resize", "300%", "png:-", capture=True)
-    tsv = subprocess.run(["tesseract", "stdin", "stdout", "--psm", "4", "tsv"], input=png, capture_output=True).stdout.decode()
+    tsv = subprocess.run(["tesseract", "stdin", "stdout", "--psm", str(psm), "tsv"], input=png, capture_output=True).stdout.decode()
     lines = {}
     for row in csv.DictReader(io.StringIO(tsv), delimiter="\t", quoting=csv.QUOTE_NONE):
         if row["level"] != "5" or not row["text"].strip():
@@ -66,12 +67,15 @@ def score(line, want):
     return max(ratio, 0.9) if want in text else ratio
 
 
-def find(lines, want):
+def find(region, want):
     want = want.lower()
-    best = max(lines, key=lambda l: score(l[0], want), default=None)
-    if not best or score(best[0], want) < 0.6:
-        sys.exit(f"menu item '{want}' not found; menu reads: {[l[0] for l in lines]}")
-    return best
+    x, y, w, h = region
+    for psm, width in ((4, w), (6, w), (4, w * 6 // 10), (6, w * 6 // 10)):   # narrower: less of the gauges behind
+        lines = ocr_lines(x, y, width, h, psm=psm)
+        best = max(lines, key=lambda l: score(l[0], want), default=None)
+        if best and score(best[0], want) >= 0.6:
+            return best
+    sys.exit(f"menu item '{want}' not found; menu reads: {[l[0] for l in lines]}")
 
 
 def main():
@@ -85,7 +89,7 @@ def main():
     run("xdotool", "mousemove", str(mx), str(my), "click", "1"); time.sleep(0.9)
     left, top = mx - 120, my + 12
     for i, item in enumerate(path[1:]):
-        text, ix, iy = find(ocr_lines(max(0, left), top, 520, 900), item)
+        text, ix, iy = find((max(0, left), top, 520, 900), item)
         last = i == len(path) - 2
         run("xdotool", "mousemove", str(ix), str(iy)); time.sleep(0.6)
         if last:

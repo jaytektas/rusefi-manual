@@ -236,7 +236,10 @@ pieces described above in a real bundle.
 
 === "Windows"
 
-    Double-click `rusefi_updater.exe`.
+    Double-click `rusefi_updater.exe`. Windows treats a program with "updater" in its name as an
+    installer, so it shows a *User Account Control* prompt (publisher *Unknown*): answer **Yes**.
+    If no Java 11 or newer is installed, the launcher says *"Please visit https://rusefi.com/s/j/
+    for Java (JRE)"* and its **OK** opens that page, which downloads a Temurin 17 JRE installer.
 
 === "Linux"
 
@@ -247,7 +250,7 @@ pieces described above in a real bundle.
 
     Run `./rusefi_updater.sh` from the bundle folder, as on Linux.
 
-<!-- src: misc/console_launcher/rusefi_updater.sh (cd into console, java -jar rusefi_console.jar); docs/frontend.md (rusefi_updater.exe launch4j wrapper) -->
+<!-- src: misc/console_launcher/rusefi_updater.sh (cd into console, java -jar rusefi_console.jar); docs/frontend.md (rusefi_updater.exe launch4j wrapper); misc/console_launcher/rusefi_updater.xml (empty manifest, downloadUrl rusefi.com/s/jre-redirect, jreNotFoundErr) -->
 
 ## Examples
 

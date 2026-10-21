@@ -135,6 +135,11 @@ Open **Setup ▸ Basic Configurations**.
 
 <!-- shot: img/ts/engine-basics-basic-configurations.png | Setup ▸ Basic Configurations | engine stopped, all buttons enabled | The Basic Configurations presets -->
 
+<figure markdown>
+  ![Setup ▸ Basic Configurations: engine stopped, all buttons enabled](../img/ts/engine-basics-basic-configurations.png)
+  <figcaption>Figure 4 — The Basic Configurations presets</figcaption>
+</figure>
+
 | Button | What it sets on Proteus |
 |---|---|
 | **Unassign all outputs** | clears every configurable actuator output: injectors, coils, fuel pump, fans, idle valve and stepper, ETB/stepper H-bridge pins, A/C, starter, tach, CEL, boost, VVT, GPPWM, Lua outputs, TCU solenoids, debug and DAC outputs. Not cleared: sensor and trigger inputs, CAN, SD card/SPI, **main relay** and fixed board wiring. It queues its own settings save. |
@@ -221,4 +226,4 @@ logic automatically. Check the result with a timing light on both cylinders.
 - Fuel — fuel strategy and VE
 - Outputs and pins — assigning outputs after **Unassign all outputs**
 - Electronic throttle — what **Switch to PPS TPS** sets up
-- Sensors — vehicle speed sensor, wheel revolutions per km and gear ratios (**Sensors ▸ Vehicle speed sensor**)
+- Sensors — vehicle speed sensor, wheel revolutions per km and gear ratios (**Sensors ▸ Chassis sensors ▸ Vehicle speed sensor**)

@@ -436,7 +436,8 @@ needs permission to open the devices.
 
     1. Unplug the ECU from the vehicle harness. The console asks you to: its confirmation is titled
        *Please disconnect from vehicle*.
-    2. On the console's start screen, click **Install Drivers** (Windows only).
+    2. On the console's start screen, open the **Connect** tab and click **Install Drivers**, next to
+       **Open Device Manager** in the *Connection help* row (Windows only).
     3. Answer **Yes** to *"Do you really want to install ST drivers?"*, and **Yes** to the Windows
        permission prompt that follows.
     4. A window titled *Windows rusEFI ST Drivers* shows progress. The console unpacks
@@ -444,6 +445,11 @@ needs permission to open the devices.
        **DFU** drivers silently.
 
     <!-- shot: img/windows/installing-console-drivers.png | rusEFI console start screen (Windows 11, no ECU connected) | start screen showing the Open Device Manager and Install Drivers buttons | The rusEFI console's start screen on Windows, with Install Drivers. -->
+
+    <figure markdown>
+      ![rusEFI console start screen (Windows 11, no ECU connected): start screen showing the Open Device Manager and Install Drivers buttons](../img/windows/installing-console-drivers.png)
+      <figcaption>Figure 20 — The rusEFI console's start screen on Windows, with Install Drivers.</figcaption>
+    </figure>
 
     If you prefer, run `drivers\silent_st_drivers2.exe` yourself: it is a self-extracting archive
     that unpacks to `drivers\silent_st_drivers`, where `silent_install_windows8.bat` installs the

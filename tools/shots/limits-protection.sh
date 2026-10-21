@@ -12,3 +12,7 @@ shot "Setup ▸ Limits and protection ▸ High oil pressure protection" $I/limit
 shot "Fuel ▸ Deceleration fuel cutoff (DFCO)" $I/limits-protection-dfco.png
 # then: useCltBasedRpmLimit=yes cltRevLimitRpm="4000 4500 5500 6800"
 shot "Setup ▸ Limits and protection ▸ Limits and fallbacks" $I/limits-protection-clt-curve.png
+
+# Live (ECU A on USB). tune: minOilPressureAfterStart=70 enableOilPressureProtect=yes minimumOilPressureTimeout=0.5
+#   minimumOilPressureBins="700 1000 2000 3000 4000 5000 6000 7000" minimumOilPressureValues="100 110 140 170 200 230 250 250"
+shot "Setup ▸ Limits and protection ▸ Low oil pressure protection" $I/limits-protection-oil-low.png

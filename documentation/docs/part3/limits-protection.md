@@ -248,11 +248,16 @@ Then, if wanted, **High oil pressure protection** (`highOilPressureProtection`):
 **Maximum oil pressure** curve (leave it at 0 to disable).
 
 <!-- shot: img/ts/limits-protection-oil-low.png | Setup ▸ Limits and protection ▸ Low oil pressure protection | after-start 70 kPa, running check on, timeout 0.5 s, curve 100 kPa at idle rising to 250 kPa at 6000 RPM | Low oil pressure protection with Example 2's values. -->
+
+<figure markdown>
+  ![Setup ▸ Limits and protection ▸ Low oil pressure protection: after-start 70 kPa, running check on, timeout 0.5 s, curve 100 kPa at idle rising to 250 kPa at 6000 RPM](../img/ts/limits-protection-oil-low.png)
+  <figcaption>Figure 5 — Low oil pressure protection with Example 2's values.</figcaption>
+</figure>
 <!-- shot: img/ts/limits-protection-oil-high.png | Setup ▸ Limits and protection ▸ High oil pressure protection | timeout 1.0 s, curve 0 (disabled) | High oil pressure protection, disabled by its zero curve. -->
 
 <figure markdown>
   ![Setup ▸ Limits and protection ▸ High oil pressure protection: timeout 1.0 s, curve 0 (disabled)](../img/ts/limits-protection-oil-high.png)
-  <figcaption>Figure 5 — High oil pressure protection, disabled by its zero curve.</figcaption>
+  <figcaption>Figure 6 — High oil pressure protection, disabled by its zero curve.</figcaption>
 </figure>
 
 !!! danger "Test oil protection before you need it"
@@ -270,7 +275,7 @@ then switch on **Lambda protection** and set the check and restore thresholds.
 
 <figure markdown>
   ![Setup ▸ Limits and protection ▸ Lambda protection: enabled, load 60, TPS 50, RPM 2500, delay 0.5 s, restore 30/20/2000, difference table 0.10 everywhere](../img/ts/limits-protection-lambda.png)
-  <figcaption>Figure 6 — Lambda protection with a 0.10 lambda margin.</figcaption>
+  <figcaption>Figure 7 — Lambda protection with a 0.10 lambda margin.</figcaption>
 </figure>
 
 ### 4 · DFCO
@@ -284,7 +289,7 @@ Cutoff**, leave **Fuel cut on** at *Overrun*, and check the thresholds: the defa
 
 <figure markdown>
   ![Fuel ▸ Deceleration fuel cutoff (DFCO): enabled, Overrun, defaults, retard 5°, ramp-in 0.5 s](../img/ts/limits-protection-dfco.png)
-  <figcaption>Figure 7 — The DFCO dialog with the factory thresholds.</figcaption>
+  <figcaption>Figure 8 — The DFCO dialog with the factory thresholds.</figcaption>
 </figure>
 
 ### 5 · Misfire detection (optional)

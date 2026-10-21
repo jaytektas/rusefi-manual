@@ -15,12 +15,17 @@ import sys
 tune, pairs = sys.argv[1], [a.split("=", 1) for a in sys.argv[2:]]
 text = open(tune, encoding="iso-8859-1").read()
 for name, value in pairs:
+    # an empty string constant is saved as <constant name="x"/>; a set one holds its text unquoted
+    text = re.sub(r'(<constant(?:\s+\w+="[^"]*")*?\s+name="%s"(?:\s+\w+="[^"]*")*)\s*/>' % re.escape(name),
+                  r'\1></constant>', text)
     pat = re.compile(r'(<constant(?:\s+\w+="[^"]*")*?\s+name="%s"(?:\s+\w+="[^"]*")*>)(.*?)(</constant>)' % re.escape(name), re.S)
     m = pat.search(text)
     if not m:
         sys.exit(f"{name}: not in {tune}")
     old = m.group(2)
-    if old.strip().startswith('"'):
+    if not re.fullmatch(r'\s*("[^"]*"|[-+0-9.eE\s]+)\s*', old):
+        new = html.escape(value, quote=False)   # a string constant (or an empty one)
+    elif old.strip().startswith('"'):
         new = '"' + html.escape(value, quote=False) + '"'
     elif "\n" in old.strip() or len(old.split()) > 1:
         cols = int(re.search(r'cols="(\d+)"', m.group(1)).group(1)) if 'cols="' in m.group(1) else 1

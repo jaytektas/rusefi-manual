@@ -262,6 +262,11 @@ dialog text says "%". Blend parameter *Zero* switches a blend off.
 
 <!-- shot: img/ts/boost-blend.png | Advanced ▸ Boost blend tables ▸ Open loop 1 bias | Blend parameter set, bias curve visible | Open-loop blend 1 settings -->
 
+<figure markdown>
+  ![Advanced ▸ Boost blend tables ▸ Open loop 1 bias: Blend parameter set, bias curve visible](../img/ts/boost-blend.png)
+  <figcaption>Figure 7 — Open-loop blend 1 settings</figcaption>
+</figure>
+
 ## Worked examples
 
 :material-circle:{ .level-intermediate } Intermediate

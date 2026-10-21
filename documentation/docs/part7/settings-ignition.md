@@ -48,49 +48,49 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Ignition blend 1 bias
 
-**Ignition ▸ Ignition blend 1 bias**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend 1 bias**
 
 --8<-- "reference/settings/_ignAdder1Cfg.table.md"
 
 ### Ignition blend table 1
 
-**Ignition ▸ Ignition blend table 1**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend table 1**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition blend 2 bias
 
-**Ignition ▸ Ignition blend 2 bias**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend 2 bias**
 
 --8<-- "reference/settings/_ignAdder2Cfg.table.md"
 
 ### Ignition blend table 2
 
-**Ignition ▸ Ignition blend table 2**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend table 2**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition blend 3 bias
 
-**Ignition ▸ Ignition blend 3 bias**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend 3 bias**
 
 --8<-- "reference/settings/_ignAdder3Cfg.table.md"
 
 ### Ignition blend table 3
 
-**Ignition ▸ Ignition blend table 3**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend table 3**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition blend 4 bias
 
-**Ignition ▸ Ignition blend 4 bias**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend 4 bias**
 
 --8<-- "reference/settings/_ignAdder4Cfg.table.md"
 
 ### Ignition blend table 4
 
-**Ignition ▸ Ignition blend table 4**
+**Ignition ▸ Ignition blend tables ▸ Ignition blend table 4**
 
 A table, curve or tool rather than a dialog of settings.
 
@@ -98,75 +98,77 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 1
 
-**Ignition ▸ Ignition trim cyl 1**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 1**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 2
 
-**Ignition ▸ Ignition trim cyl 2**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 2**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 3
 
-**Ignition ▸ Ignition trim cyl 3**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 3**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 4
 
-**Ignition ▸ Ignition trim cyl 4**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 4**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 5
 
-**Ignition ▸ Ignition trim cyl 5**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 5**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 6
 
-**Ignition ▸ Ignition trim cyl 6**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 6**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 7
 
-**Ignition ▸ Ignition trim cyl 7**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 7**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 8
 
-**Ignition ▸ Ignition trim cyl 8**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 8**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 9
 
-**Ignition ▸ Ignition trim cyl 9**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 9**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 10
 
-**Ignition ▸ Ignition trim cyl 10**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 10**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 11
 
-**Ignition ▸ Ignition trim cyl 11**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 11**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Ignition trim cyl 12
 
-**Ignition ▸ Ignition trim cyl 12**
+**Ignition ▸ Cylinder ign trims ▸ Ignition trim cyl 12**
 
 A table, curve or tool rather than a dialog of settings.
+
+## More Ignition entries
 
 ### Multispark
 
@@ -196,73 +198,73 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 1
 
-**Ignition ▸ Knock gain cyl 1**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 1**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 2
 
-**Ignition ▸ Knock gain cyl 2**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 2**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 3
 
-**Ignition ▸ Knock gain cyl 3**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 3**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 4
 
-**Ignition ▸ Knock gain cyl 4**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 4**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 5
 
-**Ignition ▸ Knock gain cyl 5**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 5**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 6
 
-**Ignition ▸ Knock gain cyl 6**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 6**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 7
 
-**Ignition ▸ Knock gain cyl 7**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 7**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 8
 
-**Ignition ▸ Knock gain cyl 8**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 8**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 9
 
-**Ignition ▸ Knock gain cyl 9**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 9**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 10
 
-**Ignition ▸ Knock gain cyl 10**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 10**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 11
 
-**Ignition ▸ Knock gain cyl 11**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 11**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Knock gain cyl 12
 
-**Ignition ▸ Knock gain cyl 12**
+**Ignition ▸ Knock sensor gain ▸ Knock gain cyl 12**
 
 A table, curve or tool rather than a dialog of settings.
 

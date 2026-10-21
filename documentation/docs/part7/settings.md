@@ -8,13 +8,13 @@ The complete TunerStudio menu for a Proteus F7, with every setting in every dial
 
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini ([Menu] and dialogs); firmware/integration/rusefi_config.txt (setting definitions and help) -->
 
-- [Setup](settings-setup.md) — 23 entries, 235 settings
-- [Fuel](settings-fuel.md) — 59 entries, 165 settings
-- [Ignition](settings-ignition.md) — 45 entries, 67 settings
+- [Setup](settings-setup.md) — 24 entries, 235 settings
+- [Fuel](settings-fuel.md) — 61 entries, 165 settings
+- [Ignition](settings-ignition.md) — 46 entries, 67 settings
 - [Cranking](settings-cranking.md) — 9 entries, 12 settings
 - [Idle](settings-idle.md) — 10 entries, 68 settings
-- [Advanced](settings-advanced.md) — 64 entries, 294 settings
-- [Sensors](settings-sensors.md) — 36 entries, 239 settings
+- [Advanced](settings-advanced.md) — 66 entries, 294 settings
+- [Sensors](settings-sensors.md) — 37 entries, 239 settings
 - [CAN-bus](settings-can-bus.md) — 6 entries, 32 settings
 - [Controller](settings-controller.md) — 34 entries, 236 settings
 - [Help](settings-help.md) — 1 entries, 0 settings

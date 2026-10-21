@@ -36,27 +36,29 @@ Every dialog under TunerStudio's **Advanced** menu, in menu order.
 
 ### Shift Torque Reduction (Flat Shift)
 
-**Advanced ▸ Shift Torque Reduction (Flat Shift)**
+**Advanced ▸ Torque Control ▸ Shift Torque Reduction (Flat Shift)**
 
 --8<-- "reference/settings/_ShiftTorqueReductionDialog.table.md"
 
 ### Shift Torque Reduction Time table
 
-**Advanced ▸ Shift Torque Reduction Time table**
+**Advanced ▸ Torque Control ▸ Shift Torque Reduction Time table**
 
 --8<-- "reference/settings/_torqueReductionTimeDialog.table.md"
 
 ### Torque Reduction Ignition Retard Table
 
-**Advanced ▸ Torque Reduction Ignition Retard Table**
+**Advanced ▸ Torque Control ▸ Torque Reduction Ignition Retard Table**
 
 --8<-- "reference/settings/_torqueReductionIgnitionRetardDialog.table.md"
 
 ### Torque Reduction Ignition Cut Table
 
-**Advanced ▸ Torque Reduction Ignition Cut Table**
+**Advanced ▸ Torque Control ▸ Torque Reduction Ignition Cut Table**
 
 --8<-- "reference/settings/_torqueReductionIgnitionCutDialog.table.md"
+
+## More Advanced entries
 
 ### Nitrous Control
 
@@ -86,55 +88,55 @@ Every dialog under TunerStudio's **Advanced** menu, in menu order.
 
 ### Boost control options
 
-**Advanced ▸ Boost control options**
+**Advanced ▸ Boost Control ▸ Boost control options**
 
 --8<-- "reference/settings/_boostDialog.table.md"
 
 ### Boost control Open loop base duty cycle
 
-**Advanced ▸ Boost control Open loop base duty cycle**
+**Advanced ▸ Boost Control ▸ Boost control Open loop base duty cycle**
 
 --8<-- "reference/settings/_boostOpenLoopDialog.table.md"
 
 ### Boost control open loop gear adder
 
-**Advanced ▸ Boost control open loop gear adder**
+**Advanced ▸ Boost Control ▸ Boost control open loop gear adder**
 
 This dialog holds tables, curves or buttons rather than individual settings.
 
 ### Boost control target
 
-**Advanced ▸ Boost control target**
+**Advanced ▸ Boost Control ▸ Boost control target**
 
 This dialog holds tables, curves or buttons rather than individual settings.
 
 ### Boost control PID
 
-**Advanced ▸ Boost control PID**
+**Advanced ▸ Boost Control ▸ Boost control PID**
 
 --8<-- "reference/settings/_boostPidDialog.table.md"
 
 ### CLT boost duty multiplier
 
-**Advanced ▸ CLT boost duty multiplier**
+**Advanced ▸ Boost Control ▸ CLT boost duty multiplier**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### IAT boost duty multiplier
 
-**Advanced ▸ IAT boost duty multiplier**
+**Advanced ▸ Boost Control ▸ IAT boost duty multiplier**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### CLT boost target adder
 
-**Advanced ▸ CLT boost target adder**
+**Advanced ▸ Boost Control ▸ CLT boost target adder**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### IAT boost target adder
 
-**Advanced ▸ IAT boost target adder**
+**Advanced ▸ Boost Control ▸ IAT boost target adder**
 
 A table, curve or tool rather than a dialog of settings.
 
@@ -142,49 +144,49 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Open loop 1 bias
 
-**Advanced ▸ Open loop 1 bias**
+**Advanced ▸ Boost blend tables ▸ Open loop 1 bias**
 
 --8<-- "reference/settings/_boostOpenBlend1Cfg.table.md"
 
 ### Open loop 1 adder
 
-**Advanced ▸ Open loop 1 adder**
+**Advanced ▸ Boost blend tables ▸ Open loop 1 adder**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Open loop 2 bias
 
-**Advanced ▸ Open loop 2 bias**
+**Advanced ▸ Boost blend tables ▸ Open loop 2 bias**
 
 --8<-- "reference/settings/_boostOpenBlend2Cfg.table.md"
 
 ### Open loop 2 adder
 
-**Advanced ▸ Open loop 2 adder**
+**Advanced ▸ Boost blend tables ▸ Open loop 2 adder**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Closed loop 1 bias
 
-**Advanced ▸ Closed loop 1 bias**
+**Advanced ▸ Boost blend tables ▸ Closed loop 1 bias**
 
 --8<-- "reference/settings/_boostClosedBlend1Cfg.table.md"
 
 ### Closed loop 1 adder
 
-**Advanced ▸ Closed loop 1 adder**
+**Advanced ▸ Boost blend tables ▸ Closed loop 1 adder**
 
 A table, curve or tool rather than a dialog of settings.
 
 ### Closed loop 2 bias
 
-**Advanced ▸ Closed loop 2 bias**
+**Advanced ▸ Boost blend tables ▸ Closed loop 2 bias**
 
 --8<-- "reference/settings/_boostClosedBlend2Cfg.table.md"
 
 ### Closed loop 2 adder
 
-**Advanced ▸ Closed loop 2 adder**
+**Advanced ▸ Boost blend tables ▸ Closed loop 2 adder**
 
 A table, curve or tool rather than a dialog of settings.
 
@@ -192,27 +194,29 @@ A table, curve or tool rather than a dialog of settings.
 
 ### General Purpose PWM 1
 
-**Advanced ▸ General Purpose PWM 1**
+**Advanced ▸ Generic PWM ▸ General Purpose PWM 1**
 
 --8<-- "reference/settings/_gppwm1.table.md"
 
 ### General Purpose PWM 2
 
-**Advanced ▸ General Purpose PWM 2**
+**Advanced ▸ Generic PWM ▸ General Purpose PWM 2**
 
 --8<-- "reference/settings/_gppwm2.table.md"
 
 ### General Purpose PWM 3
 
-**Advanced ▸ General Purpose PWM 3**
+**Advanced ▸ Generic PWM ▸ General Purpose PWM 3**
 
 --8<-- "reference/settings/_gppwm3.table.md"
 
 ### General Purpose PWM 4
 
-**Advanced ▸ General Purpose PWM 4**
+**Advanced ▸ Generic PWM ▸ General Purpose PWM 4**
 
 --8<-- "reference/settings/_gppwm4.table.md"
+
+## More Advanced entries
 
 ### DC motor actuator(s) function
 
@@ -278,25 +282,25 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Lua Analog Inputs
 
-**Advanced ▸ Lua Analog Inputs**
+**Advanced ▸ Lua ▸ Lua Analog Inputs**
 
 --8<-- "reference/settings/_auxInputsDialog.table.md"
 
 ### Lua Digital Inputs
 
-**Advanced ▸ Lua Digital Inputs**
+**Advanced ▸ Lua ▸ Lua Digital Inputs**
 
 --8<-- "reference/settings/_luaDigitalInputsDialog.table.md"
 
 ### Lua Script PWM Outputs
 
-**Advanced ▸ Lua Script PWM Outputs**
+**Advanced ▸ Lua ▸ Lua Script PWM Outputs**
 
 --8<-- "reference/settings/_luaOutputs.table.md"
 
 ### Lua Buttons
 
-**Advanced ▸ Lua Buttons**
+**Advanced ▸ Lua ▸ Lua Buttons**
 
 This dialog holds tables, curves or buttons rather than individual settings.
 
@@ -304,67 +308,67 @@ This dialog holds tables, curves or buttons rather than individual settings.
 
 ### Lua Script Settings
 
-**Advanced ▸ Lua Script Settings**
+**Advanced ▸ Lua Calibrations ▸ Lua Script Settings**
 
 --8<-- "reference/settings/_scriptSetting.table.md"
 
 ### Script Table #1
 
-**Advanced ▸ Script Table #1**
+**Advanced ▸ Lua Calibrations ▸ Script Table #1**
 
 --8<-- "reference/settings/_scriptTable1TblSettings.table.md"
 
 ### Script Table #2
 
-**Advanced ▸ Script Table #2**
+**Advanced ▸ Lua Calibrations ▸ Script Table #2**
 
 --8<-- "reference/settings/_scriptTable2TblSettings.table.md"
 
 ### Script Table #3
 
-**Advanced ▸ Script Table #3**
+**Advanced ▸ Lua Calibrations ▸ Script Table #3**
 
 --8<-- "reference/settings/_scriptTable3TblSettings.table.md"
 
 ### Script Table #4
 
-**Advanced ▸ Script Table #4**
+**Advanced ▸ Lua Calibrations ▸ Script Table #4**
 
 --8<-- "reference/settings/_scriptTable4TblSettings.table.md"
 
 ### Script Curve #1
 
-**Advanced ▸ Script Curve #1**
+**Advanced ▸ Lua Calibrations ▸ Script Curve #1**
 
 --8<-- "reference/settings/_scriptCurve1Settings.table.md"
 
 ### Script Curve #2
 
-**Advanced ▸ Script Curve #2**
+**Advanced ▸ Lua Calibrations ▸ Script Curve #2**
 
 --8<-- "reference/settings/_scriptCurve2Settings.table.md"
 
 ### Script Curve #3
 
-**Advanced ▸ Script Curve #3**
+**Advanced ▸ Lua Calibrations ▸ Script Curve #3**
 
 --8<-- "reference/settings/_scriptCurve3Settings.table.md"
 
 ### Script Curve #4
 
-**Advanced ▸ Script Curve #4**
+**Advanced ▸ Lua Calibrations ▸ Script Curve #4**
 
 --8<-- "reference/settings/_scriptCurve4Settings.table.md"
 
 ### Script Curve #5
 
-**Advanced ▸ Script Curve #5**
+**Advanced ▸ Lua Calibrations ▸ Script Curve #5**
 
 --8<-- "reference/settings/_scriptCurve5Settings.table.md"
 
 ### Script Curve #6
 
-**Advanced ▸ Script Curve #6**
+**Advanced ▸ Lua Calibrations ▸ Script Curve #6**
 
 --8<-- "reference/settings/_scriptCurve6Settings.table.md"
 

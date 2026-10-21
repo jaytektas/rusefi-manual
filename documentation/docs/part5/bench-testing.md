@@ -110,7 +110,7 @@ and a **Count** under 1 becomes 3.
    screwdriver handle on it if the workshop is noisy.
 4. Repeat for each cylinder. The injector that ticks must be the one on that cylinder.
 
-If the wrong injector ticks, swap the output pins in **Fuel ▸ Injector settings** (or rewire), not
+If the wrong injector ticks, swap the output pins in **Fuel ▸ Injector Setup ▸ Injection hardware** (or rewire), not
 the firing order.
 
 ### Coils

@@ -9,3 +9,5 @@ shot() { python3 -I tools/shots/ts_menu_shot.py "$1" "$2" | awk "{print \$1}" | 
 shot "Setup ▸ Vehicle Information" $I/engine-basics-vehicle-information.png
 # then: cylindersCount=2 firingOrder="1-2" timing_offset_cylinder2=45
 shot "Advanced ▸ Cylinder offsets" $I/engine-basics-cylinder-offsets.png
+# Live (ECU A on USB), as shipped:
+shot "Setup ▸ Basic Configurations" $I/engine-basics-basic-configurations.png

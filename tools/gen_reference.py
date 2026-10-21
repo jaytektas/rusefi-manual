@@ -104,19 +104,24 @@ def settings():
     text = INI.read_text(errors="replace")
     consts, helps, dialogs = gen_settings.parse(text)
     menu = gen_settings.section(text, "Menu")
-    tree, current = collections.OrderedDict(), None
+    tree, current, group = collections.OrderedDict(), None, None
     for line in menu.splitlines():
         m = re.match(r'\s*menu\s*=\s*"([^"]+)"', line)
         if m:
-            current = m.group(1).replace("&", "")
+            current, group = m.group(1).replace("&", ""), None
             tree[current] = []
             continue
         m = re.match(r'\s*(subMenu|groupChildMenu)\s*=\s*(\w+)\s*,\s*"([^"]+)"', line)
         if m and current and m.group(2) != "std_separator":
-            tree[current].append((m.group(2), m.group(3)))
+            if m.group(1) == "subMenu" and group:
+                # a plain entry after a group's children sits on the menu itself, not in the group
+                group = None
+                tree[current].append((None, f"More {current} entries"))
+            tree[current].append((m.group(2), m.group(3), group))
         m = re.match(r'\s*groupMenu\s*=\s*"([^"]+)"', line)
         if m and current:
-            tree[current].append((None, m.group(1)))
+            group = m.group(1)
+            tree[current].append((None, group))
     index = [GEN, "# Every setting, by menu\n\n", BADGE,
              "The complete TunerStudio menu for a Proteus F7, with every setting in every dialog: label, "
              "internal name, units, range and the help text TunerStudio shows. Generated from the official "
@@ -129,12 +134,13 @@ def settings():
                 f"Every dialog under TunerStudio's **{top}** menu, in menu order.\n\n",
                 "<!-- src: firmware/tunerstudio/tunerstudio.template.ini ([Menu] and dialogs); firmware/integration/rusefi_config.txt (setting definitions and help) -->\n\n"]
         count = 0
-        for name, title in items:
+        for name, title, *grp in items:
             if name is None:
                 page.append(f"## {title}\n\n")
                 continue
             rows = gen_settings.rows_for(name, dialogs, consts, helps, set()) if name in dialogs else []
-            page.append(f"### {title}\n\n**{top} ▸ {title}**\n\n")
+            path = " ▸ ".join([top] + [g for g in grp if g] + [title])
+            page.append(f"### {title}\n\n**{path}**\n\n")
             if rows:
                 wanted.append(name)
                 count += len(rows)

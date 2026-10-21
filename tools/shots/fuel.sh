@@ -14,3 +14,14 @@ shot "Fuel ▸ Injector Setup ▸ Injector deadtime (BatV vs fuel pressure)" $I/
 shot "Fuel ▸ Target AFR" $I/fuel-target-afr-table.png      # untick 3D View first
 shot "Controller ▸ Injector test" $I/fuel-injector-test.png
 # fuel-menu.png: Fuel menu with Injector Setup hovered, cropped to the two menus
+
+# Live shots (ECU A on USB). As shipped: TPS / Lua AE calibration, Staged injection.
+shot "Fuel ▸ AE / Transient fueling ▸ TPS / Lua AE calibration" $I/fuel-ae-tps-table.png
+shot "Fuel ▸ Staged injection" $I/fuel-staged-injection.png
+# tune: tpsAccelLookback=0.3 noFuelTrimAfterAccelTime=1 fuelClosedLoopCorrectionEnabled=enabled coastingFuelCutEnabled=enabled
+#       injectorNonlinearMode=Polynomial applyNonlinearBelowPulse=2 useEngineStateMachine=enabled
+shot "Fuel ▸ AE / Transient fueling ▸ Acceleration enrichment settings" $I/fuel-accel-enrichment.png
+shot "Fuel ▸ Short term fuel trim/Closed loop" $I/fuel-closed-loop.png
+shot "Fuel ▸ Deceleration fuel cutoff (DFCO)" $I/fuel-dfco.png
+shot "Fuel ▸ Injector Setup ▸ Injector small-pulse correction" $I/fuel-small-pulse-correction.png
+shot "Fuel ▸ Fuel Corrections ▸ WOT Enrichment" $I/fuel-wot-enrichment.png

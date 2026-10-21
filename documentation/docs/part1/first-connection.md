@@ -215,6 +215,11 @@ working settings; **Burn** afterwards if you want to keep them.
 
 <!-- shot: img/ts/first-connection-difference-report.png | appears on going online when project tune and ECU differ | one differing setting (e.g. a changed value in Advanced ▸ Electronic Throttle Body actuator), highlighted on both sides; buttons Send Current TunerStudio Settings, Exit & Go offline, Use Controller Settings visible | Figure 7 — The Difference Report: the project tune on the left, the ECU on the right, the differing field highlighted. -->
 
+<figure markdown>
+  ![appears on going online when project tune and ECU differ: one differing setting (e.g. a changed value in Advanced ▸ Electronic Throttle Body actuator), highlighted on both sides; buttons Send Current TunerStudio Settings, Exit & Go offline, Use Controller Settings visible](../img/ts/first-connection-difference-report.png)
+  <figcaption>Figure 7 — The Difference Report: the project tune on the left, the ECU on the right, the differing field highlighted.</figcaption>
+</figure>
+
 !!! danger "Sending the wrong tune to a running engine"
     **Send Current TunerStudio Settings** takes effect immediately. A tune from another engine — a
     different trigger, injector size or ignition setup — can stop a running engine or make it run
@@ -263,13 +268,20 @@ notice, **green** (or blue) for something simply switched on.
 | ETB OK | ETB: *reason* | yellow, blinking | The electronic throttle is not being driven, and why (see *Electronic throttle*). |
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini ([FrontPage] indicators, fuelIgnCutCodeList, etbCutCodeList, retrieveConfigError); firmware/console/status_loop.cpp (updateTunerStudioState: hasCriticalError, isWarnNow, checkEngine; isTriggerErrorNow; sparkCutReasonBlinker, fuelCutReasonBlinker); firmware/console/binary/tunerstudio.cpp (handleGetConfigErorr); firmware/controllers/gauges/malfunction_central.cpp (WarningCodeState::isWarningNow, hasCodes, refresh); firmware/controllers/limp_manager.h (ClearReason) -->
 
-!!! tip "On USB power, fuel and spark show as cut"
-    With only the USB cable connected, the ECU sees no ignition voltage, so **Injection OK** and
-    **Ignition OK** blink **Fuel cut: ign off** and **Ign cut: ign off**, and **Main relay off**
-    stays white. That is correct: the ECU will not fire injectors or coils with the ignition off.
-    <!-- src: firmware/controllers/limp_manager.cpp (LimpManager::updateState: ClearReason::IgnitionOff when !m_ignitionOn); firmware/controllers/actuators/main_relay.cpp (mainRelayState = hasIgnitionVoltage) -->
+!!! tip "On USB power, fuel and spark are cut, even if the rows say OK"
+    With only the USB cable connected, the ECU sees no ignition voltage: **Battery** reads close to
+    0 V and **Main relay off** stays white. The ECU will not fire injectors or coils like this.
+    With the engine stopped, **Injection OK** and **Ignition OK** still read OK, because the ECU
+    updates the cut reason only as trigger teeth arrive. Once the engine turns on USB power alone,
+    they blink **Fuel cut: ign off** and **Ign cut: ign off**.
+    <!-- src: firmware/controllers/limp_manager.cpp (LimpManager::updateState: ClearReason::IgnitionOff when !m_ignitionOn); firmware/controllers/ignition_controller.cpp (isIgnVoltage: battery voltage above 6 V when no ignition-key input); firmware/controllers/engine_cycle/main_trigger_callback.cpp (handleFuel: fuelCutReason set per trigger event); firmware/controllers/engine_cycle/spark_logic.cpp (onTriggerEventSparkLogic: sparkCutReason set per trigger event); firmware/controllers/actuators/main_relay.cpp (mainRelayState = hasIgnitionVoltage); firmware/console/status_loop.cpp (fuelCutReasonBlinker copies fuelCutReason) -->
 
-<!-- shot: img/ts/first-connection-indicators-usb.png | main window, indicator rows only | USB power only (no 12 V), captured in the blink phase showing "Fuel cut: ign off" and "Ign cut: ign off", "Main relay off" | Figure 9 — The same rows on USB power: fuel and spark are cut because the ignition is off. -->
+<!-- shot: img/ts/first-connection-indicators-usb.png | main window, indicator rows only | USB power only (no 12 V), engine stopped: "Main relay off", "Injection OK" and "Ignition OK" | Figure 9 — The same rows on USB power with the engine stopped: Main relay off, and the cut does not show until the engine turns. -->
+
+<figure markdown>
+  ![main window, indicator rows only: USB power only (no 12 V), engine stopped: "Main relay off", "Injection OK" and "Ignition OK"](../img/ts/first-connection-indicators-usb.png)
+  <figcaption>Figure 9 — The same rows on USB power with the engine stopped: Main relay off, and the cut does not show until the engine turns.</figcaption>
+</figure>
 
 ### The Check Engine lamp on the dashboard
 

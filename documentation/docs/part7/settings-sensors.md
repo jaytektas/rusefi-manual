@@ -12,27 +12,29 @@ Every dialog under TunerStudio's **Sensors** menu, in menu order.
 
 ### Misc sensors
 
-**Sensors ▸ Misc sensors**
+**Sensors ▸ Chassis sensors ▸ Misc sensors**
 
 --8<-- "reference/settings/_otherSensorInputs.table.md"
 
 ### Vehicle speed sensor
 
-**Sensors ▸ Vehicle speed sensor**
+**Sensors ▸ Chassis sensors ▸ Vehicle speed sensor**
 
 --8<-- "reference/settings/_speedSensor.table.md"
 
 ### Ambient temp sensor
 
-**Sensors ▸ Ambient temp sensor**
+**Sensors ▸ Chassis sensors ▸ Ambient temp sensor**
 
 --8<-- "reference/settings/_ambientTempSensor.table.md"
 
 ### A/C Pressure
 
-**Sensors ▸ A/C Pressure**
+**Sensors ▸ Chassis sensors ▸ A/C Pressure**
 
 --8<-- "reference/settings/_acPressureSensor.table.md"
+
+## More Sensors entries
 
 ### Analog input settings
 
@@ -128,13 +130,13 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Oil pressure
 
-**Sensors ▸ Oil pressure**
+**Sensors ▸ Oil sensors ▸ Oil pressure**
 
 --8<-- "reference/settings/_oilPressureSensor.table.md"
 
 ### Oil temp sensor
 
-**Sensors ▸ Oil temp sensor**
+**Sensors ▸ Oil sensors ▸ Oil temp sensor**
 
 --8<-- "reference/settings/_oilTempSensor.table.md"
 
@@ -142,25 +144,25 @@ A table, curve or tool rather than a dialog of settings.
 
 ### Flex
 
-**Sensors ▸ Flex**
+**Sensors ▸ Fuel sensors ▸ Flex**
 
 --8<-- "reference/settings/_flexSensorDialog.table.md"
 
 ### Fuel pressure
 
-**Sensors ▸ Fuel pressure**
+**Sensors ▸ Fuel sensors ▸ Fuel pressure**
 
 --8<-- "reference/settings/_fuelPressureSensor.table.md"
 
 ### Fuel temp sensor
 
-**Sensors ▸ Fuel temp sensor**
+**Sensors ▸ Fuel sensors ▸ Fuel temp sensor**
 
 --8<-- "reference/settings/_fuelTempSensor.table.md"
 
 ### Fuel level sensor
 
-**Sensors ▸ Fuel level sensor**
+**Sensors ▸ Fuel sensors ▸ Fuel level sensor**
 
 --8<-- "reference/settings/_fuelLevelDialog.table.md"
 
@@ -168,19 +170,19 @@ A table, curve or tool rather than a dialog of settings.
 
 ### EGT
 
-**Sensors ▸ EGT**
+**Sensors ▸ Turbo sensors ▸ EGT**
 
 --8<-- "reference/settings/_egtInputs.table.md"
 
 ### Electronic Wastegate position sensor
 
-**Sensors ▸ Electronic Wastegate position sensor**
+**Sensors ▸ Turbo sensors ▸ Electronic Wastegate position sensor**
 
 --8<-- "reference/settings/_wastegatePosDialog.table.md"
 
 ### Compressor discharge temp
 
-**Sensors ▸ Compressor discharge temp**
+**Sensors ▸ Turbo sensors ▸ Compressor discharge temp**
 
 --8<-- "reference/settings/_compressorDischargeTemperature.table.md"
 
@@ -188,19 +190,19 @@ A table, curve or tool rather than a dialog of settings.
 
 ### AuxTemp1 sensor
 
-**Sensors ▸ AuxTemp1 sensor**
+**Sensors ▸ Aux sensors ▸ AuxTemp1 sensor**
 
 --8<-- "reference/settings/_auxTempSensor1Sensor.table.md"
 
 ### AuxTemp2 sensor
 
-**Sensors ▸ AuxTemp2 sensor**
+**Sensors ▸ Aux sensors ▸ AuxTemp2 sensor**
 
 --8<-- "reference/settings/_auxTempSensor2Sensor.table.md"
 
 ### Aux Sensors
 
-**Sensors ▸ Aux Sensors**
+**Sensors ▸ Aux sensors ▸ Aux Sensors**
 
 --8<-- "reference/settings/_auxLinearSensors.table.md"
 

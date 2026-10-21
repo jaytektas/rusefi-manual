@@ -24,33 +24,35 @@ This dialog holds tables, curves or buttons rather than individual settings.
 
 ### Limits and fallbacks
 
-**Setup ▸ Limits and fallbacks**
+**Setup ▸ Limits and protection ▸ Limits and fallbacks**
 
 --8<-- "reference/settings/_limitsAndFallback.table.md"
 
 ### Low oil pressure protection
 
-**Setup ▸ Low oil pressure protection**
+**Setup ▸ Limits and protection ▸ Low oil pressure protection**
 
 --8<-- "reference/settings/_lowOilPressureProtection.table.md"
 
 ### High oil pressure protection
 
-**Setup ▸ High oil pressure protection**
+**Setup ▸ Limits and protection ▸ High oil pressure protection**
 
 --8<-- "reference/settings/_highOilPressureProtection.table.md"
 
 ### Lambda protection
 
-**Setup ▸ Lambda protection**
+**Setup ▸ Limits and protection ▸ Lambda protection**
 
 --8<-- "reference/settings/_lambdaProtection.table.md"
 
 ### Misfire Detection
 
-**Setup ▸ Misfire Detection**
+**Setup ▸ Limits and protection ▸ Misfire Detection**
 
 --8<-- "reference/settings/_misfireDetectionDialog.table.md"
+
+## More Setup entries
 
 ### Trigger
 

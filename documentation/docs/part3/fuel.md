@@ -464,7 +464,17 @@ spread one portion over several cycles, imitating a carburettor's acceleration p
 
 <!-- shot: img/ts/fuel-accel-enrichment.png | Fuel ▸ AE / Transient fueling ▸ Acceleration enrichment settings | Acceleration enrichment settings dialog with Accel Enrichment Mode MS Adder, Suspend corrections after VE edits enabled, Pause STFT learning after acceleration 1 s, TPS opening threshold 40, TPS history window set to 0.30 s, live gauges for RPM, TPS and the selected TPS event | Figure 18 — Acceleration enrichment settings. The live panel shows which TPS step the ECU picked, which is the fastest way to understand the detector. -->
 
+<figure markdown>
+  ![Fuel ▸ AE / Transient fueling ▸ Acceleration enrichment settings: Acceleration enrichment settings dialog with Accel Enrichment Mode MS Adder, Suspend corrections after VE edits enabled, Pause STFT learning after acceleration 1 s, TPS opening threshold 40, TPS history window set to 0.30 s, live gauges for RPM, TPS and the selected TPS event](../img/ts/fuel-accel-enrichment.png)
+  <figcaption>Figure 18 — Acceleration enrichment settings. The live panel shows which TPS step the ECU picked, which is the fastest way to understand the detector.</figcaption>
+</figure>
+
 <!-- shot: img/ts/fuel-ae-tps-table.png | Fuel ▸ AE / Transient fueling ▸ TPS / Lua AE calibration | TPS / Lua AE calibration dialog with the TPS-to-TPS enrichment table whose diagonal rises from 10 to 37 ms, RPM correction curve flat at 1, live graph of TPS and injection | Figure 19 — The factory enrichment table: a step ending at full throttle adds up to 37 ms of extra injection, scaled by the RPM curve. -->
+
+<figure markdown>
+  ![Fuel ▸ AE / Transient fueling ▸ TPS / Lua AE calibration: TPS / Lua AE calibration dialog with the TPS-to-TPS enrichment table whose diagonal rises from 10 to 37 ms, RPM correction curve flat at 1, live graph of TPS and injection](../img/ts/fuel-ae-tps-table.png)
+  <figcaption>Figure 19 — The factory enrichment table: a step ending at full throttle adds up to 37 ms of extra injection, scaled by the RPM curve.</figcaption>
+</figure>
 
 ### 11 · Closed loop (short term fuel trim)
 
@@ -485,6 +495,11 @@ it needs an SD card, and by default it gathers data without applying it.
 
 <!-- shot: img/ts/fuel-closed-loop.png | Fuel ▸ Short term fuel trim/Closed loop | Short term fuel trim/Closed loop dialog with Short term fuel trim enabled, Minimum CLT 60, Startup delay 60, Minimum AFR 12, Maximum AFR 17, Adjustment deadband 0.5, region settings and bank gauges with the correction state list | Figure 20 — Closed loop. *Correction state* on the dialog names the reason it is not correcting, if it is not. -->
 
+<figure markdown>
+  ![Fuel ▸ Short term fuel trim/Closed loop: Short term fuel trim/Closed loop dialog with Short term fuel trim enabled, Minimum CLT 60, Startup delay 60, Minimum AFR 12, Maximum AFR 17, Adjustment deadband 0.5, region settings and bank gauges with the correction state list](../img/ts/fuel-closed-loop.png)
+  <figcaption>Figure 20 — Closed loop. *Correction state* on the dialog names the reason it is not correcting, if it is not.</figcaption>
+</figure>
+
 <!-- shot: img/ts/fuel-ltft.png | Fuel ▸ Long term fuel trims | Proteus F7, engine idling with ignition on, Gathering Data enabled, Apply Correction disabled, Time const for Idle region 3000, Max add 12.5, Max remove 12.5, Learning deadband 0.5, Gathering data and Not correcting indicators green, Reset LTFT trims and Apply LTFT to VE and reset buttons visible | Figure 21 — Long term trims gather data by default without applying it -->
 
 ### 12 · Deceleration fuel cut, if you want it
@@ -500,6 +515,11 @@ retard timing while cut and for a short while after.
 <!-- src: firmware/controllers/algo/fuel/dfco.cpp (DfcoController::commonGuards, overrunActive, cutFuel, getTimingRetard); firmware/controllers/algo/defaults/default_fuel.cpp (setDefaultFuelCutParameters) -->
 
 <!-- shot: img/ts/fuel-dfco.png | Fuel ▸ Deceleration fuel cutoff (DFCO) | Proteus F7, ignition on engine stopped, Enable Fuel Cutoff switched on for the screenshot with the other values left at their factory defaults, Fuel cut on Overrun, No cut below CLT 60, Cut fuel below MAP 30, Overrun RPM cut above 1500, Overrun RPM restore below 1300, Overrun TPS closed threshold 2, Inhibit closed loop fuel after cut 5 | Figure 22 — DFCO entry and release thresholds. The gap between the cut and restore values is what stops the engine flickering between cut and fuel. -->
+
+<figure markdown>
+  ![Fuel ▸ Deceleration fuel cutoff (DFCO): Proteus F7, ignition on engine stopped, Enable Fuel Cutoff switched on for the screenshot with the other values left at their factory defaults, Fuel cut on Overrun, No cut below CLT 60, Cut fuel below MAP 30, Overrun RPM cut above 1500, Overrun RPM restore below 1300, Overrun TPS closed threshold 2, Inhibit closed loop fuel after cut 5](../img/ts/fuel-dfco.png)
+  <figcaption>Figure 22 — DFCO entry and release thresholds. The gap between the cut and restore values is what stops the engine flickering between cut and fuel.</figcaption>
+</figure>
 
 
 ### 13 · Prove the outputs: injector test
@@ -623,13 +643,23 @@ target AFR table, expressed as a percentage of the ideal naturally-aspirated cyl
 
 <!-- shot: img/ts/fuel-staged-injection.png | Fuel ▸ Staged injection | Proteus F7, ignition on, Enable off, Secondary injector flow 200, Secondary injector flow compensation mode None, the secondary dead-time table shown greyed | Figure 24 — The second injector set has its own flow and dead time -->
 
+<figure markdown>
+  ![Fuel ▸ Staged injection: Proteus F7, ignition on, Enable off, Secondary injector flow 200, Secondary injector flow compensation mode None, the secondary dead-time table shown greyed](../img/ts/fuel-staged-injection.png)
+  <figcaption>Figure 24 — The second injector set has its own flow and dead time</figcaption>
+</figure>
+
 - **Injector small-pulse correction** (**Fuel ▸ Injector Setup ▸ Injector small-pulse correction**)
-  reshapes short pulses: a polynomial added below **Apply nonlinearity below pulse**, or the Ford model
+  reshapes short pulses: a polynomial added below **Add nonlinearity below pulse**, or the Ford model
   with separate small- and large-pulse slopes and a breakpoint. Both describe a measured injector, so
   enter them from flow-bench data rather than guessing.
   <!-- src: firmware/controllers/algo/fuel/injector_model.cpp (correctInjectionPolynomial, INJ_FordModel small pulse offset); firmware/tunerstudio/tunerstudio.template.ini (injectorNonlinear dialog) -->
 
-<!-- shot: img/ts/fuel-small-pulse-correction.png | Fuel ▸ Injector Setup ▸ Injector small-pulse correction | Proteus F7, ignition on, Small pulse correction mode set to Polynomial Adder, Add nonlinearity below pulse 2 ms, constant offset and the pulsewidth multipliers at zero | Figure 25 — Short-pulse behaviour is a measured property of the injector -->
+<!-- shot: img/ts/fuel-small-pulse-correction.png | Fuel ▸ Injector Setup ▸ Injector small-pulse correction | Proteus F7, ignition on, Small pulse correction mode set to Polynomial, Add nonlinearity below pulse 2 ms, constant offset and the pulsewidth multipliers at zero | Figure 25 — Short-pulse behaviour is a measured property of the injector -->
+
+<figure markdown>
+  ![Fuel ▸ Injector Setup ▸ Injector small-pulse correction: Proteus F7, ignition on, Small pulse correction mode set to Polynomial, Add nonlinearity below pulse 2 ms, constant offset and the pulsewidth multipliers at zero](../img/ts/fuel-small-pulse-correction.png)
+  <figcaption>Figure 25 — Short-pulse behaviour is a measured property of the injector</figcaption>
+</figure>
 
 - **WOT Enrichment** (**Fuel ▸ Fuel Corrections ▸ WOT Enrichment**) adds an AFR offset against time
   once the Engine State Machine classifies the state as wide-open, and it moves the target the wideband
@@ -638,6 +668,11 @@ target AFR table, expressed as a percentage of the ideal naturally-aspirated cyl
   <!-- src: firmware/controllers/modules/wot_enrichment/wot_enrichment.cpp (WotEnrichment::onSlowCallback, getAfrAdder); firmware/controllers/algo/fuel/fuel_computer.cpp (WotEnrichment adder in getCycleFuel); firmware/controllers/modules/engine_state_machine/engine_state_machine.cpp (setDefaultConfiguration, the WOT throttle threshold) -->
 
 <!-- shot: img/ts/fuel-wot-enrichment.png | Fuel ▸ Fuel Corrections ▸ WOT Enrichment | Proteus F7, ignition on, WOT Enrichment off with Enable Engine State Machine on, Driver throttle WOT threshold 90, the time-to-AFR-adder curve flat at zero | Figure 26 — WOT enrichment changes the target, not the injector pulse -->
+
+<figure markdown>
+  ![Fuel ▸ Fuel Corrections ▸ WOT Enrichment: Proteus F7, ignition on, WOT Enrichment off with Enable Engine State Machine on, Driver throttle WOT threshold 90, the time-to-AFR-adder curve flat at zero](../img/ts/fuel-wot-enrichment.png)
+  <figcaption>Figure 26 — WOT enrichment changes the target, not the injector pulse</figcaption>
+</figure>
 
 - **Wall wetting compensation** (**Fuel ▸ AE / Transient fueling ▸ Wall wetting compensation**) models
   the fuel film in the inlet tract with two numbers: **Evaporation time constant - tau** and **Fuel

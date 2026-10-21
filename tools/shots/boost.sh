@@ -12,3 +12,7 @@ shot "Advanced ▸ Boost Control ▸ Boost control Open loop base duty cycle" $I
 shot "Advanced ▸ Boost Control ▸ Boost control target" $I/boost-target.png
 shot "Advanced ▸ Boost Control ▸ Boost control PID" $I/boost-pid.png
 shot "Setup ▸ Limits and protection ▸ Limits and fallbacks" $I/boost-limits.png
+
+# Live (ECU A on USB). tune: isBoostControlEnabled=enabled boostOpenLoopBlends1_blendParameter=IAT
+#   boostOpenLoopBlends1_blendBins="0 10 20 30 40 50 60 70" boostOpenLoopBlends1_blendValues="0 0 0 10 25 50 75 100"
+shot "Advanced ▸ Boost blend tables ▸ Open loop 1 bias" $I/boost-blend.png

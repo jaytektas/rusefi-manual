@@ -5,8 +5,9 @@
 
 The marker reads  <!-- shot: <image> | <where> | <state> | <caption> -->. Its figure gets the image, an
 alt text built from where and state, and the caption. A caption that already starts "Figure N —" keeps
-its number; one without gets the next number after the figure before it, and the chapter is refused if
-that number is already used later on, so in-text "Figure N" references never silently go stale.
+its number; one without gets the next number after the figure before it. If that number is already used
+later on, the chapter's figures are renumbered in order and every in-text "Figure N" follows its figure,
+so references never silently go stale.
 A marker whose image is already shown (held or not) is left alone.
 """
 import os
@@ -37,13 +38,30 @@ def place_one(page, text):
         after = [int(a or b) for a, b in NUM.findall(text[m.end():])]
         if not re.match(r"Figure \d+ —", caption):
             n = max(before, default=0) + 1
-            if n in after:
-                sys.exit(f"{page.name}: {img} would be Figure {n}, already used later; number it in the marker")
-            caption = f"Figure {n} — {caption}"
+            caption = f"Figure {0 if n in after else n} — {caption}"   # 0: renumbered below
         alt = f"{where}: {state}".replace("]", ")").replace("[", "(")
         fig = f"\n{ind}<figure markdown>\n{ind}  ![{alt}]({rel})\n{ind}  <figcaption>{caption}</figcaption>\n{ind}</figure>\n"
         return text[:m.end()] + fig + text[m.end():]
     return None
+
+
+def renumber(text):
+    """Number the figures 1, 2, 3 … in order and move every in-text reference with its figure."""
+    caps = list(re.finditer(r"(figcaption>Figure )(\d+)", text))
+    old = [int(m.group(2)) for m in caps]
+    if old == list(range(1, len(old) + 1)):
+        return text
+    if len([o for o in old if o]) != len(set(o for o in old if o)):
+        sys.exit("figure numbers repeat; fix them by hand")
+    new = {o: i + 1 for i, o in enumerate(old) if o}
+    marks = {m.start(2): str(i + 1) for i, m in enumerate(caps)}
+
+    def ref(m):
+        if m.start(1) in marks:
+            return m.group(0)[:m.start(1) - m.start(0)] + marks[m.start(1)]
+        n = int(m.group(1))
+        return m.group(0)[:m.start(1) - m.start(0)] + str(new.get(n, n))
+    return re.sub(r"Figure (\d+)", ref, text)
 
 
 for page in pages:
@@ -51,5 +69,6 @@ for page in pages:
     while (new := place_one(page, text)) is not None:
         text, placed = new, placed + 1
     if placed:
+        text = renumber(text)
         page.write_text(text)
         print(f"{page.relative_to(DOCS)}: placed {placed} figure(s)")

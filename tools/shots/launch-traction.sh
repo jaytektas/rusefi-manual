@@ -15,3 +15,10 @@ shot "Advanced ▸ Torque Control ▸ Torque Reduction Ignition Cut Table" $I/la
 shot "Controller ▸ Traction Control Timing Adjustment" $I/launch-traction-tc-timing.png
 shot "Controller ▸ Traction Control ETB Drop" $I/launch-traction-tc-etb.png
 shot "Controller ▸ Traction Control Skip Ignition" $I/launch-traction-tc-skip.png
+
+# Live (ECU A on USB). tune: clutchDownPin="Digital 5" torqueReductionTimeXaxis="Vehicle speed"
+#   torqueReductionTimeXBins="0 20 40 60 80 100" torqueReductionTimeTable=120 x12 totalGearsCount=5
+#   gearRatio1..5=3.36 2.07 1.40 1.00 0.81 finalGearRatio=4.10
+shot "Sensors ▸ Chassis sensors ▸ Misc sensors" $I/launch-traction-misc-sensors.png
+shot "Advanced ▸ Torque Control ▸ Shift Torque Reduction Time table" $I/launch-traction-time-table.png
+shot "Sensors ▸ Chassis sensors ▸ Vehicle speed sensor" $I/launch-traction-gear-detection.png

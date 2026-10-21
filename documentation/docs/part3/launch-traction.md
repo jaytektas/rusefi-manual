@@ -174,7 +174,7 @@ means the value is always 0, which puts the lookup on the first column.
     <!-- src: firmware/controllers/algo/shift_torque_reduction_controller.cpp (getTorqueReductionIgnitionRetard, update, updateTimeConditionSatisfied, updateRpmConditionSatisfied, updateAppConditionSatisfied, updateTriggerPinState); firmware/controllers/algo/ignition/ignition_state.cpp (getRunningAdvance returns the retard table value instead of the running advance); firmware/integration/rusefi_config.txt (torqueReductionIgnitionRetardTable, torqueReductionIgnitionCutTable, torqueReductionTimeTable ranges and help) -->
 
 The gear rows only mean something if rusEFI knows what gear you are in. Gear detection lives in
-**Sensors ▸ Vehicle speed sensor** under **Gear Detection**: **Forward gear count**, one ratio per gear,
+**Sensors ▸ Chassis sensors ▸ Vehicle speed sensor** under **Gear Detection**: **Forward gear count**, one ratio per gear,
 **Wheel revolutions per kilometer** and **Final drive ratio**. With the factory gear bins still at 0, a
 car with no detected gear (0) lands on the first row and any detected gear lands on the second.
 
@@ -231,7 +231,7 @@ so the **lowest row of all three tables applies continuously**, whatever the car
   (Black23 pin 11). A switch to 12 V uses a *PULLDOWN* input mode; a switch to ground uses *PULLUP*; a normally
   closed switch uses an *INVERTED* mode.
 - **A clutch switch is enough for both launch and flat shift** if you set the arming RPM correctly, and it
-  is the arrangement most people end up with. Assign it under **Sensors ▸ Misc sensors** (**Clutch Down**,
+  is the arrangement most people end up with. Assign it under **Sensors ▸ Chassis sensors ▸ Misc sensors** (**Clutch Down**,
   **Clutch Up**, **Brake Pedal**), or directly in the launch and flat shift dialogs.
 - **A vehicle speed sensor** for the launch speed gate, for traction control's speed axis, and for gear
   detection. See the Sensors and calibration chapter.
@@ -245,7 +245,12 @@ so the **lowest row of all three tables applies continuously**, whatever the car
   on USB the 5 V sensor supplies do not reach 5 V and every ratiometric reading is wrong.
 <!-- src: firmware/config/boards/proteus/connectors/black23.yaml (Digital 1 to Digital 6, Black pins 1, 2, 3, 9, 10, 11); firmware/config/boards/proteus/board_configuration.cpp (triggerInputPins[0] default PROTEUS_DIGITAL_1); firmware/integration/rusefi_config.txt (pin_input_mode_e enum: DEFAULT, PULLUP, PULLDOWN and the INVERTED variants); firmware/tunerstudio/tunerstudio.template.ini (otherSensorInputs: Clutch Down, Clutch Up, Brake Pedal) -->
 
-<!-- shot: img/ts/launch-traction-misc-sensors.png | Sensors ▸ Misc sensors | ignition on, engine stopped: Clutch Down set to Digital 5 with its default mode, Clutch Up unassigned, Brake Pedal unassigned, the rest of the dialog at factory | The clutch and brake inputs live here, whether or not launch control uses them by name -->
+<!-- shot: img/ts/launch-traction-misc-sensors.png | Sensors ▸ Chassis sensors ▸ Misc sensors | ignition on, engine stopped: Clutch Down set to Digital 5 with its default mode, Clutch Up unassigned, Brake Pedal unassigned, the rest of the dialog at factory | The clutch and brake inputs live here, whether or not launch control uses them by name -->
+
+<figure markdown>
+  ![Sensors ▸ Chassis sensors ▸ Misc sensors: ignition on, engine stopped: Clutch Down set to Digital 5 with its default mode, Clutch Up unassigned, Brake Pedal unassigned, the rest of the dialog at factory](../img/ts/launch-traction-misc-sensors.png)
+  <figcaption>Figure 5 — The clutch and brake inputs live here, whether or not launch control uses them by name</figcaption>
+</figure>
 
 !!! danger "A launch test is a load test"
     A launch puts the whole torque of the engine into the clutch, gearbox, differential and tyres at once,
@@ -290,7 +295,7 @@ Burn.
 
 <figure markdown>
   ![Advanced ▸ Launch Control: Launch Control enabled, Activation Mode Clutch Down Switch, Clutch Down set to Digital 5 with its default mode, Launch RPM Threshold 0, Speed Threshold 30, Launch RPM 3000, Launch Control Window 500, TPS Threshold 3, Use Absolute Timing at Launch off, Ignition Cut off, Fuel Cut off; the launch_control_state panel on the right is visible](../img/ts/launch-traction-launch-control.png)
-  <figcaption>Figure 5 — Launch Control with the Example 1 settings and its live state panel</figcaption>
+  <figcaption>Figure 6 — Launch Control with the Example 1 settings and its live state panel</figcaption>
 </figure>
 
 ### 2 · Prove the switch, engine off
@@ -348,7 +353,7 @@ Open **Advanced ▸ Torque Control ▸ Shift Torque Reduction (Flat Shift)**:
 
 <figure markdown>
   ![Advanced ▸ Torque Control ▸ Shift Torque Reduction (Flat Shift): Enable Shift Torque Reduction enabled, Activation Mode Launch Button, Launch Button set to Digital 6, Minimal Engine Temperature 60, Torque Reduction Arming RPM 4000, Torque Reduction Arming APP 20; the shift_torque_reduction_state panel on the right is visible](../img/ts/launch-traction-flat-shift.png)
-  <figcaption>Figure 6 — Flat shift settings, sharing the launch button, with its live state panel</figcaption>
+  <figcaption>Figure 7 — Flat shift settings, sharing the launch button, with its live state panel</figcaption>
 </figure>
 
 Then the three tables in the same **Advanced ▸ Torque Control** group. For each one, choose the **X axis**
@@ -364,25 +369,38 @@ shifting; leave the gear rows labelled with the gear numbers you use.
   of 5 … 10 %.
 
 <!-- shot: img/ts/launch-traction-time-table.png | Advanced ▸ Torque Control ▸ Shift Torque Reduction Time table | X axis set to Vehicle speed, both gear rows filled, values 120 ms across the row, live graph of the X axis value alongside | The Time table: how long the reduction is allowed to last -->
+
+<figure markdown>
+  ![Advanced ▸ Torque Control ▸ Shift Torque Reduction Time table: X axis set to Vehicle speed, both gear rows filled, values 120 ms across the row, live graph of the X axis value alongside](../img/ts/launch-traction-time-table.png)
+  <figcaption>Figure 8 — The Time table: how long the reduction is allowed to last</figcaption>
+</figure>
 <!-- shot: img/ts/launch-traction-retard-table.png | Advanced ▸ Torque Control ▸ Torque Reduction Ignition Retard Table | X axis set to Vehicle speed, both gear rows at 12 degrees | The retard table is the timing itself during the shift: 10 degrees BTDC, not 10 degrees less -->
 
 <figure markdown>
   ![Advanced ▸ Torque Control ▸ Torque Reduction Ignition Retard Table: X axis set to Vehicle speed, both gear rows at 12 degrees](../img/ts/launch-traction-retard-table.png)
-  <figcaption>Figure 7 — The retard table is the timing itself during the shift: 10 degrees BTDC, not 10 degrees less</figcaption>
+  <figcaption>Figure 9 — The retard table is the timing itself during the shift: 10 degrees BTDC, not 10 degrees less</figcaption>
 </figure>
 <!-- shot: img/ts/launch-traction-cut-table.png | Advanced ▸ Torque Control ▸ Torque Reduction Ignition Cut Table | X axis set to Vehicle speed, both gear rows at 10 percent | The ignition cut table: percent of ignition events skipped during the shift -->
 
 <figure markdown>
   ![Advanced ▸ Torque Control ▸ Torque Reduction Ignition Cut Table: X axis set to Vehicle speed, both gear rows at 10 percent](../img/ts/launch-traction-cut-table.png)
-  <figcaption>Figure 8 — The ignition cut table: percent of ignition events skipped during the shift</figcaption>
+  <figcaption>Figure 10 — The ignition cut table: percent of ignition events skipped during the shift</figcaption>
 </figure>
 
-If you use the gear rows, set gear detection first: **Sensors ▸ Vehicle speed sensor**, the **Gear
-Detection** half of the dialog — **Forward gear count** and one ratio per gear (transmission ratio × final
-drive), plus **Wheel revolutions per kilometer** and **Final drive ratio**. rusEFI picks the gear whose
-ratio is closest to the measured RPM-over-speed ratio.
+If you use the gear rows, set gear detection first: **Sensors ▸ Chassis sensors ▸ Vehicle speed sensor**, the **Gear
+Detection** half of the dialog — **Forward gear count**, one ratio per gear, **Wheel revolutions per
+kilometer** and **Final drive ratio**. rusEFI divides engine RPM by the driveshaft speed (wheel speed ×
+**Final drive ratio**) and picks the gear whose ratio is closest. So enter each gear's own gearbox
+ratio and the axle ratio as **Final drive ratio**. The factory final drive is 1; if you leave it there,
+each gear ratio must already include the final drive.
+<!-- src: firmware/controllers/modules/gear_detector/gear_detector.cpp (getDriveshaftRpm: wheel RPM × finalGearRatio; computeGearboxRatio: engine RPM / driveshaft RPM; determineGearFromRatio); firmware/controllers/algo/engine_configuration.cpp (finalGearRatio = 1) -->
 
-<!-- shot: img/ts/launch-traction-gear-detection.png | Sensors ▸ Vehicle speed sensor | Gear Detection panel visible: Speed Source Main Vehicle Speed, Forward gear count 5, five gear ratios filled with transmission times final drive values, live Vehicle Speed and gear readouts | Gear detection: the flat shift tables' gear rows only work if these ratios are right -->
+<!-- shot: img/ts/launch-traction-gear-detection.png | Sensors ▸ Chassis sensors ▸ Vehicle speed sensor | Gear Detection panel visible: Speed Source Main Vehicle Speed, Forward gear count 5, five gearbox ratios 3.36, 2.07, 1.40, 1.00 and 0.81 with Final drive ratio 4.10, live Vehicle Speed gauge | Gear detection: the flat shift tables' gear rows only work if these ratios are right -->
+
+<figure markdown>
+  ![Sensors ▸ Chassis sensors ▸ Vehicle speed sensor: Gear Detection panel visible: Speed Source Main Vehicle Speed, Forward gear count 5, five gearbox ratios 3.36, 2.07, 1.40, 1.00 and 0.81 with Final drive ratio 4.10, live Vehicle Speed gauge](../img/ts/launch-traction-gear-detection.png)
+  <figcaption>Figure 11 — Gear detection: the flat shift tables' gear rows only work if these ratios are right</figcaption>
+</figure>
 
 ### 5 · Traction control
 
@@ -401,7 +419,7 @@ Only do this with a car that gives rusEFI individual wheel speeds over CAN.
 
 <figure markdown>
   ![Controller ▸ Traction Control Timing Adjustment: table with 0 in the four lowest slip rows and -2 to -5 degrees in the top two rows, six speed columns](../img/ts/launch-traction-tc-timing.png)
-  <figcaption>Figure 9 — Traction Control Timing Adjustment: degrees added to the advance, so negative means retard</figcaption>
+  <figcaption>Figure 12 — Traction Control Timing Adjustment: degrees added to the advance, so negative means retard</figcaption>
 </figure>
 4. **Controller ▸ Traction Control Skip Ignition**: 0 in the low rows; small percentages in the top rows, and
    leave **useHardSkipInTraction** at *no* until you know what the softer version does.
@@ -413,19 +431,19 @@ Burn, and log the wheel slip ratio on every run so the tables mean something aft
 
 <figure markdown>
   ![CAN-bus ▸ CAN Vehicle speed sensor: CAN read enabled, Enable CAN VSS yes, CAN VSS type Hyundai PB, CAN VSS scaling 1.0](../img/ts/launch-traction-can-vss.png)
-  <figcaption>Figure 10 — CAN vehicle speed: the only source of the wheel slip ratio traction control uses</figcaption>
+  <figcaption>Figure 13 — CAN vehicle speed: the only source of the wheel slip ratio traction control uses</figcaption>
 </figure>
 <!-- shot: img/ts/launch-traction-tc-etb.png | Controller ▸ Traction Control ETB Drop | the Example 3 table: 0 in the three lowest slip rows, −5 … −30 at 1.15 and −10 … −40 at 1.20, Wheel Slip Ratio gauge alongside | Traction Control ETB Drop: the gentlest lever, and the one an electronic throttle needs -->
 
 <figure markdown>
   ![Controller ▸ Traction Control ETB Drop: the Example 3 table: 0 in the three lowest slip rows, −5 … −30 at 1.15 and −10 … −40 at 1.20, Wheel Slip Ratio gauge alongside](../img/ts/launch-traction-tc-etb.png)
-  <figcaption>Figure 11 — Traction Control ETB Drop: the gentlest lever, and the one an electronic throttle needs</figcaption>
+  <figcaption>Figure 14 — Traction Control ETB Drop: the gentlest lever, and the one an electronic throttle needs</figcaption>
 </figure>
 <!-- shot: img/ts/launch-traction-tc-skip.png | Controller ▸ Traction Control Skip Ignition | useHardSkipInTraction at no, table with 0 in the low rows and 10 in the top row | The skip table and the hard-versus-soft limiter switch -->
 
 <figure markdown>
   ![Controller ▸ Traction Control Skip Ignition: useHardSkipInTraction at no, table with 0 in the low rows and 10 in the top row](../img/ts/launch-traction-tc-skip.png)
-  <figcaption>Figure 12 — The skip table and the hard-versus-soft limiter switch</figcaption>
+  <figcaption>Figure 15 — The skip table and the hard-versus-soft limiter switch</figcaption>
 </figure>
 
 ## Worked examples
@@ -644,7 +662,7 @@ This dialog holds the table plus one switch, shown with its internal name: **use
 `useHardSkipInTraction`. *yes* moves the traction skip request from the soft limiter to the hard one.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (tractionIgnitionSkipDialog shows useHardSkipInTraction without a label); firmware/integration/rusefi_config.txt (useHardSkipInTraction) -->
 
-### Vehicle speed sensor and gear detection (Sensors ▸ Vehicle speed sensor)
+### Vehicle speed sensor and gear detection (Sensors ▸ Chassis sensors ▸ Vehicle speed sensor)
 
 --8<-- "reference/settings/_speedSensor.table.md"
 
@@ -652,7 +670,7 @@ This dialog holds the table plus one switch, shown with its internal name: **use
 
 --8<-- "reference/settings/_speedSensorCan.table.md"
 
-### Misc sensors — clutch and brake inputs (Sensors ▸ Misc sensors)
+### Misc sensors — clutch and brake inputs (Sensors ▸ Chassis sensors ▸ Misc sensors)
 
 --8<-- "reference/settings/_otherSensorInputs.table.md"
 
