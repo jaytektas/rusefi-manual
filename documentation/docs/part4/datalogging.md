@@ -196,7 +196,8 @@ new one started every 32 MB, so one drive becomes several files, oldest first.
 <!-- src: firmware/hw_layer/mmc_card.cpp (prepareLogFileName, LOGGER_MAX_FILE_SIZE 32 MB and the rollover in sdLoggerMlg, F_SYNC_FREQUENCY, SD_CARD_LABEL); firmware/hw_layer/mmc_card_util.cpp (incLogFileName and LOG_INDEX_FILENAME "index.txt"); firmware/hw_layer/rtc_helper.cpp (dateToStringShort: the 2016 to 2030 range) -->
 
 !!! warning "**Format** erases the card"
-    **Format** (`cmd_format`) builds a new FAT volume on the card and labels it `rusEFI logs`. It takes
+    **Format** (`cmd_format`) builds a new FAT volume on the card and labels it `rusEFI logs` (FAT keeps labels in capitals, so a
+    PC shows **RUSEFI LOGS**). It takes
     your logs with it, and also the ECU's own records on that card — the diagnostic-code history
     `past-codes.csv` and any crash reports. Only press it for a card you do not need, or for a card the
     ECU refuses to write to.
@@ -226,19 +227,17 @@ files out; you do not need to keep them on the card, and the ECU does not delete
 
 === "Windows"
 
-    File Explorer shows a new drive, labelled **rusEFI logs** if the ECU formatted it. Open it, select
+    File Explorer shows a new drive, labelled **RUSEFI LOGS** if the ECU formatted it. Open it, select
     the `re_*.mlg` files, and copy them somewhere you can find them again. Use **Safely Remove
     Hardware** before unplugging the ECU's USB cable.
 
-    <!-- shot: img/windows/datalogging-sd-drive.png | Windows 11 File Explorer, This PC, removable drive | state: a Proteus F7 with the SD card mounted to the PC, the drive labelled rusEFI logs, several files named re_YYMMDD_HHMMSS.mlg between 20 and 32 MB plus index.txt, column view with file sizes and dates, nothing selected | The ECU's SD card as Windows sees it after Mount to PC: a normal folder of dated mlg files. -->
+    <!-- shot: img/windows/datalogging-sd-drive.png | Windows 11 File Explorer, This PC, removable drive | state: a Proteus F7 with the SD card mounted to the PC, the drive labelled RUSEFI LOGS, three files named re_YYMMDD_HHMMSS.mlg of a few MB each from one-minute bench sessions (Ardu-Stim at about 860 rpm) plus index.txt and past-codes.csv, Details view with file sizes and dates; crop to the Explorer window | The ECU's SD card as Windows sees it after Mount to PC: a normal folder of dated mlg files. -->
 
-    <!-- pending-figure
     <figure markdown>
-      ![Windows File Explorer showing the rusEFI logs drive with several re_YYMMDD_HHMMSS.mlg files and their sizes](../img/windows/datalogging-sd-drive.png)
+      ![Windows File Explorer showing the RUSEFI LOGS drive with index.txt, past-codes.csv and three re_YYMMDD_HHMMSS.mlg files with their sizes](../img/windows/datalogging-sd-drive.png)
       <figcaption>Figure 6 — The ECU's SD card as Windows sees it after <b>Mount to PC</b>: a normal
       folder of dated `.mlg` files.</figcaption>
     </figure>
-    pending-figure -->
 
 === "Linux"
 
