@@ -130,22 +130,25 @@ solves the problem.
 Two lines are enough:
 
 ```
-Board:  Proteus F7 (Proteus plug-in pack, 4 cylinders)
-Firmware identity: rusEFI master.2026.08.07.<board>.<hash>   (from the TunerStudio title bar)
+Board:     Proteus F7 (Proteus plug-in pack, 4 cylinders)
+Firmware:  rusEFI v20261020@1972639898   (from the TunerStudio title bar)
 ```
 
-That identity string is worth understanding, because it is what lets a helper match your ECU to the
-right files. The ECU sends it when a program first connects, and it is how the console and TunerStudio
-find the `.ini` that describes *your* firmware's settings: the number at the end is the signature
-hash, and an `.ini` whose hash does not match cannot be used. rusEFI publishes each build's `.ini`
-under a path built from that same branch, date, board and hash.
-<!-- src: firmware/console/binary/tunerstudio.cpp (TS_HELLO_COMMAND and getTsSignature: the signature identifies the settings layout); firmware/tunerstudio/tunerstudio.template.ini (TunerStudio signature entry and the versionInfo command used for the title bar); java_console/shared_io/src/main/java/com/rusefi/core/SignatureHelper.java (branch, date, board and hash taken from the signature, and the URL the matching .ini is fetched from) -->
+The TunerStudio title bar shows the firmware as **rusEFI v**, a date, **@** and a number. The date is
+the stamp rusEFI's build robot writes into the source each day; the number is the **signature hash**,
+and it is the part that matters. The ECU's full signature, which it sends when a program first
+connects, reads `rusEFI master.<date>.<board>.<hash>` and ends with the same hash. It is how the console
+and TunerStudio find the `.ini` that describes *your* firmware's settings: an `.ini` whose hash does
+not match cannot be used, and rusEFI publishes each build's `.ini` under a path built from that branch,
+date, board and hash. The full signature is shown by the console when it connects, and by TunerStudio's
+**New Project** page as the **Serial Signature** after **Detect**.
+<!-- src: firmware/console/binary/tunerstudio.cpp (TS_HELLO_COMMAND and getTsSignature: the signature identifies the settings layout; the versionInfo reply "%s v%d@%u" with FRONTEND_TITLE_BAR_NAME, getRusEfiVersion and SIGNATURE_HASH); firmware/integration/ts_protocol.txt (versionInfo: only used for the TS title bar); firmware/controllers/engine_controller.cpp (getRusEfiVersion returns VCS_DATE); .github/workflows/set-date.yaml (writes VCS_DATE into firmware/controllers/date_stamp.h); firmware/gen_signature.sh (TS_SIGNATURE: branch, date, board, hash); java_console/shared_io/src/main/java/com/rusefi/core/SignatureHelper.java (branch, date, board and hash taken from the signature, and the URL the matching .ini is fetched from) -->
 
 The console prints the same information when it connects, which is why the community asks for a
 screenshot that includes the console's window border: it shows the console version, the board and the
 connection state in one image.
 
-<!-- shot: img/ts/getting-help-firmware-identity.png | TunerStudio main window | state: Proteus F7 connected over USB, ignition on (12 V), engine stopped; crop the top of the window so the title bar is fully legible and shows an official firmware signature with no private branch name; front page gauges partly visible below | Caption: Figure 3 — The title bar carries the firmware identity string — branch, date, board and signature hash — that a helper needs in order to match your settings to the right files. -->
+<!-- shot: img/ts/getting-help-firmware-identity.png | TunerStudio main window | state: Proteus F7 connected over USB, ignition on (12 V), engine stopped; crop the top of the window so the title bar is fully legible and shows rusEFI v<date>@<hash> from an official build; front page gauges partly visible below | Caption: Figure 3 — The title bar carries the firmware's date stamp and signature hash, which a helper needs in order to match your settings to the right files. -->
 
 !!! warning "A firmware version older than your problem"
     Before you spend an evening describing a fault, check whether it is already fixed. Read the

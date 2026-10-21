@@ -96,7 +96,7 @@ it. Installing TunerStudio and creating a project are covered in *Installing the
 *First connection*.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (menuDialog = main, top-level menus); firmware/tunerstudio/readme.md (ini files configure TunerStudio for a specific board) -->
 
-<!-- shot: img/ts/two-tools-ts-main.png | TunerStudio main window | Proteus F7 project connected to the ECU on 12 V, engine stopped, front page gauges and the top-level menu bar visible; title bar must show an official firmware signature | Figure 1 — TunerStudio connected to a Proteus F7: the menus across the top hold every setup and tuning dialog in this manual. -->
+<!-- shot: img/ts/two-tools-ts-main.png | TunerStudio main window | Proteus F7 project connected to the ECU on 12 V, engine stopped, front page gauges and the top-level menu bar visible; title bar must show an official build (rusEFI v<date>@<hash>) | Figure 1 — TunerStudio connected to a Proteus F7: the menus across the top hold every setup and tuning dialog in this manual. -->
 
 ## The rusEFI console
 

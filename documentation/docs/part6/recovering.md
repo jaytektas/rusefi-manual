@@ -206,10 +206,11 @@ pending-figure -->
 
 2. **Rule out the harmless look-alike: a mismatched `.ini`.** If TunerStudio's `.ini` is not the one
    that belongs to the firmware on the ECU, TunerStudio reads and writes the wrong bytes and the tune
-   *looks* corrupted while the ECU is fine. Check the signature in TunerStudio's title bar against
-   the bundle you are using, and start from the `.ini` inside the bundle of the firmware that is
-   actually flashed. See the First connection chapter.
-    <!-- src: firmware/tunerstudio/tunerstudio.template.ini ([TunerStudio] signature line); java_console/io/src/main/java/com/rusefi/ts/TsProjectUpdater.java (project .ini must follow the firmware) -->
+   *looks* corrupted while the ECU is fine. TunerStudio's title bar ends with the firmware's
+   signature hash (`rusEFI v<date>@<hash>`): compare it with the number at the end of the
+   `signature` line near the top of the bundle's `.ini`, and start from the `.ini` inside the bundle of
+   the firmware that is actually flashed. See the First connection chapter.
+    <!-- src: firmware/tunerstudio/tunerstudio.template.ini ([TunerStudio] signature line, versionInfo for the title bar); firmware/console/binary/tunerstudio.cpp (versionInfo reply with SIGNATURE_HASH); java_console/io/src/main/java/com/rusefi/ts/TsProjectUpdater.java (project .ini must follow the firmware) -->
 
 3. **If you have a saved tune: put it back.** Connect TunerStudio with the right `.ini`. Because the
    tune in the ECU and the tune in your project differ, it shows the **Difference Report**; choose
