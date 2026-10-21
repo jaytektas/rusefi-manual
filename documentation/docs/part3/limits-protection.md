@@ -300,7 +300,7 @@ trigger tooth stops detection with a configuration error. Then enable it and wat
 the right at idle.
 <!-- src: firmware/controllers/algo/misfire_detection.cpp (onEnginePhase: windowWidth < toothSpacing configError) -->
 
-<!-- shot: img/ts/limits-protection-misfire.png | Setup ▸ Limits and protection ▸ Misfire Detection | enabled, threshold 50, window 10–90°, other fields default; engine idling | Misfire Detection with its live state panel. -->
+<!-- shot: img/ts/limits-protection-misfire.png | Setup ▸ Limits and protection ▸ Misfire Detection | enabled, threshold 50, window 10–90°, other fields default; engine idling | Figure 9 — Misfire Detection with its live state panel. -->
 
 ## Worked examples
 

@@ -149,6 +149,11 @@ In TunerStudio choose **File ▸ Vehicle Projects ▸ New Project**. On the firs
 
 <!-- shot: img/ts/first-connection-browse-ini.png | New Project ▸ Other / Browse | file chooser open in the bundle's top folder, rusefi_proteus_f7.ini selected, Files of Type "TunerStudio files (*.ini;*.ecu)" | Figure 3 — Choosing the .ini from the firmware bundle. -->
 
+<figure markdown>
+  ![New Project ▸ Other / Browse: file chooser open in the bundle's top folder, rusefi_proteus_f7.ini selected, Files of Type "TunerStudio files (*.ini;*.ecu)"](../img/ts/first-connection-browse-ini.png)
+  <figcaption>Figure 3 — Choosing the .ini from the firmware bundle.</figcaption>
+</figure>
+
 !!! tip "Why Other / Browse and not just Detect"
     TunerStudio looks the detected signature up in its own library of ECU definitions. rusEFI
     builds come out far more often than that library is updated, so it rarely has an exact match.
@@ -172,6 +177,11 @@ Then press **Next**.
 
 <!-- shot: img/ts/first-connection-comms.png | New Project (page 2: Communication Settings) | Driver "Standard Protocols Driver (Default)", Connection Type "RS232 Serial Interface", Com Port set to the ECU's port, Baud Rate 115200, Test Port pressed showing "Successful!!!" | Figure 4 — Communication settings: the ECU's port, and a successful Test Port. -->
 
+<figure markdown>
+  ![New Project (page 2: Communication Settings): Driver "Standard Protocols Driver (Default)", Connection Type "RS232 Serial Interface", Com Port set to the ECU's port, Baud Rate 115200, Test Port pressed showing "Successful!!!"](../img/ts/first-connection-comms.png)
+  <figcaption>Figure 4 — Communication settings: the ECU's port, and a successful Test Port.</figcaption>
+</figure>
+
 ### 4 · Choose a dashboard
 
 The last page offers a **dashboard** — the page of gauges TunerStudio shows when the project is
@@ -182,6 +192,11 @@ right-clicking one. Press **Finish**.
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini ([FrontPage] gauge1..gauge8, indicators) -->
 
 <!-- shot: img/ts/first-connection-dashboard.png | New Project (page 3: Select Dashboard) | "Default (<project name>)" selected, preview visible | Figure 5 — The default dashboard, built from the rusEFI .ini. -->
+
+<figure markdown>
+  ![New Project (page 3: Select Dashboard): "Default (<project name>)" selected, preview visible](../img/ts/first-connection-dashboard.png)
+  <figcaption>Figure 5 — The default dashboard, built from the rusEFI .ini.</figcaption>
+</figure>
 
 ### 5 · Go online
 
