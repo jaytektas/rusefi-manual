@@ -100,6 +100,8 @@ Two details that catch people out:
   rusEFI's list goes into the file, whether you want it or not.</figcaption>
 </figure>
 
+pending-figure -->
+
 !!! warning "A bench log taken on USB power records wrong values"
     With only USB connected the firmware runs and logs, but the 5 V sensor supplies cannot reach 5 V, so
     every ratiometric sensor — TPS, the pedal, MAP, the wideband reference — reads low. A log like that
@@ -128,6 +130,8 @@ set is on one page: **Controller ▸ SD Card Logger** (`sdCard`).
   <figcaption>Figure 3 — <b>Controller ▸ SD Card Logger</b>: what the ECU records by itself, and the
   buttons that hand the card to your computer.</figcaption>
 </figure>
+
+pending-figure -->
 
 ### Which mode the card is in
 
@@ -187,6 +191,8 @@ by design, so you can always read the card without pulling it out. Two consequen
   <figcaption>Figure 5 — Card handed to the computer. The ECU stops logging; the files on the card are
   yours to copy.</figcaption>
 </figure>
+
+pending-figure -->
 
 The file names tell you what is on the card: **`re_yymmdd_HHMMSS.mlg`** when the ECU's clock knows a
 sane date (its own rule is 2016 to 2030), and **`re_<index>.mlg`** otherwise, where the next index is
@@ -267,6 +273,8 @@ open.
   <figcaption>Figure 7 — Conditional logging for dyno pulls. The <b>Logging state</b> readout is the
   reason it is or is not writing.</figcaption>
 </figure>
+
+pending-figure -->
 
 How it behaves, in the order the firmware applies it:
 
@@ -365,6 +373,8 @@ headroom left.
   drive, the pale points at the top right are the ones you must explain.</figcaption>
 </figure>
 
+pending-figure -->
+
 !!! note "Filter before you judge"
     A scatter averages trustworthy and untrustworthy rows together. Exclude the rows where the engine was
     cold, the wideband was still warming, the throttle was moving, or fuel was cut — MegaLogViewer's
@@ -397,6 +407,8 @@ Read it against the ECU's own tables:
   <figcaption>Figure 10 — The same log averaged into cells. Read each average with its sample count: a
   cell with three rows is an anecdote, a cell with three thousand is a fact.</figcaption>
 </figure>
+
+pending-figure -->
 
 TunerStudio's **VE Analyze** does the same job inside TunerStudio, and rusEFI supplies it with the
 lambda channel, the target table and the correction channel; that procedure is in the *Tuning fuel*
