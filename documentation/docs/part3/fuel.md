@@ -405,7 +405,7 @@ about 49 % at low load to over 100 % at high load — a placeholder to start fro
 **Fuel ▸ VE 3D view** shows the same data in 3D, and **Fuel ▸ Second VE Table** plus the
 **VE blend tables** add or switch tables on a condition such as a flex reading.
 
-<!-- shot: img/ts/fuel-ve-table.png | Fuel ▸ VE | Proteus F7, ignition on, 4 cylinders, Fuel strategy Speed Density, Override VE table load axis None, the VE grid filled with the factory values (49 at low load up to about 120 at high load), Fuel: VE gauge alongside, dropdowns closed | Figure 13 — The VE dialog: the strategy panel on the left, the table on the right -->
+<!-- shot: img/ts/fuel-ve-table.png | Fuel ▸ VE | Proteus F7, ignition on, 4 cylinders, Fuel strategy Speed Density, Override VE table load axis None, the VE grid filled with the factory values (49 at low load up to about 120 at high load), 3D View off, dropdowns closed | Figure 13 — The VE dialog: the fuel strategy and load-axis settings above the table -->
 
 <figure markdown>
   ![Factory VE table as a colour grid with values printed in each cell, engine speed across, MAP down](../img/plots/fuel-ve-default.svg)

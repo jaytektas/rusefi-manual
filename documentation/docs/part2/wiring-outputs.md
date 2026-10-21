@@ -447,7 +447,7 @@ features want the pin and shuts the outputs down.
 
 <!-- shot: img/ts/wiring-outputs-main-relay.png | Setup ▸ Outputs | state: Proteus F7, ignition on, engine stopped, Main relay output panel: Output Lowside 12, Output mode default, Main Relay Disable Time 1, Test Main Relay button visible, Fuel Pump panel alongside with Output Lowside 10, all dropdowns closed | Caption: The main relay pin and its output mode: the pin switches the coil, the relay carries the harness. -->
 
-<!-- shot: img/ts/wiring-outputs-fuel-pump.png | Setup ▸ Fuel Pump Control | state: Proteus F7, ignition on, engine stopped, Control mode Single relay, Output Lowside 10, Output mode default, Prime duration 4 seconds, Secondary relay and PWM pressure control panels hidden by the mode, all dropdowns closed | Caption: The fuel pump relay pin lives in its own dialog, not in a pin map. -->
+<!-- shot: img/ts/wiring-outputs-fuel-pump.png | Setup ▸ Fuel Pump Control | state: Proteus F7, ignition on, engine stopped, Control mode Single relay, Output Lowside 10, Output mode default, Prime duration 4 seconds, Secondary relay and PWM pressure control panels greyed out by the mode, all dropdowns closed | Caption: The fuel pump relay pin lives in its own dialog, not in a pin map. -->
 
 <!-- shot: img/ts/wiring-outputs-cooling-fans.png | Setup ▸ Cooling Fans | state: Proteus F7, ignition on, engine stopped, Fan 1 panel with Output Lowside 11 and Output mode default, Fan 2 panel with Output unassigned, On temperature 92 and Off temperature 88 visible, Test Fan 1 and Test Fan 2 buttons along the bottom, all dropdowns closed | Caption: Fan 1 on Lowside 11 by default, Fan 2 free: on a twelve-cylinder engine this is where the fan moves to Lowside 15. -->
 

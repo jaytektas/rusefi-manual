@@ -149,7 +149,7 @@ tune **CAN read enabled** and **CAN write enabled** are already on and both bit 
 **500kbps**. Set **Bitrate** to match every other device on that bus, **Burn**, and power-cycle the
 ECU.
 
-<!-- shot: img/ts/can-bus-settings.png | CAN-bus ▸ CAN Bus Settings | Proteus F7, ignition on, engine stopped, factory tune: CAN dash type None, Inertia Measurement Unit None, CAN read enabled enabled, CAN write enabled enabled, Enable rusEFI CAN broadcast disabled, Board state broadcast disabled, rusEFI CAN data bus Primary CAN, rusEFI CAN data base address 512, rusEFI CAN data address type 11 bit, rusEFI CAN data period 50 ms, Verbose Can unchecked, Bitrate 500kbps in the Primary CAN panel, Verbose Can2 unchecked with Bitrate 500kbps in the Secondary CAN panel, all dropdowns closed | CAN Bus Settings with the factory defaults: the two switches that start the network, one bit rate per bus, and the optional senders next to them. -->
+<!-- shot: img/ts/can-bus-settings.png | CAN-bus ▸ CAN Bus Settings | Proteus F7, ignition on, engine stopped, factory tune: CAN dash type None, Inertia Measurement Unit None, CAN read enabled enabled, CAN write enabled enabled, Enable rusEFI CAN broadcast no, Board state broadcast yes (its factory value), rusEFI CAN data bus Primary CAN, rusEFI CAN data base address 512, rusEFI CAN data address type 11 bit, rusEFI CAN data period 50 ms, Verbose Can unchecked, Bitrate 500kbps in the Primary CAN panel, Verbose Can2 unchecked with Bitrate 500kbps in the Secondary CAN panel, all dropdowns closed | CAN Bus Settings with the factory defaults: the two switches that start the network, one bit rate per bus, and the optional senders next to them. -->
 
 Field by field, in the order they appear:
 
@@ -168,7 +168,8 @@ Field by field, in the order they appear:
   the wideband controller stops being told to heat its sensor.
 - **Enable rusEFI CAN broadcast** `enableVerboseCanTx` — send rusEFI's own engine-data set (step 7).
 - **Board state broadcast** `enableExtendedCanBroadcast` — send rusEFI's board-status and counter
-  frames on the bench-test identifiers; meant for factory test equipment, not for a dash.
+  frames on the bench-test identifiers; meant for factory test equipment, not for a dash. It is
+  **on** at factory.
 - **rusEFI CAN data bus** `canBroadcastUseChannel` — which bus the rusEFI broadcast goes out on:
   *Primary CAN* or *Secondary CAN* (a Proteus has two buses).
 - **rusEFI CAN data base address** `verboseCanBaseAddress` — the first identifier of the set; the
@@ -183,7 +184,7 @@ Field by field, in the order they appear:
   console; TunerStudio has no CAN frame view. Leave these off while driving: printing a line per
   frame on a busy bus buries the console in text and slows it down.
 
-<!-- src: firmware/controllers/algo/engine_configuration.cpp (setDefaultCanSettings: 500 kbps both buses, canReadEnabled, canWriteEnabled, canSleepPeriodMs 50, verboseCanBaseAddress); firmware/controllers/generated/rusefi_generated_proteus_f7.h (CAN_DEFAULT_BASE 0x200, EFI_CAN_BUS_COUNT 2); firmware/controllers/can/can_dash.cpp (updateDash: dash type to protocol mapping); firmware/controllers/can/can_dash_haltech.cpp (canDashboardHaltech 1 Mbps assertion); firmware/controllers/can/can_rx.cpp (processCanRxImu, imuType); firmware/controllers/can/can_verbose.cpp (sendCanVerbose base and offsets); firmware/controllers/can/can_bench_test.cpp (board status frames); firmware/hw_layer/drivers/can/can_hw.cpp (canInfo, listen mode) -->
+<!-- src: firmware/controllers/algo/defaults/default_base_engine.cpp (enableExtendedCanBroadcast = true); firmware/controllers/can/can_tx.cpp (enableExtendedCanBroadcast: QC bench counters every 100 ms and 250 ms); firmware/controllers/algo/engine_configuration.cpp (setDefaultCanSettings: 500 kbps both buses, canReadEnabled, canWriteEnabled, canSleepPeriodMs 50, verboseCanBaseAddress); firmware/controllers/generated/rusefi_generated_proteus_f7.h (CAN_DEFAULT_BASE 0x200, EFI_CAN_BUS_COUNT 2); firmware/controllers/can/can_dash.cpp (updateDash: dash type to protocol mapping); firmware/controllers/can/can_dash_haltech.cpp (canDashboardHaltech 1 Mbps assertion); firmware/controllers/can/can_rx.cpp (processCanRxImu, imuType); firmware/controllers/can/can_verbose.cpp (sendCanVerbose base and offsets); firmware/controllers/can/can_bench_test.cpp (board status frames); firmware/hw_layer/drivers/can/can_hw.cpp (canInfo, listen mode) -->
 
 ### 2 · Check that the bus is alive
 
@@ -303,6 +304,14 @@ second, so a bus that stops talking makes vehicle speed disappear rather than fr
     which, use a wheel-speed sensor on a digital input instead.
 
 <!-- src: firmware/controllers/can/can_vss.cpp (look_up_vss_can_id, processBMW_e46, processHyundai, processNissan, canSpeed timeout, canVssScaling, initCanVssSupport, filterRpmCanID); firmware/tunerstudio/tunerstudio.template.ini (speedSensorCan dialog, speedSensorCanHelp, enableCanVss condition on canReadEnabled) -->
+
+!!! warning "One vehicle speed source, not two"
+    CAN VSS and a wired speed sensor (**Sensors ▸ Chassis sensors ▸ Vehicle speed sensor**, **Input**)
+    both provide the one vehicle speed reading. With a wired input assigned, switching **Enable CAN VSS**
+    on stops the ECU with the fatal error *Duplicate registration for sensor "VehicleSpeed"*. Unassign
+    the wired input first, Burn, and power-cycle the ECU.
+    <!-- src: firmware/controllers/can/can_vss.cpp (canSpeed is a SensorType::VehicleSpeed sensor, registered in initCanVssSupport); firmware/init/sensor/init_vehicle_speed_sensor.cpp (vehicleSpeedSensor on SensorType::VehicleSpeed); firmware/controllers/sensors/core/sensor.cpp (Register: firmwareError Duplicate registration for sensor) -->
+
 
 ### 7 · Broadcast engine data to a dash or logger
 
@@ -471,8 +480,9 @@ consumes and how usable the data is:
 
 - **One protocol, not three.** rusEFI broadcast, an OEM dash protocol and board-state broadcast all
   send overlapping numbers. Use the rusEFI set for aftermarket dashes and loggers, an OEM protocol
-  only when the car's own cluster must be fooled, and leave **Board state broadcast** off — it exists
-  for factory test equipment, and at 100 ms and 250 ms it is a busy talker.
+  only when the car's own cluster must be fooled. **Board state broadcast** is on at factory; switch it
+  off on a shared vehicle bus — it exists for factory test equipment, and at 100 ms and 250 ms it is a
+  busy talker.
 - **Period.** 50 ms suits needles and gauges; lambda and knock at 20 ms buy nothing a log does not
   already record better, and cost bus capacity on slow buses.
 - **Identifier block.** Pick a base address nobody else on the bus owns. The factory `0x200` sits in
@@ -517,6 +527,7 @@ Other CAN faults you may see:
 |---|---|---|
 | *Please pick either analog AFR or CAN AFR input not both.* | analogue wideband input still assigned with CAN wideband on | unassign the analogue input |
 | *CAN read and write are required to use CAN wideband.* | one of the two switches is off | enable both, burn, power-cycle |
+| *Duplicate registration for sensor "VehicleSpeed"* (fatal) | **Enable CAN VSS** on while a wired vehicle speed input is assigned | unassign one of the two, burn, power-cycle |
 | *Haltech requires 1Mbps baud rate* | **CAN dash type** Haltech with a slower **Bitrate** | set 1 Mbps, or change the dash type |
 | *CAN1 and CAN2 pins must be set to different devices* | both buses were pointed at the same controller | only reachable where CAN pins are configurable, not on Proteus |
 | **CAN: Rx** stays at zero | no termination, swapped High and Low, mismatched bit rate | Figure 1, and the bit rate on every node |

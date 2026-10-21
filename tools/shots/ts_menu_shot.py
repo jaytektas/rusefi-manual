@@ -103,7 +103,12 @@ def main():
         sys.exit(f"no dialog opened for {sys.argv[1]}")
     wid = new[-1]
     run("import", "-window", wid, out)
-    print(wid, windows()[wid])
+    title, want = windows()[wid], path[-1]
+    print(wid, title)
+    # dialog titles often differ from menu labels, so only warn: a wrong neighbour (a longer item that
+    # contains the wanted one) is the usual OCR mistake
+    if difflib.SequenceMatcher(None, title.lower(), want.lower()).ratio() < 0.5 and want.lower() not in title.lower():
+        print(f"WARNING: opened '{title}' for menu item '{want}'", file=sys.stderr)
 
 
 main()
