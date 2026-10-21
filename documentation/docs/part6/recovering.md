@@ -186,16 +186,14 @@ one you gave it.
 *flash CRC failed*; the engine type is no longer yours; settings that change again after every power
 cycle.
 
-<!-- shot: img/ts/recovering-frontpage-config-error.png | TunerStudio front page of a rusEFI project for the Proteus F7 | connected to a Proteus F7 with 12 V ignition on and the engine stopped, a firmware warning present (flash CRC failed, code 6141) plus a configuration error message: Config Error indicator red, Warning yellow, Unsaved changes yellow, the ECU message dialog or status text visible, gauges live, no dropdown open | The three front-page indicators that matter during recovery: Config Error means the ECU has a fatal or configuration error and TunerStudio has fetched its message. -->
-<!-- pending-figure
+<!-- shot: img/ts/recovering-frontpage-config-error.png | TunerStudio front page of a rusEFI project for the Proteus F7 | connected to a Proteus F7 with 12 V ignition on and the engine stopped, a configuration error raised by setting both H-bridge functions to None while the pedal stays configured: Config Error indicator red, Warning yellow, Settings saved, TunerStudio's Settings Configuration Error banner and the ECU message dialog visible; crop below the title bar (registration name), gauges live, no dropdown open | The three front-page indicators that matter during recovery: Config Error means the ECU has a fatal or configuration error and TunerStudio has fetched its message. -->
 <figure markdown>
-  ![TunerStudio front page on a Proteus F7 with the Config Error indicator red, the Warning indicator yellow and the Unsaved changes indicator yellow, the ECU's error message shown](../img/ts/recovering-frontpage-config-error.png)
+  ![TunerStudio front page on a Proteus F7 with the Config Error indicator red, the Warning indicator yellow and the setting indicator at Settings saved, the ECU's message (a pedal sensor configured with no electronic throttle) shown in TunerStudio's error banner and dialog](../img/ts/recovering-frontpage-config-error.png)
   <figcaption>Figure 3 — The three front-page indicators that matter during recovery. <b>Config
   Error</b> means the ECU has a fatal or configuration error and TunerStudio has fetched its
   message.</figcaption>
 </figure>
 
-pending-figure -->
 
 1. **Read what the ECU says.** The front page **Config Error** indicator appears when the firmware has
    a fatal error, a configuration error, or a warning that comes with a message; TunerStudio asks the
