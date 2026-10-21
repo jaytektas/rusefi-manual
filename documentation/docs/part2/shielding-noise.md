@@ -339,15 +339,13 @@ crank wire was the cause; the filter is a stop-gap until the cable is re-routed 
    level rather than only the decoded edges. Look for a doubled edge, or a signal that never crosses
    the switching level while cranking.
 
-<!-- shot: img/console/shielding-noise-engine-sniffer.png | rusEFI console ▸ Engine Sniffer | Proteus F7 on 12 V, engine cranking, Engine Sniffer Threshold above cranking RPM, Display logic signals on | The console's Engine Sniffer tab with crank edges visible while cranking -->
+<!-- shot: img/console/shielding-noise-engine-sniffer.png | rusEFI console ▸ Engine Sniffer | Proteus F7 on 12 V, the Ardu-Stim feeding a 60-2 crank signal at about 860 rpm (crank only, no cam), Engine Sniffer Threshold above that RPM, zoomed in until single edges separate | The console's Engine Sniffer tab with crank edges visible -->
 
-<!-- pending-figure
 <figure markdown>
-  ![rusEFI console Engine Sniffer tab showing crank and cam edges while the engine is cranking](../img/console/shielding-noise-engine-sniffer.png)
+  ![rusEFI console Engine Sniffer tab showing the Trigger #1 crank edges of a 60-2 wheel at about 860 rpm, with the red 20 ms time marks along the bottom](../img/console/shielding-noise-engine-sniffer.png)
   <figcaption>Figure 6 — The console's **Engine Sniffer** tab: trigger edges in time order, so an
    interference spike appears as an extra edge, and a weak signal appears as a missing one.</figcaption>
 </figure>
-pending-figure -->
 
 <!-- src: firmware/tunerstudio/tunerstudio.template.ini (monitoringSettings dialog, Engine Sniffer Threshold, Display logic signals) -->
 <!-- src: java_console/ui/src/main/java/com/rusefi/ConsoleUI.java (Engine Sniffer tab) -->
