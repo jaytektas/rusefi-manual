@@ -36,9 +36,10 @@ cd documentation && ../.venv/bin/mkdocs serve
 
 ## Licence
 
-The manual (text, diagrams, plots and screenshots) and everything else in this repository is licensed
-under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); see [`LICENSE`](LICENSE). Credit
-*Jason Roughley and the rusEFI Manual contributors* and share adaptations under the same licence. The names rusEFI,
+The manual (text, diagrams, plots and screenshots) is licensed under
+[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); see [`LICENSE`](LICENSE). Credit
+*Jason Roughley and the rusEFI Manual contributors* and share adaptations under the same licence.
+The scripts in [`tools/`](tools/) are licensed under the MIT licence; see [`tools/LICENSE`](tools/LICENSE). The names rusEFI,
 TunerStudio and MegaLogViewer belong to their owners.
 
 rusEFI itself is free software under the GPL v3 with additional terms; see the manual's
