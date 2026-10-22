@@ -4,6 +4,7 @@ site_url: https://jaytektas.github.io/rusefi-manual/
 repo_url: https://github.com/jaytektas/rusefi-manual
 repo_name: jaytektas/rusefi-manual
 edit_uri: ""
+copyright: 'Text and images © Jason Roughley and the rusEFI Manual contributors, licensed <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>. Unofficial; no warranty.'
 docs_dir: docs
 site_dir: site
 strict: true

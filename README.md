@@ -34,5 +34,12 @@ cd documentation && ../.venv/bin/mkdocs serve
 | `tools/mlg.py` | reads MegaLogViewer binary logs (`.mlg`) for figures |
 | `tools/figures/` | scripts that draw the manual's plots from recorded data |
 
+## Licence
+
+The manual (text, diagrams, plots and screenshots) and everything else in this repository is licensed
+under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); see [`LICENSE`](LICENSE). Credit
+*Jason Roughley and the rusEFI Manual contributors* and share adaptations under the same licence. The names rusEFI,
+TunerStudio and MegaLogViewer belong to their owners.
+
 rusEFI itself is free software under the GPL v3 with additional terms; see the manual's
 *Read this first* page.

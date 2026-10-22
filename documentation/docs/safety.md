@@ -39,6 +39,19 @@ but it can be wrong, out of date, or wrong for your engine. **You are responsibl
 wire, configure and run.** The authors and contributors accept no liability for damage, injury or loss
 of any kind arising from its use.
 
+## Licence of this manual
+
+This manual (its text, diagrams, plots and screenshots) is licensed under the
+[Creative Commons Attribution-ShareAlike 4.0 International licence](https://creativecommons.org/licenses/by-sa/4.0/)
+(CC BY-SA 4.0). You may copy it, share it and adapt it, for any purpose including commercial use, as
+long as you:
+
+- **credit it**: name *Jason Roughley and the rusEFI Manual contributors*, link to the licence, and say if you changed anything;
+- **share alike**: release your adapted version under the same licence.
+
+The licence covers this manual only. Quoted licence text stays under its own terms, and the names
+rusEFI, TunerStudio and MegaLogViewer belong to their owners; the licence gives no rights to them.
+
 ## The hazards
 
 | Hazard | What can happen | The rule |
