@@ -356,16 +356,16 @@ coloured lean at high speed and high load. Same plot with **Knock: Retard** inst
 pulling timing out of your way. Same plot with **Fuel: injector duty cycle**: whether you have any
 headroom left.
 
-<!-- shot: img/ts/datalogging-mlv-scatter.png | MegaLogViewer HD scatter plot (this is a MegaLogViewer window, not a TunerStudio dialog) | state: a loaded road-log .mlg from a warm drive, X axis RPM 0 to 7000, Y axis Fuel: Load 20 to 250 kPa, plotted value Lambda coloured from 0.75 lean to 1.05 rich, the idle and cruise clusters dense, a sparse lean streak at high RPM and high load, the row-count readout visible | MegaLogViewer HD scatter plot of a rusEFI log: every row is one point, and the tune's map appears drawn by the engine. -->
+<!-- shot: img/ts/datalogging-mlv-scatter.png | MegaLogViewer HD scatter plot (this is a MegaLogViewer window, not a TunerStudio dialog) | state: MegaLogViewer HD 4.6.14, Scatter Plots tab, a 22,844-row SD-card road log from a warm drive (re_251202_141127.mlg), X axis RPM, Y axis Fuel: Load, Z axis Lambda on the automatic colour scale 0.70 (blue, rich) to 1.37 (red, lean); idle and cruise clusters dense at the bottom left, the full-load ribbon climbing to about 230 kPa in blue, red specks along the bottom at 3000 to 5500 RPM from closed-throttle overrun (throttle about 6 %, injector pulse near zero) | MegaLogViewer HD scatter plot of a rusEFI log: every row is one point, and the tune's map appears drawn by the engine. -->
 
-<!-- pending-figure
 <figure markdown>
-  ![MegaLogViewer scatter plot of a rusEFI log with RPM on the horizontal axis, Fuel Load on the vertical axis and each point coloured by Lambda, the idle and cruise clusters dense and a sparse lean streak at the top right](../img/ts/datalogging-mlv-scatter.png)
-  <figcaption>Figure 9 — Engine speed against load, coloured by lambda: the clusters are where you
-  drive, the pale points at the top right are the ones you must explain.</figcaption>
+  ![MegaLogViewer scatter plot of a rusEFI log with RPM on the horizontal axis, Fuel Load on the vertical axis and each point coloured by Lambda from blue (rich) to red (lean): dense idle and cruise clusters at the bottom left, a blue ribbon climbing to full load, and red specks along the bottom at mid to high RPM](../img/ts/datalogging-mlv-scatter.png)
+  <figcaption>Figure 9 — Engine speed against load, coloured by lambda, from a 22,844-row road log. The
+  clusters are where you drive; the blue ribbon is full throttle, rich as the target asks. The red specks
+  along the bottom are closed-throttle overrun with the injectors almost off: the sensor is reading air,
+  not a lean tune.</figcaption>
 </figure>
 
-pending-figure -->
 
 !!! note "Filter before you judge"
     A scatter averages trustworthy and untrustworthy rows together. Exclude the rows where the engine was
@@ -391,16 +391,16 @@ Read it against the ECU's own tables:
 | ignition table | **Knock: Retard** | the advance you cannot run |
 | nothing — reliability | row count per cell | where the engine actually spends its time |
 
-<!-- shot: img/ts/datalogging-mlv-histogram.png | MegaLogViewer HD histogram / table generator (this is a MegaLogViewer window, not a TunerStudio dialog) | state: the same road log, bins of RPM against Fuel: Load, channel Lambda with average and sample count per cell, cells with fewer than five samples greyed, the row for 4000 to 4500 RPM highlighted at an average of 0.79 | MegaLogViewer HD's table generator: the average lambda per engine-speed and load cell, beside the sample counts that say how much each number is worth. -->
+<!-- shot: img/ts/datalogging-mlv-histogram.png | MegaLogViewer HD histogram / table generator (this is a MegaLogViewer window, not a TunerStudio dialog) | state: the same road log, Histogram / Table Generator tab, X RPM, Y Fuel: Load, Z Lambda, 16 x 16 cells with Auto-Generate axis High at top, Color based on Hit Weight (red many rows, green few, white none), Weighted Averages; the cell at 5273 RPM and 221 kPa selected (average 0.89), Data Details showing Total Records 22844 and Cell Hit Count 120 | MegaLogViewer HD's table generator: the average lambda per engine-speed and load cell, beside the sample counts that say how much each number is worth. -->
 
-<!-- pending-figure
 <figure markdown>
-  ![MegaLogViewer table generator output: a grid of RPM against Fuel Load cells holding average lambda and sample counts, with the high load cells showing an average lean of target](../img/ts/datalogging-mlv-histogram.png)
-  <figcaption>Figure 10 — The same log averaged into cells. Read each average with its sample count: a
-  cell with three rows is an anecdote, a cell with three thousand is a fact.</figcaption>
+  ![MegaLogViewer table generator output: a grid of RPM against Fuel Load cells holding average lambda, coloured by how many rows fell in each cell; the selected full-load cell averages 0.89 over 120 rows, while the 0.71 at the top right edge rests on three rows](../img/ts/datalogging-mlv-histogram.png)
+  <figcaption>Figure 10 — The same log averaged into cells, coloured by row count (red many, green few).
+  Click a cell and <b>Data Details</b> shows its <b>Cell Hit Count</b>: the selected full-load cell
+  averages 0.89 over 120 rows, the 0.71 at the right-hand edge over three. A cell with three rows is an
+  anecdote, a cell with three thousand is a fact.</figcaption>
 </figure>
 
-pending-figure -->
 
 TunerStudio's **VE Analyze** does the same job inside TunerStudio, and rusEFI supplies it with the
 lambda channel, the target table and the correction channel; that procedure is in the *Tuning fuel*
