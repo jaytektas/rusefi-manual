@@ -274,8 +274,7 @@ the Gradle distribution, so expect it to take a while; the builds after that are
    your `.ini` to the signature the ECU sent.
     <!-- src: firmware/console/eficonsole.cpp (the hello line with rusEFI v<version>@<SIGNATURE_HASH>); firmware/controllers/engine_controller.cpp (getRusEfiVersion returns VCS_DATE); firmware/controllers/date_stamp.h (VCS_DATE); firmware/tunerstudio/tunerstudio.template.ini (versionInfo and signature) -->
 
-<!-- shot: img/ts/building-rusefi-ts-title.png | TunerStudio main window title bar of a rusEFI Proteus F7 project | Proteus F7 connected over USB with 12 V ignition on, project opened with firmware/tunerstudio/generated/rusefi_proteus_f7.ini; crop to the window title bar and the top status strip so the firmware version string and the ini's signature are readable; no dialog or dropdown open | TunerStudio shows the firmware's own version string in its title bar, and matches its .ini to the signature the ECU reports — a build and an .ini from different trees are not a pair. -->
-<!-- pending-figure
+<!-- shot: img/ts/building-rusefi-ts-title.png | TunerStudio main window title bar of a rusEFI Proteus F7 project | Proteus F7 connected over USB with 12 V ignition on, project opened with firmware/tunerstudio/generated/rusefi_proteus_f7.ini; crop to the window title bar and the top status strip so the firmware version string and the ini's signature are readable; no dialog or dropdown open; TunerStudio's registration text at the end of the title is painted out (shot: bench Proteus F7 build, title rusEFI v20261019@1431655765, menu bar and toolbar below it) | TunerStudio shows the firmware's own version string in its title bar, and matches its .ini to the signature the ECU reports — a build and an .ini from different trees are not a pair. -->
 <figure markdown>
   ![TunerStudio main window over a Proteus F7 project, title bar showing the firmware version string reported by the ECU](../img/ts/building-rusefi-ts-title.png)
   <figcaption>Figure 3 — After flashing a build of your own: the title bar carries the firmware's own
@@ -283,7 +282,6 @@ the Gradle distribution, so expect it to take a while; the builds after that are
   ECU reports.</figcaption>
 </figure>
 
-pending-figure -->
 
 !!! warning "The *_debug compile scripts are pointed at disabled board files"
     `compile_proteus_f7_debug.sh` names `meta-info-proteus_f7_debug.env`, but in this revision the
